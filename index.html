@@ -822,19 +822,17 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    const section = document.getElementById("q3_2");
-    const mainContent = document.querySelector("#q3_2 .main__content");
-    const formContainer = document.querySelector("#q3_2 .d-flex.flex-column.pt-3");
+    function ajustarFormulario() {
+        const contenedorFormulario = document.querySelector("#q3_2 .d-flex.flex-column.pt-3");
+        const mainContent = document.querySelector("#q3_2 .main__content");
 
-    const observer = new MutationObserver(() => {
-        if (window.innerWidth >= 1024) {
-            if (section && window.getComputedStyle(section).display !== "none") {
-                // Aplicar diseño en dos columnas
-                if (formContainer && !formContainer.classList.contains("grid-layout")) {
-                    formContainer.classList.add("grid-layout");
-                    formContainer.style.display = "grid";
-                    formContainer.style.gridTemplateColumns = "1fr 1fr";
-                    formContainer.style.gap = "20px";
+        if (contenedorFormulario) {
+            if (window.innerWidth >= 1024) { // Solo en pantallas grandes
+                if (!contenedorFormulario.classList.contains("grid-layout")) {
+                    contenedorFormulario.classList.add("grid-layout");
+                    contenedorFormulario.style.display = "grid";
+                    contenedorFormulario.style.gridTemplateColumns = "1fr 1fr";
+                    contenedorFormulario.style.gap = "0px";
 
                     // Asegurar que ciertos elementos ocupen todo el ancho
                     const elementosFullWidth = [
@@ -850,7 +848,7 @@
                         });
                     });
 
-                    // Ajustar el checkbox de aviso de privacidad
+                    // Para el checkbox de aviso de privacidad
                     const avisoPrivacidad = document.querySelector("#q3_2 .contenidoGeneralForm .campoFormulario");
                     if (avisoPrivacidad) {
                         avisoPrivacidad.style.gridColumn = "span 2";
@@ -859,29 +857,28 @@
                     }
                 }
 
-                // Aplicar ancho a .main__content
+                // Aplicar estilo a .main__content solo en pantallas grandes
                 if (mainContent) {
                     mainContent.style.width = "752px";
                 }
-            }
-        } else {
-            // Restaurar diseño en mobile
-            if (formContainer) {
-                formContainer.classList.remove("grid-layout");
-                formContainer.style.display = "flex";
-                formContainer.style.flexDirection = "column";
-            }
 
-            if (mainContent) {
-                mainContent.style.width = "";
+            } else {
+                // Revertir cambios si la pantalla es menor a 1024px
+                contenedorFormulario.classList.remove("grid-layout");
+                contenedorFormulario.style.display = "flex";
+                contenedorFormulario.style.flexDirection = "column";
+
+                // Revertir el ancho de .main__content en pantallas pequeñas
+                if (mainContent) {
+                    mainContent.style.width = "auto";
+                }
             }
         }
-    });
+    }
 
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Ejecutar la función al inicio para aplicar los estilos si ya está cargado
-    observer.takeRecords();
+    // Ejecutar en carga y en cambio de tamaño de pantalla
+    ajustarFormulario();
+    window.addEventListener("resize", ajustarFormulario);
 });
 
     </script>
