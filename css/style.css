@@ -1,0 +1,46 @@
+a{
+	cursor: pointer;
+	text-decoration: none;
+}
+.wrapper {
+    margin: auto;
+    max-width: 1240px;
+    padding: 0 20px 0 20px;
+}
+header{
+	background-color: #FFFFFF;
+	height: 60px;
+}
+.header__logo__center{
+	margin: auto;
+}
+.header__logo{
+	height: 40px;
+	width: 103px;
+}
+.header__info {
+	padding-top: 10px;
+	justify-content: center;
+	display: flex;
+}
+.header__info.ty {
+	justify-content: left;
+}
+.header__border__top{
+	display: block !important;
+	width: max-content;
+	margin: auto;
+}
+.header__cta__ubicanos{
+	display: none;
+}
+
+@media (min-width:991px) {
+	.header__cta__ubicanos{
+		display: inline !important;
+	}
+	.header__border__top{
+		width: auto;
+	}
+}
+

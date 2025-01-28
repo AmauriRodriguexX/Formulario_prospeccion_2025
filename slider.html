@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="previous-winners">
+        <h2 id="title" class="font-bree">
+          Conoce a los Emprendedores ganadores del 2023
+        </h2>
+        <span id="subtitle" class="font-inter">¡Tú puedes ser uno de ellos!</span>
+        <div class="carousel">
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Reyna Arroyo', 1);
+            openModal('k3F-dA7LazM', 'Reyna Arroyo - Participante 2023')
+            "
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Reyna Arroyo</span>
+              <span class="card_footer-description">Participación Familiar</span>
+            </div>
+          </div>
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Carolina Rojas', 2);
+            openModal('oxgHzsGpuO0', 'Carolina Rojas - Participante 2023')
+            "
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Carolina Rojas</span>
+              <span class="card_footer-description">Comercio Digital</span>
+            </div>
+          </div>
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Idania Medina', 3);
+            openModal('oMzcYu6Wuvo', 'Idania Medina - Participante 2023')
+            "
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Idania Medina</span>
+              <span class="card_footer-description">Servicio</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid">
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Reyna Arroyo', 1);
+            openModal('k3F-dA7LazM', 'Reyna Arroyo - Participante 2023')
+            "
+            style="cursor: pointer"
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Reyna Arroyo</span>
+              <span class="card_footer-description">Participación Familiar</span>
+            </div>
+          </div>
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Carolina Rojas', 2);
+            openModal('oxgHzsGpuO0', 'Carolina Rojas - Participante 2023')
+            "
+            style="cursor: pointer"
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Carolina Rojas</span>
+              <span class="card_footer-description">Comercio Digital</span>
+            </div>
+          </div>
+          <div
+            class="card"
+            onclick="
+            onVideoClicked('Idania Medina', 3);
+            openModal('oMzcYu6Wuvo', 'Idania Medina - Participante 2023')
+            "
+            style="cursor: pointer"
+          >
+            <div class="thumbnail">
+              <div class="play_button-circle">
+                <div class="play_button"></div>
+              </div>
+            </div>
+            <div class="card_footer">
+              <span class="card_footer-name">Idania Medina</span>
+              <span class="card_footer-description">Servicio</span>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <div id="video-modal">
+        <div class="modal_content">
+          <div class="closable_container">
+            <img
+              src="./assets/images/icon_close.png"
+              alt="Icono de cerrar"
+              onclick="closeModal()"
+            />
+          </div>
+          <div id="video-container">
+            <div id="player" group-name="" competitor-index="0" ></div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

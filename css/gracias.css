@@ -1,0 +1,28 @@
+header.ty{
+    box-shadow: none;
+}
+.tituloGracias{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    width: 100%;
+    color: #ce0058;
+    font-weight: bold;
+    font-size: 24px;
+}
+.gracias{
+    margin-top: 1px;
+    text-align: left;
+    font-size: 18px;;
+    padding: 1% 4%;
+}
+.avance{
+    margin-top: 1px;
+    text-align: left;
+    font-size: 16px;
+    color: #ce0058;
+    padding: 1% 0%;
+}
+.progress.ty{
+    padding: 1% 4%;
+}

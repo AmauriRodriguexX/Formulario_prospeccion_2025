@@ -1,0 +1,321 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/open-sans/OpenSans-Bold.eot');
+  src: url('../fonts/open-sans/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/open-sans/OpenSans-Bold.woff2') format('woff2'),
+      url('../fonts/open-sans/OpenSans-Bold.woff') format('woff'),
+      url('../fonts/open-sans/OpenSans-Bold.ttf') format('truetype'),
+      url('../fonts/open-sans/OpenSans-Bold.svg#OpenSans-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/open-sans/OpenSans-Italic.eot');
+  src: url('../fonts/open-sans/OpenSans-Italic.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/open-sans/OpenSans-Italic.woff2') format('woff2'),
+      url('../fonts/open-sans/OpenSans-Italic.woff') format('woff'),
+      url('../fonts/open-sans/OpenSans-Italic.ttf') format('truetype'),
+      url('../fonts/open-sans/OpenSans-Italic.svg#OpenSans-Italic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/open-sans/OpenSans-Regular.eot');
+  src: url('../fonts/open-sans/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/open-sans/OpenSans-Regular.woff2') format('woff2'),
+      url('../fonts/open-sans/OpenSans-Regular.woff') format('woff'),
+      url('../fonts/open-sans/OpenSans-Regular.ttf') format('truetype'),
+      url('../fonts/open-sans/OpenSans-Regular.svg#OpenSans-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'bree';
+  src: url('../fonts/bree/bree_regular-webfont.woff2') format('woff2'),
+      url('../fonts/bree/bree_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'bree';
+  src: url('../fonts/bree/bree_bold-webfont.woff2') format('woff2'),
+      url('../fonts/bree/bree_bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face{
+    font-family: 'Inter';
+    src: local("☺"),
+    url("../fonts/inter/Inter-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face{
+    font-family: 'Inter-Medium';
+    src: local("☺"),
+    url("../fonts/inter/Inter-Medium.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*!
+ * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2023 Fonticons, Inc.
+ */
+.fa {
+  font-family: var(--fa-style-family, "Font Awesome 6 Free");
+  font-weight: var(--fa-style, 900); }
+
+.fa,
+.fa-classic,
+.fa-sharp,
+.fas,
+.fa-solid,
+.far,
+.fa-regular,
+.fab,
+.fa-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto; }
+
+.fas,
+.fa-classic,
+.fa-solid,
+.far,
+.fa-regular {
+  font-family: 'Font Awesome 6 Free'; }
+
+.fab,
+.fa-brands {
+  font-family: 'Font Awesome 6 Brands'; }
+
+:root, :host {
+  --fa-style-family-brands: 'Font Awesome 6 Brands';
+  --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands'; }
+
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fontawesome/webfonts/fa-brands-400.woff2") format("woff2"), 
+  url("../fonts/fontawesome/webfonts/fa-brands-400.ttf") format("truetype"); 
+}
+
+.fab,
+.fa-brands {
+  font-weight: 400; }
+
+.fa-facebook-f:before {
+  content: "\f39e"; }
+
+.fa-tiktok:before {
+  content: "\e07b"; }
+
+.fa-instagram:before {
+  content: "\f16d"; }
+
+.fa-youtube:before {
+  content: "\f167"; }
+
+.fa-arrow-left::before {
+  content: "\f060"; }
+
+.fa-arrow-right::before {
+  content: "\f061"; }
+
+.fa-circle::before {
+  content: "\f111"; }
+ 
+.fa-search::before {
+  content: "\f002"; }
+  
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fontawesome/webfonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fontawesome/webfonts/fa-solid-900.ttf") format("truetype"); }
+  
+.fas,
+.fa-solid {
+  font-weight: 900; }
+
+
+.wrapper {
+    margin: auto;
+    max-width: 1240px;
+    padding: 0 20px 0 20px;
+}
+
+header .logo {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 120px;
+    height: auto;
+}
+
+header {
+    max-height: 80px;
+    box-shadow: 0px 2px 8px 0px #0000001A;
+    position: relative;
+    z-index: 100;
+}
+  
+
+
+
+
+a, a:hover {
+    color: #ce0058
+}
+
+:focus, a:active, a:focus, a:hover, button:focus, input:focus {
+    outline: 0
+}
+
+ol, ul {
+    list-style: none
+}
+
+ul {
+    list-style: none;
+}
+
+b, strong {
+    font-weight: 700
+}
+
+*, :after, :before {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    word-wrap: break-word;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    text-size-adjust: none;
+    font: 400 16px/1.5 "Inter", sans-serif;
+    color: #252A2D;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+input[type=text], input[type=email], input[type=tel], input[type=search], input[type=password], input[type=date], input[type=number], select, textarea {
+    border: 1px solid #c2c0bf;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%
+}
+
+textarea {
+    min-height: 100px
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none
+}
+
+.button, button, input[type=button], input[type=submit] {
+    color: #fff;
+    background: url(../assets/boton-rosa.png) top center no-repeat;
+    background-size: 100% 100%;
+    padding: 10px 14px 20px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    min-width: 150px;
+    max-width: 100%;
+    display: inline-block
+}
+
+.button:hover, button:hover, input[type=button]:hover, input[type=submit]:hover {
+    color: #fff;
+    text-decoration: underline
+}
+
+.button.yellow {
+    color: #fff!important;
+    background: url(../assets/boton-amarillo.png) top center no-repeat;
+    background-size: 100% 100%;
+    font-size: 16px;
+    text-align: center
+}
+
+iframe {
+    max-width: 100%
+}
+
+iframe[src*=you] {
+    width: 100%;
+    min-height: 380px;
+    max-height: 100%
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: 700 16px/1.2 bree, "Open Sans", sans-serif;
+    color: #ce0058;
+    margin-bottom: .85em
+}
+
+h1 {
+    font-size: 32px
+}
+
+h2 {
+    font-size: 28px
+}
+
+h3 {
+    font-size: 25px
+}
+
+
+section p {
+    margin-bottom: 1em;
+    line-height: 1.5
+}

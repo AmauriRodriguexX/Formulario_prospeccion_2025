@@ -1,0 +1,519 @@
+@import url(theme.css);
+@import url(footer.css);
+.above {
+    margin-bottom:65px;
+    position:relative
+}
+.slider__item.time {
+    display:flex;
+    align-items:flex-start
+}
+.cover__mobile {
+    height:auto;
+    width:100%
+}
+.banner__time {
+    margin:0 auto
+}
+.banner__time a {
+    cursor:pointer;
+    position:relative
+}
+.bn__time__img.desktop,.slider__buttons {
+    display:none
+}
+.bx-wrapper {
+    border:0!important;
+    box-shadow:none
+}
+.slider__button {
+    background-color:#ce0058;
+    width:40px;
+    height:40px;
+    border-radius:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:.6;
+    position:absolute;
+    top:45%;
+    cursor:pointer
+}
+.slider__button:hover {
+    opacity:1
+}
+.slider__button img {
+    width:12px;
+    height:auto
+}
+.slider__prev .slider__button {
+    left:10px;
+    right:auto
+}
+.slider__next .slider__button {
+    right:10px;
+    left:auto
+}
+.home__title {
+    font:bold 32px/44px Bree;
+    letter-spacing:0;
+    color:#ce0058;
+    margin:20px 0
+}
+.hero__text,.home__text {
+    text-align:center;
+    font:16px/24px Open Sans;
+    letter-spacing:0;
+    color:#202124;
+    padding-bottom:15px
+}
+.piensa-en-ti__text {
+    text-align:left
+}
+.fixed__btn,.fixed__btn__1 {
+    text-align:center;
+    letter-spacing:0;
+    text-decoration:none
+}
+.home__title__content>.home__text {
+    color:#202124
+}
+.fixed__cpt {
+    padding-top:70px;
+    margin-bottom:-50px
+}
+.cta__fix {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:no-repeat padding-box #fff;
+    border:1px solid #dfdfdf;
+    padding-bottom:20px;
+    padding-top:20px;
+    z-index:2
+}
+.cta__fixed {
+    display:flex;
+    justify-content:space-between;
+    max-width:535px
+}
+.fixed__btn {
+    width:46.5%;
+    font:bold 12px/17px Open Sans;
+    padding:12px 4px;
+    border-radius:30px
+}
+.fixed__btn__1 {
+    color:#ffff;
+    font-family:Inter;
+    font-weight:600;
+    border-radius:6px;
+    padding:12px 20px
+}
+.fixed__btn:hover {
+    color:#fff;
+    text-decoration:none
+}
+.credito__btn {
+    background-color:#ce0058;
+    color:#fff
+}
+.sitio__btn {
+    border:2px solid #ce0058;
+    color:#ce0058
+}
+.sitio__btn:hover {
+    border:2px solid #910048;
+    color:#910048
+}
+.digital__btn {
+    border-radius:25px;
+    background:#ce0058
+}
+.digital__btn:hover {
+    background:#910048;
+    color:#fff
+}
+.home__slide__item {
+    min-width:240px;
+    height:180px;
+    border-radius:6px;
+    display:block;
+    text-decoration:none
+}
+.home__slide__item1 {
+    background:url(../img/LP/mobile/body-img-mobile_1.webp) center/cover no-repeat;
+    margin-left:20px;
+    margin-right:20px
+}
+.home__slide__item2 {
+    background:url(../img/LP/mobile/body-img-mobile_2.webp) center/cover no-repeat;
+    margin-right:20px
+}
+.home__slide__item3 {
+    background:url(../img/LP/mobile/body-img-mobile_3.webp) center/cover no-repeat;
+    margin-right:20px
+}
+.home__slide__item4 {
+    background:url(../img/LP/mobile/body-img-mobile_4.webp) center/cover no-repeat;
+    margin-right:20px
+}
+.credito__slider,.home__slider {
+    display:flex;
+    justify-content:space-between;
+    overflow-x:auto;
+    width:auto;
+    padding-bottom:20px;
+    margin-top:30px
+}
+.home__slide__text {
+    align-items:center;
+    display:flex;
+    text-align:left;
+    font:20px/24px Bree;
+    letter-spacing:0;
+    color:#fff;
+    margin:142px 10px 15px 16px
+}
+.credito__go__img,.home__arrow__go {
+    margin-left:10px
+}
+.credito__slide__img {
+    min-width:270px;
+    height:170px;
+    border-radius:8px 8px 0 0;
+    display:block;
+    text-decoration:none
+}
+.credito__slide__img1 {
+    background:url(../img/LP/mobile/credito-grupal.webp) center/cover no-repeat
+}
+.credito__slide__img2 {
+    background:url(../img/LP/mobile/credito_comerciante.jpg) center/cover no-repeat
+}
+.credito__slide__img3 {
+    background:url(../img/LP/mobile/credito-individual.webp) center/cover no-repeat
+}
+.credito__slide__img4 {
+    background:url(../img/LP/mobile/credito-adicional-plus.webp) center/cover no-repeat
+}
+.credito__title {
+    text-align:left;
+    letter-spacing:0;
+    color:#ce0058;
+    margin:0 0 14px
+}
+.credito__text {
+    text-align:left;
+    font:14px/24px Open Sans;
+    letter-spacing:0;
+    color:#202124;
+    margin:0 0 20px
+}
+.credito__conoce,.credito__solicita {
+    letter-spacing:0;
+    text-align:center;
+    display:block
+}
+.credito__slide__info {
+    background:no-repeat padding-box #fff;
+    box-shadow:0 2px 10px #0000001A;
+    border-radius:0 0 8px 8px
+}
+.credito__solicita {
+    font:bold 14px/19px Open Sans;
+    color:#fff;
+    background:no-repeat padding-box #ce0058;
+    border-radius:30px;
+    padding:12px 4px;
+    text-decoration:none;
+    margin-bottom:20px
+}
+.credito__solicita:hover {
+    color:#fff
+}
+.home__title__mobile>.home__title,.info__title {
+    color:#ce0058
+}
+.credito__conoce {
+    align-items:center;
+    font:italic 14px/24px Open Sans;
+    color:#ce0058
+}
+.info__text,.info__title {
+    text-align:left;
+    letter-spacing:0
+}
+.info__title {
+    font:bold 16px/24px Open Sans;
+    margin:20px 0 12px
+}
+.info__text {
+    font:14px/22px Open Sans;
+    color:#202124;
+    margin-bottom:0
+}
+.benefits__img,.home__title,.home__title__content {
+    text-align:justify;
+}
+.benefits__row {
+    display:flex;
+    gap:16px;
+    margin-top:30px
+}
+.benefits__item {
+    width:49%
+}
+.home__subtitle {
+    margin-bottom:16px
+}
+.credito {
+    margin-top:40px
+}
+.info {
+    margin-top:60px;
+    margin-bottom:60px
+}
+.wrapper__banner {
+    padding-left:20px;
+    padding-right:20px;
+    width:100%;
+    margin:auto
+}
+footer {
+    padding-top:40px;
+    padding-bottom:75px
+}
+@media (min-width:320px) {
+    .fixed__cpt {
+        padding-top:10px;
+        margin-bottom:20px
+    }
+    .credito__slide__info {
+        padding:16px
+    }
+    .credito__title {
+        font:bold 20px/24px Bree
+    }
+    .credito__slider {
+        column-gap:20px;
+        padding:20px
+    }
+}
+@media (min-width:620px) {
+    .above {
+        margin-bottom:0
+    }
+    .cover__desk {
+        background:url(../img/LP/desk/compartamos-te-esta-buscando.webp) center/cover no-repeat;
+        display:flex;
+        align-items:center;
+        height:280px
+    }
+    .cover__mobile {
+        display:none!important
+    }
+    .fixed__cpt {
+        padding-top:70px;
+        margin-bottom:50px
+    }
+    .home__title__content {
+        border-radius:12px;
+        max-width:313px;
+        padding:5px;
+        display:block
+    }
+    .home__title {
+        font:bold 30px/34px Bree
+    }
+    .home__title__mobile {
+        display:none
+    }
+}
+@media (min-width:900px) {
+    .benefits__item,.home__text,.home__title,.home_title_2,.info__text,.info__title {
+        text-align:center
+    }
+    .credito__solicita,.fixed__btn {
+        transition:background-color .3s
+    }
+    .bn__time__img.desktop {
+        display:block
+    }
+    .bn__time__img.mobile {
+        display:none
+    }
+    .above:hover>.slider__buttons {
+        display:block;
+        transition:display .2s ease-in
+    }
+    .home__title__content {
+        max-width:420px
+    }
+    .home__title {
+        font:bold 40px/44px Bree
+    }
+    .home_title_2 {
+        font:bold 30px/34px Bree;
+        padding-top:35px
+    }
+    .home__subtitle {
+        margin-bottom:80px
+    }
+    .home__subtitle__beneficios {
+        margin-bottom:.85em
+    }
+    .home__text__category {
+        margin-top:80px
+    }
+    .benefits__img {
+        width:80px;
+        height:80px
+    }
+    .info__title {
+        font:bold 16px/24px Open Sans;
+        height:50px
+    }
+    .benefits__item2 {
+        margin-right:20px
+    }
+    .benefits {
+        display:flex
+    }
+    .fixed__btn {
+        font:bold 16px/24px Open Sans
+    }
+    .credito__btn:hover,.credito__solicita:hover {
+        background-color:#910048
+    }
+    .credito__conoce,.home__slide__text {
+        transition:font .3s
+    }
+    .credito__conoce:hover {
+        font:italic bold 16px/24px Open Sans
+    }
+    .home__slide__text:hover {
+        font:bold 21px/24px Bree
+    }
+    .credito__title {
+        margin-bottom:15px
+    }
+    .wrapper__banner {
+        max-width:1240px;
+        padding-left:20px;
+        padding-right:20px;
+        width:100%;
+        margin:auto
+    }
+    footer {
+        padding-bottom:82px;
+        padding-top:80px
+    }
+    .fixed__cpt {
+        padding-top:20px
+    }
+}
+@media (min-width:950px) {
+    .cover__desk {
+        height:380px
+    }
+    .home__title__content {
+        border-radius:12px;
+        max-width:448px;
+        padding:5px;
+        display:block
+    }
+    .home__text__banner,.home__title__banner {
+        margin:0
+    }
+    .wrapper__banner {
+        max-width:1240px;
+        padding-left:20px;
+        padding-right:20px;
+        width:100%;
+        margin:auto
+    }
+    .contenido__info {
+        margin-bottom:-70px
+    }
+    .home__slide__item {
+        min-width:270px;
+        height:220px;
+        border-radius:8px
+    }
+    .home__slide__item1,.home__slide__item2,.home__slide__item3,.home__slide__item4 {
+        background-size:cover
+    }
+    .credito__slider,.home__slider {
+        max-width:1240px;
+        margin:0 auto;
+        padding:0 20px 20px
+    }
+    .home__slide__text {
+        margin-top:180px
+    }
+    .credito {
+        margin-top:60px
+    }
+    .info {
+        margin-bottom:80px
+    }
+}
+@media (min-width:992px) {
+    .info__title {
+        height:auto
+    }
+}
+@media (min-width:1100px) {
+    .credito__slide__item {
+        width:24%;
+        max-width:250px
+    }
+}
+@media (min-width:1200px) {
+    .home__title__content {
+        max-width:525px;
+        padding:40px
+    }
+    .credito__slide__img,.credito__slide__item {
+        width:100%;
+        max-width:370px
+    }
+    .cover__desk {
+        height:500px
+    }
+    .home__text__banner {
+        padding-bottom:35px
+    }
+    .fixed__btn__1 {
+        padding:16px 56px
+    }
+    .credito__slide__img1 {
+        background:url(../img/LP/desk/credito-grupal.webp) center/cover no-repeat
+    }
+    .credito__slide__img2 {
+        background:url(../img/LP/desk/credito_comerciante.jpg) center/cover no-repeat
+    }
+    .credito__slide__img3 {
+        background:url(../img/LP/desk/credito-individual.webp) center/cover no-repeat
+    }
+    .credito__slide__img4 {
+        background:url(../img/LP/desk/credito-adicional-plus.webp) center/cover no-repeat
+    }
+    .credito__slide__img {
+        border-radius:8px 8px 0 0;
+        height:240px
+    }
+    .credito__slide__item1,.home__slide__item1 {
+        margin-left:0
+    }
+    .credito__slide__item4,.home__slide__item4 {
+        margin-right:0
+    }
+    .credito__slide__info {
+        padding:32px
+    }
+    .credito__title {
+        font:bold 24px/32px Bree
+    }
+}

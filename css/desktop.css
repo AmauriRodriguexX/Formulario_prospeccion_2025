@@ -1,0 +1,194 @@
+@media screen and (min-width: 1024px) {
+     body {
+         background: url('../assets/images/BG-amarillo.png') no-repeat center center fixed;
+         background-size: cover;
+         min-height: 100vh;
+         margin: 0;
+         padding: 0;
+     }
+ 
+     .desktop-center {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+     }
+ 
+     .main {
+         max-width: 500px;
+         margin: 0px auto;
+         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+         border-radius: 10px;
+         background: #fff;
+     }
+ 
+     .main__content {
+         position: relative;
+     }
+ 
+     .home__title {
+         font-size: 28px;
+         font-weight: bold;
+         text-align: left;
+         margin-bottom: -14px;
+     }
+ 
+     .home__subtitle {
+         font-size: 18px;
+         font-weight: 700;
+         text-align: right;
+         color: #333;
+         margin-bottom: 20px;
+     }
+ 
+     .home__line {
+         width: calc(100% + 80px);
+         margin-left: -40px;
+         margin-right: -40px;
+         height: 2px;
+         background-color: #ccc;
+         margin-top: 40px;
+         margin-bottom: 40px;
+     }
+ 
+     .question {
+         font-weight: 600;
+         font-size: 18px;
+         font-family: Inter;
+         font-style: normal;
+         line-height: 30px;
+         margin-top: 0;
+         margin-bottom: 10px;
+         color: var(--Color-Text-paragraphs, #252A2D);
+     }
+ 
+     .progress {
+         margin-top: 20px;
+     }
+ 
+     .progress__bar {
+         background-color: #e0e0e0;
+         height: 6px;
+         margin-bottom: 8px;
+         border-radius: 5px;
+     }
+ 
+     .answer {
+         width: 100%;
+         padding: 15px 20px;
+         font-size: 16px;
+         border-radius: 8px;
+         background: #fff;
+         display: flex;
+         align-items: center;
+         margin-bottom: 10px;
+         cursor: pointer;
+         box-shadow: 0 0 0 transparent;
+     }
+ 
+     .answer.selected {
+         border: 1px solid #ccc;
+         box-shadow: 0 3px 6px #00000021;
+         background: #F6F6F6;
+     }
+ 
+     .answer label {
+         margin-left: 8px;
+     }
+ 
+     .answer:hover {
+         border-color: #ce0058;
+     }
+ 
+     input[type="radio"] {
+         appearance: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         width: 25px;
+         height: 25px;
+         border: 2px solid #CE0058;
+         border-radius: 50%;
+         display: inline-block;
+         position: relative;
+         cursor: pointer;
+     }
+ 
+     input[type="radio"]:checked::before {
+         content: '';
+         width: 14px;
+         height: 14px;
+         background-color: #CE0058;
+         border-radius: 50%;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+     }
+ 
+     .frm__btn {
+         display: block;
+         width: 100%;
+         margin: 20px auto;
+         background-color: #aaa;
+         color: #fff;
+         border-radius: 30px;
+         font-size: 18px;
+         text-align: center;
+         cursor: pointer;
+     }
+ 
+     .frm__btn:hover {
+         background-color: #83786F;
+     }
+ 
+     .wrapper {
+         margin: auto;
+         max-width: 1240px;
+         padding: 0px;
+     }
+ 
+     .desktop-only {
+         height: 63vh;
+     }
+ 
+     #previous-winners {
+         padding: 0px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+ 
+     #previous-winners h2 {
+         color: #252A2D;
+         text-align: center;
+         font-family: Inter;
+         font-size: 20px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: 30px;
+     }
+ 
+     #previous-winners span.font-inter {
+         color: #CE0058;
+         text-align: center;
+         font-family: Bree;
+         font-size: 48px;
+         font-style: normal;
+         font-weight: 500;
+         line-height: 56px;
+         margin-bottom: 0px;
+     }
+ 
+     #previous-winners .carousel {
+         display: flex;
+     }
+ 
+     /* Quitar estilos de .main cuando #q4_1 esté visible */
+     #q4_1:target ~ .main,
+     #q4_1[style*="display: block"] ~ .main,
+     .main[data-visible-q4_1="true"] {
+         background: none !important;
+         box-shadow: none !important;
+     }
+ }
+ 
