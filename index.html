@@ -40,8 +40,6 @@
                 <input id="tipoCreditoIndividual" type="hidden" name="answer_question_4_2" value="">
 
                 <h1 class="home__title">Tramita tu crédito</h1>
-
-
                 <!-- Pregunta 1: Ya tienes un crédito Compartamos -->
                 <div class="question__content" id="q1">
                     <div class="d-flex flex-column">
@@ -417,8 +415,8 @@
                 <!--Crédito grupal-->
                 <div class="question__content desktop-only" id="q4_1">
                     <div class="d-flex flex-column">
-                        <p class="question">Crédito Grupal</p>
-                        <p>Tus ofertas</p>
+                        <p class="question no-text">Crédito Grupal</p>
+                        <p class="p-oftert">Tus ofertas</p>
                     </div>
 
                     <div class="progress">
@@ -447,13 +445,12 @@
                                 </div>
                             </div>
                             <div class="card" onclick="
-                               agregarTipoCreditoGrupal('Crédito Individual')
-                              ">
+                               agregarTipoCreditoGrupal('Crédito Individual')">
                                 <div class="thumbnail">
 
                                 </div>
                                 <div class="card_footer">
-                                    <span class="card_footer-name">Crédito Emergencia</span>
+                                    <span class="card_footer-name h2-creditos">Cuida de tu dinero</span>
                                     <span class="card_footer-description">Ayuda inmediata para los clientes de
                                         Crédito,
                                         afectados por desastres naturales.</span>
@@ -464,10 +461,10 @@
                     </section>
 
                     <section id="previous-winners">
-                        <h2 id="title" class="font-bree">
+                        <h2 id="title" class="font-bree no-text ">
                             Cuida tu dinero
                         </h2>
-                        <span id="subtitle" class="font-inter">Créditos adicionales.</span>
+                        <span id="subtitle" class="font-inter">Cuida tu dinero</span>
                         <div class="carousel">
                             <div class="card" onclick="
                               agregarTipoCreditoGrupal('Crédito Crece y Mejora')
@@ -582,12 +579,8 @@
                         </div>
                     </section>
                 </div>
-
-
-
                 <div class="home__msg" id="msgError">Debe seleccionar una respuesta</div>
                 <div class="home__msg" id="msgDatosIncorrectos"></div>
-
                 <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">Continuar <i
                         class="fas fa-arrow-right"></i></button>
             </form>
@@ -618,19 +611,28 @@
             const rbSiContainer = document.getElementById('DrbCSi');
             const rbNoContainer = document.getElementById('DrbCNo');
             const body = document.body;
-
-            // Añadir estilos base para el fondo
+    
+            // Añadir estilos base para el fondo y la transición
             Object.assign(body.style, {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                backgroundAttachment: 'fixed'
+                backgroundAttachment: 'fixed',
+                transition: 'background-image 0.5s ease-in-out' // Transición suave para el cambio de fondo
             });
-
+    
             function changeBackground(image) {
+                const section = document.getElementById('q4_1');
+    
+                // Si la sección `q4_1` está visible, deshabilitar el fondo del body
+                if (section && section.offsetParent !== null) { // offsetParent verifica si está visible
+                    body.style.backgroundImage = 'none'; // Quitar imagen del body
+                    body.style.backgroundColor = '#fff'; // Fondo blanco opcional
+                    return;
+                }
+    
                 if (window.innerWidth >= 1024) {
                     body.style.backgroundImage = `url('assets/images/${image}')`;
-                    // Asegurar que el body ocupe toda la altura de la ventana
                     document.documentElement.style.height = '100%';
                     body.style.minHeight = '100vh';
                 } else {
@@ -639,21 +641,21 @@
                     body.style.minHeight = '';
                 }
             }
-
+    
             // Establecer fondo inicial
             changeBackground('BG-amarillo.png');
-
+    
             // Eventos de clic
             rbSiContainer.addEventListener('click', () => {
                 document.getElementById('rbCSi').checked = true;
                 changeBackground('BG-morado.png');
             });
-
+    
             rbNoContainer.addEventListener('click', () => {
                 document.getElementById('rbCNo').checked = true;
                 changeBackground('BG-blue.png');
             });
-
+    
             // Manejar resize y orientación
             window.addEventListener('resize', () => {
                 const currentBG = document.getElementById('rbCSi').checked ? 'BG-morado.png' :
@@ -661,7 +663,7 @@
                         'BG-amarillo.png';
                 changeBackground(currentBG);
             });
-
+    
             // Manejar cambios de orientación en móviles
             window.addEventListener('orientationchange', () => {
                 setTimeout(() => {
@@ -671,38 +673,97 @@
                     changeBackground(currentBG);
                 }, 100);
             });
+    
+            // Detectar si la sección q4_1 está visible dinámicamente
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Si la sección `q4_1` es visible
+                        body.style.backgroundImage = 'none'; // Desactivar el fondo
+                        body.style.backgroundColor = '#fff'; // Color opcional
+                    } else {
+                        // Restaurar el fondo del body si la sección no es visible
+                        const currentBG = document.getElementById('rbCSi').checked ? 'BG-morado.png' :
+                            document.getElementById('rbCNo').checked ? 'BG-blue.png' :
+                                'BG-amarillo.png';
+                        changeBackground(currentBG);
+                    }
+                });
+            });
+    
+            // Observar la sección `q4_1`
+            const section = document.getElementById('q4_1');
+            if (section) {
+                observer.observe(section);
+            }
         });
     </script>
+    
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const section = document.getElementById("q4_1");
             const mainElement = document.querySelector(".main");
             const mainContent = document.querySelector(".main__content");
             const carouselCards = document.querySelectorAll("#previous-winners .carousel .card"); // Seleccionar las cards
-
+            const wrapperElement = document.querySelector(".wrapper"); // Seleccionar .wrapper
+            const homeTitle = document.querySelector(".home__title"); // Seleccionar .home__title
+            const questionElement = document.querySelector(".question"); // Seleccionar .question
+            const flexColumnElements = document.querySelectorAll(".flex-column"); // Seleccionar todos los .flex-column
+    
             const observer = new MutationObserver(() => {
-                // Solo aplicar cambios si el viewport es desktop
-                if (window.innerWidth >= 1024) {
+                // Solo aplicar cambios si el viewport es desktop (>=768px)
+                if (window.innerWidth >= 768) {
                     if (section && window.getComputedStyle(section).display !== "none") {
                         // Modificar estilos para .main
                         if (mainElement) {
                             mainElement.style.background = "none";
                             mainElement.style.boxShadow = "none";
-                            mainElement.style.maxWidth = "50%"; // Aplica max-width
+    
+                            if (window.innerWidth >= 1024) {
+                                mainElement.style.maxWidth = "100%"; // Aplica max-width para >=1024px
+                            } else {
+                                mainElement.style.width = "100%"; // Aplica width: 100% para >=768px y <1024px
+                            }
                         }
-
+    
                         // Modificar estilos para .main__content
                         if (mainContent) {
-                            mainContent.style.width = "75%";
+                            mainContent.style.width = "50%";
                         }
-
+    
                         // Modificar estilos para las cards dentro del carousel
                         if (carouselCards.length > 0) {
                             carouselCards.forEach((card) => {
                                 card.style.flex = "auto"; // Aplica flex: auto
                             });
                         }
-
+    
+                        // Modificar estilos para .wrapper
+                        if (wrapperElement && window.innerWidth >= 1024) {
+                            wrapperElement.style.maxWidth = "1240px";
+                            wrapperElement.style.display = "flex";
+                            wrapperElement.style.justifyContent = "center";
+                        }
+    
+                        // Modificar estilos para .home__title
+                        if (homeTitle && window.innerWidth >= 1024) {
+                            homeTitle.style.textAlign = "center";
+                        }
+    
+                        // Modificar estilos para .question
+                        if (questionElement && window.innerWidth >= 1024) {
+                            questionElement.style.textAlign = "center";
+                        }
+    
+                        // Modificar estilos para .flex-column
+                        if (flexColumnElements.length > 0) {
+                            flexColumnElements.forEach((element) => {
+                                element.style.flexDirection = "column";
+                                element.style.textAlign = "center";
+                            });
+                        }
+    
                         console.log("Estilos aplicados para #q4_1 en escritorio.");
                     } else {
                         // Restaurar estilos predeterminados
@@ -710,28 +771,123 @@
                             mainElement.style.background = "#fff";
                             mainElement.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.1)";
                             mainElement.style.maxWidth = ""; // Restaurar max-width original
+                            mainElement.style.width = ""; // Restaurar width original
                         }
-
+    
                         if (mainContent) {
                             mainContent.style.width = ""; // Restaurar a su estado original
                         }
-
+    
                         // Restaurar estilos para las cards dentro del carousel
                         if (carouselCards.length > 0) {
                             carouselCards.forEach((card) => {
                                 card.style.flex = ""; // Restaurar el estilo original
                             });
                         }
-
+    
+                        // Restaurar estilos para .wrapper
+                        if (wrapperElement) {
+                            wrapperElement.style.maxWidth = ""; // Restaurar max-width original
+                            wrapperElement.style.display = ""; // Restaurar display original
+                            wrapperElement.style.justifyContent = ""; // Restaurar justify-content original
+                        }
+    
+                        // Restaurar estilos para .home__title
+                        if (homeTitle) {
+                            homeTitle.style.textAlign = ""; // Restaurar text-align original
+                        }
+    
+                        // Restaurar estilos para .question
+                        if (questionElement) {
+                            questionElement.style.textAlign = ""; // Restaurar text-align original
+                        }
+    
+                        // Restaurar estilos para .flex-column
+                        if (flexColumnElements.length > 0) {
+                            flexColumnElements.forEach((element) => {
+                                element.style.flexDirection = ""; // Restaurar flex-direction original
+                                element.style.textAlign = ""; // Restaurar text-align original
+                            });
+                        }
+    
                         console.log("Estilos restaurados para escritorio.");
                     }
                 }
             });
-
+    
             observer.observe(document.body, { childList: true, subtree: true });
         });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const section = document.getElementById("q3_2");
+    const mainContent = document.querySelector("#q3_2 .main__content");
+    const formContainer = document.querySelector("#q3_2 .d-flex.flex-column.pt-3");
+
+    const observer = new MutationObserver(() => {
+        if (window.innerWidth >= 1024) {
+            if (section && window.getComputedStyle(section).display !== "none") {
+                // Aplicar diseño en dos columnas
+                if (formContainer && !formContainer.classList.contains("grid-layout")) {
+                    formContainer.classList.add("grid-layout");
+                    formContainer.style.display = "grid";
+                    formContainer.style.gridTemplateColumns = "1fr 1fr";
+                    formContainer.style.gap = "20px";
+
+                    // Asegurar que ciertos elementos ocupen todo el ancho
+                    const elementosFullWidth = [
+                        "#q3_2 .progress",
+                        "#q3_2 .progress__label",
+                        "#q3_2 .home__line",
+                        "#q3_2 .question",
+                        "#q3_2 .contenidoGeneralForm"
+                    ];
+                    elementosFullWidth.forEach(selector => {
+                        document.querySelectorAll(selector).forEach(el => {
+                            el.style.gridColumn = "span 2";
+                        });
+                    });
+
+                    // Ajustar el checkbox de aviso de privacidad
+                    const avisoPrivacidad = document.querySelector("#q3_2 .contenidoGeneralForm .campoFormulario");
+                    if (avisoPrivacidad) {
+                        avisoPrivacidad.style.gridColumn = "span 2";
+                        avisoPrivacidad.style.display = "flex";
+                        avisoPrivacidad.style.alignItems = "center";
+                    }
+                }
+
+                // Aplicar ancho a .main__content
+                if (mainContent) {
+                    mainContent.style.width = "752px";
+                }
+            }
+        } else {
+            // Restaurar diseño en mobile
+            if (formContainer) {
+                formContainer.classList.remove("grid-layout");
+                formContainer.style.display = "flex";
+                formContainer.style.flexDirection = "column";
+            }
+
+            if (mainContent) {
+                mainContent.style.width = "";
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Ejecutar la función al inicio para aplicar los estilos si ya está cargado
+    observer.takeRecords();
+});
 
     </script>
+    
+    
+    
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>

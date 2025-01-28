@@ -47,8 +47,8 @@
          margin-right: -40px;
          height: 2px;
          background-color: #ccc;
-         margin-top: 40px;
-         margin-bottom: 40px;
+         margin-top: 16px;
+         margin-bottom: 16px;
      }
  
      .question {
@@ -63,8 +63,14 @@
      }
  
      .progress {
-         margin-top: 20px;
-     }
+        margin-top: 20px;
+        /* width: 413px; */
+        margin-top: 20px;
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
  
      .progress__bar {
          background-color: #e0e0e0;
@@ -182,13 +188,107 @@
      #previous-winners .carousel {
          display: flex;
      }
- 
-     /* Quitar estilos de .main cuando #q4_1 esté visible */
-     #q4_1:target ~ .main,
-     #q4_1[style*="display: block"] ~ .main,
-     .main[data-visible-q4_1="true"] {
-         background: none !important;
-         box-shadow: none !important;
-     }
+
+     #previous-winners .carousel {
+        max-width: 65%;
+        margin: 0 auto;
+    }
+
+    #previous-winners .carousel .card .card_footer .card_footer-name {
+        color: #CE0058;
+        font-family: Bree;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 34px;
+        height: 50px;
+    }
+
+    #previous-winners .carousel .card .card_footer .card_footer-description {
+        color: #252A2D;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+    }
+    #previous-winners .carousel {
+        max-width: 35%;
+        margin: 0px auto;
+        padding: 20px;
+    }
+
+    #previous-winners .carousel .card .card_footer {
+        padding: 24px 24px;
+    }
+
+    #previous-winners .carousel .card {
+        cursor: pointer;
+    }
+    .thumbnail-container {
+        width: 100%;
+        height: 340px; 
+        overflow: hidden; 
+        position: relative;
+        border-radius: 8px; 
+    }
+    
+    .thumbnail {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .thumbnail:hover {
+        transform: scale(1.1);
+    } 
+
+    .no-text {
+        display: none;
+    }
+
+    #previous-winners {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding: 50px 0;
+        overflow: hidden; /* Asegura que no haya desbordamiento */
+    }
+    
+    #previous-winners::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(../assets/images/bg-tk-page.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.3; /* Reduce la opacidad de la imagen al 50% */
+        z-index: -1; /* Coloca la imagen detrás del contenido */
+    }
+
+    .p-oftert {
+        font-weight: 600;
+        font-size: 18px;
+        font-family: Inter;
+        font-style: normal;
+        line-height: 30px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: var(--Color-Text-paragraphs, #252A2D);
+    }
+
+    
+
+    
+    
  }
+
+ 
  
