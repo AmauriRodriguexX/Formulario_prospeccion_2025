@@ -156,7 +156,7 @@ input[type='radio'] {
     align-items: center;
     /*padding: 0% 8%;*/
     min-width: 340px;
-	margin: 1.5% 0%;
+	margin: 4.5% 0%;
 	
 	   
 }
@@ -649,14 +649,13 @@ ul li h2{
     height: auto;
 }
 
-.imgTY-cte{
-    content: url(../assets/images/gracias-por-tu-solicitud-cte.jpg);
-   /* width: 361px;
-    height: 226px;*/
-    border-radius: 5px;
-	width: 100%;
+.imgTY-cte {
+    width: 10%;
     height: auto;
+    margin: 0 auto;
+    display: block;
 }
+
 .textoImagen{
     position: relative;
 }

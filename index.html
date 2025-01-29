@@ -143,9 +143,9 @@
                     </div>
                 </div>
                 <!--Situación actial No-->
-                <div class="question__content" id="q3_2">
+                <div class="question__content " id="q3_2">
                     <div class="d-flex flex-column">
-                        <p class="question">Información personal</p>
+                        <p class="question c-center">Información cliente</p>
                         <div class="progress">
                             <div class="progress__bar">
                                 <div class="progress__line"></div>
@@ -153,40 +153,34 @@
                             <div class="progress__label"><span>80%</span> avance de la solicitud</div>
                         </div>
                         <div class="home__line"></div>
-                        <span class="question pt-3">Déjanos tus datos para que nuestro agente se contacte contigo y te
+                        <span class="question pt-3 p-title">Déjanos tus datos para que nuestro agente se contacte
+                            contigo y te
                             haga saber la oferta que te tenemos</span>
                         <label>Campos con (*) son obligatorios</label>
                         <div id="msError" style="color: red; text-align: center; display: none;">No se pudo procesar tu
                             informacion favor de intentar mas tarde</div>
                         <div class="d-flex flex-column pt-3">
                             <div class="campoFormulario">
-                                <!--
                                 <p>Nombre(s) <b class="camposObligatorios">*</b> </p>
-                                    -->
                                 <input class="answer" type="text" id="txbNombre" name="nombre" placeholder="Nombre(s)*">
                                 <p class="mensajeCampoError" id="textErrortxbNombre">Escribe tu(s) nombre(s)</p>
                             </div>
                             <div class="campoFormulario">
-                                <!-- 
                                 <p>Primer apellido <b class="camposObligatorios">*</b> </p>
-                                -->
                                 <input class="answer" type="text" id="txbApPaterno" name="aPaterno"
                                     placeholder="Primer apellido*">
                                 <p class="mensajeCampoError" id="textErrortxbApPaterno">Escribe tu primer apellido</p>
                             </div>
                             <div class="campoFormulario">
-                                <!-- 
                                 <p>Segundo apellido (opcional)</p>
-                                -->
                                 <input class="answer" type="text" id="txbApMaterno" name="aMaterno"
                                     placeholder="Segundo apellido (opcional)">
                                 <p class="mensajeCampoError" id="textErrortxbApMaterno">Apellido inválido</p>
                             </div>
                             <div class="campoFormulario tipoCredito">
                                 <p>Fecha de nacimiento <b class="camposObligatorios">*</b> </p>
-
-                                <div id="dt-Date" style="display: block;">
-                                    <select id="diaSelect" class="selectedForm selectFecha answer"
+                                <div id="dt-Date" class="desktop-date-m-d">
+                                    <select id="diaSelect" class="desktop-date selectedForm selectFecha answer"
                                         onchange="validaFormularioDatosPersonales()">
                                         <option disabled="" selected="" value="0">Día</option>
                                         <option value="01">01</option>
@@ -221,7 +215,7 @@
                                         <option value="30">30</option>
                                         <option value="31">31</option>
                                     </select>
-                                    <select id="mesSelect" class="selectedForm selectFecha answer"
+                                    <select id="mesSelect" class="desktop-date selectedForm selectFecha answer"
                                         onchange="validaFormularioDatosPersonales()">
                                         <option disabled="" selected="" value="0">Mes</option>
                                         <option value="01">Enero</option>
@@ -237,7 +231,7 @@
                                         <option value="11">Noviembre</option>
                                         <option value="12">Diciembre</option>
                                     </select>
-                                    <select id="anioSelect" class="selectedForm selectFecha answer"
+                                    <select id="anioSelect" class="desktop-date selectedForm selectFecha answer"
                                         onchange="validaFormularioDatosPersonales()">
                                         <option disabled="" selected="" value="0">Año</option>
                                         <option value="2005">2006</option>
@@ -346,12 +340,12 @@
                                     identificas</p>
                             </div>
                             <div class="campoFormulario">
-                                <p id="topTel">Teléfono <b class="camposObligatorios">*</b> </p>
+                                <p id="topTel" class="hide-desk">Teléfono <b class="camposObligatorios">*</b> </p>
                                 <div style="float: left; width: 35%;">
                                     <select id="telefonoSelect" name="tipoTelefono"
                                         class="selectedForm disableForm answer">
-                                        <option value="Fijo">Fijo</option>
-                                        <option value="Celular" selected="selected">Celular </option>
+                                        <option value="Fijo">Fijo*</option>
+                                        <option value="Celular" selected="selected">Celular*</option>
                                     </select>
                                     <div class="arrow-down"></div>
                                 </div>
@@ -376,9 +370,9 @@
                             </div>
 
                             <div class="campoFormulario">
-                                <p>Código postal <b class="camposObligatorios">*</b> </p>
+                                <p class="hide-desk ">Código postal <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" maxlength="5" type="tel" id="txbCP" name="codigoPostal"
-                                    placeholder="Código postal">
+                                    placeholder="Código postal*">
                                 <p class="mensajeCampoError" id="textErrortxbCP">Número debe ser 5 dígitos</p>
                             </div>
 
@@ -391,10 +385,10 @@
 
                             <div class="contenidoGeneralForm pricipalDisable">
                                 <div class="campoFormulario">
-                                    <div style="display: flex; height: 24px;">
+                                    <div style="display: flex; height: 24px;" class="c-center">
                                         <input class="answer" type="checkbox" style="width: 24px;height: 24px;"
                                             id="avisoPrivacidad" name="avisoPrivacidad">
-                                        <div style="margin: 3px 2px;">
+                                        <div style="margin: 3px 2px 8px 4px;">
                                             <label for="aviso">He leido y acepto el <a
                                                     style="text-decoration: underline;color: #CE0058;"
                                                     onclick="muestraAviso()">Aviso de Privacidad </a></label>
@@ -409,7 +403,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <!--Crédito grupal-->
@@ -606,100 +599,9 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const rbSiContainer = document.getElementById('DrbCSi');
-            const rbNoContainer = document.getElementById('DrbCNo');
-            const body = document.body;
-    
-            // Añadir estilos base para el fondo y la transición
-            Object.assign(body.style, {
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundAttachment: 'fixed',
-                transition: 'background-image 0.5s ease-in-out' // Transición suave para el cambio de fondo
-            });
-    
-            function changeBackground(image) {
-                const section = document.getElementById('q4_1');
-    
-                // Si la sección `q4_1` está visible, deshabilitar el fondo del body
-                if (section && section.offsetParent !== null) { // offsetParent verifica si está visible
-                    body.style.backgroundImage = 'none'; // Quitar imagen del body
-                    body.style.backgroundColor = '#fff'; // Fondo blanco opcional
-                    return;
-                }
-    
-                if (window.innerWidth >= 1024) {
-                    body.style.backgroundImage = `url('assets/images/${image}')`;
-                    document.documentElement.style.height = '100%';
-                    body.style.minHeight = '100vh';
-                } else {
-                    body.style.backgroundImage = '';
-                    document.documentElement.style.height = '';
-                    body.style.minHeight = '';
-                }
-            }
-    
-            // Establecer fondo inicial
-            changeBackground('BG-amarillo.png');
-    
-            // Eventos de clic
-            rbSiContainer.addEventListener('click', () => {
-                document.getElementById('rbCSi').checked = true;
-                changeBackground('BG-morado.png');
-            });
-    
-            rbNoContainer.addEventListener('click', () => {
-                document.getElementById('rbCNo').checked = true;
-                changeBackground('BG-blue.png');
-            });
-    
-            // Manejar resize y orientación
-            window.addEventListener('resize', () => {
-                const currentBG = document.getElementById('rbCSi').checked ? 'BG-morado.png' :
-                    document.getElementById('rbCNo').checked ? 'BG-blue.png' :
-                        'BG-amarillo.png';
-                changeBackground(currentBG);
-            });
-    
-            // Manejar cambios de orientación en móviles
-            window.addEventListener('orientationchange', () => {
-                setTimeout(() => {
-                    const currentBG = document.getElementById('rbCSi').checked ? 'BG-morado.png' :
-                        document.getElementById('rbCNo').checked ? 'BG-blue.png' :
-                            'BG-amarillo.png';
-                    changeBackground(currentBG);
-                }, 100);
-            });
-    
-            // Detectar si la sección q4_1 está visible dinámicamente
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Si la sección `q4_1` es visible
-                        body.style.backgroundImage = 'none'; // Desactivar el fondo
-                        body.style.backgroundColor = '#fff'; // Color opcional
-                    } else {
-                        // Restaurar el fondo del body si la sección no es visible
-                        const currentBG = document.getElementById('rbCSi').checked ? 'BG-morado.png' :
-                            document.getElementById('rbCNo').checked ? 'BG-blue.png' :
-                                'BG-amarillo.png';
-                        changeBackground(currentBG);
-                    }
-                });
-            });
-    
-            // Observar la sección `q4_1`
-            const section = document.getElementById('q4_1');
-            if (section) {
-                observer.observe(section);
-            }
-        });
-    </script>
-    
-    
+
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const section = document.getElementById("q4_1");
@@ -710,7 +612,7 @@
             const homeTitle = document.querySelector(".home__title"); // Seleccionar .home__title
             const questionElement = document.querySelector(".question"); // Seleccionar .question
             const flexColumnElements = document.querySelectorAll(".flex-column"); // Seleccionar todos los .flex-column
-    
+
             const observer = new MutationObserver(() => {
                 // Solo aplicar cambios si el viewport es desktop (>=768px)
                 if (window.innerWidth >= 768) {
@@ -719,43 +621,43 @@
                         if (mainElement) {
                             mainElement.style.background = "none";
                             mainElement.style.boxShadow = "none";
-    
+
                             if (window.innerWidth >= 1024) {
                                 mainElement.style.maxWidth = "100%"; // Aplica max-width para >=1024px
                             } else {
                                 mainElement.style.width = "100%"; // Aplica width: 100% para >=768px y <1024px
                             }
                         }
-    
+
                         // Modificar estilos para .main__content
                         if (mainContent) {
                             mainContent.style.width = "50%";
                         }
-    
+
                         // Modificar estilos para las cards dentro del carousel
                         if (carouselCards.length > 0) {
                             carouselCards.forEach((card) => {
                                 card.style.flex = "auto"; // Aplica flex: auto
                             });
                         }
-    
+
                         // Modificar estilos para .wrapper
                         if (wrapperElement && window.innerWidth >= 1024) {
                             wrapperElement.style.maxWidth = "1240px";
                             wrapperElement.style.display = "flex";
                             wrapperElement.style.justifyContent = "center";
                         }
-    
+
                         // Modificar estilos para .home__title
                         if (homeTitle && window.innerWidth >= 1024) {
                             homeTitle.style.textAlign = "center";
                         }
-    
+
                         // Modificar estilos para .question
                         if (questionElement && window.innerWidth >= 1024) {
                             questionElement.style.textAlign = "center";
                         }
-    
+
                         // Modificar estilos para .flex-column
                         if (flexColumnElements.length > 0) {
                             flexColumnElements.forEach((element) => {
@@ -763,7 +665,7 @@
                                 element.style.textAlign = "center";
                             });
                         }
-    
+
                         console.log("Estilos aplicados para #q4_1 en escritorio.");
                     } else {
                         // Restaurar estilos predeterminados
@@ -773,35 +675,35 @@
                             mainElement.style.maxWidth = ""; // Restaurar max-width original
                             mainElement.style.width = ""; // Restaurar width original
                         }
-    
+
                         if (mainContent) {
                             mainContent.style.width = ""; // Restaurar a su estado original
                         }
-    
+
                         // Restaurar estilos para las cards dentro del carousel
                         if (carouselCards.length > 0) {
                             carouselCards.forEach((card) => {
                                 card.style.flex = ""; // Restaurar el estilo original
                             });
                         }
-    
+
                         // Restaurar estilos para .wrapper
                         if (wrapperElement) {
                             wrapperElement.style.maxWidth = ""; // Restaurar max-width original
                             wrapperElement.style.display = ""; // Restaurar display original
                             wrapperElement.style.justifyContent = ""; // Restaurar justify-content original
                         }
-    
+
                         // Restaurar estilos para .home__title
                         if (homeTitle) {
                             homeTitle.style.textAlign = ""; // Restaurar text-align original
                         }
-    
+
                         // Restaurar estilos para .question
                         if (questionElement) {
                             questionElement.style.textAlign = ""; // Restaurar text-align original
                         }
-    
+
                         // Restaurar estilos para .flex-column
                         if (flexColumnElements.length > 0) {
                             flexColumnElements.forEach((element) => {
@@ -809,82 +711,191 @@
                                 element.style.textAlign = ""; // Restaurar text-align original
                             });
                         }
-    
+
                         console.log("Estilos restaurados para escritorio.");
                     }
                 }
             });
-    
+
             observer.observe(document.body, { childList: true, subtree: true });
         });
     </script>
-
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    function ajustarFormulario() {
-        const contenedorFormulario = document.querySelector("#q3_2 .d-flex.flex-column.pt-3");
-        const mainContent = document.querySelector("#q3_2 .main__content");
+            const observer = new MutationObserver(() => {
+                aplicarEstilosQ3_2();
+            });
 
-        if (contenedorFormulario) {
-            if (window.innerWidth >= 1024) { // Solo en pantallas grandes
-                if (!contenedorFormulario.classList.contains("grid-layout")) {
-                    contenedorFormulario.classList.add("grid-layout");
-                    contenedorFormulario.style.display = "grid";
-                    contenedorFormulario.style.gridTemplateColumns = "1fr 1fr";
-                    contenedorFormulario.style.gap = "0px";
+            function aplicarEstilosQ3_2() {
+                const contenedorFormulario = document.querySelector("#q3_2 .d-flex.flex-column.pt-3");
+                const mainContent = document.querySelector("#q3_2 .main");
 
-                    // Asegurar que ciertos elementos ocupen todo el ancho
-                    const elementosFullWidth = [
-                        "#q3_2 .progress",
-                        "#q3_2 .progress__label",
-                        "#q3_2 .home__line",
-                        "#q3_2 .question",
-                        "#q3_2 .contenidoGeneralForm"
-                    ];
-                    elementosFullWidth.forEach(selector => {
-                        document.querySelectorAll(selector).forEach(el => {
-                            el.style.gridColumn = "span 2";
+                if (contenedorFormulario) {
+                    if (window.innerWidth >= 1024) {
+                        // Vista de escritorio
+                        contenedorFormulario.style.display = "grid";
+                        contenedorFormulario.style.gridTemplateColumns = "1fr 1fr";
+                        contenedorFormulario.style.gap = "0px";
+
+                        // Ajustar elementos que ocupan todo el ancho
+                        const elementosFullWidth = [
+                            "#q3_2 .progress",
+                            "#q3_2 .progress__label",
+                            "#q3_2 .home__line",
+                            "#q3_2 .question",
+                            "#q3_2 .contenidoGeneralForm"
+                        ];
+                        elementosFullWidth.forEach(selector => {
+                            document.querySelectorAll(selector).forEach(el => {
+                                el.style.gridColumn = "span 2";
+                            });
                         });
-                    });
 
-                    // Para el checkbox de aviso de privacidad
-                    const avisoPrivacidad = document.querySelector("#q3_2 .contenidoGeneralForm .campoFormulario");
-                    if (avisoPrivacidad) {
-                        avisoPrivacidad.style.gridColumn = "span 2";
-                        avisoPrivacidad.style.display = "flex";
-                        avisoPrivacidad.style.alignItems = "center";
+                        // Ajustar el ancho de .main en % (en escritorio)
+                        if (mainContent) {
+                            mainContent.style.maxWidth = "40%";
+                        }
+                    } else {
+                        // Pantallas pequeñas
+                        contenedorFormulario.style.display = "flex";
+                        contenedorFormulario.style.flexDirection = "column";
+
+                        // Restaurar a 500px en pantallas pequeñas
+                        if (mainContent) {
+                            mainContent.style.maxWidth = "500px";
+                        }
                     }
                 }
-
-                // Aplicar estilo a .main__content solo en pantallas grandes
-                if (mainContent) {
-                    mainContent.style.width = "752px";
-                }
-
-            } else {
-                // Revertir cambios si la pantalla es menor a 1024px
-                contenedorFormulario.classList.remove("grid-layout");
-                contenedorFormulario.style.display = "flex";
-                contenedorFormulario.style.flexDirection = "column";
-
-                // Revertir el ancho de .main__content en pantallas pequeñas
-                if (mainContent) {
-                    mainContent.style.width = "auto";
-                }
             }
-        }
-    }
 
-    // Ejecutar en carga y en cambio de tamaño de pantalla
-    ajustarFormulario();
-    window.addEventListener("resize", ajustarFormulario);
-});
+            // Ejecutar al cargar y al redimensionar la ventana
+            aplicarEstilosQ3_2();
+            window.addEventListener("resize", aplicarEstilosQ3_2);
+
+            // Observar cambios en el DOM (por si algo se inyecta dinámicamente)
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+
+
+
 
     </script>
-    
-    
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rbSiContainer = document.getElementById('DrbCSi');
+            const rbNoContainer = document.getElementById('DrbCNo');
+            const body = document.body;
+            const q3_2 = document.querySelector('#q3_2'); // Elemento con ID q3_2
+            const mainElement = document.querySelector('.main'); // Contenedor principal
+            const mainContent = document.querySelector('.main__content'); // Contenedor interno
+            const wrapper = document.querySelector('.wrapper'); // Contenedor wrapper
+            const homeTitle = document.querySelector('.home__title'); // Título con clase home__title
+            const q4_1 = document.getElementById('q4_1'); // Elemento con ID q4_1
+
+            // Añadir estilos base para el fondo y la transición
+            Object.assign(body.style, {
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                transition: 'background-image 0.5s ease-in-out' // Transición suave para el cambio de fondo
+            });
+
+            function changeBackground(image) {
+                // Si la sección `q4_1` está visible, deshabilitar el fondo del body
+                if (q4_1 && q4_1.offsetParent !== null) { // offsetParent verifica si está visible
+                    body.style.backgroundImage = 'none'; // Quitar imagen del body
+                    body.style.backgroundColor = '#fff'; // Fondo blanco opcional
+                    return;
+                }
+
+                if (window.innerWidth >= 1024) {
+                    body.style.backgroundImage = `url('assets/images/${image}')`;
+                    document.documentElement.style.height = '100%';
+                    body.style.minHeight = '100vh';
+                } else {
+                    body.style.backgroundImage = '';
+                    document.documentElement.style.height = '';
+                    body.style.minHeight = '';
+                }
+            }
+
+            // Establecer fondo inicial
+            changeBackground('BG-amarillo.png');
+
+            // Eventos de clic
+            if (rbSiContainer && rbNoContainer) {
+                rbSiContainer.addEventListener('click', () => {
+                    document.getElementById('rbCSi').checked = true;
+                    changeBackground('BG-morado.png');
+                });
+
+                rbNoContainer.addEventListener('click', () => {
+                    document.getElementById('rbCNo').checked = true;
+                    changeBackground('BG-blue.png');
+                });
+            }
+
+            // Manejar resize y orientación
+            window.addEventListener('resize', () => {
+                const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
+                    document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
+                        'BG-amarillo.png';
+                changeBackground(currentBG);
+            });
+
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
+                        document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
+                            'BG-amarillo.png';
+                    changeBackground(currentBG);
+                }, 100);
+            });
+
+            // IntersectionObserver para #q4_1 (Fondo dinámico)
+            if (q4_1) {
+                const observerQ4 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            body.style.backgroundImage = 'none'; // Desactivar el fondo
+                            body.style.backgroundColor = '#fff'; // Fondo blanco opcional
+                        } else {
+                            const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
+                                document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
+                                    'BG-amarillo.png';
+                            changeBackground(currentBG);
+                        }
+                    });
+                });
+
+                observerQ4.observe(q4_1);
+            }
+
+            // IntersectionObserver para #q3_2 (Cambiar dinámicamente clases de .main, .main__content, .wrapper y .home__title)
+            if (q3_2) {
+                const observerQ3 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            mainElement?.classList.add('main-visible-q3_2'); // Agrega clase a .main
+                            mainContent?.classList.add('main-content-visible-q3_2'); // Agrega clase a .main__content
+                            wrapper?.classList.add('wrapper-visible-q3_2'); // Agrega clase a .wrapper
+                            homeTitle?.classList.add('home-title-visible-q3_2'); // Agrega clase a .home__title
+                        } else {
+                            mainElement?.classList.remove('main-visible-q3_2'); // Remueve clase de .main
+                            mainContent?.classList.remove('main-content-visible-q3_2'); // Remueve clase de .main__content
+                            wrapper?.classList.remove('wrapper-visible-q3_2'); // Remueve clase de .wrapper
+                            homeTitle?.classList.remove('home-title-visible-q3_2'); // Remueve clase de .home__title
+                        }
+                    });
+                });
+
+                observerQ3.observe(q3_2);
+            }
+        });
+
+    </script>
+
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>
