@@ -19,7 +19,6 @@
         max-height: calc(100vh - 100px); 
         overflow-x: hidden;
         overflow-y: auto; 
-        white-space: nowrap; 
     }
     
     .main {
@@ -474,7 +473,8 @@
     .link {
         color: #CE0058;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 300;
+        text-decoration: underline;
     }
     
     .link:hover {
@@ -501,6 +501,35 @@
         font-style: normal;
         font-weight: 500;
         line-height: 34px;
+    }
+
+    .download-container {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 600px;
+        margin: 50px auto;
+    } 
+    
+    .store-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+    .store-buttons img {
+        width: 150px;
+        transition: transform 0.3s ease;
+    }
+    
+    .store-buttons img:hover {
+        transform: scale(1.05);
     }
     
 

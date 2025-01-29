@@ -967,7 +967,20 @@ function agregarTipoIndividual(answer){
 
 }
 
-
+function agregarTipoCreditoGrupal(answer) {
+	console.log("Tipo de crédito seleccionado:", answer); // Depuración
+ 
+	// Si la opción seleccionada es "Cuenta a mi favor" o "Inversiones", redirige a ty.html
+	if (answer === "Cuenta a mi favor" || answer === "Inversiones") {
+	    window.location.href = "ty.html"; // Redirección directa
+	    return; // Detiene la ejecución para evitar que siga ejecutando la lógica original
+	}
+ 
+	// Si es cualquier otro crédito, ejecuta la lógica original
+	$('#tipoCreditoGrupal').val(answer);
+	$('#tipoCreditoGrupal').trigger('change');
+ }
+ 
 
 
 
