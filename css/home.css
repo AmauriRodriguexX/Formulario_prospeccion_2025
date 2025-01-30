@@ -44,7 +44,8 @@
 .progress__line {
     background-color:#CE0058;
     width:0;
-    height:100%
+    height:100%;
+    border-radius: 20px;
 }
 .progress__line.p30 {
     width:30%
@@ -56,7 +57,7 @@
     width:50%
 }
 .progress__line.p80 {
-    width:80%
+    width:90%
 }
 .progress__line.p100 {
     width:100%
@@ -77,8 +78,8 @@
     cursor:pointer
 }
 .answer:hover {
-    border:1px solid #CE0058
+    border:1px solid #C91A0F
 }
 .answer.selected {
-    border:2px solid #CE0058
+    border:2px solid #C91A0F
 }

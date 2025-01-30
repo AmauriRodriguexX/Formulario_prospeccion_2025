@@ -44,6 +44,7 @@ header.ty{
     padding: 30px;
     border-radius: 10px;
     text-align: center;
+    margin-bottom: 48px;
 }
 
 .finance-title {
@@ -109,8 +110,8 @@ header.ty{
 }
 
 .secondary-btn:hover {
-    background-color: #CE0058;
-    color: #ffffff;
+    border: 2px solid #910048;
+    color: #910048;
 }
 
 
@@ -170,11 +171,13 @@ header.ty{
 .desktop-footer {
     width: 100%;
     text-align: center;
-    padding: 20px 10px;
+    padding: 32px 20px 20px 20px;
+    margin: 32px 20px 32px 20px;
     background-color: #fff;
     font-size: 14px;
     display: flex;
     height: 180px;
+    border-top: 1px solid #EFEFEF;
     justify-content: center;
 }
 

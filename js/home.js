@@ -11,6 +11,15 @@ $(document).ready(function() {
 	$('input[name=id_question]').val('1');
 	$('#msError').hide();	
 
+	// Cambiar color del checkbox cuando esté marcado
+	$('#avisoPrivacidad').on('change', function() {
+		if ($(this).is(':checked')) {
+			$(this).css('accent-color', '#CE0058');
+		} else {
+			$(this).css('accent-color', 'initial');
+		}
+	});
+
 	//Inicializar localStorage
 	localStorage.setItem("CompartamosGenero","");
     localStorage.setItem("CompartamosNombre","");
@@ -26,7 +35,6 @@ $(document).ready(function() {
 	localStorage.setItem("productoAdicional", 'N/A');
 	localStorage.setItem("negocio", 'N/A');
 	localStorage.setItem("antiguedad", 'N/A');
-
 
 
 	//Variables Globales
@@ -277,7 +285,7 @@ $(document).ready(function() {
 		} else {
 			$('#q3_2').show();
 			$('input[name=id_question]').val('3_2');
-			$('#q3_2 .progress__label span').html('80%');
+			$('#q3_2 .progress__label span').html('90%');
 			$('#q3_2 .progress__line').addClass('p80');
 		}
 
@@ -311,7 +319,7 @@ $(document).ready(function() {
 		//Cambia a Datos Personales
 		$('#q3_2').show();
 		$('input[name=id_question]').val('3_2');
-		$('#q3_1 .progress__label span').html('80%');
+		$('#q3_1 .progress__label span').html('90%');
 		$('#q3_2 .progress__line').addClass('p80');
 
 
@@ -351,7 +359,7 @@ $(document).ready(function() {
 		//Cambia a Datos Personales
 		$('#q3_2').show();
 		$('input[name=id_question]').val('3_2');
-		$('#q3_2 .progress__label span').html('80%');
+		$('#q3_2 .progress__label span').html('90%');
 		$('#q3_2 .progress__line').addClass('p80');
 
 		$('#q3_2 .tipoCredito').hide();
@@ -381,7 +389,7 @@ $(document).ready(function() {
 		//Cambia a Datos Personales
 		$('#q3_2').show();
 		$('input[name=id_question]').val('3_2');
-		$('#q3_2 .progress__label span').html('80%');
+		$('#q3_2 .progress__label span').html('90%');
 		$('#q3_2 .progress__line').addClass('p80');
 
 		$('#q3_2 .tipoCredito').hide();
@@ -670,93 +678,99 @@ $(document).ready(function() {
 		}
 	}
 
-	function sendData(token){
-		spinnerOn('Registrando informaci\u00F3n...');
-		let formData = armarFormulario(token);
-		var opts = {
-			 method: 'POST',
-			 type: 'POST',
-			 data : formData,
-			 url: endPointSendData,
-			 cache: false,
-			 contenType: false,
-			 processData: false,
-			 success: function(data){
-			   if (data.codigo == 0){         
-				sessionStorage.setItem('Folio', data.solicitud.id);          
-				localStorage.setItem("CompartamosFolio", data.solicitud.id);	
-				if (data.solicitud.horario.indexOf("am")>=0)			
-					sessionStorage.setItem('Horario', 'Matutino  ' + data.solicitud.horario);
-				else if (data.solicitud.horario.indexOf("pm")>=0)
-					sessionStorage.setItem('Horario', 'Vespertino ' + data.solicitud.horario);
-				else
-				sessionStorage.setItem('Horario', data.solicitud.horario);
-					
-					formSubmitDatosPersonales("OK","envío correcto");//DATALAYER
-					generateLead(data.solicitud.id);//DATALAYER
-					/*
-					window.dataLayer.push({
-					   'event': 'form_complete',
-					});
-					*/
-					clearForm();
-					//setTimeout(()=> window.location.href = 'ty-cliente.html',500);
-
-					//window.location.href = 'ty.html';
-			   } else {
-				   gestionaError(data);
-
-				   //setTimeout(()=> window.location.href = 'ty-cliente.html',500);  //BORRAR
-				   
-			   }
-			},
-			error: function (data, status, xhr) {
-	
-			   try {
-				setTimeout(()=> window.location.href = 'ty-cliente.html',500);  //BORRAR
-				  var data = data.responseJSON;
-				  var msj = "Validar campos del formulario";
-				  
-					  if (data.codigo === -1) {
-					   msErrorsend("Token invalido, intente de nuevo");					
-					  } else if (data.codigo === -2 && data.errores !== null) {
-						  msj = data.mensaje + " validar: ";
-						  $.each(data.errores, function(index, item) {
-							  var labelElem = item ;
-	
-							  if (labelElem.length > 0) {
-								  msj += "*" + labelElem;							
-							  } 
-						  });	   				
-						spinnerOff();
-					   msErrorsend(msj);							   			
-					  
-				   }  else {
-						spinnerOff();
-					   msErrorsend(MSG_ERROR_GRAL);	
-						  }
-			   } catch(err) {
-				   
-				   msErrorsend(MSG_ERROR_GRAL);	
-				   spinnerOff();			
-				   return;
-			   }
-			},
-			complete: function(data) {
-				grecaptcha.reset();
-				spinnerOff();
-			}
-		 };
-
-	
-		if(formData.fake) {
-			opts.xhr = function() { var xhr = jQuery.ajaxSettings.xhr(); xhr.send = xhr.sendAsBinary; return xhr; }
-			opts.contentType = "multipart/form-data; boundary="+data.boundary;
-			opts.data = formData.toString();
-		}
+	function sendData(token) {
+		console.log("Iniciando envío de datos...");
+		spinnerOn('Registrando información...');
 		
-		$.ajax(opts);
-	}
+		$.ajax({
+		    method: 'POST', // ✅ Añadir método HTTP
+		    url: endPointSendData,
+		    data: armarFormulario(token),
+		    contentType: false, // ✅ Necesario para FormData
+		    processData: false, // ✅ Necesario para FormData
+		    cache: false,
+		    success: function(data) {
+			   console.log("Respuesta del servidor:", data);
+			   spinnerOff();
+			   
+			   if (data.codigo == 0) {
+				  console.log("Redireccionando...");
+				  determinarRedireccion();
+			   } else {
+				  console.error("Error en respuesta:", data.mensaje);
+				  gestionaError(data);
+			   }
+		    },
+		    error: function(xhr, status, error) {
+			   console.error("Error de conexión:", error);
+			   spinnerOff();
+			   alert("Error al conectar con el servidor. Intente nuevamente.");
+		    },
+		    complete: function() {
+			   grecaptcha.reset(); // ✅ Limpiar captcha si se usa
+		    }
+		});
+	 }
+	 
+	 function determinarRedireccion() {
+		// Verificar visibilidad con estilo CSS
+		const isDateVisible = () => {
+		    const dia = document.getElementById('diaSelect');
+		    if (!dia) return false;
+		    const style = window.getComputedStyle(dia);
+		    return style.display !== 'none' && style.visibility !== 'hidden';
+		};
+	 
+		if (isDateVisible()) {
+		    console.log("Campos de fecha VISIBLES");
+		    const diaVal = document.getElementById('diaSelect').value;
+		    const mesVal = document.getElementById('mesSelect').value;
+		    const anioVal = document.getElementById('anioSelect').value;
+		    
+		    if (diaVal !== "0" && mesVal !== "0" && anioVal !== "0") {
+			   console.log("Fecha COMPLETA - Redirigiendo a ty-no-cliente.html");
+			   window.location.href = 'ty-no-cliente.html';
+		    } else {
+			   console.log("Fecha INCOMPLETA - Redirigiendo a ty-cliente.html");
+			   window.location.href = 'ty-cliente.html';
+		    }
+		} else {
+		    console.log("Campos de fecha OCULTOS - Redirigiendo a ty-cliente.html");
+		    window.location.href = 'ty-cliente.html';
+		}
+	 }
+	 function determinarRedireccion() {
+		// Verificar si los campos de fecha están visibles
+		const isDateVisible = () => {
+		    const dia = document.getElementById('diaSelect');
+		    return dia && dia.offsetParent !== null; // offsetParent chequea visibilidad
+		};
+	 
+		if (isDateVisible()) { // Campos de fecha VISIBLES
+		    const diaVal = document.getElementById('diaSelect').value;
+		    const mesVal = document.getElementById('mesSelect').value;
+		    const anioVal = document.getElementById('anioSelect').value;
+		    const fechaCompleta = diaVal !== "0" && mesVal !== "0" && anioVal !== "0";
+		    
+		    fechaCompleta 
+			   ? window.location.href = 'ty-no-cliente.html' 
+			   : window.location.href = 'ty-cliente.html';
+		    
+		} else { // Campos de fecha OCULTOS
+		    window.location.href = 'ty-cliente.html';
+		}
+	 }
+
+	 function validaFecha(dia, mes, anio) {
+		// Si los campos no existen, retornar true para no bloquear el envío
+		if (!document.getElementById('diaSelect')) return true; 
+		
+		// Resto de tu lógica actual...
+		if (dia === "0" || mes === "0" || anio === "0") return false;
+		
+		const fecha = new Date(anio, mes - 1, dia);
+		return fecha.getDate() == dia && fecha.getMonth() + 1 == mes && fecha.getFullYear() == anio;
+	 }
 
 	function armarFormulario(token){
 		var formData = new FormData();
@@ -968,18 +982,28 @@ function agregarTipoIndividual(answer){
 }
 
 function agregarTipoCreditoGrupal(answer) {
-	console.log("Tipo de crédito seleccionado:", answer); // Depuración
+    console.log("Tipo de crédito seleccionado:", answer); // Depuración
+
+    // Convertimos la opción seleccionada a minúsculas para evitar errores en comparación
+    let selectedAnswer = answer.toLowerCase();
+
+    // Redirigir según la opción seleccionada
+    if (selectedAnswer === "cuenta a mi favor") {
+        window.location.href = "ty-cuenta-a-mi-favor.html";
+        return; // Detiene la ejecución
+    }
+
+    if (selectedAnswer === "inversiones") {
+        window.location.href = "ty-inversiones-compartamos.html";
+        return; // Detiene la ejecución
+    }
+
+    // Si es cualquier otro crédito, ejecuta la lógica original
+    $('#tipoCreditoGrupal').val(answer);
+    $('#tipoCreditoGrupal').trigger('change');
+}
+
  
-	// Si la opción seleccionada es "Cuenta a mi favor" o "Inversiones", redirige a ty.html
-	if (answer === "Cuenta a mi favor" || answer === "Inversiones") {
-	    window.location.href = "ty.html"; // Redirección directa
-	    return; // Detiene la ejecución para evitar que siga ejecutando la lógica original
-	}
- 
-	// Si es cualquier otro crédito, ejecuta la lógica original
-	$('#tipoCreditoGrupal').val(answer);
-	$('#tipoCreditoGrupal').trigger('change');
- }
  
 
 

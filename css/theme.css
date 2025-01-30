@@ -275,7 +275,6 @@ select {
 
 .button:hover, button:hover, input[type=button]:hover, input[type=submit]:hover {
     color: #fff;
-    text-decoration: underline
 }
 
 .button.yellow {
@@ -316,6 +315,7 @@ h3 {
 
 
 section p {
-    margin-bottom: 1em;
+    margin-bottom: 8px;
     line-height: 1.5
 }
+

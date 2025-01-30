@@ -57,7 +57,7 @@
                         <div class="d-flex flex-column pt-3">
                             <div class="radioButonsForm answer" data-id="Si" id="DrbCSi" name="DrbCSi">
                                 <input type="radio" id="rbCSi" value="Si" name="rbCliente">
-                                <label style="color: grey;" for="Si">Si, ya tengo uno</label>
+                                <label style="color: grey;" for="Si">Sí, ya tengo uno</label>
                             </div>
                             <div class="radioButonsForm answer" data-id="No" id="DrbCNo" name="DrbCNo">
                                 <input type="radio" id="rbCNo" value="No" name="rbCliente">
@@ -83,12 +83,12 @@
                     <div class="d-flex flex-column pt-3">
                         <div class="radioButonsForm answer" data-id="Grupal" id="DrbCGrupal" name="DrbCGrupal">
                             <input type="radio" id="rbGrupalSi" value="Grupal" name="rbCredito">
-                            <label style="color: grey;" for="rbGrupalSi">Credito grupal</label>
+                            <label style="color: grey;" for="rbGrupalSi">Crédito grupal</label>
                         </div>
                         <div class="radioButonsForm answer" data-id="Individual" id="DrbIndividual"
                             name="DrbCIndividual">
                             <input type="radio" id="rbIndividualNo" value="Individual" name="rbCredito">
-                            <label style="color: grey;" for="rbIndividualNo">Credito individual</label>
+                            <label style="color: grey;" for="rbIndividualNo">Crédito individual</label>
                         </div>
                     </div>
                 </div>
@@ -108,11 +108,11 @@
                     <div class="d-flex flex-column pt-3">
                         <div class="radioButonsForm answer" data-id="Si" id="DrbSi" name="DrbSi">
                             <input type="radio" id="rbSi" value="Si" name="rbNegocio">
-                            <label style="color: grey;" for="Si">Si, tengo</label>
+                            <label style="color: grey;" for="Si">Sí, tengo</label>
                         </div>
                         <div class="radioButonsForm answer" data-id="No" id="DrbNo" name="DrbCNo">
                             <input type="radio" id="rbNo" value="No" name="rbNegocio">
-                            <label style="color: grey;" for="No">No, tengo</label>
+                            <label style="color: grey;" for="No">No, no tengo</label>
                         </div>
                     </div>
                 </div>
@@ -150,32 +150,31 @@
                             <div class="progress__bar">
                                 <div class="progress__line"></div>
                             </div>
-                            <div class="progress__label"><span>80%</span> avance de la solicitud</div>
+                            <div class="progress__label"><span>90%</span> avance de la solicitud</div>
                         </div>
                         <div class="home__line"></div>
-                        <span class="question pt-3 p-title">Déjanos tus datos para que nuestro agente se contacte
-                            contigo y te
-                            haga saber la oferta que te tenemos</span>
-                        <label>Campos con (*) son obligatorios</label>
+                        <span class="question pt-3 p-title">Déjanos tus datos. Le haremos saber a tu Promotor que estás
+                            interesado en este crédito para iniciar el trámite.</span>
+                        <label class="margin-bottom-24">Campos con (*) son obligatorios</label>
                         <div id="msError" style="color: red; text-align: center; display: none;">No se pudo procesar tu
                             informacion favor de intentar mas tarde</div>
                         <div class="d-flex flex-column pt-3">
                             <div class="campoFormulario">
                                 <p>Nombre(s) <b class="camposObligatorios">*</b> </p>
-                                <input class="answer" type="text" id="txbNombre" name="nombre" placeholder="Nombre(s)*">
-                                <p class="mensajeCampoError" id="textErrortxbNombre">Escribe tu(s) nombre(s)</p>
+                                <input class="answer" type="text" id="txbNombre" name="nombre" placeholder="Nombre(s)">
+                                <p class="mensajeCampoError" id="textErrortxbNombre">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
                                 <p>Primer apellido <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" type="text" id="txbApPaterno" name="aPaterno"
-                                    placeholder="Primer apellido*">
-                                <p class="mensajeCampoError" id="textErrortxbApPaterno">Escribe tu primer apellido</p>
+                                    placeholder="Primer apellido">
+                                <p class="mensajeCampoError" id="textErrortxbApPaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
                                 <p>Segundo apellido (opcional)</p>
                                 <input class="answer" type="text" id="txbApMaterno" name="aMaterno"
                                     placeholder="Segundo apellido (opcional)">
-                                <p class="mensajeCampoError" id="textErrortxbApMaterno">Apellido inválido</p>
+                                <p class="mensajeCampoError" id="textErrortxbApMaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario tipoCredito">
                                 <p>Fecha de nacimiento <b class="camposObligatorios">*</b> </p>
@@ -336,18 +335,16 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="genero" id="generoHidden">
-                                <p class="mensajeCampoError" id="textErrorGenero">Selecciona el género con el que te
-                                    identificas</p>
+                                <p class="mensajeCampoError" id="textErrorGenero">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
                                 <p id="topTel" class="hide-desk">Teléfono <b class="camposObligatorios">*</b> </p>
-                                <div style="float: left; width: 35%;">
-                                    <select id="telefonoSelect" name="tipoTelefono"
-                                        class="selectedForm disableForm answer">
-                                        <option value="Fijo">Fijo*</option>
-                                        <option value="Celular" selected="selected">Celular*</option>
+                                <div style="position: relative; display: inline-block; width: 35%;">
+                                    <select id="telefonoSelect" name="tipoTelefono" class="selectedForm disableForm answer">
+                                        <option value="Fijo">Fijo</option>
+                                        <option value="Celular" selected="selected">Celular</option>
                                     </select>
-                                    <div class="arrow-down"></div>
+                                    <i class="fa fa-chevron-down" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
                                 </div>
                                 <div style="float: right; width: 63%;">
                                     <input type="tel" maxlength="10" pattern="\d{10}" id="txbNumeroTel"
@@ -359,20 +356,20 @@
                                 </div>
                             </div>
                             <div class="campoFormulario pricipalDisable tipoCredito">
-                                <p>¿A qué hora deseas recibir nuestra llamada? <b class="camposObligatorios">*</b> </p>
+                                <p>¿A qué hora te hablamos? <b class="camposObligatorios">*</b> </p>
                                 <select id="horaSelect" name="horarioLlamada" class="selectedForm disableForm answer">
                                     <option disabled selected value="0">Seleccionar horario</option>
                                     <option value="8:00 am a 3:00 pm">Matutino (8:00 am a 3:00 pm)</option>
                                     <option value="3:00 pm a 8:00 pm">Vespertino (3:00 pm a 8:00 pm)</option>
                                     <option value="En cualquier horario">En cualquier horario</option>
                                 </select>
-                                <p class="mensajeCampoError" id="textErrorhoraSelect">Selecciona una horario</p>
+                                <p class="mensajeCampoError" id="textErrorhoraSelect">Selecciona un horario</p>
                             </div>
 
                             <div class="campoFormulario">
                                 <p class="hide-desk ">Código postal <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" maxlength="5" type="tel" id="txbCP" name="codigoPostal"
-                                    placeholder="Código postal*">
+                                    placeholder="Código postal">
                                 <p class="mensajeCampoError" id="textErrortxbCP">Número debe ser 5 dígitos</p>
                             </div>
 
@@ -385,13 +382,13 @@
 
                             <div class="contenidoGeneralForm pricipalDisable">
                                 <div class="campoFormulario">
-                                    <div style="display: flex; height: 24px;" class="c-center">
+                                    <div style="display: flex; height: 24px; padding-top: 40px; padding-bottom: 40px;" class="c-center">
                                         <input class="answer" type="checkbox" style="width: 24px;height: 24px;"
                                             id="avisoPrivacidad" name="avisoPrivacidad">
-                                        <div style="margin: 3px 2px 8px 4px;">
-                                            <label for="aviso">He leido y acepto el <a
+                                        <div style="margin: 3px 2px 8px 4px;  ">
+                                            <label for="aviso">He leído y acepto el <a
                                                     style="text-decoration: underline;color: #CE0058;"
-                                                    onclick="muestraAviso()">Aviso de Privacidad </a></label>
+                                                    onclick="muestraAviso()" class="cursor-finger">Aviso de Privacidad </a></label>
                                         </div>
                                         <span style="margin: 2px;" onclick="muestraAviso()" id="arrowAviso"
                                             class="imgAvisoUp"></span>
@@ -421,9 +418,9 @@
 
                     <section id="previous-winners">
                         <h2 id="title" class="font-bree">
-                            Tener un Crédito te recompensa con nuevas posibilidades:
+                            Tener un crédito te recompensa con nuevas posibilidades:
                         </h2>
-                        <span id="subtitle" class="font-inter">Créditos adicionales.</span>
+                        <span id="subtitle" class="font-inter margin-bottom-60">Créditos adicionales</span>
                         <div class="carousel">
                             <div class="card" onclick="
                               agregarTipoCreditoGrupal('Crédito Crece y Mejora')
@@ -433,8 +430,8 @@
                                 </div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Crédito Crece y Mejora</span>
-                                    <span class="card_footer-description">La solución qal instante para tu casa, el
-                                        negocio y cualquier imprevisto.</span>
+                                    <span class="card_footer-description">Préstamo personal preautorizado para clientes.
+                                        Desde $5,000 hasta $8,000.</span>
                                 </div>
                             </div>
                             <div class="card" onclick="
@@ -444,9 +441,8 @@
                                 </div>
                                 <div class="card_footer">
                                     <span class="card_footer-name h2-creditos">Cuida de tu dinero</span>
-                                    <span class="card_footer-description">Ayuda inmediata para los clientes de
-                                        Crédito,
-                                        afectados por desastres naturales.</span>
+                                    <span class="card_footer-description">Crédito individual y el párrafo debe ser ¡Dile
+                                        que sí a tu negocio! Ahora puedes solicitar un monto de hasta $500,000.</span>
                                 </div>
                             </div>
 
@@ -457,28 +453,30 @@
                         <h2 id="title" class="font-bree no-text">
                             Cuida tu dinero
                         </h2>
-                        <span id="subtitle" class="font-inter">Cuida tu dinero</span>
+                        <span id="subtitle" class="font-inter margin-bottom-60">Cuida tu dinero</span>
                         <div class="carousel">
                             <!-- Aquí corregimos el onclick para que el valor sea 'Cuenta a mi favor' -->
                             <div class="card" onclick="agregarTipoCreditoGrupal('Cuenta a mi favor')">
                                 <div class="thumbnail"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Cuenta a mi favor</span>
-                                    <span class="card_footer-description">La solución al instante para tu casa, el negocio y cualquier imprevisto.</span>
+                                    <span class="card_footer-description">Obtener tu tarjeta es más fácil. Descarga
+                                        Compartamos Móvil para iniciar a tramitarla.</span>
                                 </div>
                             </div>
-                    
+
                             <!-- Aquí corregimos el onclick para que el valor sea 'Inversiones' -->
                             <div class="card" onclick="agregarTipoCreditoGrupal('Inversiones')">
                                 <div class="thumbnail"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Inversiones</span>
-                                    <span class="card_footer-description">Ayuda inmediata para los clientes de Crédito, afectados por desastres naturales.</span>
+                                    <span class="card_footer-description">Tu dinero crece desde $1,000. Invierte con
+                                        nuestra app Compartamos Móvil.</span>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    
+
                 </div>
 
 
@@ -772,121 +770,358 @@
 
 
     </script>
+
+    <!--cambiar BG dinamicamente-->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const rbSiContainer = document.getElementById('DrbCSi');
-            const rbNoContainer = document.getElementById('DrbCNo');
-            const body = document.body;
-            const q3_2 = document.querySelector('#q3_2'); // Elemento con ID q3_2
-            const mainElement = document.querySelector('.main'); // Contenedor principal
-            const mainContent = document.querySelector('.main__content'); // Contenedor interno
-            const wrapper = document.querySelector('.wrapper'); // Contenedor wrapper
-            const homeTitle = document.querySelector('.home__title'); // Título con clase home__title
-            const q4_1 = document.getElementById('q4_1'); // Elemento con ID q4_1
-
-            // Añadir estilos base para el fondo y la transición
-            Object.assign(body.style, {
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundAttachment: 'fixed',
-                transition: 'background-image 0.5s ease-in-out' // Transición suave para el cambio de fondo
+          const body = document.body;
+      
+          // --- Radio Buttons "Sí/No" (anteriores) ---
+          const rbSiContainer = document.getElementById('DrbCSi');    
+          const rbNoContainer = document.getElementById('DrbCNo');    
+      
+          // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
+          const rbGrupalContainer   = document.getElementById('DrbCGrupal');    
+          const rbIndividualContainer = document.getElementById('DrbIndividual');
+      
+          // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
+          const rbSiNegocioContainer = document.getElementById('DrbSi'); 
+          const rbNoNegocioContainer = document.getElementById('DrbNo'); 
+      
+          // *** NUEVO: Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ***
+          // (Asumiendo que en el HTML están con IDs DrbSi y DrbNo también,
+          //  pero lo ideal sería diferenciarlos si te causa conflicto).
+          const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+          const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
+      
+          // Secciones
+          const q2_1 = document.getElementById('q2_1'); 
+          const q2_2 = document.getElementById('q2_2'); 
+          const q3_1 = document.getElementById('q3_1'); 
+          const q3_2 = document.getElementById('q3_2');
+          const q4_1 = document.getElementById('q4_1');
+      
+          // Elementos para la lógica de clases con q3_2
+          const mainElement = document.querySelector('.main');
+          const mainContent = document.querySelector('.main__content');
+          const wrapper     = document.querySelector('.wrapper');
+          const homeTitle   = document.querySelector('.home__title');
+      
+          // Estilos base para el <body>
+          Object.assign(body.style, {
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
+            transition: 'background-image 0.5s ease-in-out'
+          });
+      
+          /**
+           * Retorna el nombre de la imagen de fondo que corresponde 
+           * según la sección visible y los radios seleccionados.
+           */
+          function getCurrentBackground() {
+            // 1) #q4_1 visible => blanco
+            if (q4_1 && q4_1.offsetParent !== null) {
+              return 'none';
+            }
+      
+            // 2) #q3_1 visible => gris por defecto ("Sí" o sin selección), morado si "No"
+            if (q3_1 && q3_1.offsetParent !== null) {
+              const rbSiMeses = document.getElementById('rbSiNegocio'); // Sí, más de 6 meses
+              const rbNoMeses = document.getElementById('rbNoNegocio'); // No, menos de 6 meses
+      
+              if (rbNoMeses?.checked) {
+                // "No, tiene menos de 6 meses" => morado
+                return 'BG-morado.png';
+              } else {
+                // Por defecto y si "Sí, tiene más de 6 meses" => gris
+                return 'BG-gris.png';
+              }
+            }
+      
+            // 3) #q3_2 visible => amarillo
+            if (q3_2 && q3_2.offsetParent !== null) {
+              return 'BG-amarillo.png';
+            }
+      
+            // 4) #q2_2 visible => checar radio "Sí, tengo" / "No, tengo"
+            if (q2_2 && q2_2.offsetParent !== null) {
+              const rbSi2_2 = document.getElementById('rbSi');  
+              const rbNo2_2 = document.getElementById('rbNo');  
+              
+              if (rbSi2_2?.checked) {
+                return 'BG-gris.png';     // "Sí, tengo"
+              } else if (rbNo2_2?.checked) {
+                return 'BG-morado.png';   // "No, tengo"
+              } else {
+                return 'BG-amarillo.png'; // Sin seleccionar
+              }
+            }
+      
+            // 5) #q2_1 visible => "Crédito grupal/individual"
+            if (q2_1 && q2_1.offsetParent !== null) {
+              const rbGrupal     = document.getElementById('rbGrupalSi');
+              const rbIndividual = document.getElementById('rbIndividualNo');
+      
+              if (rbGrupal?.checked) {
+                return 'BG-morado.png';  
+              } else if (rbIndividual?.checked) {
+                return 'BG-gris.png';    
+              } else {
+                return 'BG-amarillo.png'; 
+              }
+            }
+      
+            // 6) Fuera de #q2_1 / #q2_2 / #q3_2 / #q3_1 => revisamos "Sí/No"
+            const rbSi = document.getElementById('rbCSi');
+            const rbNo = document.getElementById('rbCNo');
+      
+            if (rbSi?.checked) {
+              return 'BG-morado.png'; 
+            } else if (rbNo?.checked) {
+              return 'BG-blue.png';  
+            }
+      
+            // 7) Default => amarillo
+            return 'BG-amarillo.png';
+          }
+      
+          /**
+           * Aplica el fondo al <body> dada la imagen (o 'none').
+           * - Sólo aplica en >=1024px. En <1024px se omite la imagen.
+           */
+          function changeBackground(image) {
+            if (image === 'none') {
+              body.style.backgroundImage = 'none';
+              body.style.backgroundColor = '#fff';
+              return;
+            }
+            if (window.innerWidth >= 1024) {
+              body.style.backgroundImage = `url('assets/images/${image}')`;
+              body.style.backgroundColor = ''; 
+              document.documentElement.style.height = '100%';
+              body.style.minHeight = '100vh';
+            } else {
+              body.style.backgroundImage = '';
+              body.style.backgroundColor = '';
+              document.documentElement.style.height = '';
+              body.style.minHeight = '';
+            }
+          }
+      
+          // Al cargar, aplicamos el fondo inicial
+          changeBackground(getCurrentBackground());
+      
+          // ---------------------------------------------------
+          // 1. Eventos de clic para "Sí/No" (anteriores)
+          // ---------------------------------------------------
+          if (rbSiContainer && rbNoContainer) {
+            rbSiContainer.addEventListener('click', () => {
+              document.getElementById('rbCSi').checked = true;
+              changeBackground(getCurrentBackground());
             });
-
-            function changeBackground(image) {
-                // Si la sección `q4_1` está visible, deshabilitar el fondo del body
-                if (q4_1 && q4_1.offsetParent !== null) { // offsetParent verifica si está visible
-                    body.style.backgroundImage = 'none'; // Quitar imagen del body
-                    body.style.backgroundColor = '#fff'; // Fondo blanco opcional
-                    return;
-                }
-
-                if (window.innerWidth >= 1024) {
-                    body.style.backgroundImage = `url('assets/images/${image}')`;
-                    document.documentElement.style.height = '100%';
-                    body.style.minHeight = '100vh';
+      
+            rbNoContainer.addEventListener('click', () => {
+              document.getElementById('rbCNo').checked = true;
+              changeBackground(getCurrentBackground());
+            });
+          }
+      
+          // ---------------------------------------------------
+          // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
+          // ---------------------------------------------------
+          if (rbGrupalContainer && rbIndividualContainer) {
+            rbGrupalContainer.addEventListener('click', () => {
+              document.getElementById('rbGrupalSi').checked = true;
+              changeBackground(getCurrentBackground());
+            });
+      
+            rbIndividualContainer.addEventListener('click', () => {
+              document.getElementById('rbIndividualNo').checked = true;
+              changeBackground(getCurrentBackground());
+            });
+          }
+      
+          // ---------------------------------------------------
+          // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
+          // ---------------------------------------------------
+          if (rbSiNegocioContainer) {
+            rbSiNegocioContainer.addEventListener('click', () => {
+              document.getElementById('rbSi').checked = true;  
+              changeBackground(getCurrentBackground());
+            });
+          }
+          if (rbNoNegocioContainer) {
+            rbNoNegocioContainer.addEventListener('click', () => {
+              document.getElementById('rbNo').checked = true;  
+              changeBackground(getCurrentBackground());
+            });
+          }
+      
+          // ---------------------------------------------------
+          // 4. NUEVO: Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
+          // ---------------------------------------------------
+          if (rbSiMesesContainer) {
+            rbSiMesesContainer.addEventListener('click', () => {
+              // Marca <input id="rbSiNegocio">
+              document.getElementById('rbSiNegocio').checked = true;
+              changeBackground(getCurrentBackground());
+            });
+          }
+          if (rbNoMesesContainer) {
+            rbNoMesesContainer.addEventListener('click', () => {
+              // Marca <input id="rbNoNegocio">
+              document.getElementById('rbNoNegocio').checked = true;
+              changeBackground(getCurrentBackground());
+            });
+          }
+      
+          // ---------------------------------------------------
+          // 5. Al cambiar tamaño/orientación
+          // ---------------------------------------------------
+          window.addEventListener('resize', () => {
+            changeBackground(getCurrentBackground());
+          });
+          window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+              changeBackground(getCurrentBackground());
+            }, 100);
+          });
+      
+          // ---------------------------------------------------
+          // 6. IntersectionObserver para #q4_1 => blanco si visible
+          // ---------------------------------------------------
+          if (q4_1) {
+            const observerQ4 = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  changeBackground('none'); 
                 } else {
-                    body.style.backgroundImage = '';
-                    document.documentElement.style.height = '';
-                    body.style.minHeight = '';
+                  changeBackground(getCurrentBackground());
                 }
-            }
-
-            // Establecer fondo inicial
-            changeBackground('BG-amarillo.png');
-
-            // Eventos de clic
-            if (rbSiContainer && rbNoContainer) {
-                rbSiContainer.addEventListener('click', () => {
-                    document.getElementById('rbCSi').checked = true;
-                    changeBackground('BG-morado.png');
-                });
-
-                rbNoContainer.addEventListener('click', () => {
-                    document.getElementById('rbCNo').checked = true;
-                    changeBackground('BG-blue.png');
-                });
-            }
-
-            // Manejar resize y orientación
-            window.addEventListener('resize', () => {
-                const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
-                    document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
-                        'BG-amarillo.png';
-                changeBackground(currentBG);
+              });
             });
-
-            window.addEventListener('orientationchange', () => {
-                setTimeout(() => {
-                    const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
-                        document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
-                            'BG-amarillo.png';
-                    changeBackground(currentBG);
-                }, 100);
+            observerQ4.observe(q4_1);
+          }
+      
+          // ---------------------------------------------------
+          // 7. IntersectionObserver para #q3_2 => cambia clases .main, .wrapper...
+          // ---------------------------------------------------
+          if (q3_2) {
+            const observerQ3 = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  mainElement?.classList.add('main-visible-q3_2');
+                  mainContent?.classList.add('main-content-visible-q3_2');
+                  wrapper?.classList.add('wrapper-visible-q3_2');
+                  homeTitle?.classList.add('home-title-visible-q3_2');
+                } else {
+                  mainElement?.classList.remove('main-visible-q3_2');
+                  mainContent?.classList.remove('main-content-visible-q3_2');
+                  wrapper?.classList.remove('wrapper-visible-q3_2');
+                  homeTitle?.classList.remove('home-title-visible-q3_2');
+                }
+              });
             });
-
-            // IntersectionObserver para #q4_1 (Fondo dinámico)
-            if (q4_1) {
-                const observerQ4 = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            body.style.backgroundImage = 'none'; // Desactivar el fondo
-                            body.style.backgroundColor = '#fff'; // Fondo blanco opcional
-                        } else {
-                            const currentBG = document.getElementById('rbCSi')?.checked ? 'BG-morado.png' :
-                                document.getElementById('rbCNo')?.checked ? 'BG-blue.png' :
-                                    'BG-amarillo.png';
-                            changeBackground(currentBG);
-                        }
-                    });
-                });
-
-                observerQ4.observe(q4_1);
-            }
-
-            // IntersectionObserver para #q3_2 (Cambiar dinámicamente clases de .main, .main__content, .wrapper y .home__title)
-            if (q3_2) {
-                const observerQ3 = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            mainElement?.classList.add('main-visible-q3_2'); // Agrega clase a .main
-                            mainContent?.classList.add('main-content-visible-q3_2'); // Agrega clase a .main__content
-                            wrapper?.classList.add('wrapper-visible-q3_2'); // Agrega clase a .wrapper
-                            homeTitle?.classList.add('home-title-visible-q3_2'); // Agrega clase a .home__title
-                        } else {
-                            mainElement?.classList.remove('main-visible-q3_2'); // Remueve clase de .main
-                            mainContent?.classList.remove('main-content-visible-q3_2'); // Remueve clase de .main__content
-                            wrapper?.classList.remove('wrapper-visible-q3_2'); // Remueve clase de .wrapper
-                            homeTitle?.classList.remove('home-title-visible-q3_2'); // Remueve clase de .home__title
-                        }
-                    });
-                });
-
-                observerQ3.observe(q3_2);
-            }
+            observerQ3.observe(q3_2);
+          }
+      
+          // ---------------------------------------------------
+          // 8. IntersectionObserver para #q3_1 => recalcula fondo
+          // ---------------------------------------------------
+          if (q3_1) {
+            const observerQ3_1 = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                changeBackground(getCurrentBackground());
+              });
+            });
+            observerQ3_1.observe(q3_1);
+          }
+      
+          // ---------------------------------------------------
+          // 9. IntersectionObservers opcionales para #q2_2, #q2_1
+          // ---------------------------------------------------
+          if (q2_2) {
+            const observerQ2_2 = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                changeBackground(getCurrentBackground());
+              });
+            });
+            observerQ2_2.observe(q2_2);
+          }
+          if (q2_1) {
+            const observerQ2_1 = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                changeBackground(getCurrentBackground());
+              });
+            });
+            observerQ2_1.observe(q2_1);
+          }
         });
+      </script>
+      
+      
+      
+      
+      
+      
+
+
+
+    <!--cambiar titulos h1 dinamicamente-->
+    <script>
+        // Observer para q2_1 (Ofertas para clientes)
+        const observerQ2_1 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelector('.home__title').textContent = "Ofertas para clientes";
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observerQ2_1.observe(document.getElementById("q2_1"));
+
+        // Observer para q4_1 (Crédito grupal)
+        const observerQ4_1 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelector('.home__title').textContent = "Crédito grupal";
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observerQ4_1.observe(document.getElementById("q4_1"));
+
+        // Observer para q3_2 (Solicitud de crédito adicional)
+        const observerQ3_2 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelector('.home__title').textContent = "Solicitud de crédito adicional";
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observerQ3_2.observe(document.getElementById("q3_2"));
+
+
+
 
     </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var btn = document.getElementById("btnContinue");
+
+            if (btn) {
+                btn.innerHTML = "Enviar"; // Cambia el texto
+            }
+        });
+    </script>
+    
+
+
 
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
