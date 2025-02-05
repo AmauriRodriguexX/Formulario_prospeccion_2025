@@ -21,17 +21,18 @@
      }
 
      .btnContinuarInicio {
-          opacity: 1; /* Visible por defecto */
+          opacity: 1;
+          /* Visible por defecto */
           pointer-events: auto;
           transition: opacity 0.3s ease;
-      }
-      
-      .btnContinuarInicio.hidden {
+     }
+
+     .btnContinuarInicio.hidden {
           opacity: 0;
           pointer-events: none;
-      }
-      
-      
+     }
+
+
 
      .wrapper {
           margin: auto;
@@ -264,10 +265,9 @@
      }
 
 
-     a,
-     a:hover {
-          color: #ffffff;
-     }
+     a, a:hover {
+          color: #ce0058;
+      }
 
      .text-mobiel-form {
           color: #252A2D;
@@ -277,14 +277,14 @@
           font-weight: 400;
           line-height: 26px;
           margin-bottom: 24px;
-     } 
-     
+     }
+
      .disableForm {
           background-color: #ffffff !important;
           border: 1px solid #c2c0bf;
-      }
+     }
 
-      .aviso-de-privacidad {
+     .aviso-de-privacidad {
           display: flex !important;
           height: 24px !important;
           padding-top: 20px !important;
@@ -294,81 +294,82 @@
      }
 
      .aviso-de-privacidad input {
-         margin-right: 8px;
+          margin-right: 8px;
      }
 
      .desktop-date-m-d {
           display: flex;
-      }
+     }
 
      .campoFormulario {
           width: 100%;
-      }
+     }
 
-      .radio-button {
-           margin: 0px;
-      }
+     .radio-button {
+          margin: 0px;
+     }
 
-      .social-btn {
+     .social-btn {
           width: 50px;
           height: 50px;
           border-radius: 15px;
-          display: flex
-      ;
+          display: flex;
           align-items: center;
           justify-content: center;
           transition: 0.3s ease;
-      }
+     }
 
-      .finance-buttons {
-          display: block; /* O inline-block según la estructura que necesites */
-          text-align: center; /* Para mantener la alineación */
-      }
+     .finance-buttons {
+          display: block;
+          /* O inline-block según la estructura que necesites */
+          text-align: center;
+          /* Para mantener la alineación */
+     }
 
-      .finance-buttons .finance-btn{
+     .finance-buttons .finance-btn {
           margin-bottom: 24px;
-      }
+     }
 
-      .primary-btn {
+     .primary-btn {
           background-color: #CE0058;
           color: #ffffff;
           border: none;
-      }
-      
-      .primary-btn:hover {
+     }
+
+     .primary-btn:hover {
           background-color: #a30046;
           color: #ffffff;
-      }
-      
-      .secondary-btn {
+     }
+
+     .secondary-btn {
           border: 2px solid #CE0058;
           color: #CE0058;
           background-color: transparent;
-      }
-      
-      .secondary-btn:hover {
+     }
+
+     .secondary-btn:hover {
           border: 2px solid #910048;
           color: #910048;
-      }
+     }
 
-      .finance-buttons .finance-btn {
+     .finance-buttons .finance-btn {
           margin-bottom: 8px !important;
-      }
+     }
 
-      .contenidoCentralTY {
+     .contenidoCentralTY {
           box-shadow: none !important;
-      }
+     }
 
-      .finance-list {
+     .finance-list {
           list-style-type: disc;
           padding-left: 20px;
           text-align: left;
           color: #252525;
           margin-bottom: 32px !important;
-      }
+     }
 
 
-      .tituloGracias {
+     .tituloGracias {
           display: flex;
           justify-content: left;
           padding-top: 20px;
@@ -377,9 +378,9 @@
           color: #ce0058;
           font-weight: bold;
           font-size: 24px;
-      }
+     }
 
-      .title-credito-grupales {
+     .title-credito-grupales {
           color: #252A2D;
           font-family: Inter;
           font-size: 18px;
@@ -391,11 +392,11 @@
      }
 
      .frm__btn {
-          
-          margin-top: 0px;
-      }
 
-      .btnContinuarInicio {
+          margin-top: 0px;
+     }
+
+     .btnContinuarInicio {
           position: fixed;
           bottom: 20px;
           display: flex;
@@ -407,15 +408,49 @@
           max-width: 400px;
           text-align: center;
           z-index: 1000;
-      }
-      
-      .btnContinuarInicio .material-symbols-outlined {
+     }
+
+     .btnContinuarInicio .material-symbols-outlined {
           margin-left: 8px;
-      }
+     }
 
-      .hide {
+     .hide {
           display: none;
+     }
+
+
+     #divAvisoPri {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7) !important;
+          /* Overlay gris oscuro */
+          display: none;
+          /* Ahora estará oculto */
+          justify-content: center;
+          align-items: center;
+          z-index: 99999;
+          /* Asegura que está sobre todo */
       }
 
-           
+     /* Modal centrado correctamente */
+     .modal-content {
+          background-color: #fff;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 90%;
+          max-width: 720px;
+          max-height: 66vh;
+          overflow-y: auto;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          position: relative;
+          margin: auto;
+          z-index: 999999;
+     }
+
+
+
 }
