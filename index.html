@@ -569,7 +569,7 @@
                 <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">
                     Continuar <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
-                
+
             </form>
         </div>
     </section>
@@ -594,7 +594,7 @@
         </div>
     </div>
 
-    
+
 
 
 
@@ -1394,7 +1394,7 @@
         });
     </script>
 
-    
+
 
     <!--AUTO SCROLL-->
     <script>
@@ -1415,143 +1415,144 @@
 
     <!--dtos carousel y botones -->
 
-    <Script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const carousels = document.querySelectorAll("[data-carousel]");
-
-    carousels.forEach((carouselSection) => {
-        const carousel = carouselSection.querySelector(".carousel");
-        const cards = carousel.querySelectorAll(".card");
-        const dots = carouselSection.querySelectorAll(".dot");
-        const prevButton = carouselSection.querySelector(".carousel-prev");
-        const nextButton = carouselSection.querySelector(".carousel-next");
-
-        if (cards.length === 0) return; // Evita errores si no hay cards
-
-        let currentIndex = 0;
-        let startX = 0;
-        let scrollLeft = 0;
-        let isDragging = false;
-
-        function getCardWidth() {
-            return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
-        }
-
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentIndex);
-            });
-        }
-
-        function moveSlide(event, direction) {
-            event.preventDefault();
-            const cardWidth = getCardWidth();
-            currentIndex += direction;
-
-            if (currentIndex < 0) {
-                currentIndex = 0;
-            } else if (currentIndex >= cards.length) {
-                currentIndex = cards.length - 1;
-            }
-
-            carousel.scrollTo({
-                left: currentIndex * cardWidth,
-                behavior: "smooth"
-            });
-
-            updateDots();
-        }
-
-        function goToSlide(event, index) {
-            event.preventDefault();
-            const cardWidth = getCardWidth();
-            currentIndex = index;
-
-            carousel.scrollTo({
-                left: currentIndex * cardWidth,
-                behavior: "smooth"
-            });
-
-            updateDots();
-        }
-
-        // Vincula eventos de navegación
-        prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-        nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-        // Vincula eventos de dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener("click", (event) => goToSlide(event, index));
-        });
-
-        // --- AGREGANDO SCROLL TÁCTIL (TOUCH SWIPE) ---
-        carousel.addEventListener("touchstart", (event) => {
-            isDragging = true;
-            startX = event.touches[0].pageX - carousel.offsetLeft;
-            scrollLeft = carousel.scrollLeft;
-        });
-
-        carousel.addEventListener("touchmove", (event) => {
-            if (!isDragging) return;
-            const x = event.touches[0].pageX - carousel.offsetLeft;
-            const walk = (x - startX) * 2; // Ajusta la sensibilidad del swipe
-            carousel.scrollLeft = scrollLeft - walk;
-        });
-
-        carousel.addEventListener("touchend", () => {
-            isDragging = false;
-            const cardWidth = getCardWidth();
-            currentIndex = Math.round(carousel.scrollLeft / cardWidth);
-
-            carousel.scrollTo({
-                left: currentIndex * cardWidth,
-                behavior: "smooth"
-            });
-
-            updateDots();
-        });
-
-        console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
-    });
-});
-
-    </Script>
-
-    
-    
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    if (window.innerWidth > 768) return; // Solo ejecuta el script en dispositivos móviles
+            const carousels = document.querySelectorAll("[data-carousel]");
 
-    let btn = document.querySelector(".btnContinuarInicio");
-    let targetSection = document.getElementById("q3_2");
+            carousels.forEach((carouselSection) => {
+                const carousel = carouselSection.querySelector(".carousel");
+                const cards = carousel.querySelectorAll(".card");
+                const dots = carouselSection.querySelectorAll(".dot");
+                const prevButton = carouselSection.querySelector(".carousel-prev");
+                const nextButton = carouselSection.querySelector(".carousel-next");
 
-    if (!btn || !targetSection) return; // Evita errores si los elementos no existen
+                if (cards.length === 0) return; // Evita errores si no hay cards
 
-    let observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    if (btn.style.position !== "relative") {
-                        btn.style.position = "relative";
-                    }
-                } else {
-                    if (btn.style.position !== "fixed") {
-                        btn.style.position = "fixed";
-                    }
+                let currentIndex = 0;
+                let startX = 0;
+                let scrollLeft = 0;
+                let isDragging = false;
+                const swipeSpeed = 10; // Aumenta el factor para hacer el scroll más rápido
+
+                function getCardWidth() {
+                    return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
                 }
-            });
-        },
-        { threshold: 0.2 } // Detectar cuando al menos el 20% de la sección es visible
-    );
 
-    observer.observe(targetSection);
-});
+                function updateDots() {
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle("active", index === currentIndex);
+                    });
+                }
+
+                function moveSlide(event, direction) {
+                    event.preventDefault();
+                    const cardWidth = getCardWidth();
+                    currentIndex += direction;
+
+                    if (currentIndex < 0) {
+                        currentIndex = 0;
+                    } else if (currentIndex >= cards.length) {
+                        currentIndex = cards.length - 1;
+                    }
+
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateDots();
+                }
+
+                function goToSlide(event, index) {
+                    event.preventDefault();
+                    const cardWidth = getCardWidth();
+                    currentIndex = index;
+
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateDots();
+                }
+
+                // Vincula eventos de navegación
+                prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+                nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+                // Vincula eventos de dots
+                dots.forEach((dot, index) => {
+                    dot.addEventListener("click", (event) => goToSlide(event, index));
+                });
+
+                // --- SCROLL TÁCTIL MEJORADO ---
+                carousel.addEventListener("touchstart", (event) => {
+                    isDragging = true;
+                    startX = event.touches[0].pageX - carousel.offsetLeft;
+                    scrollLeft = carousel.scrollLeft;
+                });
+
+                carousel.addEventListener("touchmove", (event) => {
+                    if (!isDragging) return;
+                    const x = event.touches[0].pageX - carousel.offsetLeft;
+                    const walk = (x - startX) * swipeSpeed; // Aumenta el multiplicador para hacer scroll más rápido
+                    carousel.scrollLeft = scrollLeft - walk;
+                });
+
+                carousel.addEventListener("touchend", () => {
+                    isDragging = false;
+                    const cardWidth = getCardWidth();
+                    currentIndex = Math.round(carousel.scrollLeft / cardWidth);
+
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateDots();
+                });
+
+                console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
+            });
+        });
 
     </script>
 
-    
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.innerWidth > 768) return; // Solo ejecuta el script en dispositivos móviles
+
+            let btn = document.querySelector(".btnContinuarInicio");
+            let targetSection = document.getElementById("q3_2");
+
+            if (!btn || !targetSection) return; // Evita errores si los elementos no existen
+
+            let observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            if (btn.style.position !== "relative") {
+                                btn.style.position = "relative";
+                            }
+                        } else {
+                            if (btn.style.position !== "fixed") {
+                                btn.style.position = "fixed";
+                            }
+                        }
+                    });
+                },
+                { threshold: 0.2 } // Detectar cuando al menos el 20% de la sección es visible
+            );
+
+            observer.observe(targetSection);
+        });
+
+    </script>
+
+
 
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
