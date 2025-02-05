@@ -251,8 +251,6 @@
           -webkit-overflow-scrolling: touch;
           max-width: 100%;
           scroll-behavior: smooth;
-          white-space: nowrap;
-          /* Evita que los elementos salten de línea */
      }
 
      /* Asegurar que los cards sean lo suficientemente grandes */
