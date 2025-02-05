@@ -17,10 +17,11 @@
 .home__msg {
     display:none;
     color:#fff;
-    background-color:red;
+    background-color:#C91A0F;
     border-radius:6px;
     padding:6px;
-    text-align:center
+    text-align:center;
+    margin-bottom: 42px;
 }
 .question {
     color: #252A2D;

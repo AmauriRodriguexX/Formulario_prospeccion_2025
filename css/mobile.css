@@ -79,6 +79,7 @@
 
      label {
           cursor: pointer;
+          color: #5E6A71;
      }
 
      input[type="radio"]:checked::before {
