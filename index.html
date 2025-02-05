@@ -12,6 +12,7 @@
 
     <link rel="canonical"
         href="https://www.compartamos.com.mx/compartamos/lp/educacion-financiera/conoce-tu-personalidad/">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" rel="stylesheet">
     <title>Educación Financiera de Compartamos Banco</title>
     <link rel="stylesheet" href="css/theme.min.css">
     <link rel="stylesheet" href="css/home.css">
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/prospeccion.css">
     <link rel="stylesheet" href="css/desktop.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 
 <body>
@@ -79,7 +81,7 @@
                     </div>
 
                     <div class="home__line"></div>
-                    <p class="question pt-3">¿Que tipo de crédito tienes?</p>
+                    <p class="question pt-3">¿Qué tipo de crédito tienes?</p>
                     <div class="d-flex flex-column pt-3">
                         <div class="radioButonsForm answer" data-id="Grupal" id="DrbCGrupal" name="DrbCGrupal">
                             <input type="radio" id="rbGrupalSi" value="Grupal" name="rbCredito">
@@ -153,9 +155,16 @@
                             <div class="progress__label"><span>90%</span> avance de la solicitud</div>
                         </div>
                         <div class="home__line"></div>
-                        <span class="question pt-3 p-title">Déjanos tus datos. Le haremos saber a tu Promotor que estás
+                        <span class="question pt-3 p-title text-mobiel-form ">Déjanos tus datos. Le haremos saber a tu Promotor que estás
                             interesado en este crédito para iniciar el trámite.</span>
-                        <label class="margin-bottom-24">Campos con (*) son obligatorios</label>
+                        <label class="margin-bottom-24">
+                            <span class="material-symbols-outlined"
+                                style="vertical-align: middle; font-variation-settings: 'FILL' 1;">
+                                info
+                            </span>
+                            Campos con (*) son obligatorios
+                        </label>
+
                         <div id="msError" style="color: red; text-align: center; display: none;">No se pudo procesar tu
                             informacion favor de intentar mas tarde</div>
                         <div class="d-flex flex-column pt-3">
@@ -171,151 +180,100 @@
                                 <p class="mensajeCampoError" id="textErrortxbApPaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
-                                <p>Segundo apellido (opcional)</p>
+                                <p>Segundo apellido</p>
                                 <input class="answer" type="text" id="txbApMaterno" name="aMaterno"
-                                    placeholder="Segundo apellido (opcional)">
+                                    placeholder="Segundo apellido ">
                                 <p class="mensajeCampoError" id="textErrortxbApMaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario tipoCredito">
-                                <p>Fecha de nacimiento <b class="camposObligatorios">*</b> </p>
+                                <p>Fecha de nacimiento <b class="camposObligatorios">*</b></p>
                                 <div id="dt-Date" class="desktop-date-m-d">
-                                    <select id="diaSelect" class="desktop-date selectedForm selectFecha answer"
-                                        onchange="validaFormularioDatosPersonales()">
-                                        <option disabled="" selected="" value="0">Día</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select>
-                                    <select id="mesSelect" class="desktop-date selectedForm selectFecha answer"
-                                        onchange="validaFormularioDatosPersonales()">
-                                        <option disabled="" selected="" value="0">Mes</option>
-                                        <option value="01">Enero</option>
-                                        <option value="02">Febrero</option>
-                                        <option value="03">Marzo</option>
-                                        <option value="04">Abril</option>
-                                        <option value="05">Mayo</option>
-                                        <option value="06">Junio</option>
-                                        <option value="07">Julio</option>
-                                        <option value="08">Agosto</option>
-                                        <option value="09">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                    </select>
-                                    <select id="anioSelect" class="desktop-date selectedForm selectFecha answer"
-                                        onchange="validaFormularioDatosPersonales()">
-                                        <option disabled="" selected="" value="0">Año</option>
-                                        <option value="2005">2006</option>
-                                        <option value="2005">2005</option>
-                                        <option value="2004">2004</option>
-                                        <option value="2003">2003</option>
-                                        <option value="2002">2002</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2000">2000</option>
-                                        <option value="1999">1999</option>
-                                        <option value="1998">1998</option>
-                                        <option value="1997">1997</option>
-                                        <option value="1996">1996</option>
-                                        <option value="1995">1995</option>
-                                        <option value="1994">1994</option>
-                                        <option value="1993">1993</option>
-                                        <option value="1992">1992</option>
-                                        <option value="1991">1991</option>
-                                        <option value="1990">1990</option>
-                                        <option value="1989">1989</option>
-                                        <option value="1988">1988</option>
-                                        <option value="1987">1987</option>
-                                        <option value="1986">1986</option>
-                                        <option value="1985">1985</option>
-                                        <option value="1984">1984</option>
-                                        <option value="1983">1983</option>
-                                        <option value="1982">1982</option>
-                                        <option value="1981">1981</option>
-                                        <option value="1980">1980</option>
-                                        <option value="1979">1979</option>
-                                        <option value="1978">1978</option>
-                                        <option value="1977">1977</option>
-                                        <option value="1976">1976</option>
-                                        <option value="1975">1975</option>
-                                        <option value="1974">1974</option>
-                                        <option value="1973">1973</option>
-                                        <option value="1972">1972</option>
-                                        <option value="1971">1971</option>
-                                        <option value="1970">1970</option>
-                                        <option value="1969">1969</option>
-                                        <option value="1968">1968</option>
-                                        <option value="1967">1967</option>
-                                        <option value="1966">1966</option>
-                                        <option value="1965">1965</option>
-                                        <option value="1964">1964</option>
-                                        <option value="1963">1963</option>
-                                        <option value="1962">1962</option>
-                                        <option value="1961">1961</option>
-                                        <option value="1960">1960</option>
-                                        <option value="1959">1959</option>
-                                        <option value="1958">1958</option>
-                                        <option value="1957">1957</option>
-                                        <option value="1956">1956</option>
-                                        <option value="1955">1955</option>
-                                        <option value="1954">1954</option>
-                                        <option value="1953">1953</option>
-                                        <option value="1952">1952</option>
-                                        <option value="1951">1951</option>
-                                        <option value="1950">1950</option>
-                                        <option value="1949">1949</option>
-                                        <option value="1948">1948</option>
-                                        <option value="1947">1947</option>
-                                        <option value="1946">1946</option>
-                                        <option value="1945">1945</option>
-                                        <option value="1944">1944</option>
-                                        <option value="1943">1943</option>
-                                        <option value="1942">1942</option>
-                                        <option value="1941">1941</option>
-                                        <option value="1940">1940</option>
-                                        <option value="1939">1939</option>
-                                        <option value="1938">1938</option>
-                                        <option value="1937">1937</option>
-                                        <option value="1936">1936</option>
-                                        <option value="1935">1935</option>
-                                        <option value="1934">1934</option>
-                                        <option value="1933">1933</option>
-                                        <option value="1932">1932</option>
-                                        <option value="1931">1931</option>
-                                        <option value="1930">1930</option>
-                                        <option value="1929">1929</option>
-                                        <option value="1928">1928</option>
-                                        <option value="1927">1927</option>
-                                        <option value="1926">1926</option>
-                                        <option value="1925">1925</option>
-                                    </select>
+
+                                    <!-- Día -->
+                                    <div class="select-container">
+                                        <select id="diaSelect" class="desktop-date selectedForm selectFecha answer">
+                                            <option disabled selected value="0">Día</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </div>
+
+                                    <!-- Mes -->
+                                    <div class="select-container">
+                                        <select id="mesSelect" class="desktop-date selectedForm selectFecha answer">
+                                            <option disabled selected value="0">Mes</option>
+                                            <option value="01">Enero</option>
+                                            <option value="02">Febrero</option>
+                                            <option value="03">Marzo</option>
+                                            <option value="04">Abril</option>
+                                            <option value="05">Mayo</option>
+                                            <option value="06">Junio</option>
+                                            <option value="07">Julio</option>
+                                            <option value="08">Agosto</option>
+                                            <option value="09">Septiembre</option>
+                                            <option value="10">Octubre</option>
+                                            <option value="11">Noviembre</option>
+                                            <option value="12">Diciembre</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </div>
+
+                                    <!-- Año -->
+                                    <div class="select-container">
+                                        <select id="anioSelect" class="desktop-date selectedForm selectFecha answer">
+                                            <option disabled selected value="0">Año</option>
+                                            <option value="2006">2006</option>
+                                            <option value="2005">2005</option>
+                                            <option value="2004">2004</option>
+                                            <option value="2003">2003</option>
+                                            <option value="2002">2002</option>
+                                            <option value="2001">2001</option>
+                                            <option value="2000">2000</option>
+                                            <option value="1999">1999</option>
+                                            <option value="1998">1998</option>
+                                            <option value="1997">1997</option>
+                                            <option value="1996">1996</option>
+                                            <option value="1995">1995</option>
+                                            <option value="1994">1994</option>
+                                            <option value="1993">1993</option>
+                                            <option value="1992">1992</option>
+                                            <option value="1991">1991</option>
+                                            <option value="1990">1990</option>
+                                            <option value="1989">1989</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </div>
+
                                 </div>
                                 <p class="mensajeCampoError" id="textErrorFecha">Selecciona tu fecha de nacimiento,
                                     mayor de 18 años</p>
@@ -340,11 +298,13 @@
                             <div class="campoFormulario">
                                 <p id="topTel" class="hide-desk">Teléfono <b class="camposObligatorios">*</b> </p>
                                 <div style="position: relative; display: inline-block; width: 35%;">
-                                    <select id="telefonoSelect" name="tipoTelefono" class="selectedForm disableForm answer">
+                                    <select id="telefonoSelect" name="tipoTelefono"
+                                        class="selectedForm disableForm answer">
                                         <option value="Fijo">Fijo</option>
                                         <option value="Celular" selected="selected">Celular</option>
                                     </select>
-                                    <i class="fa fa-chevron-down" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                                    <i class="fa fa-chevron-down"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-80%); pointer-events: none; color: #7f7f7f;"></i>
                                 </div>
                                 <div style="float: right; width: 63%;">
                                     <input type="tel" maxlength="10" pattern="\d{10}" id="txbNumeroTel"
@@ -357,14 +317,19 @@
                             </div>
                             <div class="campoFormulario pricipalDisable tipoCredito">
                                 <p>¿A qué hora te hablamos? <b class="camposObligatorios">*</b> </p>
-                                <select id="horaSelect" name="horarioLlamada" class="selectedForm disableForm answer">
-                                    <option disabled selected value="0">Seleccionar horario</option>
-                                    <option value="8:00 am a 3:00 pm">Matutino (8:00 am a 3:00 pm)</option>
-                                    <option value="3:00 pm a 8:00 pm">Vespertino (3:00 pm a 8:00 pm)</option>
-                                    <option value="En cualquier horario">En cualquier horario</option>
-                                </select>
+                                <div class="select-container">
+                                    <select id="horaSelect" name="horarioLlamada"
+                                        class="selectedForm disableForm answer">
+                                        <option disabled selected value="0">Seleccionar horario</option>
+                                        <option value="8:00 am a 3:00 pm">Matutino (8:00 am a 3:00 pm)</option>
+                                        <option value="3:00 pm a 8:00 pm">Vespertino (3:00 pm a 8:00 pm)</option>
+                                        <option value="En cualquier horario">En cualquier horario</option>
+                                    </select>
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
                                 <p class="mensajeCampoError" id="textErrorhoraSelect">Selecciona un horario</p>
                             </div>
+
 
                             <div class="campoFormulario">
                                 <p class="hide-desk ">Código postal <b class="camposObligatorios">*</b> </p>
@@ -374,21 +339,23 @@
                             </div>
 
                             <div class="campoFormulario pricipalDisable tipoCredito">
-                                <p>Correo electrónico (opcional)</p>
+                                <p>Correo electrónico</p>
                                 <input type="email" id="txbCorreoElectronico" class="disableForm answer"
-                                    name="correoElectronico" placeholder="Correo electrónico (opcional)">
+                                    name="correoElectronico" placeholder="Correo electrónico">
                                 <p class="mensajeCampoError" id="textErrortxbCorreoElectronico">Correo inválido</p>
                             </div>
 
                             <div class="contenidoGeneralForm pricipalDisable">
                                 <div class="campoFormulario">
-                                    <div style="display: flex; height: 24px; padding-top: 40px; padding-bottom: 40px;" class="c-center">
+                                    <div  style="display: flex; height: 24px; padding-top: 40px; padding-bottom: 40px;"
+                                        class="c-center aviso-de-privacidad">
                                         <input class="answer" type="checkbox" style="width: 24px;height: 24px;"
                                             id="avisoPrivacidad" name="avisoPrivacidad">
                                         <div style="margin: 3px 2px 8px 4px;  ">
                                             <label for="aviso">He leído y acepto el <a
                                                     style="text-decoration: underline;color: #CE0058;"
-                                                    onclick="muestraAviso()" class="cursor-finger">Aviso de Privacidad </a></label>
+                                                    onclick="muestraAviso()" class="cursor-finger">Aviso de Privacidad
+                                                </a></label>
                                         </div>
                                         <span style="margin: 2px;" onclick="muestraAviso()" id="arrowAviso"
                                             class="imgAvisoUp"></span>
@@ -415,67 +382,87 @@
                         </div>
                         <div class="progress__label"><span>60%</span> avance de la solicitud</div>
                     </div>
-
-                    <section id="previous-winners">
-                        <h2 id="title" class="font-bree">
-                            Tener un crédito te recompensa con nuevas posibilidades:
-                        </h2>
+                    <section id="previous-winners" data-carousel="1">
                         <span id="subtitle" class="font-inter margin-bottom-60">Créditos adicionales</span>
-                        <div class="carousel">
-                            <div class="card" onclick="
-                              agregarTipoCreditoGrupal('Crédito Crece y Mejora')
-                              ">
-                                <div class="thumbnail">
 
-                                </div>
+                        <div class="carousel">
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Crece y Mejora')">
+                                <div class="thumbnail"></div>
                                 <div class="card_footer">
-                                    <span class="card_footer-name">Crédito Crece y Mejora</span>
+                                    <span class="card_footer-name">Crédito crece y mejora</span>
                                     <span class="card_footer-description">Préstamo personal preautorizado para clientes.
                                         Desde $5,000 hasta $8,000.</span>
                                 </div>
                             </div>
-                            <div class="card" onclick="
-                               agregarTipoCreditoGrupal('Crédito Individual')">
-                                <div class="thumbnail">
-
-                                </div>
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Individual')">
+                                <div class="thumbnail"></div>
                                 <div class="card_footer">
-                                    <span class="card_footer-name h2-creditos">Cuida de tu dinero</span>
-                                    <span class="card_footer-description">Crédito individual y el párrafo debe ser ¡Dile
-                                        que sí a tu negocio! Ahora puedes solicitar un monto de hasta $500,000.</span>
+                                    <span class="card_footer-name h2-creditos">Crédito individual</span>
+                                    <span class="card_footer-description">¡Dile que sí a tu negocio! Ahora puedes
+                                        solicitar un monto de hasta $500,000.</span>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="carousel-controls">
+                            <div class="carousel-dots">
+                                <a href="#" class="dot active" onclick="goToSlide(event, 1, 0)"></a>
+                                <a href="#" class="dot" onclick="goToSlide(event, 1, 1)"></a>
+                            </div>
+
+                            <div class="carousel-buttons">
+                                <a href="#" class="carousel-prev" onclick="moveSlide(event, 1, -1)">
+                                    <span class="material-symbols-outlined">keyboard_arrow_left</span>
+                                </a>
+                                <a href="#" class="carousel-next" onclick="moveSlide(event, 1, 1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </a>
+                            </div>
                         </div>
                     </section>
 
-                    <section id="previous-winners">
-                        <h2 id="title" class="font-bree no-text">
-                            Cuida tu dinero
-                        </h2>
-                        <span id="subtitle" class="font-inter margin-bottom-60">Cuida tu dinero</span>
+                    <section id="previous-winners" data-carousel="2">
+                        <span id="subtitle" class="font-inter margin-bottom-60 margin-top_40">Cuida de tu dinero</span>
+
                         <div class="carousel">
-                            <!-- Aquí corregimos el onclick para que el valor sea 'Cuenta a mi favor' -->
                             <div class="card" onclick="agregarTipoCreditoGrupal('Cuenta a mi favor')">
-                                <div class="thumbnail"></div>
+                                <div class="thumbnail cuenta-a-mi-favor"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Cuenta a mi favor</span>
-                                    <span class="card_footer-description">Obtener tu tarjeta es más fácil. Descarga
-                                        Compartamos Móvil para iniciar a tramitarla.</span>
+                                    <span class="card_footer-description">
+                                        Obtener tu tarjeta es más fácil. Descarga Compartamos Móvil para iniciar a
+                                        tramitarla.
+                                    </span>
                                 </div>
                             </div>
-
-                            <!-- Aquí corregimos el onclick para que el valor sea 'Inversiones' -->
                             <div class="card" onclick="agregarTipoCreditoGrupal('Inversiones')">
-                                <div class="thumbnail"></div>
+                                <div class="thumbnail inversiones"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Inversiones</span>
-                                    <span class="card_footer-description">Tu dinero crece desde $1,000. Invierte con
-                                        nuestra app Compartamos Móvil.</span>
+                                    <span class="card_footer-description">
+                                        Tu dinero crece desde $1,000. Invierte con nuestra app Compartamos Móvil.
+                                    </span>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="carousel-controls">
+                            <div class="carousel-dots">
+                                <a href="#" class="dot active" onclick="goToSlide(event, 2, 0)"></a>
+                                <a href="#" class="dot" onclick="goToSlide(event, 2, 1)"></a>
+                            </div>
+
+                            <div class="carousel-buttons">
+                                <a href="#" class="carousel-prev" onclick="moveSlide(event, 2, -1)">
+                                    <span class="material-symbols-outlined">keyboard_arrow_left</span>
+                                </a>
+                                <a href="#" class="carousel-next" onclick="moveSlide(event, 2, 1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </a>
+                            </div>
+                        </div>
                     </section>
+
 
                 </div>
 
@@ -494,77 +481,91 @@
                         <div class="progress__label"><span>60%</span> avance de la solicitud</div>
                     </div>
 
-                    <section id="previous-winners">
-                        <h2 id="title" class="font-bree">
-                            Tener un Crédito te recompensa con nuevas posibilidades:
-                        </h2>
+                    <!-- Primer Carrusel -->
+                    <section id="previous-winners" data-carousel="1">
+                        <h2 id="title" class="font-bree">Tener un Crédito te recompensa con nuevas posibilidades:</h2>
                         <span id="subtitle" class="font-inter">Créditos adicionales.</span>
-                        <div class="carousel">
-                            <div class="card" onclick="
-                              agregarTipoCreditoGrupal('Crédito Crece y Mejora')
-                              ">
-                                <div class="thumbnail">
 
-                                </div>
+                        <div class="carousel">
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Crece y Mejora')">
+                                <div class="thumbnail crece-mejora-individual"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Crédito Crece y Mejora</span>
-                                    <span class="card_footer-description">La solución qal instante para tu casa, el
+                                    <span class="card_footer-description">La solución al instante para tu casa, el
                                         negocio y cualquier imprevisto.</span>
                                 </div>
                             </div>
-                            <div class="card" onclick="
-                               agregarTipoCreditoGrupal('Crédito Individual')
-                              ">
-                                <div class="thumbnail">
-
-                                </div>
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Individual')">
+                                <div class="thumbnail credito-emergencia-individual"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Crédito Emergencia</span>
-                                    <span class="card_footer-description">Ayuda inmediata para los clientes de Crédito,
+                                    <span class="card_footer-description">Ayuda inmediata para clientes de Crédito,
                                         afectados por desastres naturales.</span>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="carousel-controls">
+                            <div class="carousel-dots">
+                                <a href="#" class="dot active" onclick="goToSlide(event, 1, 0)"></a>
+                                <a href="#" class="dot" onclick="goToSlide(event, 1, 1)"></a>
+                            </div>
+
+                            <div class="carousel-buttons">
+                                <a href="#" class="carousel-prev" onclick="moveSlide(event, 1, -1)">
+                                    <span class="material-symbols-outlined">keyboard_arrow_left</span>
+                                </a>
+                                <a href="#" class="carousel-next" onclick="moveSlide(event, 1, 1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </a>
+                            </div>
                         </div>
                     </section>
 
-                    <section id="previous-winners">
-                        <h2 id="title" class="font-bree">
-                            Cuida de tu dinero
-                        </h2>
-                        <span id="subtitle" class="font-inter">Créditos adicionales.</span>
-                        <div class="carousel">
-                            <div class="card" onclick="
-                              agregarTipoCreditoGrupal('Crédito Crece y Mejora')
-                              ">
-                                <div class="thumbnail">
+                    <!-- Segundo Carrusel -->
+                    <section id="previous-winners" data-carousel="2">
+                        <h2 id="title" class="font-bree no-text">Cuida tu dinero</h2>
+                        <span id="subtitle" class="font-inter margin-bottom-60">Cuida de tu dinero</span>
 
-                                </div>
+                        <div class="carousel">
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Cuenta a mi favor')">
+                                <div class="thumbnail cuenta-a-mi-favor"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Cuenta a mi favor</span>
-                                    <span class="card_footer-description">La solución qal instante para tu casa, el
-                                        negocio y cualquier imprevisto.</span>
+                                    <span class="card_footer-description">Obtener tu tarjeta es más fácil. Descarga
+                                        Compartamos Móvil para iniciar a tramitarla.</span>
                                 </div>
                             </div>
-                            <div class="card" onclick="
-                               agregarTipoCreditoGrupal('Crédito Individual')
-                              ">
-                                <div class="thumbnail">
-
-                                </div>
+                            <div class="card" onclick="agregarTipoCreditoGrupal('Inversiones')">
+                                <div class="thumbnail inversiones"></div>
                                 <div class="card_footer">
                                     <span class="card_footer-name">Inversiones</span>
-                                    <span class="card_footer-description">Ayuda inmediata para los clientes de Crédito,
-                                        afectados por desastres naturales.</span>
+                                    <span class="card_footer-description">Tu dinero crece desde $1,000. Invierte con
+                                        nuestra app Compartamos Móvil.</span>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="carousel-controls">
+                            <div class="carousel-dots">
+                                <a href="#" class="dot active" onclick="goToSlide(event, 2, 0)"></a>
+                                <a href="#" class="dot" onclick="goToSlide(event, 2, 1)"></a>
+                            </div>
+
+                            <div class="carousel-buttons">
+                                <a href="#" class="carousel-prev" onclick="moveSlide(event, 2, -1)">
+                                    <span class="material-symbols-outlined">keyboard_arrow_left</span>
+                                </a>
+                                <a href="#" class="carousel-next" onclick="moveSlide(event, 2, 1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </a>
+                            </div>
                         </div>
                     </section>
                 </div>
                 <div class="home__msg" id="msgError">Debe seleccionar una respuesta</div>
                 <div class="home__msg" id="msgDatosIncorrectos"></div>
-                <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">Continuar <i
+                <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">Continuar →<i
                         class="fas fa-arrow-right"></i></button>
             </form>
         </div>
@@ -575,14 +576,14 @@
             <span class="close" onclick="cerrarAviso()">&times;</span>
             <div class="d-flex">
                 <p style="margin: 10px; padding-top: 6rem;">
-                    Banco Compartamos, S.A., Institución de Banca Múltiple, subsidiaria de GENTERA S.A.B. de C.V, con
-                    domicilio en Insurgentes Sur número 1458 piso 5, Colonia Actipan, Alcaldía Benito Juárez, C.P.
-                    03230, México, Ciudad de México, es el responsable del tratamiento y protección de sus datos
-                    personales, categorizados como: i) Contacto y ii) Patrimonio, recabados a través de este medio y los
-                    utilizará para las siguientes finalidades: i) Ofrecer nuestros productos y servicios y ii) Dar
-                    seguimiento a los productos que solicitó con nosotros. Para más información acerca del tratamiento
-                    de sus datos personales y la forma en que podrá ejercer sus derechos ARCO, usted puede consultar el
-                    Aviso de Privacidad Integral para Prospecto a Cliente en el sitio web <a
+                    Banco Compartamos, S.A., Institución de Banca Múltiple (en adelante “Banco Compartamos”), empresa
+                    perteneciente a GENTERA con domicilio en Insurgentes Sur número 1458, piso 5, Colonia Actipan,
+                    Alcaldía Benito Juárez, C.P. 03230, México, Ciudad de México, es el responsable de sus datos
+                    personales categorizados como: Identificación y contacto; recabados por este medio y los utilizará
+                    para las siguientes finalidades: i) Ofrecer nuestros productos y servicios y ii) Dar seguimiento a
+                    los productos que solicitó con nosotros. Para más información acerca del tratamiento de sus datos
+                    personales y forma en que podrá ejercer sus derechos ARCO, usted puede consultar el Aviso de
+                    Privacidad Integral para Prospecto a Cliente en el sitio web <a
                         href="https://www.compartamos.com.mx/compartamos" target="_blank"
                         style="text-decoration: underline;">www.compartamos.com.mx</a> en la sección Avisos Privacidad.
                 </p>
@@ -594,122 +595,129 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const section = document.getElementById("q4_1");
+            // Solo se ejecuta en resoluciones de escritorio (>=768px)
+            if (window.innerWidth < 768) return;
+
+            // Obtener ambas secciones
+            const section1 = document.getElementById("q4_1");
+            const section2 = document.getElementById("q4_2");
+
+            // Otros elementos a modificar
             const mainElement = document.querySelector(".main");
             const mainContent = document.querySelector(".main__content");
-            const carouselCards = document.querySelectorAll("#previous-winners .carousel .card"); // Seleccionar las cards
-            const wrapperElement = document.querySelector(".wrapper"); // Seleccionar .wrapper
-            const homeTitle = document.querySelector(".home__title"); // Seleccionar .home__title
-            const questionElement = document.querySelector(".question"); // Seleccionar .question
-            const flexColumnElements = document.querySelectorAll(".flex-column"); // Seleccionar todos los .flex-column
+            const carouselCards = document.querySelectorAll("#previous-winners .carousel .card");
+            const wrapperElement = document.querySelector(".wrapper");
+            const homeTitle = document.querySelector(".home__title");
+            const questionElement = document.querySelector(".question");
+            const flexColumnElements = document.querySelectorAll(".flex-column");
 
-            const observer = new MutationObserver(() => {
-                // Solo aplicar cambios si el viewport es desktop (>=768px)
-                if (window.innerWidth >= 768) {
-                    if (section && window.getComputedStyle(section).display !== "none") {
-                        // Modificar estilos para .main
-                        if (mainElement) {
-                            mainElement.style.background = "none";
-                            mainElement.style.boxShadow = "none";
+            // Función que aplica o restaura los estilos
+            function updateStyles() {
+                // Verificar si alguna de las secciones (q4_1 o q4_2) existe y está visible
+                const section1Visible = section1 && window.getComputedStyle(section1).display !== "none";
+                const section2Visible = section2 && window.getComputedStyle(section2).display !== "none";
 
-                            if (window.innerWidth >= 1024) {
-                                mainElement.style.maxWidth = "100%"; // Aplica max-width para >=1024px
-                            } else {
-                                mainElement.style.width = "100%"; // Aplica width: 100% para >=768px y <1024px
-                            }
+                if (section1Visible || section2Visible) {
+                    // Se aplica la modificación de estilos, por ejemplo, quitar el fondo de .main
+                    if (mainElement) {
+                        mainElement.style.background = "none";
+                        mainElement.style.boxShadow = "none";
+                        if (window.innerWidth >= 1024) {
+                            mainElement.style.maxWidth = "100%";
+                        } else {
+                            mainElement.style.width = "100%";
                         }
-
-                        // Modificar estilos para .main__content
-                        if (mainContent) {
-                            mainContent.style.width = "50%";
-                        }
-
-                        // Modificar estilos para las cards dentro del carousel
-                        if (carouselCards.length > 0) {
-                            carouselCards.forEach((card) => {
-                                card.style.flex = "auto"; // Aplica flex: auto
-                            });
-                        }
-
-                        // Modificar estilos para .wrapper
-                        if (wrapperElement && window.innerWidth >= 1024) {
-                            wrapperElement.style.maxWidth = "1240px";
-                            wrapperElement.style.display = "flex";
-                            wrapperElement.style.justifyContent = "center";
-                        }
-
-                        // Modificar estilos para .home__title
-                        if (homeTitle && window.innerWidth >= 1024) {
-                            homeTitle.style.textAlign = "center";
-                        }
-
-                        // Modificar estilos para .question
-                        if (questionElement && window.innerWidth >= 1024) {
-                            questionElement.style.textAlign = "center";
-                        }
-
-                        // Modificar estilos para .flex-column
-                        if (flexColumnElements.length > 0) {
-                            flexColumnElements.forEach((element) => {
-                                element.style.flexDirection = "column";
-                                element.style.textAlign = "center";
-                            });
-                        }
-
-                        console.log("Estilos aplicados para #q4_1 en escritorio.");
-                    } else {
-                        // Restaurar estilos predeterminados
-                        if (mainElement) {
-                            mainElement.style.background = "#fff";
-                            mainElement.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.1)";
-                            mainElement.style.maxWidth = ""; // Restaurar max-width original
-                            mainElement.style.width = ""; // Restaurar width original
-                        }
-
-                        if (mainContent) {
-                            mainContent.style.width = ""; // Restaurar a su estado original
-                        }
-
-                        // Restaurar estilos para las cards dentro del carousel
-                        if (carouselCards.length > 0) {
-                            carouselCards.forEach((card) => {
-                                card.style.flex = ""; // Restaurar el estilo original
-                            });
-                        }
-
-                        // Restaurar estilos para .wrapper
-                        if (wrapperElement) {
-                            wrapperElement.style.maxWidth = ""; // Restaurar max-width original
-                            wrapperElement.style.display = ""; // Restaurar display original
-                            wrapperElement.style.justifyContent = ""; // Restaurar justify-content original
-                        }
-
-                        // Restaurar estilos para .home__title
-                        if (homeTitle) {
-                            homeTitle.style.textAlign = ""; // Restaurar text-align original
-                        }
-
-                        // Restaurar estilos para .question
-                        if (questionElement) {
-                            questionElement.style.textAlign = ""; // Restaurar text-align original
-                        }
-
-                        // Restaurar estilos para .flex-column
-                        if (flexColumnElements.length > 0) {
-                            flexColumnElements.forEach((element) => {
-                                element.style.flexDirection = ""; // Restaurar flex-direction original
-                                element.style.textAlign = ""; // Restaurar text-align original
-                            });
-                        }
-
-                        console.log("Estilos restaurados para escritorio.");
                     }
-                }
-            });
 
+                    // Modificar estilos para .main__content
+                    if (mainContent) {
+                        mainContent.style.width = "50%";
+                    }
+
+                    // Modificar estilos para las cards del carrusel
+                    if (carouselCards.length > 0) {
+                        carouselCards.forEach((card) => {
+                            card.style.flex = "auto";
+                        });
+                    }
+
+                    // Modificar estilos para .wrapper en pantallas grandes
+                    if (wrapperElement && window.innerWidth >= 1024) {
+                        wrapperElement.style.maxWidth = "1240px";
+                        wrapperElement.style.display = "flex";
+                        wrapperElement.style.justifyContent = "center";
+                    }
+
+                    // Centrar el texto en .home__title y .question para resoluciones >=1024px
+                    if (homeTitle && window.innerWidth >= 1024) {
+                        homeTitle.style.textAlign = "center";
+                    }
+                    if (questionElement && window.innerWidth >= 1024) {
+                        questionElement.style.textAlign = "center";
+                    }
+
+                    // Modificar estilos para elementos .flex-column
+                    if (flexColumnElements.length > 0) {
+                        flexColumnElements.forEach((element) => {
+                            element.style.flexDirection = "column";
+                            element.style.textAlign = "center";
+                        });
+                    }
+
+                    console.log("Estilos aplicados para q4_1 o q4_2 en escritorio.");
+                } else {
+                    // Restaurar estilos originales
+
+                    if (mainElement) {
+                        mainElement.style.background = "#fff";
+                        mainElement.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.1)";
+                        mainElement.style.maxWidth = "";
+                        mainElement.style.width = "";
+                    }
+
+                    if (mainContent) {
+                        mainContent.style.width = "";
+                    }
+
+                    if (carouselCards.length > 0) {
+                        carouselCards.forEach((card) => {
+                            card.style.flex = "";
+                        });
+                    }
+
+                    if (wrapperElement) {
+                        wrapperElement.style.maxWidth = "";
+                        wrapperElement.style.display = "";
+                        wrapperElement.style.justifyContent = "";
+                    }
+
+                    if (homeTitle) {
+                        homeTitle.style.textAlign = "";
+                    }
+
+                    if (questionElement) {
+                        questionElement.style.textAlign = "";
+                    }
+
+                    if (flexColumnElements.length > 0) {
+                        flexColumnElements.forEach((element) => {
+                            element.style.flexDirection = "";
+                            element.style.textAlign = "";
+                        });
+                    }
+
+                    console.log("Estilos restaurados para escritorio.");
+                }
+            }
+
+            // Usamos un MutationObserver para detectar cambios en el DOM y actualizar estilos
+            const observer = new MutationObserver(updateStyles);
             observer.observe(document.body, { childList: true, subtree: true });
         });
     </script>
+
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const observer = new MutationObserver(() => {
@@ -766,363 +774,839 @@
             observer.observe(document.body, { childList: true, subtree: true });
         });
 
-
-
-
     </script>
 
-    <!--cambiar BG dinamicamente-->
+    <!--cambiar BG dinamicamente Desktop-->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const body = document.body;
-      
-          // --- Radio Buttons "Sí/No" (anteriores) ---
-          const rbSiContainer = document.getElementById('DrbCSi');    
-          const rbNoContainer = document.getElementById('DrbCNo');    
-      
-          // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
-          const rbGrupalContainer   = document.getElementById('DrbCGrupal');    
-          const rbIndividualContainer = document.getElementById('DrbIndividual');
-      
-          // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
-          const rbSiNegocioContainer = document.getElementById('DrbSi'); 
-          const rbNoNegocioContainer = document.getElementById('DrbNo'); 
-      
-          // *** NUEVO: Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ***
-          // (Asumiendo que en el HTML están con IDs DrbSi y DrbNo también,
-          //  pero lo ideal sería diferenciarlos si te causa conflicto).
-          const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
-          const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
-      
-          // Secciones
-          const q2_1 = document.getElementById('q2_1'); 
-          const q2_2 = document.getElementById('q2_2'); 
-          const q3_1 = document.getElementById('q3_1'); 
-          const q3_2 = document.getElementById('q3_2');
-          const q4_1 = document.getElementById('q4_1');
-      
-          // Elementos para la lógica de clases con q3_2
-          const mainElement = document.querySelector('.main');
-          const mainContent = document.querySelector('.main__content');
-          const wrapper     = document.querySelector('.wrapper');
-          const homeTitle   = document.querySelector('.home__title');
-      
-          // Estilos base para el <body>
-          Object.assign(body.style, {
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            transition: 'background-image 0.5s ease-in-out'
-          });
-      
-          /**
-           * Retorna el nombre de la imagen de fondo que corresponde 
-           * según la sección visible y los radios seleccionados.
-           */
-          function getCurrentBackground() {
-            // 1) #q4_1 visible => blanco
-            if (q4_1 && q4_1.offsetParent !== null) {
-              return 'none';
-            }
-      
-            // 2) #q3_1 visible => gris por defecto ("Sí" o sin selección), morado si "No"
-            if (q3_1 && q3_1.offsetParent !== null) {
-              const rbSiMeses = document.getElementById('rbSiNegocio'); // Sí, más de 6 meses
-              const rbNoMeses = document.getElementById('rbNoNegocio'); // No, menos de 6 meses
-      
-              if (rbNoMeses?.checked) {
-                // "No, tiene menos de 6 meses" => morado
-                return 'BG-morado.png';
-              } else {
-                // Por defecto y si "Sí, tiene más de 6 meses" => gris
-                return 'BG-gris.png';
-              }
-            }
-      
-            // 3) #q3_2 visible => amarillo
-            if (q3_2 && q3_2.offsetParent !== null) {
-              return 'BG-amarillo.png';
-            }
-      
-            // 4) #q2_2 visible => checar radio "Sí, tengo" / "No, tengo"
-            if (q2_2 && q2_2.offsetParent !== null) {
-              const rbSi2_2 = document.getElementById('rbSi');  
-              const rbNo2_2 = document.getElementById('rbNo');  
-              
-              if (rbSi2_2?.checked) {
-                return 'BG-gris.png';     // "Sí, tengo"
-              } else if (rbNo2_2?.checked) {
-                return 'BG-morado.png';   // "No, tengo"
-              } else {
-                return 'BG-amarillo.png'; // Sin seleccionar
-              }
-            }
-      
-            // 5) #q2_1 visible => "Crédito grupal/individual"
-            if (q2_1 && q2_1.offsetParent !== null) {
-              const rbGrupal     = document.getElementById('rbGrupalSi');
-              const rbIndividual = document.getElementById('rbIndividualNo');
-      
-              if (rbGrupal?.checked) {
-                return 'BG-morado.png';  
-              } else if (rbIndividual?.checked) {
-                return 'BG-gris.png';    
-              } else {
-                return 'BG-amarillo.png'; 
-              }
-            }
-      
-            // 6) Fuera de #q2_1 / #q2_2 / #q3_2 / #q3_1 => revisamos "Sí/No"
-            const rbSi = document.getElementById('rbCSi');
-            const rbNo = document.getElementById('rbCNo');
-      
-            if (rbSi?.checked) {
-              return 'BG-morado.png'; 
-            } else if (rbNo?.checked) {
-              return 'BG-blue.png';  
-            }
-      
-            // 7) Default => amarillo
-            return 'BG-amarillo.png';
-          }
-      
-          /**
-           * Aplica el fondo al <body> dada la imagen (o 'none').
-           * - Sólo aplica en >=1024px. En <1024px se omite la imagen.
-           */
-          function changeBackground(image) {
-            if (image === 'none') {
-              body.style.backgroundImage = 'none';
-              body.style.backgroundColor = '#fff';
-              return;
-            }
-            if (window.innerWidth >= 1024) {
-              body.style.backgroundImage = `url('assets/images/${image}')`;
-              body.style.backgroundColor = ''; 
-              document.documentElement.style.height = '100%';
-              body.style.minHeight = '100vh';
-            } else {
-              body.style.backgroundImage = '';
-              body.style.backgroundColor = '';
-              document.documentElement.style.height = '';
-              body.style.minHeight = '';
-            }
-          }
-      
-          // Al cargar, aplicamos el fondo inicial
-          changeBackground(getCurrentBackground());
-      
-          // ---------------------------------------------------
-          // 1. Eventos de clic para "Sí/No" (anteriores)
-          // ---------------------------------------------------
-          if (rbSiContainer && rbNoContainer) {
-            rbSiContainer.addEventListener('click', () => {
-              document.getElementById('rbCSi').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-      
-            rbNoContainer.addEventListener('click', () => {
-              document.getElementById('rbCNo').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-          }
-      
-          // ---------------------------------------------------
-          // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
-          // ---------------------------------------------------
-          if (rbGrupalContainer && rbIndividualContainer) {
-            rbGrupalContainer.addEventListener('click', () => {
-              document.getElementById('rbGrupalSi').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-      
-            rbIndividualContainer.addEventListener('click', () => {
-              document.getElementById('rbIndividualNo').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-          }
-      
-          // ---------------------------------------------------
-          // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
-          // ---------------------------------------------------
-          if (rbSiNegocioContainer) {
-            rbSiNegocioContainer.addEventListener('click', () => {
-              document.getElementById('rbSi').checked = true;  
-              changeBackground(getCurrentBackground());
-            });
-          }
-          if (rbNoNegocioContainer) {
-            rbNoNegocioContainer.addEventListener('click', () => {
-              document.getElementById('rbNo').checked = true;  
-              changeBackground(getCurrentBackground());
-            });
-          }
-      
-          // ---------------------------------------------------
-          // 4. NUEVO: Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
-          // ---------------------------------------------------
-          if (rbSiMesesContainer) {
-            rbSiMesesContainer.addEventListener('click', () => {
-              // Marca <input id="rbSiNegocio">
-              document.getElementById('rbSiNegocio').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-          }
-          if (rbNoMesesContainer) {
-            rbNoMesesContainer.addEventListener('click', () => {
-              // Marca <input id="rbNoNegocio">
-              document.getElementById('rbNoNegocio').checked = true;
-              changeBackground(getCurrentBackground());
-            });
-          }
-      
-          // ---------------------------------------------------
-          // 5. Al cambiar tamaño/orientación
-          // ---------------------------------------------------
-          window.addEventListener('resize', () => {
-            changeBackground(getCurrentBackground());
-          });
-          window.addEventListener('orientationchange', () => {
-            setTimeout(() => {
-              changeBackground(getCurrentBackground());
-            }, 100);
-          });
-      
-          // ---------------------------------------------------
-          // 6. IntersectionObserver para #q4_1 => blanco si visible
-          // ---------------------------------------------------
-          if (q4_1) {
-            const observerQ4 = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  changeBackground('none'); 
-                } else {
-                  changeBackground(getCurrentBackground());
-                }
-              });
-            });
-            observerQ4.observe(q4_1);
-          }
-      
-          // ---------------------------------------------------
-          // 7. IntersectionObserver para #q3_2 => cambia clases .main, .wrapper...
-          // ---------------------------------------------------
-          if (q3_2) {
-            const observerQ3 = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  mainElement?.classList.add('main-visible-q3_2');
-                  mainContent?.classList.add('main-content-visible-q3_2');
-                  wrapper?.classList.add('wrapper-visible-q3_2');
-                  homeTitle?.classList.add('home-title-visible-q3_2');
-                } else {
-                  mainElement?.classList.remove('main-visible-q3_2');
-                  mainContent?.classList.remove('main-content-visible-q3_2');
-                  wrapper?.classList.remove('wrapper-visible-q3_2');
-                  homeTitle?.classList.remove('home-title-visible-q3_2');
-                }
-              });
-            });
-            observerQ3.observe(q3_2);
-          }
-      
-          // ---------------------------------------------------
-          // 8. IntersectionObserver para #q3_1 => recalcula fondo
-          // ---------------------------------------------------
-          if (q3_1) {
-            const observerQ3_1 = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-              });
-            });
-            observerQ3_1.observe(q3_1);
-          }
-      
-          // ---------------------------------------------------
-          // 9. IntersectionObservers opcionales para #q2_2, #q2_1
-          // ---------------------------------------------------
-          if (q2_2) {
-            const observerQ2_2 = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-              });
-            });
-            observerQ2_2.observe(q2_2);
-          }
-          if (q2_1) {
-            const observerQ2_1 = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-              });
-            });
-            observerQ2_1.observe(q2_1);
-          }
-        });
-      </script>
-      
-      
-      
-      
-      
-      
+            const body = document.body;
 
+            // --- Radio Buttons "Sí/No" (anteriores) ---
+            const rbSiContainer = document.getElementById('DrbCSi');
+            const rbNoContainer = document.getElementById('DrbCNo');
+
+            // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
+            const rbGrupalContainer = document.getElementById('DrbCGrupal');
+            const rbIndividualContainer = document.getElementById('DrbIndividual');
+
+            // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
+            const rbSiNegocioContainer = document.getElementById('DrbSi');
+            const rbNoNegocioContainer = document.getElementById('DrbNo');
+
+            // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
+            const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+            const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
+
+            // Secciones
+            const q2_1 = document.getElementById('q2_1');
+            const q2_2 = document.getElementById('q2_2');
+            const q3_1 = document.getElementById('q3_1');
+            const q3_2 = document.getElementById('q3_2');
+            const q4_1 = document.getElementById('q4_1');
+            // Sección que se desea que no muestre fondo
+            const q4_2 = document.getElementById('q4_2');
+
+            // Elementos para modificar clases (usados en q3_2)
+            const mainElement = document.querySelector('.main');
+            const mainContent = document.querySelector('.main__content');
+            const wrapper = document.querySelector('.wrapper');
+            const homeTitle = document.querySelector('.home__title');
+
+            // Estilos base para el <body>
+            Object.assign(body.style, {
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                transition: 'background-image 0.5s ease-in-out'
+            });
+
+            /**
+             * Retorna el nombre de la imagen de fondo correspondiente
+             * según la sección visible y los radios seleccionados.
+             * Se ha agregado la condición para q4_2 como prioridad.
+             */
+            function getCurrentBackground() {
+                // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
+                if (q4_2 && q4_2.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 1) Si q4_1 está visible => fondo 'none' (blanco)
+                if (q4_1 && q4_1.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 2) Si q3_1 está visible => gris por defecto ("Sí" o sin selección), morado si "No"
+                if (q3_1 && q3_1.offsetParent !== null) {
+                    // Se asume que los inputs de 6 meses tienen los IDs 'rbSiNegocio' y 'rbNoNegocio'
+                    const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses"
+                    if (rbNoMeses?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-gris.png';
+                    }
+                }
+
+                // 3) Si q3_2 está visible => amarillo
+                if (q3_2 && q3_2.offsetParent !== null) {
+                    return 'BG-amarillo.png';
+                }
+
+                // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
+                if (q2_2 && q2_2.offsetParent !== null) {
+                    const rbSi2_2 = document.getElementById('rbSi');
+                    const rbNo2_2 = document.getElementById('rbNo');
+
+                    if (rbSi2_2?.checked) {
+                        return 'BG-gris.png';
+                    } else if (rbNo2_2?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 5) Si q2_1 está visible => "Crédito grupal/individual"
+                if (q2_1 && q2_1.offsetParent !== null) {
+                    const rbGrupal = document.getElementById('rbGrupalSi');
+                    const rbIndividual = document.getElementById('rbIndividualNo');
+
+                    if (rbGrupal?.checked) {
+                        return 'BG-morado.png';
+                    } else if (rbIndividual?.checked) {
+                        return 'BG-gris.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
+                const rbSi = document.getElementById('rbCSi');
+                const rbNo = document.getElementById('rbCNo');
+
+                if (rbSi?.checked) {
+                    return 'BG-morado.png';
+                } else if (rbNo?.checked) {
+                    return 'BG-blue.png';
+                }
+
+                // 7) Por defecto
+                return 'BG-amarillo.png';
+            }
+
+            /**
+             * Aplica el fondo al <body> según la imagen (o 'none').
+             * En pantallas >=1024 se aplica la imagen, en menores se omite.
+             */
+            function changeBackground(image) {
+                if (image === 'none') {
+                    body.style.backgroundImage = 'none';
+                    body.style.backgroundColor = '#fff';
+                    return;
+                }
+                if (window.innerWidth >= 1024) {
+                    body.style.backgroundImage = `url('assets/images/${image}')`;
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '100%';
+                    body.style.minHeight = '100vh';
+                } else {
+                    body.style.backgroundImage = '';
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '';
+                    body.style.minHeight = '';
+                }
+            }
+
+            // Al cargar la página, se aplica el fondo inicial
+            changeBackground(getCurrentBackground());
+
+            // ---------------------------------------------------
+            // 1. Eventos de clic para "Sí/No" (anteriores)
+            // ---------------------------------------------------
+            if (rbSiContainer && rbNoContainer) {
+                rbSiContainer.addEventListener('click', () => {
+                    document.getElementById('rbCSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbNoContainer.addEventListener('click', () => {
+                    document.getElementById('rbCNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
+            // ---------------------------------------------------
+            if (rbGrupalContainer && rbIndividualContainer) {
+                rbGrupalContainer.addEventListener('click', () => {
+                    document.getElementById('rbGrupalSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbIndividualContainer.addEventListener('click', () => {
+                    document.getElementById('rbIndividualNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
+            // ---------------------------------------------------
+            if (rbSiNegocioContainer) {
+                rbSiNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoNegocioContainer) {
+                rbNoNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
+            // ---------------------------------------------------
+            if (rbSiMesesContainer) {
+                rbSiMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbSiNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoMesesContainer) {
+                rbNoMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbNoNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 5. Al cambiar tamaño de ventana u orientación
+            // ---------------------------------------------------
+            window.addEventListener('resize', () => {
+                changeBackground(getCurrentBackground());
+            });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    changeBackground(getCurrentBackground());
+                }, 100);
+            });
+
+            // ---------------------------------------------------
+            // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
+            // ---------------------------------------------------
+            if (q4_1) {
+                const observerQ4_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_1.observe(q4_1);
+            }
+
+            // ---------------------------------------------------
+            // 7. IntersectionObserver para q4_2 => cuando esta sección esté visible, se oculta el fondo
+            // ---------------------------------------------------
+            if (q4_2) {
+                const observerQ4_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_2.observe(q4_2);
+            }
+
+            // ---------------------------------------------------
+            // 8. IntersectionObserver para q3_2 => modifica clases en elementos
+            // ---------------------------------------------------
+            if (q3_2) {
+                const observerQ3_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            mainElement?.classList.add('main-visible-q3_2');
+                            mainContent?.classList.add('main-content-visible-q3_2');
+                            wrapper?.classList.add('wrapper-visible-q3_2');
+                            homeTitle?.classList.add('home-title-visible-q3_2');
+                        } else {
+                            mainElement?.classList.remove('main-visible-q3_2');
+                            mainContent?.classList.remove('main-content-visible-q3_2');
+                            wrapper?.classList.remove('wrapper-visible-q3_2');
+                            homeTitle?.classList.remove('home-title-visible-q3_2');
+                        }
+                    });
+                });
+                observerQ3_2.observe(q3_2);
+            }
+
+            // ---------------------------------------------------
+            // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
+            // ---------------------------------------------------
+            if (q3_1) {
+                const observerQ3_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ3_1.observe(q3_1);
+            }
+
+            // ---------------------------------------------------
+            // 10. IntersectionObservers opcionales para q2_2 y q2_1
+            // ---------------------------------------------------
+            if (q2_2) {
+                const observerQ2_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_2.observe(q2_2);
+            }
+            if (q2_1) {
+                const observerQ2_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_1.observe(q2_1);
+            }
+        });
+    </script>
+
+    <!--cambiar BG dinamicamente Mobile-->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+
+            // --- Radio Buttons "Sí/No" (anteriores) ---
+            const rbSiContainer = document.getElementById('DrbCSi');
+            const rbNoContainer = document.getElementById('DrbCNo');
+
+            // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
+            const rbGrupalContainer = document.getElementById('DrbCGrupal');
+            const rbIndividualContainer = document.getElementById('DrbIndividual');
+
+            // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
+            const rbSiNegocioContainer = document.getElementById('DrbSi');
+            const rbNoNegocioContainer = document.getElementById('DrbNo');
+
+            // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
+            const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+            const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
+
+            // Secciones
+            const q2_1 = document.getElementById('q2_1');
+            const q2_2 = document.getElementById('q2_2');
+            const q3_1 = document.getElementById('q3_1');
+            const q3_2 = document.getElementById('q3_2');
+            const q4_1 = document.getElementById('q4_1');
+            // Sección que se desea que no muestre fondo
+            const q4_2 = document.getElementById('q4_2');
+
+            // Elementos para modificar clases (usados en q3_2)
+            const mainElement = document.querySelector('.main');
+            const mainContent = document.querySelector('.main__content');
+            const wrapper = document.querySelector('.wrapper');
+            const homeTitle = document.querySelector('.home__title');
+
+            // Estilos base para el <body>
+            Object.assign(body.style, {
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                transition: 'background-image 0.5s ease-in-out'
+            });
+
+            /**
+             * Retorna el nombre de la imagen de fondo correspondiente
+             * según la sección visible y los radios seleccionados.
+             * Se ha agregado la condición para q4_2 como prioridad.
+             */
+            function getCurrentBackground() {
+                // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
+                if (q4_2 && q4_2.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 1) Si q4_1 está visible => fondo 'none' (blanco)
+                if (q4_1 && q4_1.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 2) Si q3_1 está visible => gris por defecto ("Sí" o sin selección), morado si "No"
+                if (q3_1 && q3_1.offsetParent !== null) {
+                    // Se asume que los inputs de 6 meses tienen los IDs 'rbSiNegocio' y 'rbNoNegocio'
+                    const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses"
+                    if (rbNoMeses?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-gris.png';
+                    }
+                }
+
+                // 3) Si q3_2 está visible => amarillo
+                if (q3_2 && q3_2.offsetParent !== null) {
+                    return 'BG-amarillo.png';
+                }
+
+                // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
+                if (q2_2 && q2_2.offsetParent !== null) {
+                    const rbSi2_2 = document.getElementById('rbSi');
+                    const rbNo2_2 = document.getElementById('rbNo');
+
+                    if (rbSi2_2?.checked) {
+                        return 'BG-gris.png';
+                    } else if (rbNo2_2?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 5) Si q2_1 está visible => "Crédito grupal/individual"
+                if (q2_1 && q2_1.offsetParent !== null) {
+                    const rbGrupal = document.getElementById('rbGrupalSi');
+                    const rbIndividual = document.getElementById('rbIndividualNo');
+
+                    if (rbGrupal?.checked) {
+                        return 'BG-morado.png';
+                    } else if (rbIndividual?.checked) {
+                        return 'BG-gris.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
+                const rbSi = document.getElementById('rbCSi');
+                const rbNo = document.getElementById('rbCNo');
+
+                if (rbSi?.checked) {
+                    return 'BG-morado.png';
+                } else if (rbNo?.checked) {
+                    return 'BG-blue.png';
+                }
+
+                // 7) Por defecto
+                return 'BG-amarillo.png';
+            }
+
+            /**
+             * Aplica el fondo al <body> según la imagen (o 'none').
+             * En dispositivos móviles (ancho menor a 1024px) se aplica la imagen con el sufijo -mobile.
+             */
+            function changeBackground(image) {
+                if (image === 'none') {
+                    body.style.backgroundImage = 'none';
+                    body.style.backgroundColor = '#fff';
+                    return;
+                }
+                if (window.innerWidth < 1024) {
+                    // Modificar la imagen para que tenga el sufijo -mobile
+                    let mobileImage = image;
+                    if (mobileImage.endsWith('.png')) {
+                        mobileImage = mobileImage.replace('.png', '-mobile.png');
+                    }
+                    body.style.backgroundImage = `url('assets/images/${mobileImage}')`;
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '100%';
+                    body.style.minHeight = '100vh';
+                } else {
+                    body.style.backgroundImage = '';
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '';
+                    body.style.minHeight = '';
+                }
+            }
+
+            // Al cargar la página, se aplica el fondo inicial
+            changeBackground(getCurrentBackground());
+
+            // ---------------------------------------------------
+            // 1. Eventos de clic para "Sí/No" (anteriores)
+            // ---------------------------------------------------
+            if (rbSiContainer && rbNoContainer) {
+                rbSiContainer.addEventListener('click', () => {
+                    document.getElementById('rbCSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbNoContainer.addEventListener('click', () => {
+                    document.getElementById('rbCNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
+            // ---------------------------------------------------
+            if (rbGrupalContainer && rbIndividualContainer) {
+                rbGrupalContainer.addEventListener('click', () => {
+                    document.getElementById('rbGrupalSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbIndividualContainer.addEventListener('click', () => {
+                    document.getElementById('rbIndividualNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
+            // ---------------------------------------------------
+            if (rbSiNegocioContainer) {
+                rbSiNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoNegocioContainer) {
+                rbNoNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
+            // ---------------------------------------------------
+            if (rbSiMesesContainer) {
+                rbSiMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbSiNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoMesesContainer) {
+                rbNoMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbNoNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 5. Al cambiar tamaño de ventana u orientación
+            // ---------------------------------------------------
+            window.addEventListener('resize', () => {
+                changeBackground(getCurrentBackground());
+            });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    changeBackground(getCurrentBackground());
+                }, 100);
+            });
+
+            // ---------------------------------------------------
+            // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
+            // ---------------------------------------------------
+            if (q4_1) {
+                const observerQ4_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_1.observe(q4_1);
+            }
+
+            // ---------------------------------------------------
+            // 7. IntersectionObserver para q4_2 => cuando esta sección esté visible, se oculta el fondo
+            // ---------------------------------------------------
+            if (q4_2) {
+                const observerQ4_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_2.observe(q4_2);
+            }
+
+            // ---------------------------------------------------
+            // 8. IntersectionObserver para q3_2 => modifica clases en elementos
+            // ---------------------------------------------------
+            if (q3_2) {
+                const observerQ3_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            mainElement?.classList.add('main-visible-q3_2');
+                            mainContent?.classList.add('main-content-visible-q3_2');
+                            wrapper?.classList.add('wrapper-visible-q3_2');
+                            homeTitle?.classList.add('home-title-visible-q3_2');
+                        } else {
+                            mainElement?.classList.remove('main-visible-q3_2');
+                            mainContent?.classList.remove('main-content-visible-q3_2');
+                            wrapper?.classList.remove('wrapper-visible-q3_2');
+                            homeTitle?.classList.remove('home-title-visible-q3_2');
+                        }
+                    });
+                });
+                observerQ3_2.observe(q3_2);
+            }
+
+            // ---------------------------------------------------
+            // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
+            // ---------------------------------------------------
+            if (q3_1) {
+                const observerQ3_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ3_1.observe(q3_1);
+            }
+
+            // ---------------------------------------------------
+            // 10. IntersectionObservers opcionales para q2_2 y q2_1
+            // ---------------------------------------------------
+            if (q2_2) {
+                const observerQ2_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_2.observe(q2_2);
+            }
+            if (q2_1) {
+                const observerQ2_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_1.observe(q2_1);
+            }
+        });
+    </script>
 
 
     <!--cambiar titulos h1 dinamicamente-->
     <script>
-        // Observer para q2_1 (Ofertas para clientes)
-        const observerQ2_1 = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelector('.home__title').textContent = "Ofertas para clientes";
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            // ... (el resto de las variables y lógica)
+
+            // Secciones
+            const q4_1 = document.getElementById('q4_1');
+            const q4_2 = document.getElementById('q4_2');
+
+            // Función para cambiar el fondo (ya definida en tu script)
+            function changeBackground(image) {
+                if (image === 'none') {
+                    body.style.backgroundImage = 'none';
+                    body.style.backgroundColor = '#fff';
+                    return;
                 }
-            });
-        }, { threshold: 0.5 });
-
-        observerQ2_1.observe(document.getElementById("q2_1"));
-
-        // Observer para q4_1 (Crédito grupal)
-        const observerQ4_1 = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelector('.home__title').textContent = "Crédito grupal";
+                if (window.innerWidth >= 1024) {
+                    body.style.backgroundImage = `url('assets/images/${image}')`;
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '100%';
+                    body.style.minHeight = '100vh';
+                } else {
+                    body.style.backgroundImage = '';
+                    body.style.backgroundColor = '';
+                    document.documentElement.style.height = '';
+                    body.style.minHeight = '';
                 }
-            });
-        }, { threshold: 0.5 });
+            }
 
-        observerQ4_1.observe(document.getElementById("q4_1"));
-
-        // Observer para q3_2 (Solicitud de crédito adicional)
-        const observerQ3_2 = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelector('.home__title').textContent = "Solicitud de crédito adicional";
+            // Función que determina el fondo actual según la sección visible
+            function getCurrentBackground() {
+                // ... (tu lógica para determinar el fondo)
+                // Ejemplo:
+                if (q4_1 && q4_1.offsetParent !== null) {
+                    return 'none';
                 }
-            });
-        }, { threshold: 0.5 });
+                // Otros casos...
+                return 'BG-amarillo.png';
+            }
 
-        observerQ3_2.observe(document.getElementById("q3_2"));
+            // Aplicar fondo inicial
+            changeBackground(getCurrentBackground());
 
+            // IntersectionObserver para q4_1: pone fondo 'none' cuando es visible
+            if (q4_1) {
+                const observerQ4_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_1.observe(q4_1);
+            }
 
+            // NUEVO: IntersectionObserver para q4_2, para aplicar lo mismo que en q4_1
+            if (q4_2) {
+                const observerQ4_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            changeBackground('none');
+                        } else {
+                            changeBackground(getCurrentBackground());
+                        }
+                    });
+                });
+                observerQ4_2.observe(q4_2);
+            }
 
-
+            // Resto de tus observadores y lógica (eventos, resize, etc.)
+        });
     </script>
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var btn = document.getElementById("btnContinue");
 
             if (btn) {
-                btn.innerHTML = "Enviar"; // Cambia el texto
+                // Cambia el texto inicial del botón a Continuar con flecha
+                btn.innerHTML = "Continuar →";
+
+                // Agrega efecto hover y focus
+                btn.addEventListener('click', function () {
+                    this.innerHTML = "Continuar →"; // Restaura el texto original
+                });
+
+                // Si deseas que el botón reaparezca si escondido:
+                if (btn.classList.contains('hidden')) {
+                    setTimeout(() => {
+                        btn.classList.remove('hidden');
+                    }, 100);
+                }
+            }
+
+            // Agrega efecto de hover y click
+            const button = document.getElementById("btnContinue");
+            if (button) {
+                button.addEventListener('click', function () {
+                    this.innerHTML = "Continuar →";
+                });
+
+                button.addEventListener('mouseover', function () {
+                    this.classList.add('hover');
+                    setTimeout(() => {
+                        this.classList.remove('hover');
+                    }, 200);
+                });
+
+                button.addEventListener('focus', function () {
+                    this.classList.add('focus');
+                    setTimeout(() => {
+                        this.classList.remove('focus');
+                    }, 200);
+                });
             }
         });
     </script>
-    
 
+    <!--AUTO SCROLL-->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                e.preventDefault();
+                const id = this.getAttribute('href');
+                const target = document.getElementById(id);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 
+    <!--dtos carousel -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carousels = document.querySelectorAll("[data-carousel]");
 
+            carousels.forEach((carouselSection) => {
+                const carousel = carouselSection.querySelector(".carousel");
+                const cards = carousel.querySelectorAll(".card");
+                const dots = carouselSection.querySelectorAll(".dot");
+                const prevButton = carouselSection.querySelector(".carousel-prev");
+                const nextButton = carouselSection.querySelector(".carousel-next");
+
+                if (cards.length === 0) return; // Evita errores si no hay cards
+
+                let currentIndex = 0;
+
+                function getCardWidth() {
+                    return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
+                }
+
+                function updateDots() {
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle("active", index === currentIndex);
+                    });
+                }
+
+                function moveSlide(event, direction) {
+                    event.preventDefault();
+                    const cardWidth = getCardWidth();
+                    currentIndex += direction;
+
+                    if (currentIndex < 0) {
+                        currentIndex = 0;
+                    } else if (currentIndex >= cards.length) {
+                        currentIndex = cards.length - 1;
+                    }
+
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateDots();
+                }
+
+                function goToSlide(event, index) {
+                    event.preventDefault();
+                    const cardWidth = getCardWidth();
+                    currentIndex = index;
+
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateDots();
+                }
+
+                // Vincula eventos de navegación
+                prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+                nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+                // Vincula eventos de dots
+                dots.forEach((dot, index) => {
+                    dot.addEventListener("click", (event) => goToSlide(event, index));
+                });
+
+                // Verifica si `getCardWidth()` obtiene el valor correcto
+                console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
+            });
+        });
+
+    </script>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>

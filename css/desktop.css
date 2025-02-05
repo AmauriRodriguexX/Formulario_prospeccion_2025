@@ -61,6 +61,7 @@
         margin-left: -40px;
         margin-right: -40px;
         height: 2px;
+        position: relative;
         background-color: #D8DADA;
         margin-top: 16px;
         margin-bottom: 16px;
@@ -118,9 +119,6 @@
         margin-left: 8px;
     }
 
-    .answer:hover {
-        border-color: #C91A0F;
-    }
 
     input[type="radio"] {
         appearance: none;
@@ -132,6 +130,10 @@
         border-radius: 50%;
         display: inline-block;
         position: relative;
+        cursor: pointer;
+    }
+
+    label {
         cursor: pointer;
     }
 
@@ -350,13 +352,12 @@
     }
 
     .campoFormulario {
-       
+
         margin: 0;
     }
 
     .desktop-date {
         width: 33.333%;
-        margin-left: 8px;
     }
 
     .desktop-date-m-d {
@@ -455,7 +456,7 @@
     ul {
         padding-left: 20px;
         list-style-type: disc !important;
-        /* Forzar los puntos */
+        margin-bottom: 32px;
     }
 
     ul li {
@@ -553,11 +554,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7) !important; /* Overlay gris oscuro */
-        display: none; /* Ahora estará oculto */
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        /* Overlay gris oscuro */
+        display: none;
+        /* Ahora estará oculto */
         justify-content: center;
         align-items: center;
-        z-index: 99999; /* Asegura que está sobre todo */
+        z-index: 99999;
+        /* Asegura que está sobre todo */
     }
 
     /* Modal centrado correctamente */
@@ -566,8 +570,8 @@
         padding: 20px;
         border: 1px solid #888;
         width: 70%;
-        max-width: 400px;
-        max-height: 70vh;
+        max-width: 720px;
+        max-height: 46vh;
         overflow-y: auto;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -588,8 +592,53 @@
         cursor: pointer !important;
     }
 
-   
+    .finance-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .primary-btn {
+        background-color: #CE0058;
+        color: #ffffff;
+        border: none;
+    }
+    
+    .primary-btn:hover {
+        background-color: #a30046;
+        color: #ffffff;
+    }
+    
+    .secondary-btn {
+        border: 2px solid #CE0058;
+        color: #CE0058;
+        background-color: transparent;
+        margin-bottom: 8px;
+    }
+    
+    .secondary-btn:hover {
+        border: 2px solid #910048;
+        color: #910048;
+    }
+
+    .tituloGracias{
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        width: 100%;
+        color: #ce0058;
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    
+
+
+    
+
+    
+
+
 
 }
-
-

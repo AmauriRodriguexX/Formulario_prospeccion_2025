@@ -48,7 +48,6 @@ textarea {
 .campoFormulario input:focus {
   background-color: #ffffff;
   outline: none;
-  box-shadow: 0 0 0 1px #e70c6b;
   border-radius: 5px;
 }
 
@@ -57,7 +56,7 @@ textarea {
 }
 
 .camposObligatorios {
-  color: #ce0058;
+  color: #5E6A71;
 }
 
 .camposObligatoriosText {
@@ -112,7 +111,7 @@ textarea {
 }
 
 .mensajeCampoError {
-  color: #ce0058;
+  color: #C91A0F;
   margin-bottom: 0px;
   display: none;
   float: left;
@@ -120,7 +119,7 @@ textarea {
 }
 
 .inputError {
-  border: 1px solid #ce0058 !important;
+  border: 1px solid #C91A0F !important;
 }
 
 /*GENERO*/
@@ -236,7 +235,6 @@ textarea {
 
 
 #previous-winners {
-  padding: 40px 20px;
   overflow-x: hidden;
   width: 100%;
 }
@@ -284,14 +282,14 @@ textarea {
 }
 
 #previous-winners .carousel .card:nth-child(1) .thumbnail {
-  background-image: url("../assets/images/imagen_1.png");
+  background-image: url("../assets/images/credito-crece-y-mejora.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center 40%;
 }
 
 #previous-winners .carousel .card:nth-child(2) .thumbnail {
-  background-image: url("../assets/images/imagen_2.png");
+  background-image: url("../assets/images/credito-individual.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center 40%;
@@ -303,6 +301,42 @@ textarea {
   background-size: 100%;
   background-position: center 40%;
 }
+
+
+/* Imagen para "Cuenta a mi favor" */
+.thumbnail.cuenta-a-mi-favor {
+  background-image: url("../assets/images/cuenta-a-mi-favor.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Imagen para "Inversiones" */
+.thumbnail.inversiones {
+  background-image: url("../assets/images/inversiones.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* Imagenes para credito individual */
+.thumbnail.crece-mejora-individual {
+  background-image: url("../assets/images/crece-y-mejora.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Imagen para "Inversiones" */
+.thumbnail.credito-emergencia-individual {
+  background-image: url("../assets/images/credito-de-emergencia.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
 
 #previous-winners .carousel .card .thumbnail .play_button-circle {
   width: 32px;
@@ -329,7 +363,6 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 16px;
   color: var(--charcoal-gray);
   font-family: "Inter", sans-serif;
   padding: 40px 24px;

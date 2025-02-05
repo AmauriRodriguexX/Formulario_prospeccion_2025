@@ -5,15 +5,7 @@ header.ty{
     box-shadow: none;
     margin-top: 24px;
 }
-.tituloGracias{
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    width: 100%;
-    color: #ce0058;
-    font-weight: bold;
-    font-size: 24px;
-}
+
 .gracias{
     margin-top: 1px;
     text-align: left;
@@ -65,6 +57,7 @@ header.ty{
     padding-left: 20px;
     text-align: left;
     color: #252525;
+    margin-bottom: 32px;
 }
 
 .finance-list li {
@@ -72,12 +65,7 @@ header.ty{
     font-size: 16px;
 }
 
-.finance-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
+
 
 .finance-btn {
     text-decoration: none;
@@ -96,6 +84,7 @@ header.ty{
     background-color: #CE0058;
     color: #ffffff;
     border: none;
+    margin-bottom: 8px !important;
 }
 
 .primary-btn:hover {
@@ -172,7 +161,7 @@ header.ty{
     width: 100%;
     text-align: center;
     padding: 32px 20px 20px 20px;
-    margin: 32px 20px 32px 20px;
+    margin: 32px 0px 32px 0px;
     background-color: #fff;
     font-size: 14px;
     display: flex;

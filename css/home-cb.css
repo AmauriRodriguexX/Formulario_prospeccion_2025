@@ -15,6 +15,9 @@
 .banner__time {
     margin:0 auto
 }
+
+
+
 .banner__time a {
     cursor:pointer;
     position:relative
@@ -58,7 +61,7 @@
     font:bold 32px/44px Bree;
     letter-spacing:0;
     color:#ce0058;
-    margin:20px 0
+    margin:4px 0
 }
 .hero__text,.home__text {
     text-align:center;
@@ -517,3 +520,4 @@ footer {
         font:bold 24px/32px Bree
     }
 }
+

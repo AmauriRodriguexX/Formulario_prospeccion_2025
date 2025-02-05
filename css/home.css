@@ -3,7 +3,6 @@
     font-size:28px;
     line-height:36px;
     margin:0;
-    padding-bottom:12px
 }
 .home__txt {
     font-size:16px;
@@ -24,16 +23,15 @@
     text-align:center
 }
 .question {
-    font-weight:500;
-    font-size:16px;
-    margin-top:50px;
-    margin-bottom:10px
-}
-.progress {
-    margin-bottom:20px
+    color: #252A2D;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
 }
 .progress__label {
-    margin-bottom:5px
+    margin-bottom:24px
 }
 .progress__bar {
     width:100%;
@@ -77,9 +75,87 @@
     margin-bottom:20px;
     cursor:pointer
 }
-.answer:hover {
-    border:1px solid #C91A0F
+
+
+.material-symbols-outlined {
+    font-size: 24px; 
+    margin-right: 2px; 
 }
-.answer.selected {
-    border:2px solid #C91A0F
+
+
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 32%;
+    /* Para que los 3 selects ocupen una línea */
+    margin-right: 2%;
+    /* Espaciado entre ellos */
 }
+
+.select-container:last-child {
+    margin-right: 0;
+    /* Evita margen extra en el último select */
+}
+
+.select-container select {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none;
+    /* Ocultar la flecha por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    font-size: 16px;
+}
+
+.select-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-80%);
+    pointer-events: none;
+    /* Evita que el icono interfiera con el clic */
+    color: #7f7f7f;
+}
+
+/* Estilo para el contenedor del select */
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    /* Se adapta al ancho del contenedor */
+}
+
+/* Estilo para el select */
+.select-container select {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none;
+    /* Ocultar la flecha nativa */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    font-size: 16px;
+}
+
+/* Ícono dentro del select */
+.select-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-80%);
+    pointer-events: none;
+    /* Evita que el icono interfiera con el clic */
+    color: #7f7f7f;
+}
+
+
+.inter-font {
+    font-family: 'Inter', sans-serif;
+ 
+}
+
