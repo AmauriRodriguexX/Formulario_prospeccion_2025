@@ -160,9 +160,6 @@ input[type='radio'] {
 	
 	   
 }
-p{
-	text-align: center;
-}
 
 h1{
 	text-align: center;
@@ -213,10 +210,11 @@ h3{
 }
 .divBody2{
     align-items: center;
-    min-width: 360px !important;
     background-color: #FFF;    
     width: 720px;
     margin: auto;
+    display: flex;
+    justify-content: center;
 }
 form{    
     position: relative;
@@ -874,21 +872,7 @@ ul li h2{
     }
     .divCompletoInfoDetalles{        
         margin-top: -35px;
-    }      
-    .divBody, .divBody2 {
-        padding: 0 5vw; /* Usa un valor relativo para que se ajuste mejor */
-        max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
-        margin: 30px auto; /* Centra el contenedor */
-        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
-    }
-    
-    /* Media query para pantallas pequeñas (como 320px) */
-    @media (max-width: 480px) {
-        .divBody, .divBody2 {
-            padding: 0 16px; /* Reduce el padding en pantallas pequeñas */
-        }
-    }
-    
+    } 
     .textoImagenPruebas div{
         width: 60%;
     }
@@ -1065,4 +1049,13 @@ ul li h2{
     .correccionBotonContinuar{
         margin-bottom: 40%;
     }
+}
+
+
+.margin-bottom-24 {
+    margin-bottom: 24px;
+}
+
+.text-alig-left {
+    text-align: left;
 }

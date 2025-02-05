@@ -548,9 +548,7 @@
 
     }
 
-    .margin-bottom-24 {
-        margin-bottom: 24px;
-    }
+    
 
     #divAvisoPri {
         position: fixed;
@@ -659,10 +657,13 @@
         text-align: left;
     }
 
-    .text-alig-left {
-        text-align: left;
+
+    .display-flex-justify-center {
+        display: flex;
+        justify-self: center;
     }
 
+   
 
 
 }

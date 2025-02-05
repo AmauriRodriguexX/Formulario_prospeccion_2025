@@ -265,9 +265,10 @@
      }
 
 
-     a, a:hover {
+     a,
+     a:hover {
           color: #ce0058;
-      }
+     }
 
      .text-mobiel-form {
           color: #252A2D;
@@ -373,7 +374,6 @@
           display: flex;
           justify-content: left;
           padding-top: 20px;
-          width: 100%;
           margin-left: 19px;
           color: #ce0058;
           font-weight: bold;
@@ -431,7 +431,7 @@
           align-items: center;
           z-index: 99999;
           overflow: hidden;
-      }
+     }
 
      /* Modal centrado correctamente */
      .modal-content {
@@ -454,13 +454,81 @@
           height: auto;
           margin: 0 auto;
           display: block;
-      }
+     }
 
-      .h1-custom-title {
+     .h1-custom-title {
           font-size: 24px;
           font-weight: 400;
+     }
+
+     .store-buttons {
+          display: block;
+          text-align: center;
+          /* Para centrar los botones */
+     }
+
+     .store-buttons a {
+          /* Si los botones son enlaces */
+          display: block;
+          margin: 10px auto;
+          /* Añade espacio entre ellos y los centra */
+     }
+
+     .header-center-mobile {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+     }
+
+
+     .code-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50%;
+          height: 70px;
+          border: 2px solid #d3d3d3;
+          border-radius: 16px;
+          text-align: center;
+          margin-bottom: 24px;
+     }
+
+     .code {
+          font-size: 20px;
+          font-weight: bold;
+          color: #CE0058;
+     }
+
+     .hide-mobile {
+          display: none;
+     }
+
+     .finance-section {
+          background: url(../assets/images/bg-tk-page.png) no-repeat center;
+          background-size: cover;
+          padding: 0px 0px;
+     }
+
+     header.ty {
+          box-shadow: none;
+          margin-top: 16px;
+     }
+
+     .tiitlte-ul-ty {
+          color: #252A2D;
+          font-family: Inter;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 26px;
+     }
+
+     ul {
+          padding-left: 20px;
+          list-style-type: disc !important;
+          margin-bottom: 32px;
       }
+ 
 
-
-
+                    
 }
