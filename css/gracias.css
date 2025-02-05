@@ -200,3 +200,8 @@ header.ty{
 .footer-link:hover {
     opacity: 0.8;
 }
+
+
+.label-color {
+    color: #5E6A71;
+}

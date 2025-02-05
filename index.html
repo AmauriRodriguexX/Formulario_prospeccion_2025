@@ -169,30 +169,30 @@
                             informacion favor de intentar mas tarde</div>
                         <div class="d-flex flex-column pt-3">
                             <div class="campoFormulario">
-                                <p>Nombre(s) <b class="camposObligatorios">*</b> </p>
+                                <p class="label-color">Nombre(s) <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" type="text" id="txbNombre" name="nombre" placeholder="Nombre(s)">
                                 <p class="mensajeCampoError" id="textErrortxbNombre">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
-                                <p>Primer apellido <b class="camposObligatorios">*</b> </p>
+                                <p class="label-color">Primer apellido <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" type="text" id="txbApPaterno" name="aPaterno"
                                     placeholder="Primer apellido">
                                 <p class="mensajeCampoError" id="textErrortxbApPaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
-                                <p>Segundo apellido (opcional)</p>
+                                <p class="label-color">Segundo apellido (opcional)</p>
                                 <input class="answer" type="text" id="txbApMaterno" name="aMaterno"
                                     placeholder="Segundo apellido ">
                                 <p class="mensajeCampoError" id="textErrortxbApMaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario tipoCredito">
-                                <p>Fecha de nacimiento <b class="camposObligatorios">*</b></p>
+                                <p class="label-color">Fecha de nacimiento <b class="camposObligatorios">*</b></p>
                                 <div id="dt-Date" class="desktop-date-m-d">
 
                                     <!-- Día -->
                                     <div class="select-container">
                                         <select id="diaSelect" class="desktop-date selectedForm selectFecha answer">
-                                            <option disabled selected value="0">Día</option>
+                                            <option disabled selected value="0" class="label-color">Día</option>
                                             <option value="01">01</option>
                                             <option value="02">02</option>
                                             <option value="03">03</option>
@@ -231,7 +231,7 @@
                                     <!-- Mes -->
                                     <div class="select-container">
                                         <select id="mesSelect" class="desktop-date selectedForm selectFecha answer">
-                                            <option disabled selected value="0">Mes</option>
+                                            <option disabled selected value="0" class="label-color">Mes</option>
                                             <option value="01">Enero</option>
                                             <option value="02">Febrero</option>
                                             <option value="03">Marzo</option>
@@ -251,7 +251,7 @@
                                     <!-- Año -->
                                     <div class="select-container">
                                         <select id="anioSelect" class="desktop-date selectedForm selectFecha answer">
-                                            <option disabled selected value="0">Año</option>
+                                            <option disabled selected value="0" class="label-color">Año</option>
                                             <option value="2006">2006</option>
                                             <option value="2005">2005</option>
                                             <option value="2004">2004</option>
@@ -275,11 +275,11 @@
                                     </div>
 
                                 </div>
-                                <p class="mensajeCampoError" id="textErrorFecha">Selecciona tu fecha de nacimiento,
+                                <p class="mensajeCampoError " id="textErrorFecha">Selecciona tu fecha de nacimiento,
                                     mayor de 18 años</p>
                             </div>
                             <div class="campoFormulario tipoCredito">
-                                <p>Indica tu género <b class="camposObligatorios">*</b> </p>
+                                <p class="label-color">Indica tu género <b class="camposObligatorios">*</b> </p>
                                 <div class="radio-button">
                                     <div class="radio-display">
                                         <input class="genero answer" type="radio" id="rbFemenino" value="Femenino"
@@ -296,7 +296,7 @@
                                 <p class="mensajeCampoError" id="textErrorGenero">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
-                                <p id="topTel" class="hide-desk">Teléfono <b class="camposObligatorios">*</b> </p>
+                                <p id="topTel" class="hide-desk label-color">Teléfono <b class="camposObligatorios">*</b> </p>
                                 <div style="position: relative; display: inline-block; width: 35%;">
                                     <select id="telefonoSelect" name="tipoTelefono"
                                         class="selectedForm disableForm answer">
@@ -316,7 +316,7 @@
                                 </div>
                             </div>
                             <div class="campoFormulario pricipalDisable tipoCredito">
-                                <p>¿A qué hora te hablamos? <b class="camposObligatorios">*</b> </p>
+                                <p class="label-color">¿A qué hora te hablamos? <b class="camposObligatorios">*</b> </p>
                                 <div class="select-container">
                                     <select id="horaSelect" name="horarioLlamada"
                                         class="selectedForm disableForm answer">
@@ -332,14 +332,14 @@
 
 
                             <div class="campoFormulario">
-                                <p class="hide-desk ">Código postal <b class="camposObligatorios">*</b> </p>
+                                <p class="hide-desk label-color">Código postal <b class="camposObligatorios">*</b> </p>
                                 <input class="answer" maxlength="5" type="tel" id="txbCP" name="codigoPostal"
                                     placeholder="Código postal">
                                 <p class="mensajeCampoError" id="textErrortxbCP">Número debe ser 5 dígitos</p>
                             </div>
 
                             <div class="campoFormulario pricipalDisable tipoCredito">
-                                <p>Correo electrónico (opcional)</p>
+                                <p class="label-color">Correo electrónico (opcional)</p>
                                 <input type="email" id="txbCorreoElectronico" class="disableForm answer"
                                     name="correoElectronico" placeholder="Correo electrónico">
                                 <p class="mensajeCampoError" id="textErrortxbCorreoElectronico">Correo inválido</p>
@@ -598,62 +598,72 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    const titleElement = document.querySelector(".home__title"); // Selecciona el <h1>
-    const sectionQ3_2 = document.getElementById("q3_2"); // Sección q3_2
-    const paragraphQ3_2 = sectionQ3_2?.querySelector("p.question.c-center"); // <p> en q3_2
+            const titleElement = document.querySelector(".home__title"); // Selecciona el <h1>
+            const sectionQ3_2 = document.getElementById("q3_2"); // Sección q3_2
+            const paragraphQ3_2 = sectionQ3_2?.querySelector("p.question.c-center"); // <p> en q3_2
+            const spanQ3_2 = sectionQ3_2?.querySelector("span.p-title.text-mobiel-form"); // <span> en q3_2
 
-    // Radio buttons
-    const radioNo = document.getElementById("rbCNo"); // "No, pero quiero uno"
-    const radioSi = document.getElementById("rbCSi"); // "Sí, ya tengo uno"
+            // Radio buttons
+            const radioNo = document.getElementById("rbCNo"); // "No, pero quiero uno"
+            const radioSi = document.getElementById("rbCSi"); // "Sí, ya tengo uno"
 
-    // Definimos las secciones y sus títulos correspondientes
-    const sectionTitles = {
-        "q2_1": "Ofertas para clientes",
-        "q3_2": "Solicitud crédito adicional",
-        "q4_1": "Crédito grupal",
-        "q4_2": "Crédito individual"
-    };
+            // Definimos las secciones y sus títulos correspondientes
+            const sectionTitles = {
+                "q2_1": "Ofertas para clientes",
+                "q3_2": "Solicitud crédito adicional",
+                "q4_1": "Crédito grupal",
+                "q4_2": "Crédito individual"
+            };
 
-    function updateTitle() {
-        let newTitle = "Tramita tu crédito"; // Título por defecto
+            function updateTitle() {
+                let newTitle = "Tramita tu crédito"; // Título por defecto
+                let newSpanText = "Déjanos tus datos para que nuestro agente se contacte contigo y te haga saber la oferta que te tenemos."; // Texto por defecto
 
-        for (let sectionId in sectionTitles) {
-            const section = document.getElementById(sectionId);
-            if (section && section.offsetParent !== null) {
-                newTitle = sectionTitles[sectionId];
-                break; // Detiene la búsqueda al encontrar la primera sección visible
+                for (let sectionId in sectionTitles) {
+                    const section = document.getElementById(sectionId);
+                    if (section && section.offsetParent !== null) {
+                        newTitle = sectionTitles[sectionId];
+                        break; // Detiene la búsqueda al encontrar la primera sección visible
+                    }
+                }
+
+                // Si estamos en q3_2 y el usuario seleccionó "No, pero quiero uno"
+                if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioNo?.checked) {
+                    newTitle = "Tramita tu crédito";
+                    if (paragraphQ3_2) {
+                        paragraphQ3_2.textContent = "Información personal";
+                    }
+                } else if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioSi?.checked) {
+                    if (paragraphQ3_2) {
+                        paragraphQ3_2.textContent = "Información cliente"; // Mantener el texto original
+                    }
+                }
+
+                // Si el título es "Solicitud crédito adicional", actualizamos el span
+                if (newTitle === "Solicitud crédito adicional" && spanQ3_2) {
+                    newSpanText = "Déjanos tus datos. Le haremos saber a tu Promotor que estás interesado en este crédito para iniciar el trámite.";
+                }
+
+                titleElement.textContent = newTitle;
+                if (spanQ3_2) {
+                    spanQ3_2.textContent = newSpanText;
+                }
             }
-        }
 
-        // Si el usuario seleccionó "No, pero quiero uno" y estamos en q3_2, cambia el título
-        if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioNo?.checked) {
-            newTitle = "Tramita tu crédito";
-            if (paragraphQ3_2) {
-                paragraphQ3_2.textContent = "Información personal";
+            // Observer para detectar cambios en el DOM
+            const observer = new MutationObserver(updateTitle);
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            // Detectar cambios en los radio buttons
+            if (radioNo) {
+                radioNo.addEventListener("change", updateTitle);
             }
-        } else if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioSi?.checked) {
-            if (paragraphQ3_2) {
-                paragraphQ3_2.textContent = "Información cliente"; // Mantener el texto original
+            if (radioSi) {
+                radioSi.addEventListener("change", updateTitle);
             }
-        }
 
-        titleElement.textContent = newTitle;
-    }
-
-    // Observer para detectar cambios en el DOM
-    const observer = new MutationObserver(updateTitle);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Detectar cambios en los radio buttons
-    if (radioNo) {
-        radioNo.addEventListener("change", updateTitle);
-    }
-    if (radioSi) {
-        radioSi.addEventListener("change", updateTitle);
-    }
-
-    updateTitle(); // Verifica el estado inicial
-});
+            updateTitle(); // Verifica el estado inicial
+        });
 
     </script>
 
@@ -1478,123 +1488,123 @@
 
     <!--dtos carousel y botones -->
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const carousels = document.querySelectorAll("[data-carousel]");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carousels = document.querySelectorAll("[data-carousel]");
 
-    carousels.forEach((carouselSection) => {
-        const carousel = carouselSection.querySelector(".carousel");
-        const cards = carousel.querySelectorAll(".card");
-        const dots = carouselSection.querySelectorAll(".dot");
-        const prevButton = carouselSection.querySelector(".carousel-prev");
-        const nextButton = carouselSection.querySelector(".carousel-next");
+            carousels.forEach((carouselSection) => {
+                const carousel = carouselSection.querySelector(".carousel");
+                const cards = carousel.querySelectorAll(".card");
+                const dots = carouselSection.querySelectorAll(".dot");
+                const prevButton = carouselSection.querySelector(".carousel-prev");
+                const nextButton = carouselSection.querySelector(".carousel-next");
 
-        if (cards.length === 0) return; // Evita errores si no hay cards
+                if (cards.length === 0) return; // Evita errores si no hay cards
 
-        let currentIndex = 0;
-        const threshold = 50; // Distancia mínima de swipe para cambiar de slide
-        let startX = 0;
-        let isDragging = false;
+                let currentIndex = 0;
+                const threshold = 50; // Distancia mínima de swipe para cambiar de slide
+                let startX = 0;
+                let isDragging = false;
 
-        function getCardWidth() {
-            return carousel.scrollWidth / cards.length;
-        }
+                function getCardWidth() {
+                    return carousel.scrollWidth / cards.length;
+                }
 
-        function updateButtons() {
-            if (currentIndex === 0) {
-                prevButton.style.backgroundColor = "#D8D8D8"; // Gris
-                prevButton.style.color = "#333";
+                function updateButtons() {
+                    if (currentIndex === 0) {
+                        prevButton.style.backgroundColor = "#D8D8D8"; // Gris
+                        prevButton.style.color = "#333";
 
-                nextButton.style.backgroundColor = "#CE0058"; // Magenta
-                nextButton.style.color = "white";
-            } else if (currentIndex === 1) {
-                prevButton.style.backgroundColor = "#CE0058"; // Magenta
-                prevButton.style.color = "white";
+                        nextButton.style.backgroundColor = "#CE0058"; // Magenta
+                        nextButton.style.color = "white";
+                    } else if (currentIndex === 1) {
+                        prevButton.style.backgroundColor = "#CE0058"; // Magenta
+                        prevButton.style.color = "white";
 
-                nextButton.style.backgroundColor = "#D8D8D8"; // Gris
-                nextButton.style.color = "#333";
-            }
-        }
+                        nextButton.style.backgroundColor = "#D8D8D8"; // Gris
+                        nextButton.style.color = "#333";
+                    }
+                }
 
-        function moveSlide(event, direction) {
-            event.preventDefault();
-            const cardWidth = getCardWidth();
-            currentIndex += direction;
+                function moveSlide(event, direction) {
+                    event.preventDefault();
+                    const cardWidth = getCardWidth();
+                    currentIndex += direction;
 
-            if (currentIndex < 0) {
-                currentIndex = 0;
-            } else if (currentIndex >= cards.length) {
-                currentIndex = cards.length - 1;
-            }
+                    if (currentIndex < 0) {
+                        currentIndex = 0;
+                    } else if (currentIndex >= cards.length) {
+                        currentIndex = cards.length - 1;
+                    }
 
-            carousel.scrollTo({
-                left: currentIndex * cardWidth,
-                behavior: "smooth"
+                    carousel.scrollTo({
+                        left: currentIndex * cardWidth,
+                        behavior: "smooth"
+                    });
+
+                    updateButtons();
+                    updateDots();
+                }
+
+                function goToSlide(event, index) {
+                    event.preventDefault();
+                    currentIndex = index;
+
+                    carousel.scrollTo({
+                        left: currentIndex * getCardWidth(),
+                        behavior: "smooth"
+                    });
+
+                    updateButtons();
+                    updateDots();
+                }
+
+                function updateDots() {
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle("active", index === currentIndex);
+                    });
+                }
+
+                prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+                nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener("click", (event) => goToSlide(event, index));
+                });
+
+                // --- SWIPE SUAVE Y PRECISO ---
+                carousel.addEventListener("touchstart", (event) => {
+                    isDragging = true;
+                    startX = event.touches[0].clientX;
+                });
+
+                carousel.addEventListener("touchmove", (event) => {
+                    if (!isDragging) return;
+                    event.preventDefault(); // Evita interferencias con el scroll de la página
+                });
+
+                carousel.addEventListener("touchend", (event) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+
+                    const endX = event.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+
+                    if (diffX > threshold) {
+                        // Swipe a la izquierda (siguiente slide)
+                        moveSlide(event, 1);
+                    } else if (diffX < -threshold) {
+                        // Swipe a la derecha (slide anterior)
+                        moveSlide(event, -1);
+                    }
+                });
+
+                // Asegurar que los botones tengan el color correcto al inicio
+                updateButtons();
             });
-
-            updateButtons();
-            updateDots();
-        }
-
-        function goToSlide(event, index) {
-            event.preventDefault();
-            currentIndex = index;
-
-            carousel.scrollTo({
-                left: currentIndex * getCardWidth(),
-                behavior: "smooth"
-            });
-
-            updateButtons();
-            updateDots();
-        }
-
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentIndex);
-            });
-        }
-
-        prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-        nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener("click", (event) => goToSlide(event, index));
         });
 
-        // --- SWIPE SUAVE Y PRECISO ---
-        carousel.addEventListener("touchstart", (event) => {
-            isDragging = true;
-            startX = event.touches[0].clientX;
-        });
-
-        carousel.addEventListener("touchmove", (event) => {
-            if (!isDragging) return;
-            event.preventDefault(); // Evita interferencias con el scroll de la página
-        });
-
-        carousel.addEventListener("touchend", (event) => {
-            if (!isDragging) return;
-            isDragging = false;
-
-            const endX = event.changedTouches[0].clientX;
-            const diffX = startX - endX;
-
-            if (diffX > threshold) {
-                // Swipe a la izquierda (siguiente slide)
-                moveSlide(event, 1);
-            } else if (diffX < -threshold) {
-                // Swipe a la derecha (slide anterior)
-                moveSlide(event, -1);
-            }
-        });
-
-        // Asegurar que los botones tengan el color correcto al inicio
-        updateButtons();
-    });
-});
-
-  </script>
+    </script>
 
 
 
@@ -1629,9 +1639,6 @@
         });
 
     </script>
-
-
-
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>
