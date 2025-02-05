@@ -330,16 +330,28 @@ $(document).ready(function() {
 		localStorage.setItem('antiguedad', antiguedadSeisMeses);
 	}
 
-	function validateQ3_2(){
+	function validateQ3_2() {
 		if (bandContinuar == false) {
-			$('#msgDatosIncorrectos')
-				.html('Verifica que todos los datos sean correctos.')
-				.show();
-			return false;
+		    $('#msgDatosIncorrectos')
+			   .html('Verifica que todos los datos sean correctos.')
+			   .show();
+	 
+		    // Oculta el mensaje después de 7 segundos (7000 ms)
+		    setTimeout(function() {
+			   $('#msgDatosIncorrectos').fadeOut();
+		    }, 7000);
+	 
+		    return false;
 		}
-
+	 
+		// Oculta el mensaje si los datos son correctos
+		$('#msgDatosIncorrectos').hide();
+	 
 		sendData('');
-	}
+	 }
+	 
+	 
+	 
 
 	//Credito Grupal
 	function validateQ4_1(){

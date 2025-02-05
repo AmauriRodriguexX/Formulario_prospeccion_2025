@@ -426,13 +426,11 @@
           width: 100%;
           height: 100%;
           background-color: rgba(0, 0, 0, 0.7) !important;
-          /* Overlay gris oscuro */
           display: none;
-          /* Ahora estará oculto */
           justify-content: center;
           align-items: center;
           z-index: 99999;
-          /* Asegura que está sobre todo */
+          overflow: hidden;
       }
 
      /* Modal centrado correctamente */
