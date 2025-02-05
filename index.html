@@ -155,7 +155,8 @@
                             <div class="progress__label"><span>90%</span> avance de la solicitud</div>
                         </div>
                         <div class="home__line"></div>
-                        <span class="question pt-3 p-title text-mobiel-form ">Déjanos tus datos para que nuestro agente se contacte contigo y te haga saber la oferta que te tenemos.</span>
+                        <span class="question pt-3 p-title text-mobiel-form ">Déjanos tus datos para que nuestro agente
+                            se contacte contigo y te haga saber la oferta que te tenemos.</span>
                         <label class="margin-bottom-24">
                             <span class="material-symbols-outlined"
                                 style="vertical-align: middle; font-variation-settings: 'FILL' 1; color: #5E6A71;">
@@ -1524,6 +1525,37 @@
         });
 
     </script>
+
+    <SCRipt>
+        document.addEventListener("DOMContentLoaded", function () {
+    let btn = document.querySelector(".btnContinuarInicio");
+    let targetSection = document.getElementById("q3_2");
+
+    if (!btn || !targetSection) return; // Evitar errores si los elementos no existen
+
+    let observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Si #q3_2 está en pantalla, el botón cambia a 'relative'
+                    btn.style.position = "relative";
+                } else {
+                    // Si #q3_2 no está en pantalla, el botón vuelve a 'fixed'
+                    btn.style.position = "fixed";
+                }
+            });
+        },
+        { threshold: 0.2 } // Detectar cuando al menos el 20% de la sección es visible
+    );
+
+    observer.observe(targetSection);
+});
+
+        
+    </SCRipt>
+
+
+  
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>

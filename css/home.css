@@ -29,20 +29,24 @@
     font-style: normal;
     font-weight: 600;
     line-height: 30px;
+    margin-bottom: 24px;
 }
 .progress__label {
-    margin-bottom:24px
+    margin-bottom:24px;
+    margin-top: 8px;
 }
 .progress__bar {
     width:100%;
     margin:auto;
     height:5px;
+    border-radius: 92px;
     background-color:#CEC9C6
 }
 .progress__line {
     background-color:#CE0058;
     width:0;
     height:100%;
+    border-radius: 92px;
     border-radius: 20px;
 }
 .progress__line.p30 {

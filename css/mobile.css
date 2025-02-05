@@ -14,14 +14,24 @@
           bottom: 20px;
           left: 50%;
           transform: translateX(-50%);
-          width: 90%;
-          /* Opcional: Ajusta el ancho */
+          width: 93%;
           max-width: 400px;
-          /* Opcional: Define un máximo */
           text-align: center;
           z-index: 1000;
-          /* Asegura que esté encima de otros elementos */
      }
+
+     .btnContinuarInicio {
+          opacity: 1; /* Visible por defecto */
+          pointer-events: auto;
+          transition: opacity 0.3s ease;
+      }
+      
+      .btnContinuarInicio.hidden {
+          opacity: 0;
+          pointer-events: none;
+      }
+      
+      
 
      .wrapper {
           margin: auto;
@@ -380,6 +390,11 @@
           margin-bottom: 32px;
 
      }
+
+     .frm__btn {
+          
+          margin-top: 0px;
+      }
 
            
 }
