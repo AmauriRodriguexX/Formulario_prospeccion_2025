@@ -1392,50 +1392,51 @@
         });
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var btn = document.getElementById("btnContinue");
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.getElementById("btnContinue");
 
-            if (btn) {
-                // Cambia el texto inicial del botón a Continuar con flecha
-                btn.innerHTML = "Continuar →";
+        if (btn) {
+            // Cambia el contenido del botón a "Continuar" con el icono de Google Fonts
+            btn.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>';
 
-                // Agrega efecto hover y focus
-                btn.addEventListener('click', function () {
-                    this.innerHTML = "Continuar →"; // Restaura el texto original
-                });
+            // Agrega efecto hover y focus
+            btn.addEventListener('click', function () {
+                this.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>'; // Restaura el texto original
+            });
 
-                // Si deseas que el botón reaparezca si escondido:
-                if (btn.classList.contains('hidden')) {
-                    setTimeout(() => {
-                        btn.classList.remove('hidden');
-                    }, 100);
-                }
+            // Si deseas que el botón reaparezca si está escondido:
+            if (btn.classList.contains('hidden')) {
+                setTimeout(() => {
+                    btn.classList.remove('hidden');
+                }, 100);
             }
+        }
 
-            // Agrega efecto de hover y click
-            const button = document.getElementById("btnContinue");
-            if (button) {
-                button.addEventListener('click', function () {
-                    this.innerHTML = "Continuar →";
-                });
+        // Agrega efecto de hover y click
+        const button = document.getElementById("btnContinue");
+        if (button) {
+            button.addEventListener('click', function () {
+                this.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>';
+            });
 
-                button.addEventListener('mouseover', function () {
-                    this.classList.add('hover');
-                    setTimeout(() => {
-                        this.classList.remove('hover');
-                    }, 200);
-                });
+            button.addEventListener('mouseover', function () {
+                this.classList.add('hover');
+                setTimeout(() => {
+                    this.classList.remove('hover');
+                }, 200);
+            });
 
-                button.addEventListener('focus', function () {
-                    this.classList.add('focus');
-                    setTimeout(() => {
-                        this.classList.remove('focus');
-                    }, 200);
-                });
-            }
-        });
-    </script>
+            button.addEventListener('focus', function () {
+                this.classList.add('focus');
+                setTimeout(() => {
+                    this.classList.remove('focus');
+                }, 200);
+            });
+        }
+    });
+</script>
+
 
     <!--AUTO SCROLL-->
     <script>
