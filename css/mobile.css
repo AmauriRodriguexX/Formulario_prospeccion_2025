@@ -37,7 +37,7 @@
      .wrapper {
           margin: auto;
           max-width: 1240px;
-          padding: 0 0px 0 0px !important;
+          padding: 0 0px 0 16px !important;
      }
 
      .answer {
@@ -377,7 +377,7 @@
           margin-left: 19px;
           color: #ce0058;
           font-weight: bold;
-          font-size: 24px;
+          font-size: 28px;
      }
 
      .title-credito-grupales {
@@ -448,6 +448,18 @@
           margin: auto;
           z-index: 999999;
      }
+
+     .imgTY-cte {
+          width: 24%;
+          height: auto;
+          margin: 0 auto;
+          display: block;
+      }
+
+      .h1-custom-title {
+          font-size: 24px;
+          font-weight: 400;
+      }
 
 
 
