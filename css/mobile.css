@@ -396,5 +396,23 @@
           margin-top: 0px;
       }
 
+      .btnContinuarInicio {
+          position: fixed;
+          bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 93%;
+          max-width: 400px;
+          text-align: center;
+          z-index: 1000;
+      }
+      
+      .btnContinuarInicio .material-symbols-outlined {
+          margin-left: 8px;
+      }
+
            
 }

@@ -566,8 +566,10 @@
                 </div>
                 <div class="home__msg" id="msgError">Debe seleccionar una respuesta</div>
                 <div class="home__msg" id="msgDatosIncorrectos"></div>
-                <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">Continuar →<i
-                        class="fas fa-arrow-right"></i></button>
+                <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">
+                    Continuar <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                
             </form>
         </div>
     </section>
@@ -1392,51 +1394,7 @@
         });
     </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var btn = document.getElementById("btnContinue");
-
-        if (btn) {
-            // Cambia el contenido del botón a "Continuar" con el icono de Google Fonts
-            btn.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>';
-
-            // Agrega efecto hover y focus
-            btn.addEventListener('click', function () {
-                this.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>'; // Restaura el texto original
-            });
-
-            // Si deseas que el botón reaparezca si está escondido:
-            if (btn.classList.contains('hidden')) {
-                setTimeout(() => {
-                    btn.classList.remove('hidden');
-                }, 100);
-            }
-        }
-
-        // Agrega efecto de hover y click
-        const button = document.getElementById("btnContinue");
-        if (button) {
-            button.addEventListener('click', function () {
-                this.innerHTML = 'Continuar <span class="material-symbols-outlined">arrow_forward</span>';
-            });
-
-            button.addEventListener('mouseover', function () {
-                this.classList.add('hover');
-                setTimeout(() => {
-                    this.classList.remove('hover');
-                }, 200);
-            });
-
-            button.addEventListener('focus', function () {
-                this.classList.add('focus');
-                setTimeout(() => {
-                    this.classList.remove('focus');
-                }, 200);
-            });
-        }
-    });
-</script>
-
+    
 
     <!--AUTO SCROLL-->
     <script>
