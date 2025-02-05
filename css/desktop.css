@@ -45,7 +45,7 @@
         font-size: 28px;
         font-weight: bold;
         text-align: left;
-        margin-bottom: -14px;
+        margin-bottom: 0px;
     }
 
     .home__subtitle {
@@ -152,9 +152,10 @@
     .frm__btn {
         display: block;
         width: 100%;
+        font-weight: 600;
         margin: 20px auto;
         background-color: #D8DADA;
-        color: #fff;
+        color: #949C9F;
         border-radius: 30px;
         font-size: 18px;
         text-align: center;
