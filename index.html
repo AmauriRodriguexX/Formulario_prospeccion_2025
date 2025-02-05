@@ -1415,108 +1415,123 @@
 
     <!--dtos carousel y botones -->
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const carousels = document.querySelectorAll("[data-carousel]");
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const carousels = document.querySelectorAll("[data-carousel]");
 
-            carousels.forEach((carouselSection) => {
-                const carousel = carouselSection.querySelector(".carousel");
-                const cards = carousel.querySelectorAll(".card");
-                const dots = carouselSection.querySelectorAll(".dot");
-                const prevButton = carouselSection.querySelector(".carousel-prev");
-                const nextButton = carouselSection.querySelector(".carousel-next");
+    carousels.forEach((carouselSection) => {
+        const carousel = carouselSection.querySelector(".carousel");
+        const cards = carousel.querySelectorAll(".card");
+        const dots = carouselSection.querySelectorAll(".dot");
+        const prevButton = carouselSection.querySelector(".carousel-prev");
+        const nextButton = carouselSection.querySelector(".carousel-next");
 
-                if (cards.length === 0) return; // Evita errores si no hay cards
+        if (cards.length === 0) return; // Evita errores si no hay cards
 
-                let currentIndex = 0;
-                let startX = 0;
-                let scrollLeft = 0;
-                let isDragging = false;
-                const swipeSpeed = 20; // Aumenta el factor para hacer el scroll más rápido
+        let currentIndex = 0;
+        const threshold = 50; // Distancia mínima de swipe para cambiar de slide
+        let startX = 0;
+        let isDragging = false;
 
-                function getCardWidth() {
-                    return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
-                }
+        function getCardWidth() {
+            return carousel.scrollWidth / cards.length;
+        }
 
-                function updateDots() {
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle("active", index === currentIndex);
-                    });
-                }
+        function updateButtons() {
+            if (currentIndex === 0) {
+                prevButton.style.backgroundColor = "#D8D8D8"; // Gris
+                prevButton.style.color = "#333";
 
-                function moveSlide(event, direction) {
-                    event.preventDefault();
-                    const cardWidth = getCardWidth();
-                    currentIndex += direction;
+                nextButton.style.backgroundColor = "#CE0058"; // Magenta
+                nextButton.style.color = "white";
+            } else if (currentIndex === 1) {
+                prevButton.style.backgroundColor = "#CE0058"; // Magenta
+                prevButton.style.color = "white";
 
-                    if (currentIndex < 0) {
-                        currentIndex = 0;
-                    } else if (currentIndex >= cards.length) {
-                        currentIndex = cards.length - 1;
-                    }
+                nextButton.style.backgroundColor = "#D8D8D8"; // Gris
+                nextButton.style.color = "#333";
+            }
+        }
 
-                    carousel.scrollTo({
-                        left: currentIndex * cardWidth,
-                        behavior: "smooth"
-                    });
+        function moveSlide(event, direction) {
+            event.preventDefault();
+            const cardWidth = getCardWidth();
+            currentIndex += direction;
 
-                    updateDots();
-                }
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex >= cards.length) {
+                currentIndex = cards.length - 1;
+            }
 
-                function goToSlide(event, index) {
-                    event.preventDefault();
-                    const cardWidth = getCardWidth();
-                    currentIndex = index;
-
-                    carousel.scrollTo({
-                        left: currentIndex * cardWidth,
-                        behavior: "smooth"
-                    });
-
-                    updateDots();
-                }
-
-                // Vincula eventos de navegación
-                prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-                nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-                // Vincula eventos de dots
-                dots.forEach((dot, index) => {
-                    dot.addEventListener("click", (event) => goToSlide(event, index));
-                });
-
-                // --- SCROLL TÁCTIL MEJORADO ---
-                carousel.addEventListener("touchstart", (event) => {
-                    isDragging = true;
-                    startX = event.touches[0].pageX - carousel.offsetLeft;
-                    scrollLeft = carousel.scrollLeft;
-                });
-
-                carousel.addEventListener("touchmove", (event) => {
-                    if (!isDragging) return;
-                    const x = event.touches[0].pageX - carousel.offsetLeft;
-                    const walk = (x - startX) * swipeSpeed; // Aumenta el multiplicador para hacer scroll más rápido
-                    carousel.scrollLeft = scrollLeft - walk;
-                });
-
-                carousel.addEventListener("touchend", () => {
-                    isDragging = false;
-                    const cardWidth = getCardWidth();
-                    currentIndex = Math.round(carousel.scrollLeft / cardWidth);
-
-                    carousel.scrollTo({
-                        left: currentIndex * cardWidth,
-                        behavior: "smooth"
-                    });
-
-                    updateDots();
-                });
-
-                console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
+            carousel.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: "smooth"
             });
+
+            updateButtons();
+            updateDots();
+        }
+
+        function goToSlide(event, index) {
+            event.preventDefault();
+            currentIndex = index;
+
+            carousel.scrollTo({
+                left: currentIndex * getCardWidth(),
+                behavior: "smooth"
+            });
+
+            updateButtons();
+            updateDots();
+        }
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentIndex);
+            });
+        }
+
+        prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+        nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", (event) => goToSlide(event, index));
         });
 
-    </script>
+        // --- SWIPE SUAVE Y PRECISO ---
+        carousel.addEventListener("touchstart", (event) => {
+            isDragging = true;
+            startX = event.touches[0].clientX;
+        });
+
+        carousel.addEventListener("touchmove", (event) => {
+            if (!isDragging) return;
+            event.preventDefault(); // Evita interferencias con el scroll de la página
+        });
+
+        carousel.addEventListener("touchend", (event) => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const endX = event.changedTouches[0].clientX;
+            const diffX = startX - endX;
+
+            if (diffX > threshold) {
+                // Swipe a la izquierda (siguiente slide)
+                moveSlide(event, 1);
+            } else if (diffX < -threshold) {
+                // Swipe a la derecha (slide anterior)
+                moveSlide(event, -1);
+            }
+        });
+
+        // Asegurar que los botones tengan el color correcto al inicio
+        updateButtons();
+    });
+});
+
+  </script>
 
 
 
