@@ -592,6 +592,8 @@
         </div>
     </div>
 
+    
+
 
 
     <script>
@@ -1526,22 +1528,26 @@
 
     </script>
 
-    <SCRipt>
+    <SCript>
         document.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth > 768) return; // Solo ejecuta el script en dispositivos móviles
+
     let btn = document.querySelector(".btnContinuarInicio");
     let targetSection = document.getElementById("q3_2");
 
-    if (!btn || !targetSection) return; // Evitar errores si los elementos no existen
+    if (!btn || !targetSection) return; // Evita errores si los elementos no existen
 
     let observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    // Si #q3_2 está en pantalla, el botón cambia a 'relative'
-                    btn.style.position = "relative";
+                    if (btn.style.position !== "relative") {
+                        btn.style.position = "relative";
+                    }
                 } else {
-                    // Si #q3_2 no está en pantalla, el botón vuelve a 'fixed'
-                    btn.style.position = "fixed";
+                    if (btn.style.position !== "fixed") {
+                        btn.style.position = "fixed";
+                    }
                 }
             });
         },
@@ -1551,11 +1557,10 @@
     observer.observe(targetSection);
 });
 
-        
-    </SCRipt>
+    </SCript>
 
+    
 
-  
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/analytics.js?v=1.2.0"></script>
     <script src="js/home.js"></script>
