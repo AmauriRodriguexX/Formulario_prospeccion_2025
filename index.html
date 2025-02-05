@@ -114,7 +114,7 @@
                         </div>
                         <div class="radioButonsForm answer" data-id="No" id="DrbNo" name="DrbCNo">
                             <input type="radio" id="rbNo" value="No" name="rbNegocio">
-                            <label style="color: grey;" for="No">No, no tengo</label>
+                            <label style="color: grey;" for="No">No, tengo</label>
                         </div>
                     </div>
                 </div>
@@ -155,11 +155,10 @@
                             <div class="progress__label"><span>90%</span> avance de la solicitud</div>
                         </div>
                         <div class="home__line"></div>
-                        <span class="question pt-3 p-title text-mobiel-form ">Déjanos tus datos. Le haremos saber a tu Promotor que estás
-                            interesado en este crédito para iniciar el trámite.</span>
+                        <span class="question pt-3 p-title text-mobiel-form ">Déjanos tus datos para que nuestro agente se contacte contigo y te haga saber la oferta que te tenemos.</span>
                         <label class="margin-bottom-24">
                             <span class="material-symbols-outlined"
-                                style="vertical-align: middle; font-variation-settings: 'FILL' 1;">
+                                style="vertical-align: middle; font-variation-settings: 'FILL' 1; color: #5E6A71;">
                                 info
                             </span>
                             Campos con (*) son obligatorios
@@ -180,7 +179,7 @@
                                 <p class="mensajeCampoError" id="textErrortxbApPaterno">Este campo es obligatorio</p>
                             </div>
                             <div class="campoFormulario">
-                                <p>Segundo apellido</p>
+                                <p>Segundo apellido (opcional)</p>
                                 <input class="answer" type="text" id="txbApMaterno" name="aMaterno"
                                     placeholder="Segundo apellido ">
                                 <p class="mensajeCampoError" id="textErrortxbApMaterno">Este campo es obligatorio</p>
@@ -339,7 +338,7 @@
                             </div>
 
                             <div class="campoFormulario pricipalDisable tipoCredito">
-                                <p>Correo electrónico</p>
+                                <p>Correo electrónico (opcional)</p>
                                 <input type="email" id="txbCorreoElectronico" class="disableForm answer"
                                     name="correoElectronico" placeholder="Correo electrónico">
                                 <p class="mensajeCampoError" id="textErrortxbCorreoElectronico">Correo inválido</p>
@@ -347,7 +346,7 @@
 
                             <div class="contenidoGeneralForm pricipalDisable">
                                 <div class="campoFormulario">
-                                    <div  style="display: flex; height: 24px; padding-top: 40px; padding-bottom: 40px;"
+                                    <div style="display: flex; height: 24px; padding-top: 40px; padding-bottom: 40px;"
                                         class="c-center aviso-de-privacidad">
                                         <input class="answer" type="checkbox" style="width: 24px;height: 24px;"
                                             id="avisoPrivacidad" name="avisoPrivacidad">
@@ -383,6 +382,7 @@
                         <div class="progress__label"><span>60%</span> avance de la solicitud</div>
                     </div>
                     <section id="previous-winners" data-carousel="1">
+                        <p class="title-credito-grupales">Tener un crédito te recompensa con nuevas posibilidades:</p>
                         <span id="subtitle" class="font-inter margin-bottom-60">Créditos adicionales</span>
 
                         <div class="carousel">
@@ -483,14 +483,14 @@
 
                     <!-- Primer Carrusel -->
                     <section id="previous-winners" data-carousel="1">
-                        <h2 id="title" class="font-bree">Tener un Crédito te recompensa con nuevas posibilidades:</h2>
-                        <span id="subtitle" class="font-inter">Créditos adicionales.</span>
+                        <p class="title-credito-grupales">Tener un crédito te recompensa con nuevas posibilidades:</p>
+                        <span id="subtitle" class="font-inter">Créditos adicionales</span>
 
                         <div class="carousel">
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Crece y Mejora')">
                                 <div class="thumbnail crece-mejora-individual"></div>
                                 <div class="card_footer">
-                                    <span class="card_footer-name">Crédito Crece y Mejora</span>
+                                    <span class="card_footer-name">Crédito crece y mejora</span>
                                     <span class="card_footer-description">La solución al instante para tu casa, el
                                         negocio y cualquier imprevisto.</span>
                                 </div>
@@ -498,7 +498,7 @@
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito Individual')">
                                 <div class="thumbnail credito-emergencia-individual"></div>
                                 <div class="card_footer">
-                                    <span class="card_footer-name">Crédito Emergencia</span>
+                                    <span class="card_footer-name">Crédito de emergencia</span>
                                     <span class="card_footer-description">Ayuda inmediata para clientes de Crédito,
                                         afectados por desastres naturales.</span>
                                 </div>
@@ -716,8 +716,6 @@
         });
     </script>
 
-
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const observer = new MutationObserver(() => {
@@ -775,7 +773,6 @@
         });
 
     </script>
-
     <!--cambiar BG dinamicamente Desktop-->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1082,364 +1079,231 @@
             }
         });
     </script>
-
     <!-- Script modificado para mobile (se ejecuta solo si window.innerWidth < 1024) -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Ejecuta este script solo si el dispositivo es mobile
-      if (window.innerWidth >= 1024) return;
-  
-      const body = document.body;
-  
-      // --- Radio Buttons "Sí/No" (anteriores) ---
-      const rbSiContainer = document.getElementById('DrbCSi');
-      const rbNoContainer = document.getElementById('DrbCNo');
-  
-      // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
-      const rbGrupalContainer = document.getElementById('DrbCGrupal');
-      const rbIndividualContainer = document.getElementById('DrbIndividual');
-  
-      // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
-      const rbSiNegocioContainer = document.getElementById('DrbSi');
-      const rbNoNegocioContainer = document.getElementById('DrbNo');
-  
-      // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
-      const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
-      const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
-  
-      // Secciones
-      const q2_1 = document.getElementById('q2_1');
-      const q2_2 = document.getElementById('q2_2');
-      const q3_1 = document.getElementById('q3_1');
-      const q3_2 = document.getElementById('q3_2');
-      const q4_1 = document.getElementById('q4_1');
-      // Sección que se desea que no muestre fondo
-      const q4_2 = document.getElementById('q4_2');
-  
-      // Elementos para modificar clases (usados en q3_2)
-      const mainElement = document.querySelector('.main');
-      const mainContent = document.querySelector('.main__content');
-      const wrapper = document.querySelector('.wrapper');
-      const homeTitle = document.querySelector('.home__title');
-  
-      // Estilos base para el <body>
-      Object.assign(body.style, {
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        transition: 'background-image 0.5s ease-in-out'
-      });
-  
-      /**
-       * Retorna el nombre de la imagen de fondo correspondiente
-       * según la sección visible y los radios seleccionados.
-       * Se da prioridad a la sección q4_2 para que no se muestre fondo.
-       */
-      function getCurrentBackground() {
-        // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
-        if (q4_2 && q4_2.offsetParent !== null) {
-          return 'none';
-        }
-  
-        // 1) Si q4_1 está visible => fondo 'none' (blanco)
-        if (q4_1 && q4_1.offsetParent !== null) {
-          return 'none';
-        }
-  
-        // 2) Si q3_1 está visible => gris por defecto ("Sí" o sin selección), morado si "No"
-        if (q3_1 && q3_1.offsetParent !== null) {
-          const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses"
-          if (rbNoMeses?.checked) {
-            return 'BG-morado.png';
-          } else {
-            return 'BG-gris.png';
-          }
-        }
-  
-        // 3) Si q3_2 está visible => amarillo
-        if (q3_2 && q3_2.offsetParent !== null) {
-          return 'BG-amarillo.png';
-        }
-  
-        // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
-        if (q2_2 && q2_2.offsetParent !== null) {
-          const rbSi2_2 = document.getElementById('rbSi');
-          const rbNo2_2 = document.getElementById('rbNo');
-  
-          if (rbSi2_2?.checked) {
-            return 'BG-gris.png';
-          } else if (rbNo2_2?.checked) {
-            return 'BG-morado.png';
-          } else {
-            return 'BG-amarillo.png';
-          }
-        }
-  
-        // 5) Si q2_1 está visible => "Crédito grupal/individual"
-        if (q2_1 && q2_1.offsetParent !== null) {
-          const rbGrupal = document.getElementById('rbGrupalSi');
-          const rbIndividual = document.getElementById('rbIndividualNo');
-  
-          if (rbGrupal?.checked) {
-            return 'BG-morado.png';
-          } else if (rbIndividual?.checked) {
-            return 'BG-gris.png';
-          } else {
-            return 'BG-amarillo.png';
-          }
-        }
-  
-        // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
-        const rbSi = document.getElementById('rbCSi');
-        const rbNo = document.getElementById('rbCNo');
-  
-        if (rbSi?.checked) {
-          return 'BG-morado.png';
-        } else if (rbNo?.checked) {
-          return 'BG-blue.png';
-        }
-  
-        // 7) Por defecto
-        return 'BG-amarillo.png';
-      }
-  
-      /**
-       * Aplica el fondo al <body> según la imagen (o 'none').
-       * En mobile se utiliza el sufijo "-mobile" para la imagen.
-       */
-      function changeBackground(image) {
-        if (image === 'none') {
-          body.style.backgroundImage = 'none';
-          body.style.backgroundColor = '#fff';
-          return;
-        }
-        let mobileImage = image;
-        if (mobileImage.endsWith('.png')) {
-          mobileImage = mobileImage.replace('.png', '-mobile.png');
-        }
-        body.style.backgroundImage = `url('assets/images/${mobileImage}')`;
-        body.style.backgroundColor = '';
-        document.documentElement.style.height = '100%';
-        body.style.minHeight = '100vh';
-      }
-  
-      // Aplica el fondo inicial al cargar la página
-      changeBackground(getCurrentBackground());
-  
-      // ---------------------------------------------------
-      // 1. Eventos de clic para "Sí/No" (anteriores)
-      // ---------------------------------------------------
-      if (rbSiContainer && rbNoContainer) {
-        rbSiContainer.addEventListener('click', () => {
-          document.getElementById('rbCSi').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-  
-        rbNoContainer.addEventListener('click', () => {
-          document.getElementById('rbCNo').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-  
-      // ---------------------------------------------------
-      // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
-      // ---------------------------------------------------
-      if (rbGrupalContainer && rbIndividualContainer) {
-        rbGrupalContainer.addEventListener('click', () => {
-          document.getElementById('rbGrupalSi').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-  
-        rbIndividualContainer.addEventListener('click', () => {
-          document.getElementById('rbIndividualNo').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-  
-      // ---------------------------------------------------
-      // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
-      // ---------------------------------------------------
-      if (rbSiNegocioContainer) {
-        rbSiNegocioContainer.addEventListener('click', () => {
-          document.getElementById('rbSi').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-      if (rbNoNegocioContainer) {
-        rbNoNegocioContainer.addEventListener('click', () => {
-          document.getElementById('rbNo').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-  
-      // ---------------------------------------------------
-      // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
-      // ---------------------------------------------------
-      if (rbSiMesesContainer) {
-        rbSiMesesContainer.addEventListener('click', () => {
-          document.getElementById('rbSiNegocio').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-      if (rbNoMesesContainer) {
-        rbNoMesesContainer.addEventListener('click', () => {
-          document.getElementById('rbNoNegocio').checked = true;
-          changeBackground(getCurrentBackground());
-        });
-      }
-  
-      // ---------------------------------------------------
-      // 5. Al cambiar tamaño de ventana u orientación
-      // ---------------------------------------------------
-      window.addEventListener('resize', () => {
-        if (window.innerWidth < 1024) {
-          changeBackground(getCurrentBackground());
-        }
-      });
-      window.addEventListener('orientationchange', () => {
-        setTimeout(() => {
-          if (window.innerWidth < 1024) {
-            changeBackground(getCurrentBackground());
-          }
-        }, 100);
-      });
-  
-      // ---------------------------------------------------
-      // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
-      // ---------------------------------------------------
-      if (q4_1) {
-        const observerQ4_1 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              changeBackground('none');
-            } else {
-              changeBackground(getCurrentBackground());
-            }
-          });
-        });
-        observerQ4_1.observe(q4_1);
-      }
-  
-      // ---------------------------------------------------
-      // 7. IntersectionObserver para q4_2 => cuando esté visible, se oculta el fondo
-      // ---------------------------------------------------
-      if (q4_2) {
-        const observerQ4_2 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              changeBackground('none');
-            } else {
-              changeBackground(getCurrentBackground());
-            }
-          });
-        });
-        observerQ4_2.observe(q4_2);
-      }
-  
-      // ---------------------------------------------------
-      // 8. IntersectionObserver para q3_2 => modifica clases en elementos
-      // ---------------------------------------------------
-      if (q3_2) {
-        const observerQ3_2 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              mainElement?.classList.add('main-visible-q3_2');
-              mainContent?.classList.add('main-content-visible-q3_2');
-              wrapper?.classList.add('wrapper-visible-q3_2');
-              homeTitle?.classList.add('home-title-visible-q3_2');
-            } else {
-              mainElement?.classList.remove('main-visible-q3_2');
-              mainContent?.classList.remove('main-content-visible-q3_2');
-              wrapper?.classList.remove('wrapper-visible-q3_2');
-              homeTitle?.classList.remove('home-title-visible-q3_2');
-            }
-          });
-        });
-        observerQ3_2.observe(q3_2);
-      }
-  
-      // ---------------------------------------------------
-      // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
-      // ---------------------------------------------------
-      if (q3_1) {
-        const observerQ3_1 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            changeBackground(getCurrentBackground());
-          });
-        });
-        observerQ3_1.observe(q3_1);
-      }
-  
-      // ---------------------------------------------------
-      // 10. IntersectionObservers opcionales para q2_2 y q2_1
-      // ---------------------------------------------------
-      if (q2_2) {
-        const observerQ2_2 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            changeBackground(getCurrentBackground());
-          });
-        });
-        observerQ2_2.observe(q2_2);
-      }
-      if (q2_1) {
-        const observerQ2_1 = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            changeBackground(getCurrentBackground());
-          });
-        });
-        observerQ2_1.observe(q2_1);
-      }
-    });
-  </script>
-  
-
-
-    <!--cambiar titulos h1 dinamicamente-->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Ejecuta este script solo si el dispositivo es mobile
+            if (window.innerWidth >= 1024) return;
+
             const body = document.body;
-            // ... (el resto de las variables y lógica)
+
+            // --- Radio Buttons "Sí/No" (anteriores) ---
+            const rbSiContainer = document.getElementById('DrbCSi');
+            const rbNoContainer = document.getElementById('DrbCNo');
+
+            // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
+            const rbGrupalContainer = document.getElementById('DrbCGrupal');
+            const rbIndividualContainer = document.getElementById('DrbIndividual');
+
+            // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
+            const rbSiNegocioContainer = document.getElementById('DrbSi');
+            const rbNoNegocioContainer = document.getElementById('DrbNo');
+
+            // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
+            const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+            const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
 
             // Secciones
+            const q2_1 = document.getElementById('q2_1');
+            const q2_2 = document.getElementById('q2_2');
+            const q3_1 = document.getElementById('q3_1');
+            const q3_2 = document.getElementById('q3_2');
             const q4_1 = document.getElementById('q4_1');
+            // Sección que se desea que no muestre fondo
             const q4_2 = document.getElementById('q4_2');
 
-            // Función para cambiar el fondo (ya definida en tu script)
+            // Elementos para modificar clases (usados en q3_2)
+            const mainElement = document.querySelector('.main');
+            const mainContent = document.querySelector('.main__content');
+            const wrapper = document.querySelector('.wrapper');
+            const homeTitle = document.querySelector('.home__title');
+
+            // Estilos base para el <body>
+            Object.assign(body.style, {
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                transition: 'background-image 0.5s ease-in-out'
+            });
+
+            /**
+             * Retorna el nombre de la imagen de fondo correspondiente
+             * según la sección visible y los radios seleccionados.
+             * Se da prioridad a la sección q4_2 para que no se muestre fondo.
+             */
+            function getCurrentBackground() {
+                // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
+                if (q4_2 && q4_2.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 1) Si q4_1 está visible => fondo 'none' (blanco)
+                if (q4_1 && q4_1.offsetParent !== null) {
+                    return 'none';
+                }
+
+                // 2) Si q3_1 está visible => gris por defecto ("Sí" o sin selección), morado si "No"
+                if (q3_1 && q3_1.offsetParent !== null) {
+                    const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses"
+                    if (rbNoMeses?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-gris.png';
+                    }
+                }
+
+                // 3) Si q3_2 está visible => amarillo
+                if (q3_2 && q3_2.offsetParent !== null) {
+                    return 'BG-amarillo.png';
+                }
+
+                // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
+                if (q2_2 && q2_2.offsetParent !== null) {
+                    const rbSi2_2 = document.getElementById('rbSi');
+                    const rbNo2_2 = document.getElementById('rbNo');
+
+                    if (rbSi2_2?.checked) {
+                        return 'BG-gris.png';
+                    } else if (rbNo2_2?.checked) {
+                        return 'BG-morado.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 5) Si q2_1 está visible => "Crédito grupal/individual"
+                if (q2_1 && q2_1.offsetParent !== null) {
+                    const rbGrupal = document.getElementById('rbGrupalSi');
+                    const rbIndividual = document.getElementById('rbIndividualNo');
+
+                    if (rbGrupal?.checked) {
+                        return 'BG-morado.png';
+                    } else if (rbIndividual?.checked) {
+                        return 'BG-gris.png';
+                    } else {
+                        return 'BG-amarillo.png';
+                    }
+                }
+
+                // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
+                const rbSi = document.getElementById('rbCSi');
+                const rbNo = document.getElementById('rbCNo');
+
+                if (rbSi?.checked) {
+                    return 'BG-morado.png';
+                } else if (rbNo?.checked) {
+                    return 'BG-blue.png';
+                }
+
+                // 7) Por defecto
+                return 'BG-amarillo.png';
+            }
+
+            /**
+             * Aplica el fondo al <body> según la imagen (o 'none').
+             * En mobile se utiliza el sufijo "-mobile" para la imagen.
+             */
             function changeBackground(image) {
                 if (image === 'none') {
                     body.style.backgroundImage = 'none';
                     body.style.backgroundColor = '#fff';
                     return;
                 }
-                if (window.innerWidth >= 1024) {
-                    body.style.backgroundImage = `url('assets/images/${image}')`;
-                    body.style.backgroundColor = '';
-                    document.documentElement.style.height = '100%';
-                    body.style.minHeight = '100vh';
-                } else {
-                    body.style.backgroundImage = '';
-                    body.style.backgroundColor = '';
-                    document.documentElement.style.height = '';
-                    body.style.minHeight = '';
+                let mobileImage = image;
+                if (mobileImage.endsWith('.png')) {
+                    mobileImage = mobileImage.replace('.png', '-mobile.png');
                 }
+                body.style.backgroundImage = `url('assets/images/${mobileImage}')`;
+                body.style.backgroundColor = '';
+                document.documentElement.style.height = '100%';
+                body.style.minHeight = '100vh';
             }
 
-            // Función que determina el fondo actual según la sección visible
-            function getCurrentBackground() {
-                // ... (tu lógica para determinar el fondo)
-                // Ejemplo:
-                if (q4_1 && q4_1.offsetParent !== null) {
-                    return 'none';
-                }
-                // Otros casos...
-                return 'BG-amarillo.png';
-            }
-
-            // Aplicar fondo inicial
+            // Aplica el fondo inicial al cargar la página
             changeBackground(getCurrentBackground());
 
-            // IntersectionObserver para q4_1: pone fondo 'none' cuando es visible
+            // ---------------------------------------------------
+            // 1. Eventos de clic para "Sí/No" (anteriores)
+            // ---------------------------------------------------
+            if (rbSiContainer && rbNoContainer) {
+                rbSiContainer.addEventListener('click', () => {
+                    document.getElementById('rbCSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbNoContainer.addEventListener('click', () => {
+                    document.getElementById('rbCNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
+            // ---------------------------------------------------
+            if (rbGrupalContainer && rbIndividualContainer) {
+                rbGrupalContainer.addEventListener('click', () => {
+                    document.getElementById('rbGrupalSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+
+                rbIndividualContainer.addEventListener('click', () => {
+                    document.getElementById('rbIndividualNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
+            // ---------------------------------------------------
+            if (rbSiNegocioContainer) {
+                rbSiNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbSi').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoNegocioContainer) {
+                rbNoNegocioContainer.addEventListener('click', () => {
+                    document.getElementById('rbNo').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
+            // ---------------------------------------------------
+            if (rbSiMesesContainer) {
+                rbSiMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbSiNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+            if (rbNoMesesContainer) {
+                rbNoMesesContainer.addEventListener('click', () => {
+                    document.getElementById('rbNoNegocio').checked = true;
+                    changeBackground(getCurrentBackground());
+                });
+            }
+
+            // ---------------------------------------------------
+            // 5. Al cambiar tamaño de ventana u orientación
+            // ---------------------------------------------------
+            window.addEventListener('resize', () => {
+                if (window.innerWidth < 1024) {
+                    changeBackground(getCurrentBackground());
+                }
+            });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    if (window.innerWidth < 1024) {
+                        changeBackground(getCurrentBackground());
+                    }
+                }, 100);
+            });
+
+            // ---------------------------------------------------
+            // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
+            // ---------------------------------------------------
             if (q4_1) {
                 const observerQ4_1 = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -1453,7 +1317,9 @@
                 observerQ4_1.observe(q4_1);
             }
 
-            // NUEVO: IntersectionObserver para q4_2, para aplicar lo mismo que en q4_1
+            // ---------------------------------------------------
+            // 7. IntersectionObserver para q4_2 => cuando esté visible, se oculta el fondo
+            // ---------------------------------------------------
             if (q4_2) {
                 const observerQ4_2 = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -1467,7 +1333,59 @@
                 observerQ4_2.observe(q4_2);
             }
 
-            // Resto de tus observadores y lógica (eventos, resize, etc.)
+            // ---------------------------------------------------
+            // 8. IntersectionObserver para q3_2 => modifica clases en elementos
+            // ---------------------------------------------------
+            if (q3_2) {
+                const observerQ3_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            mainElement?.classList.add('main-visible-q3_2');
+                            mainContent?.classList.add('main-content-visible-q3_2');
+                            wrapper?.classList.add('wrapper-visible-q3_2');
+                            homeTitle?.classList.add('home-title-visible-q3_2');
+                        } else {
+                            mainElement?.classList.remove('main-visible-q3_2');
+                            mainContent?.classList.remove('main-content-visible-q3_2');
+                            wrapper?.classList.remove('wrapper-visible-q3_2');
+                            homeTitle?.classList.remove('home-title-visible-q3_2');
+                        }
+                    });
+                });
+                observerQ3_2.observe(q3_2);
+            }
+
+            // ---------------------------------------------------
+            // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
+            // ---------------------------------------------------
+            if (q3_1) {
+                const observerQ3_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ3_1.observe(q3_1);
+            }
+
+            // ---------------------------------------------------
+            // 10. IntersectionObservers opcionales para q2_2 y q2_1
+            // ---------------------------------------------------
+            if (q2_2) {
+                const observerQ2_2 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_2.observe(q2_2);
+            }
+            if (q2_1) {
+                const observerQ2_1 = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        changeBackground(getCurrentBackground());
+                    });
+                });
+                observerQ2_1.observe(q2_1);
+            }
         });
     </script>
 

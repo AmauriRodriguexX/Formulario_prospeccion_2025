@@ -369,4 +369,17 @@
           font-weight: bold;
           font-size: 24px;
       }
+
+      .title-credito-grupales {
+          color: #252A2D;
+          font-family: Inter;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 30px;
+          margin-bottom: 32px;
+
+     }
+
+           
 }
