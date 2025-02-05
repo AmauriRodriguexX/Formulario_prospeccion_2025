@@ -1413,81 +1413,114 @@
         });
     </script>
 
-    <!--dtos carousel -->
-    <script>
+    <!--dtos carousel y botones -->
+
+    <Script>
         document.addEventListener("DOMContentLoaded", function () {
-            const carousels = document.querySelectorAll("[data-carousel]");
+    const carousels = document.querySelectorAll("[data-carousel]");
 
-            carousels.forEach((carouselSection) => {
-                const carousel = carouselSection.querySelector(".carousel");
-                const cards = carousel.querySelectorAll(".card");
-                const dots = carouselSection.querySelectorAll(".dot");
-                const prevButton = carouselSection.querySelector(".carousel-prev");
-                const nextButton = carouselSection.querySelector(".carousel-next");
+    carousels.forEach((carouselSection) => {
+        const carousel = carouselSection.querySelector(".carousel");
+        const cards = carousel.querySelectorAll(".card");
+        const dots = carouselSection.querySelectorAll(".dot");
+        const prevButton = carouselSection.querySelector(".carousel-prev");
+        const nextButton = carouselSection.querySelector(".carousel-next");
 
-                if (cards.length === 0) return; // Evita errores si no hay cards
+        if (cards.length === 0) return; // Evita errores si no hay cards
 
-                let currentIndex = 0;
+        let currentIndex = 0;
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDragging = false;
 
-                function getCardWidth() {
-                    return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
-                }
+        function getCardWidth() {
+            return carousel.scrollWidth / cards.length; // Calcula el ancho correcto del card
+        }
 
-                function updateDots() {
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle("active", index === currentIndex);
-                    });
-                }
-
-                function moveSlide(event, direction) {
-                    event.preventDefault();
-                    const cardWidth = getCardWidth();
-                    currentIndex += direction;
-
-                    if (currentIndex < 0) {
-                        currentIndex = 0;
-                    } else if (currentIndex >= cards.length) {
-                        currentIndex = cards.length - 1;
-                    }
-
-                    carousel.scrollTo({
-                        left: currentIndex * cardWidth,
-                        behavior: "smooth"
-                    });
-
-                    updateDots();
-                }
-
-                function goToSlide(event, index) {
-                    event.preventDefault();
-                    const cardWidth = getCardWidth();
-                    currentIndex = index;
-
-                    carousel.scrollTo({
-                        left: currentIndex * cardWidth,
-                        behavior: "smooth"
-                    });
-
-                    updateDots();
-                }
-
-                // Vincula eventos de navegación
-                prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-                nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-                // Vincula eventos de dots
-                dots.forEach((dot, index) => {
-                    dot.addEventListener("click", (event) => goToSlide(event, index));
-                });
-
-                // Verifica si `getCardWidth()` obtiene el valor correcto
-                console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentIndex);
             });
+        }
+
+        function moveSlide(event, direction) {
+            event.preventDefault();
+            const cardWidth = getCardWidth();
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex >= cards.length) {
+                currentIndex = cards.length - 1;
+            }
+
+            carousel.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: "smooth"
+            });
+
+            updateDots();
+        }
+
+        function goToSlide(event, index) {
+            event.preventDefault();
+            const cardWidth = getCardWidth();
+            currentIndex = index;
+
+            carousel.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: "smooth"
+            });
+
+            updateDots();
+        }
+
+        // Vincula eventos de navegación
+        prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+        nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+        // Vincula eventos de dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", (event) => goToSlide(event, index));
         });
 
-    </script>
+        // --- AGREGANDO SCROLL TÁCTIL (TOUCH SWIPE) ---
+        carousel.addEventListener("touchstart", (event) => {
+            isDragging = true;
+            startX = event.touches[0].pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
 
-    <SCript>
+        carousel.addEventListener("touchmove", (event) => {
+            if (!isDragging) return;
+            const x = event.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Ajusta la sensibilidad del swipe
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+
+        carousel.addEventListener("touchend", () => {
+            isDragging = false;
+            const cardWidth = getCardWidth();
+            currentIndex = Math.round(carousel.scrollLeft / cardWidth);
+
+            carousel.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: "smooth"
+            });
+
+            updateDots();
+        });
+
+        console.log(`Carrusel ${carouselSection.dataset.carousel}: Card width = ${getCardWidth()}px`);
+    });
+});
+
+    </Script>
+
+    
+    
+
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
     if (window.innerWidth > 768) return; // Solo ejecuta el script en dispositivos móviles
 
@@ -1516,7 +1549,7 @@
     observer.observe(targetSection);
 });
 
-    </SCript>
+    </script>
 
     
 
