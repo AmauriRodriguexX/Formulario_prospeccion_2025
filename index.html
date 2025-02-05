@@ -596,6 +596,68 @@
     </div>
 
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const titleElement = document.querySelector(".home__title"); // Selecciona el <h1>
+    const sectionQ3_2 = document.getElementById("q3_2"); // Sección q3_2
+    const paragraphQ3_2 = sectionQ3_2?.querySelector("p.question.c-center"); // <p> en q3_2
+
+    // Radio buttons
+    const radioNo = document.getElementById("rbCNo"); // "No, pero quiero uno"
+    const radioSi = document.getElementById("rbCSi"); // "Sí, ya tengo uno"
+
+    // Definimos las secciones y sus títulos correspondientes
+    const sectionTitles = {
+        "q2_1": "Ofertas para clientes",
+        "q3_2": "Solicitud crédito adicional",
+        "q4_1": "Crédito grupal",
+        "q4_2": "Crédito individual"
+    };
+
+    function updateTitle() {
+        let newTitle = "Tramita tu crédito"; // Título por defecto
+
+        for (let sectionId in sectionTitles) {
+            const section = document.getElementById(sectionId);
+            if (section && section.offsetParent !== null) {
+                newTitle = sectionTitles[sectionId];
+                break; // Detiene la búsqueda al encontrar la primera sección visible
+            }
+        }
+
+        // Si el usuario seleccionó "No, pero quiero uno" y estamos en q3_2, cambia el título
+        if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioNo?.checked) {
+            newTitle = "Tramita tu crédito";
+            if (paragraphQ3_2) {
+                paragraphQ3_2.textContent = "Información personal";
+            }
+        } else if (sectionQ3_2 && sectionQ3_2.offsetParent !== null && radioSi?.checked) {
+            if (paragraphQ3_2) {
+                paragraphQ3_2.textContent = "Información cliente"; // Mantener el texto original
+            }
+        }
+
+        titleElement.textContent = newTitle;
+    }
+
+    // Observer para detectar cambios en el DOM
+    const observer = new MutationObserver(updateTitle);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Detectar cambios en los radio buttons
+    if (radioNo) {
+        radioNo.addEventListener("change", updateTitle);
+    }
+    if (radioSi) {
+        radioSi.addEventListener("change", updateTitle);
+    }
+
+    updateTitle(); // Verifica el estado inicial
+});
+
+    </script>
+
+
 
 
 
