@@ -876,10 +876,19 @@ ul li h2{
         margin-top: -35px;
     }      
     .divBody, .divBody2 {
-        padding: 0 24px; /* 16px a los lados */
-        width: auto; /* Se ajusta al tamaño del contenedor */
-        margin: 30px 0; /* Opcional: elimina márgenes laterales en móvil */
+        padding: 0 5vw; /* Usa un valor relativo para que se ajuste mejor */
+        max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
+        margin: 30px auto; /* Centra el contenedor */
+        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
     }
+    
+    /* Media query para pantallas pequeñas (como 320px) */
+    @media (max-width: 480px) {
+        .divBody, .divBody2 {
+            padding: 0 16px; /* Reduce el padding en pantallas pequeñas */
+        }
+    }
+    
     .textoImagenPruebas div{
         width: 60%;
     }
