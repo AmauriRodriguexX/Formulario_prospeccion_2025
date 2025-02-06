@@ -203,25 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // j) Evento para cuando el usuario finaliza el registro mediante submit (para clientes)
-  document.addEventListener("submit", function(event) {
-    if (event.target.matches("#submitForm")) {
-      event.preventDefault();
-      setTimeout(() => {
-        dataLayer.push({
-          'event': 'generate_lead_cliente',
-          'CDCategory': 'credito_individual',
-          'CDFunnel': 'cliente',
-          'CDSource': ssSource, // ssSource ahora está definida
-          'CDValue': 'OK',
-          'CDLabel': 'Crédito crece y mejora',
-          'submit_result': 'OK'
-        });
-        console.log("✅ DataLayer Push: generate_lead_cliente (submit)");
-        event.target.submit();
-      }, 500);
-    }
-  });
+
 
   // ====================================================
   // Sección 2: Formulario "Información cliente" (sección #q3_2)
@@ -242,74 +224,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // 2. Envío del formulario vía AJAX para la sección "Información cliente"
-  // Se asume que el formulario tiene el id "submitForm"
-  waitForElement("#submitForm", function(formulario) {
-    formulario.addEventListener("submit", function(e) {
-      e.preventDefault(); // Interceptamos el envío para manejarlo vía AJAX
-
-      // Llama a la función AJAX (debes adaptar enviarFormularioAJAX a tu lógica real)
-      enviarFormularioAJAX(function(response) {
-        if (response.status === 200) {  // Éxito en el envío (código 200)
-          setTimeout(function() {
-            // Si el usuario NO es cliente, se dispara el evento generate_lead
-            if (cliente !== "Si") {
-              dataLayer.push({
-                'event': 'generate_lead',
-                'CDCategory': 'NA',
-                'CDFunnel': 'no_cliente',
-                'CDSource': window.ssSource || 'default_tracking_source',
-                'CDAction': 'Registro exitoso - OK',
-                'pantalla': 'pantalla_2',
-                'CDValue': valorNombre || 'nombre_test',
-                'negocio': 'si',
-                'duracion_negocio': '6 meses',
-                'tipo_telefono': 'fijo',
-                'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-                'lead_id': '1234567890',
-                'submit_result': 'OK',
-                'detail': 'sin error'
-              });
-              console.log("✅ DataLayer Push: generate_lead (Registro exitoso)");
-            } else {
-              // Si el usuario es cliente, se dispara generate_lead_cliente
-              dataLayer.push({
-                'event': 'generate_lead_cliente',
-                'CDCategory': 'credito_individual',
-                'CDFunnel': 'cliente',
-                'CDSource': window.ssSource || 'default_tracking_source',
-                'CDValue': 'OK',
-                'CDLabel': 'Crédito crece y mejora',
-                'submit_result': 'OK'
-              });
-              console.log("✅ DataLayer Push: generate_lead_cliente (Registro exitoso)");
-            }
-            // Redirige a la Thank You Page
-            window.location.href = "thank-you.html";
-          }, 500);
-        } else {
-          // Caso de error: se dispara el dataLayer de error
-          dataLayer.push({
-            'event': 'generate_lead',
-            'CDCategory': 'NA',
-            'CDFunnel': 'no_cliente',
-            'CDSource': window.ssSource || 'default_tracking_source',
-            'CDAction': 'nombre test',
-            'pantalla': 'pantalla_2',
-            'CDValue': '',
-            'negocio': 'si',
-            'duracion_negocio': '6 meses',
-            'tipo_telefono': 'fijo',
-            'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-            'lead_id': '',
-            'submit_result': 'Error',
-            'detail': 'No se pudo mandar la información. Inténtelo más tarde'
-          });
-          console.log("❌ DataLayer Push: generate_lead (Error en registro)");
-        }
-      });
-    });
-  });
 
   // ====================================================
   // Sección 2.1: DataLayer para cada campo del formulario "Información cliente"
@@ -510,258 +424,386 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// data layer generate_lead_client
 document.addEventListener("DOMContentLoaded", function() {
+  // Variable de tracking de origen, definida o por defecto
   let ssSource = window.ssSource || 'default_tracking_source';
-  console.log("📢 Valor de ssSource:", ssSource);
+  
+  // Bandera para saber si el usuario seleccionó "Sí, ya tengo uno"
+  let clientSelected = false;
+  
+  // Bandera para evitar disparar el evento más de una vez
+  let eventPushed = false;
 
-  window.dataLayer = window.dataLayer || [];
-
-  // ✅ Lista de CAMPOS ADICIONALES requeridos para `generate_lead`
-  const requiredFieldsSecondLayer = {
-    "txbNombre": false,
-    "txbApPaterno": false,
-    "txbNumeroTel": false,
-    "txbCP": false,
-    "avisoPrivacidad": false,
-    "diaSelect": false,
-    "mesSelect": false,
-    "anioSelect": false,
-    "rbSexo": false,
-    "horaSelect": false
-  };
-
-  let leadSent = false;
-
-  function areAllAdditionalFieldsFilled() {
-    return Object.values(requiredFieldsSecondLayer).every(value => value === true);
+  // Función que verifica si se han completado todos los campos requeridos
+  function checkFormCompletion() {
+    let nombre    = document.getElementById("txbNombre") ? document.getElementById("txbNombre").value.trim() : "";
+    let apellido  = document.getElementById("txbApPaterno") ? document.getElementById("txbApPaterno").value.trim() : "";
+    let telefono  = document.getElementById("txbNumeroTel") ? document.getElementById("txbNumeroTel").value.trim() : "";
+    let cp        = document.getElementById("txbCP") ? document.getElementById("txbCP").value.trim() : "";
+    let aviso     = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
+    
+    return (nombre !== "" && apellido !== "" && telefono !== "" && cp !== "" && aviso);
   }
 
-  function getFieldValue(selector, defaultValue = "Desconocido") {
-    let element = document.querySelector(selector);
-    return element ? element.value.trim() || defaultValue : defaultValue;
-  }
-
-  function trackAdditionalFieldCompletion(fieldId, value) {
-    if (value && value.trim() !== "") {
-      requiredFieldsSecondLayer[fieldId] = true;
-      console.log(`✅ Campo ${fieldId} completado.`);
-    } else {
-      requiredFieldsSecondLayer[fieldId] = false;
-      console.log(`❌ Campo ${fieldId} aún vacío.`);
+  // Función para disparar el dataLayer push
+  function pushDataLayerEvent() {
+    // Se dispara únicamente si el usuario seleccionó "Sí, ya tengo uno", 
+    // se completaron los campos y aún no se ha enviado el evento
+    if (clientSelected && checkFormCompletion() && !eventPushed) {
+      eventPushed = true;
+      window.dataLayer = window.dataLayer || [];
+      
+      window.dataLayer.push({
+        'event': 'generate_lead_cliente',
+        'CDCategory': 'credito_individual',  
+        'CDFunnel': 'cliente',
+        'CDSource': ssSource,
+        'CDValue': 'OK',
+        'CDLabel': 'Crédito crece y mejora',
+        'submit_result': 'OK'
+      });
+      
+      console.log("✅ DataLayer event 'generate_lead_cliente' disparado");
     }
+  }
 
-    if (areAllAdditionalFieldsFilled() && !leadSent) {
-      leadSent = true;
-      console.log("🎯 Todos los campos adicionales están completos. Enviando evento generate_lead...");
-      dataLayer.push({
+  // Escuchar la selección de los radio buttons
+  document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
+    radio.addEventListener("click", function() {
+      if (radio.value === "Si") {
+        clientSelected = true;
+        console.log("✅ Opción 'Sí, ya tengo uno' seleccionada.");
+      } else {
+        clientSelected = false;
+        console.log("❌ Opción 'No, pero quiero uno' seleccionada.");
+      }
+    });
+  });
+
+  // Se agregan listeners a cada uno de los campos requeridos para validar su completitud
+  const fieldIds = ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP"];
+  fieldIds.forEach(function(id) {
+    let element = document.getElementById(id);
+    if (element) {
+      // Usamos 'blur' e 'input' para detectar cambios
+      element.addEventListener("blur", pushDataLayerEvent);
+      element.addEventListener("input", pushDataLayerEvent);
+    }
+  });
+
+  // Listener para el checkbox de Aviso de Privacidad
+  let avisoCheckbox = document.getElementById("avisoPrivacidad");
+  if (avisoCheckbox) {
+    avisoCheckbox.addEventListener("change", pushDataLayerEvent);
+  }
+});
+
+
+
+
+
+
+
+// Data layer para "No, pero quiero uno"
+document.addEventListener("DOMContentLoaded", function() {
+  // Variable de tracking de origen, definida o por defecto.
+  let ssSource = window.ssSource || 'default_tracking_source';
+
+  // Bandera para saber si se seleccionó "No, pero quiero uno"
+  let noClientSelected = false;
+
+  // Bandera para evitar disparar el evento más de una vez
+  let eventPushedNo = false;
+
+  // Función de validación para "No, pero quiero uno"
+  function checkNoFormCompletion() {
+    // Campos comunes
+    let nombre    = document.getElementById("txbNombre") ? document.getElementById("txbNombre").value.trim() : "";
+    let apellido  = document.getElementById("txbApPaterno") ? document.getElementById("txbApPaterno").value.trim() : "";
+    let telefono  = document.getElementById("txbNumeroTel") ? document.getElementById("txbNumeroTel").value.trim() : "";
+    let cp        = document.getElementById("txbCP") ? document.getElementById("txbCP").value.trim() : "";
+    let aviso     = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
+    
+    // Campos adicionales para "No, pero quiero uno"
+    let fechaNacimiento = document.getElementById("fechaNacimiento") ? document.getElementById("fechaNacimiento").value.trim() : "";
+    let horaSelect      = document.getElementById("horaSelect") ? document.getElementById("horaSelect").value.trim() : "";
+    
+    // Verificar que se haya seleccionado al menos un género (grupo de radio con name="rbSexo")
+    let generoSeleccionado = false;
+    document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
+      if (radio.checked) {
+        generoSeleccionado = true;
+      }
+    });
+    
+    console.log("Validación No-Cliente:", { nombre, apellido, telefono, cp, aviso, fechaNacimiento, horaSelect, generoSeleccionado });
+    return (
+      nombre !== "" &&
+      apellido !== "" &&
+      telefono !== "" &&
+      cp !== "" &&
+      aviso &&
+      fechaNacimiento !== "" &&
+      horaSelect !== "" &&
+      generoSeleccionado
+    );
+  }
+
+  // Función para disparar el dataLayer push para "No, pero quiero uno"
+  function pushDataLayerNoEvent() {
+    if (noClientSelected && checkNoFormCompletion() && !eventPushedNo) {
+      eventPushedNo = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
         'event': 'generate_lead',
-        'CDCategory': 'NA',
+        'CDCategory': 'NA',  
         'CDFunnel': 'no_cliente',
         'CDSource': ssSource,
         'CDAction': 'Registro exitoso - OK',
         'pantalla': 'pantalla_2',
-        'CDValue': getFieldValue("#txbNombre", "nombre_test"),
+        'CDValue': 'nombre_test',
         'negocio': 'si',
         'duracion_negocio': '6 meses',
-        'tipo_telefono': getFieldValue("#telefonoSelect", "fijo"),
-        'horario_llamada': getFieldValue("#horaSelect", "Vespertino (3:00 pm a 8:00 pm)"),
+        'tipo_telefono': 'fijo',
+        'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
         'lead_id': '1234567890',
         'submit_result': 'OK',
         'detail': 'sin error'
       });
-      console.log("✅ DataLayer Push: generate_lead (Registro exitoso)");
+      console.log("✅ DataLayer event 'generate_lead' disparado para no_cliente");
     }
   }
 
-  ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP"].forEach(fieldId => {
-    waitForElement(`#${fieldId}`, function(input) {
-      input.addEventListener("focusout", function() {
-        trackAdditionalFieldCompletion(fieldId, input.value);
-      });
-    });
-  });
-
-  ["diaSelect", "mesSelect", "anioSelect", "horaSelect"].forEach(fieldId => {
-    waitForElement(`#${fieldId}`, function(select) {
-      select.addEventListener("change", function() {
-        trackAdditionalFieldCompletion(fieldId, select.value);
-      });
-    });
-  });
-
-  document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
+  // Escuchar la selección de los radio buttons (name="rbCliente")
+  document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
     radio.addEventListener("click", function() {
-      trackAdditionalFieldCompletion("rbSexo", radio.value);
-    });
-  });
-
-  waitForElement("#avisoPrivacidad", function(checkbox) {
-    checkbox.addEventListener("change", function() {
-      requiredFieldsSecondLayer["avisoPrivacidad"] = checkbox.checked;
-      console.log(`✅ Aviso de privacidad aceptado: ${checkbox.checked}`);
-      
-      if (areAllAdditionalFieldsFilled() && !leadSent) {
-        leadSent = true;
-        console.log("🎯 Todos los campos adicionales están completos. Enviando evento generate_lead...");
-        dataLayer.push({
-          'event': 'generate_lead',
-          'CDCategory': 'NA',
-          'CDFunnel': 'no_cliente',
-          'CDSource': ssSource,
-          'CDAction': 'Registro exitoso - OK',
-          'pantalla': 'pantalla_2',
-          'CDValue': getFieldValue("#txbNombre", "nombre_test"),
-          'negocio': 'si',
-          'duracion_negocio': '6 meses',
-          'tipo_telefono': getFieldValue("#telefonoSelect", "fijo"),
-          'horario_llamada': getFieldValue("#horaSelect", "Vespertino (3:00 pm a 8:00 pm)"),
-          'lead_id': '1234567890',
-          'submit_result': 'OK',
-          'detail': 'sin error'
-        });
-        console.log("✅ DataLayer Push: generate_lead (Registro exitoso)");
+      if (radio.value === "No") {
+        noClientSelected = true;
+        console.log("✅ Opción 'No, pero quiero uno' seleccionada.");
+        // Llamada inmediata: si el formulario ya está completo, se dispara el push
+        pushDataLayerNoEvent();
+      } else {
+        noClientSelected = false;
+        console.log("❌ Opción 'Sí, ya tengo uno' seleccionada.");
       }
     });
   });
 
-});
+  // Agregar listeners a los campos comunes
+  const commonFieldIds = ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP"];
+  commonFieldIds.forEach(function(id) {
+    let element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("blur", function() {
+        if (noClientSelected) { pushDataLayerNoEvent(); }
+      });
+      element.addEventListener("input", function() {
+        if (noClientSelected) { pushDataLayerNoEvent(); }
+      });
+    }
+  });
 
-function waitForElement(selector, callback) {
-  const element = document.querySelector(selector);
-  if (element) {
-    callback(element);
-  } else {
-    new MutationObserver((mutations, observer) => {
-      if (document.querySelector(selector)) {
-        callback(document.querySelector(selector));
-        observer.disconnect();
-      }
-    }).observe(document.body, { childList: true, subtree: true });
+  // Agregar listeners a los campos adicionales
+  const extraFieldIds = ["fechaNacimiento", "horaSelect"];
+  extraFieldIds.forEach(function(id) {
+    let element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("blur", function() {
+        if (noClientSelected) { pushDataLayerNoEvent(); }
+      });
+      element.addEventListener("input", function() {
+        if (noClientSelected) { pushDataLayerNoEvent(); }
+      });
+    }
+  });
+
+  // Listener para el grupo de radio de género (name="rbSexo")
+  document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
+    radio.addEventListener("change", function() {
+      if (noClientSelected) { pushDataLayerNoEvent(); }
+    });
+  });
+
+  // Listener para el checkbox de Aviso de Privacidad
+  let avisoCheckbox = document.getElementById("avisoPrivacidad");
+  if (avisoCheckbox) {
+    avisoCheckbox.addEventListener("change", function() {
+      if (noClientSelected) { pushDataLayerNoEvent(); }
+    });
   }
-}
+});
 
 
 
 
 document.addEventListener("DOMContentLoaded", function() {
   let ssSource = window.ssSource || 'default_tracking_source';
-  console.log("📢 Valor de ssSource:", ssSource);
+  let noClientSelected = false;
+  let eventPushedNo = false;
 
-  window.dataLayer = window.dataLayer || [];
-
-  // Lista de campos obligatorios
-  const requiredFields = {
-      "txbNombre": false,
-      "txbApPaterno": false,
-      "txbNumeroTel": false,
-      "txbCP": false,
-      "avisoPrivacidad": false,
-      "diaSelect": false,
-      "mesSelect": false,
-      "anioSelect": false,
-      "rbSexo": false,
-      "horaSelect": false
-  };
-
-  function areAllFieldsFilled() {
-      return Object.values(requiredFields).every(value => value === true);
+  // Función de validación actualizada para "No, pero quiero uno"
+  function checkNoClienteCompletion() {
+    // Validar la fecha de nacimiento usando los select de día, mes y año.
+    let dia = document.getElementById("diaSelect") ? document.getElementById("diaSelect").value.trim() : "";
+    let mes = document.getElementById("mesSelect") ? document.getElementById("mesSelect").value.trim() : "";
+    let anio = document.getElementById("anioSelect") ? document.getElementById("anioSelect").value.trim() : "";
+    let fechaValida = (dia !== "0" && mes !== "0" && anio !== "0");
+    
+    // Validar el horario (select)
+    let horaSelect = document.getElementById("horaSelect") ? document.getElementById("horaSelect").value.trim() : "";
+    let horarioValido = (horaSelect !== "0");
+    
+    // Validar el checkbox
+    let aviso = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
+    
+    console.log("Validación reducida No-Cliente:", {
+      dia, mes, anio, fechaValida, horaSelect, horarioValido, aviso
+    });
+    
+    return (fechaValida && horarioValido && aviso);
   }
 
-  function getDynamicValues() {
-      return {
-          nombre: document.querySelector("#txbNombre")?.value || "",
-          telefonoTipo: document.querySelector("#telefonoSelect")?.value || "",
-          horario: document.querySelector("#horaSelect")?.value || "",
-          leadId: "1234567890"
-      };
+  function pushDataLayerNoEvent() {
+    if (noClientSelected && checkNoClienteCompletion() && !eventPushedNo) {
+      eventPushedNo = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'generate_lead',
+        'CDCategory': 'NA',  
+        'CDFunnel': 'no_cliente',
+        'CDSource': ssSource,
+        'CDAction': 'Registro exitoso - OK',
+        'pantalla': 'pantalla_2',
+        'CDValue': 'nombre_test',
+        'negocio': 'si',
+        'duracion_negocio': '6 meses',
+        'tipo_telefono': 'fijo',
+        'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
+        'lead_id': '1234567890',
+        'submit_result': 'OK',
+        'detail': 'sin error'
+      });
+      console.log("✅ DataLayer event 'generate_lead' disparado para no_cliente");
+    } else {
+      console.log("No se cumple la validación o el evento ya se disparó.");
+    }
   }
 
-  function trackFieldCompletion(fieldId, value) {
-      requiredFields[fieldId] = value.trim() !== "";
-      
-      // Si hay errores, disparamos `generate_lead` con error
-      if (!areAllFieldsFilled()) {
-          console.log("❌ Error en formulario. Enviando evento generate_lead (Error)");
-
-          let { nombre, telefonoTipo, horario, leadId } = getDynamicValues();
-
-          dataLayer.push({
-              'event': 'generate_lead_cliente',
-              'CDCategory': 'NA',
-              'CDFunnel': 'no_cliente',
-              'CDSource': ssSource,
-              'CDAction': 'Registro Fallido',
-              'pantalla': 'pantalla_2',
-              'CDValue': nombre || "nombre_test",
-              'negocio': '',
-              'duracion_negocio': '',
-              'tipo_telefono': telefonoTipo,
-              'horario_llamada': horario,
-              'lead_id': '',
-              'submit_result': 'Error',
-              'detail': 'No se pudo mandar la información. Inténtelo más tarde'
-          });
-
-          console.log("❌ DataLayer Push: generate_lead (Error en el formulario)");
-          return;
+  // Listener para los radio buttons con name="rbCliente"
+  document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
+    radio.addEventListener("click", function() {
+      if (radio.value === "No") {
+        noClientSelected = true;
+        console.log("✅ Opción 'No, pero quiero uno' seleccionada.");
+        pushDataLayerNoEvent();
+      } else {
+        noClientSelected = false;
+        console.log("❌ Opción 'Sí, ya tengo uno' seleccionada.");
       }
+    });
+  });
 
-      // Si todo está correcto, enviamos `generate_lead_cliente`
-      console.log("🎯 Todos los campos requeridos están completos. Enviando evento generate_lead_cliente...");
-
-      dataLayer.push({
-          'event': 'generate_lead_cliente',
-          'CDCategory': 'credito_individual',
-          'CDFunnel': 'cliente',
-          'CDSource': ssSource,
-          'CDValue': 'OK',
-          'CDLabel': 'Crédito crece y mejora',
-          'submit_result': 'OK'
+  // Listeners para los select de fecha (día, mes y año)
+  ["diaSelect", "mesSelect", "anioSelect"].forEach(function(id) {
+    let element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("change", function() {
+        if (noClientSelected) { pushDataLayerNoEvent(); }
       });
+    }
+  });
 
-      console.log("✅ DataLayer Push: generate_lead_cliente (Registro exitoso)");
+  // Listener para el select de hora
+  let horaSelectEl = document.getElementById("horaSelect");
+  if (horaSelectEl) {
+    horaSelectEl.addEventListener("change", function() {
+      if (noClientSelected) { pushDataLayerNoEvent(); }
+    });
   }
 
-  // Eventos para los campos de texto y selects
-  ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP", "diaSelect", "mesSelect", "anioSelect", "horaSelect"].forEach(fieldId => {
-      waitForElement(`#${fieldId}`, function(input) {
-          input.addEventListener("focusout", function() {
-              trackFieldCompletion(fieldId, input.value);
-          });
-      });
-  });
-
-  // Evento para los radio buttons (Género)
-  document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
-      radio.addEventListener("click", function() {
-          trackFieldCompletion("rbSexo", radio.value);
-      });
-  });
-
-  // Evento para checkbox (Aviso de privacidad)
-  waitForElement("#avisoPrivacidad", function(checkbox) {
-      checkbox.addEventListener("change", function() {
-          requiredFields["avisoPrivacidad"] = checkbox.checked;
-          trackFieldCompletion("avisoPrivacidad", checkbox.checked ? "aceptado" : "");
-      });
-  });
+  // Listener para el checkbox de Aviso de Privacidad
+  let avisoCheckbox = document.getElementById("avisoPrivacidad");
+  if (avisoCheckbox) {
+    avisoCheckbox.addEventListener("change", function() {
+      if (noClientSelected) { pushDataLayerNoEvent(); }
+    });
+  }
 });
 
-/**
-* ✅ Esperar a que un elemento esté en el DOM antes de agregar eventos.
-*/
-function waitForElement(selector, callback) {
-  const element = document.querySelector(selector);
-  if (element) {
-      callback(element);
-  } else {
-      new MutationObserver((mutations, observer) => {
-          if (document.querySelector(selector)) {
-              callback(document.querySelector(selector));
-              observer.disconnect();
-          }
-      }).observe(document.body, { childList: true, subtree: true });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  let ssSource = window.ssSource || 'default_tracking_source';
+  let errorDataLayerPushed = false;
+
+  // Función que valida que el nombre solo contenga letras y espacios.
+  function isValidName(name) {
+    // Permite letras (incluyendo acentos y ñ) y espacios.
+    return /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(name);
   }
-}
 
+  // Función que revisa si hay error en los campos obligatorios: Nombre y Primer Apellido.
+  function checkErrorValidation() {
+    let nombre = document.getElementById("txbNombre") ? document.getElementById("txbNombre").value.trim() : "";
+    let apellido = document.getElementById("txbApPaterno") ? document.getElementById("txbApPaterno").value.trim() : "";
+    
+    console.log("Validando campos:", { nombre: nombre, apellido: apellido });
+    
+    if (nombre === "" || !isValidName(nombre)) {
+      console.log("Error: El campo Nombre está vacío o contiene caracteres inválidos.");
+      return true;
+    }
+    if (apellido === "") {
+      console.log("Error: El campo Primer Apellido está vacío.");
+      return true;
+    }
+    return false;
+  }
 
+  // Función para disparar el dataLayer de error
+  function pushErrorDataLayer() {
+    console.log("Intentando disparar dataLayer de error...");
+    if (!errorDataLayerPushed && checkErrorValidation()) {
+      errorDataLayerPushed = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'generate_lead',
+        'CDCategory': 'NA',   
+        'CDFunnel': 'no_cliente',
+        'CDSource': ssSource,
+        'CDAction': 'nombre test', 
+        'pantalla': 'pantalla_2',
+        'CDValue': '',
+        'negocio': 'si',
+        'duracion_negocio': '6 meses',
+        'tipo_telefono': 'fijo',
+        'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
+        'lead_id': '',
+        'submit_result': 'Error',
+        'detail': 'No se pudo mandar la información. Inténtelo más tarde'
+      });
+      console.log("✅ DataLayer error event pushed");
+    } else {
+      console.log("No se disparó el error. O bien ya se disparó o la validación no detectó errores.");
+    }
+  }
+  
+  // Para facilitar la prueba, exponemos la función al objeto global
+  window.pushErrorDataLayer = pushErrorDataLayer;
+  
+  // Agregar listeners en los campos de Nombre y Primer Apellido
+  let nombreField = document.getElementById("txbNombre");
+  if (nombreField) {
+    nombreField.addEventListener("blur", pushErrorDataLayer);
+    nombreField.addEventListener("input", pushErrorDataLayer);
+  }
+  
+  let apellidoField = document.getElementById("txbApPaterno");
+  if (apellidoField) {
+    apellidoField.addEventListener("blur", pushErrorDataLayer);
+    apellidoField.addEventListener("input", pushErrorDataLayer);
+  }
+});
