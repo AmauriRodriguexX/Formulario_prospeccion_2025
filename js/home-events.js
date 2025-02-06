@@ -424,12 +424,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// data layer generate_lead_client
 document.addEventListener("DOMContentLoaded", function() {
   // Variable de tracking de origen, definida o por defecto
   let ssSource = window.ssSource || 'default_tracking_source';
   
-  // Bandera para saber si el usuario seleccionó "Sí, ya tengo uno"
+  // Bandera para saber si se seleccionó "Sí, ya tengo uno"
   let clientSelected = false;
   
   // Bandera para evitar disparar el evento más de una vez
@@ -443,13 +442,12 @@ document.addEventListener("DOMContentLoaded", function() {
     let cp        = document.getElementById("txbCP") ? document.getElementById("txbCP").value.trim() : "";
     let aviso     = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
     
+    console.log("Validación form cliente:", {nombre, apellido, telefono, cp, aviso});
     return (nombre !== "" && apellido !== "" && telefono !== "" && cp !== "" && aviso);
   }
 
-  // Función para disparar el dataLayer push
+  // Función para disparar el dataLayer push para "Sí, ya tengo uno"
   function pushDataLayerEvent() {
-    // Se dispara únicamente si el usuario seleccionó "Sí, ya tengo uno", 
-    // se completaron los campos y aún no se ha enviado el evento
     if (clientSelected && checkFormCompletion() && !eventPushed) {
       eventPushed = true;
       window.dataLayer = window.dataLayer || [];
@@ -465,10 +463,13 @@ document.addEventListener("DOMContentLoaded", function() {
       });
       
       console.log("✅ DataLayer event 'generate_lead_cliente' disparado");
+    } else {
+      console.log("No se cumple la validación o ya se disparó el evento.");
     }
   }
 
-  // Escuchar la selección de los radio buttons
+  // Listener para los radio buttons con name="rbCliente"
+  // Esto actualiza la variable clientSelected
   document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
     radio.addEventListener("click", function() {
       if (radio.value === "Si") {
@@ -481,21 +482,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // Se agregan listeners a cada uno de los campos requeridos para validar su completitud
-  const fieldIds = ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP"];
-  fieldIds.forEach(function(id) {
-    let element = document.getElementById(id);
-    if (element) {
-      // Usamos 'blur' e 'input' para detectar cambios
-      element.addEventListener("blur", pushDataLayerEvent);
-      element.addEventListener("input", pushDataLayerEvent);
-    }
-  });
-
-  // Listener para el checkbox de Aviso de Privacidad
-  let avisoCheckbox = document.getElementById("avisoPrivacidad");
-  if (avisoCheckbox) {
-    avisoCheckbox.addEventListener("change", pushDataLayerEvent);
+  // Listener para el botón Continuar
+  let btnContinue = document.getElementById("btnContinue");
+  if (btnContinue) {
+    btnContinue.addEventListener("click", function() {
+      console.log("Se hizo clic en Continuar.");
+      // Solo si se seleccionó "Sí, ya tengo uno", se evalúa la validación
+      if (clientSelected) {
+        pushDataLayerEvent();
+      } else {
+        console.log("La opción seleccionada no es 'Sí, ya tengo uno'.");
+      }
+      // Aquí puedes continuar con el flujo normal (navegación, etc.)
+    });
   }
 });
 
@@ -505,144 +504,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// Data layer para "No, pero quiero uno"
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
   // Variable de tracking de origen, definida o por defecto.
   let ssSource = window.ssSource || 'default_tracking_source';
-
+  
   // Bandera para saber si se seleccionó "No, pero quiero uno"
   let noClientSelected = false;
-
+  
   // Bandera para evitar disparar el evento más de una vez
   let eventPushedNo = false;
-
-  // Función de validación para "No, pero quiero uno"
-  function checkNoFormCompletion() {
-    // Campos comunes
-    let nombre    = document.getElementById("txbNombre") ? document.getElementById("txbNombre").value.trim() : "";
-    let apellido  = document.getElementById("txbApPaterno") ? document.getElementById("txbApPaterno").value.trim() : "";
-    let telefono  = document.getElementById("txbNumeroTel") ? document.getElementById("txbNumeroTel").value.trim() : "";
-    let cp        = document.getElementById("txbCP") ? document.getElementById("txbCP").value.trim() : "";
-    let aviso     = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
-    
-    // Campos adicionales para "No, pero quiero uno"
-    let fechaNacimiento = document.getElementById("fechaNacimiento") ? document.getElementById("fechaNacimiento").value.trim() : "";
-    let horaSelect      = document.getElementById("horaSelect") ? document.getElementById("horaSelect").value.trim() : "";
-    
-    // Verificar que se haya seleccionado al menos un género (grupo de radio con name="rbSexo")
-    let generoSeleccionado = false;
-    document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
-      if (radio.checked) {
-        generoSeleccionado = true;
-      }
-    });
-    
-    console.log("Validación No-Cliente:", { nombre, apellido, telefono, cp, aviso, fechaNacimiento, horaSelect, generoSeleccionado });
-    return (
-      nombre !== "" &&
-      apellido !== "" &&
-      telefono !== "" &&
-      cp !== "" &&
-      aviso &&
-      fechaNacimiento !== "" &&
-      horaSelect !== "" &&
-      generoSeleccionado
-    );
-  }
-
-  // Función para disparar el dataLayer push para "No, pero quiero uno"
-  function pushDataLayerNoEvent() {
-    if (noClientSelected && checkNoFormCompletion() && !eventPushedNo) {
-      eventPushedNo = true;
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        'event': 'generate_lead',
-        'CDCategory': 'NA',  
-        'CDFunnel': 'no_cliente',
-        'CDSource': ssSource,
-        'CDAction': 'Registro exitoso - OK',
-        'pantalla': 'pantalla_2',
-        'CDValue': 'nombre_test',
-        'negocio': 'si',
-        'duracion_negocio': '6 meses',
-        'tipo_telefono': 'fijo',
-        'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-        'lead_id': '1234567890',
-        'submit_result': 'OK',
-        'detail': 'sin error'
-      });
-      console.log("✅ DataLayer event 'generate_lead' disparado para no_cliente");
-    }
-  }
-
-  // Escuchar la selección de los radio buttons (name="rbCliente")
-  document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
-    radio.addEventListener("click", function() {
-      if (radio.value === "No") {
-        noClientSelected = true;
-        console.log("✅ Opción 'No, pero quiero uno' seleccionada.");
-        // Llamada inmediata: si el formulario ya está completo, se dispara el push
-        pushDataLayerNoEvent();
-      } else {
-        noClientSelected = false;
-        console.log("❌ Opción 'Sí, ya tengo uno' seleccionada.");
-      }
-    });
-  });
-
-  // Agregar listeners a los campos comunes
-  const commonFieldIds = ["txbNombre", "txbApPaterno", "txbNumeroTel", "txbCP"];
-  commonFieldIds.forEach(function(id) {
-    let element = document.getElementById(id);
-    if (element) {
-      element.addEventListener("blur", function() {
-        if (noClientSelected) { pushDataLayerNoEvent(); }
-      });
-      element.addEventListener("input", function() {
-        if (noClientSelected) { pushDataLayerNoEvent(); }
-      });
-    }
-  });
-
-  // Agregar listeners a los campos adicionales
-  const extraFieldIds = ["fechaNacimiento", "horaSelect"];
-  extraFieldIds.forEach(function(id) {
-    let element = document.getElementById(id);
-    if (element) {
-      element.addEventListener("blur", function() {
-        if (noClientSelected) { pushDataLayerNoEvent(); }
-      });
-      element.addEventListener("input", function() {
-        if (noClientSelected) { pushDataLayerNoEvent(); }
-      });
-    }
-  });
-
-  // Listener para el grupo de radio de género (name="rbSexo")
-  document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
-    radio.addEventListener("change", function() {
-      if (noClientSelected) { pushDataLayerNoEvent(); }
-    });
-  });
-
-  // Listener para el checkbox de Aviso de Privacidad
-  let avisoCheckbox = document.getElementById("avisoPrivacidad");
-  if (avisoCheckbox) {
-    avisoCheckbox.addEventListener("change", function() {
-      if (noClientSelected) { pushDataLayerNoEvent(); }
-    });
-  }
-});
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  let ssSource = window.ssSource || 'default_tracking_source';
-  let noClientSelected = false;
-  let eventPushedNo = false;
-
-  // Función de validación actualizada para "No, pero quiero uno"
+  
+  // Función de validación reducida para "No, pero quiero uno"
+  // Se valida que los selects de día, mes y año tengan valores distintos de "0",
+  // que el select de hora tenga un valor distinto de "0", y que el checkbox esté marcado.
   function checkNoClienteCompletion() {
     // Validar la fecha de nacimiento usando los select de día, mes y año.
     let dia = document.getElementById("diaSelect") ? document.getElementById("diaSelect").value.trim() : "";
@@ -654,7 +531,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let horaSelect = document.getElementById("horaSelect") ? document.getElementById("horaSelect").value.trim() : "";
     let horarioValido = (horaSelect !== "0");
     
-    // Validar el checkbox
+    // Validar el checkbox de aviso
     let aviso = document.getElementById("avisoPrivacidad") ? document.getElementById("avisoPrivacidad").checked : false;
     
     console.log("Validación reducida No-Cliente:", {
@@ -663,7 +540,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
     return (fechaValida && horarioValido && aviso);
   }
-
+  
+  // Función para disparar el dataLayer push para "No, pero quiero uno"
   function pushDataLayerNoEvent() {
     if (noClientSelected && checkNoClienteCompletion() && !eventPushedNo) {
       eventPushedNo = true;
@@ -689,47 +567,39 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log("No se cumple la validación o el evento ya se disparó.");
     }
   }
-
+  
   // Listener para los radio buttons con name="rbCliente"
+  // Actualiza la variable noClientSelected según la opción seleccionada.
   document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
     radio.addEventListener("click", function() {
       if (radio.value === "No") {
         noClientSelected = true;
         console.log("✅ Opción 'No, pero quiero uno' seleccionada.");
-        pushDataLayerNoEvent();
       } else {
         noClientSelected = false;
         console.log("❌ Opción 'Sí, ya tengo uno' seleccionada.");
       }
     });
   });
-
-  // Listeners para los select de fecha (día, mes y año)
-  ["diaSelect", "mesSelect", "anioSelect"].forEach(function(id) {
-    let element = document.getElementById(id);
-    if (element) {
-      element.addEventListener("change", function() {
-        if (noClientSelected) { pushDataLayerNoEvent(); }
-      });
-    }
-  });
-
-  // Listener para el select de hora
-  let horaSelectEl = document.getElementById("horaSelect");
-  if (horaSelectEl) {
-    horaSelectEl.addEventListener("change", function() {
-      if (noClientSelected) { pushDataLayerNoEvent(); }
-    });
-  }
-
-  // Listener para el checkbox de Aviso de Privacidad
-  let avisoCheckbox = document.getElementById("avisoPrivacidad");
-  if (avisoCheckbox) {
-    avisoCheckbox.addEventListener("change", function() {
-      if (noClientSelected) { pushDataLayerNoEvent(); }
+  
+  // (Opcional) Puedes agregar listeners a los selects o checkbox para actualizar los valores,
+  // pero en este caso el dataLayer se disparará únicamente al hacer clic en el botón "Continuar".
+  
+  // Listener para el botón "Continuar"
+  let btnContinue = document.getElementById("btnContinue");
+  if (btnContinue) {
+    btnContinue.addEventListener("click", function() {
+      console.log("Se hizo clic en el botón Continuar.");
+      if (noClientSelected) {
+        console.log("Validando datos para 'No, pero quiero uno'...");
+        pushDataLayerNoEvent();
+      } else {
+        console.log("La opción seleccionada no es 'No, pero quiero uno'; se ignora.");
+      }
     });
   }
 });
+
 
 
 
