@@ -53,12 +53,25 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // b) Al hacer clic en "Sí, ya tengo uno" o "No, pero quiero uno" (input[name='rbCliente'])
-  document.addEventListener("click", function(event) {
-    const radioButton = event.target.closest("input[name='rbCliente']");
+  // Escuchamos clics en todo el documento
+document.addEventListener("click", function(event) {
+  // Buscamos el elemento contenedor con la clase completa
+  const container = event.target.closest(".radioButonsForm.answer");
+  if (container) {
+    // Obtenemos el radio interno dentro del contenedor
+    const radioButton = container.querySelector("input[name='rbCliente']");
     if (radioButton) {
-      let CDFunnel = radioButton.value === "Si" ? "cliente" : "no_cliente";
-      let CDCategory = radioButton.value === "Si" ? "credito_individual" : "NA";
-      let fieldValue = radioButton.value;
+      // Si no está seleccionado, lo marcamos
+      if (!radioButton.checked) {
+        radioButton.checked = true;
+      }
+      
+      // Configuramos los parámetros según el valor del radio
+      const CDFunnel = radioButton.value === "Si" ? "cliente" : "no_cliente";
+      const CDCategory = radioButton.value === "Si" ? "credito_individual" : "NA";
+      const fieldValue = radioButton.value;
+      
+      // Enviamos la información al dataLayer
       dataLayer.push({
         'event': 'form_field_steps',
         'CDCategory': CDCategory,
@@ -70,7 +83,9 @@ document.addEventListener("DOMContentLoaded", function() {
       });
       console.log("✅ DataLayer Push: form_field_steps (crédito activo)", dataLayer);
     }
-  });
+  }
+});
+
 
   // c) Evento para la pregunta "¿Tienes un negocio?" (excluyendo la sección #q3_1)
   document.addEventListener("click", function(event) {
@@ -501,12 +516,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
   // Variable de tracking de origen, definida o por defecto.
   let ssSource = window.ssSource || 'default_tracking_source';
@@ -604,76 +613,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-document.addEventListener("DOMContentLoaded", function() {
-  let ssSource = window.ssSource || 'default_tracking_source';
-  let errorDataLayerPushed = false;
-
-  // Función que valida que el nombre solo contenga letras y espacios.
-  function isValidName(name) {
-    // Permite letras (incluyendo acentos y ñ) y espacios.
-    return /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(name);
-  }
-
-  // Función que revisa si hay error en los campos obligatorios: Nombre y Primer Apellido.
-  function checkErrorValidation() {
-    let nombre = document.getElementById("txbNombre") ? document.getElementById("txbNombre").value.trim() : "";
-    let apellido = document.getElementById("txbApPaterno") ? document.getElementById("txbApPaterno").value.trim() : "";
-    
-    console.log("Validando campos:", { nombre: nombre, apellido: apellido });
-    
-    if (nombre === "" || !isValidName(nombre)) {
-      console.log("Error: El campo Nombre está vacío o contiene caracteres inválidos.");
-      return true;
-    }
-    if (apellido === "") {
-      console.log("Error: El campo Primer Apellido está vacío.");
-      return true;
-    }
-    return false;
-  }
-
-  // Función para disparar el dataLayer de error
-  function pushErrorDataLayer() {
-    console.log("Intentando disparar dataLayer de error...");
-    if (!errorDataLayerPushed && checkErrorValidation()) {
-      errorDataLayerPushed = true;
+//error event cuando presionamos Sí, ya tengo uno
+function validateQ3_2() {
+  if (bandContinuar == false) {
+      // Muestra el mensaje de error
+      $('#msgDatosIncorrectos')
+          .html('Verifica que todos los datos sean correctos.')
+          .show();
+      
+      // Dispara el dataLayer con el objeto de error
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        'event': 'generate_lead',
-        'CDCategory': 'NA',   
-        'CDFunnel': 'no_cliente',
-        'CDSource': ssSource,
-        'CDAction': 'nombre test', 
-        'pantalla': 'pantalla_2',
-        'CDValue': '',
-        'negocio': 'si',
-        'duracion_negocio': '6 meses',
-        'tipo_telefono': 'fijo',
-        'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-        'lead_id': '',
-        'submit_result': 'Error',
-        'detail': 'No se pudo mandar la información. Inténtelo más tarde'
+          'event': 'generate_lead',
+          'CDCategory': 'NA',   
+          'CDFunnel': 'no_cliente',
+          'CDSource': ssSource,         // Asegúrate de que ssSource esté definido (global o en el scope adecuado)
+          'CDAction': 'nombre test', 
+          'pantalla': 'pantalla_2',
+          'CDValue': '',
+          'negocio': 'si',
+          'duracion_negocio': '6 meses',
+          'tipo_telefono': 'fijo',
+          'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
+          'lead_id': '',
+          'submit_result': 'Error',
+          'detail': 'No se pudo mandar la información. Inténtelo más tarde'
       });
       console.log("✅ DataLayer error event pushed");
-    } else {
-      console.log("No se disparó el error. O bien ya se disparó o la validación no detectó errores.");
-    }
+
+      // Oculta el mensaje después de 7 segundos
+      setTimeout(function() {
+          $('#msgDatosIncorrectos').fadeOut();
+      }, 7000);
+
+      return false;
   }
   
-  // Para facilitar la prueba, exponemos la función al objeto global
-  window.pushErrorDataLayer = pushErrorDataLayer;
-  
-  // Agregar listeners en los campos de Nombre y Primer Apellido
-  let nombreField = document.getElementById("txbNombre");
-  if (nombreField) {
-    nombreField.addEventListener("blur", pushErrorDataLayer);
-    nombreField.addEventListener("input", pushErrorDataLayer);
-  }
-  
-  let apellidoField = document.getElementById("txbApPaterno");
-  if (apellidoField) {
-    apellidoField.addEventListener("blur", pushErrorDataLayer);
-    apellidoField.addEventListener("input", pushErrorDataLayer);
-  }
-});
+  // Si no hay error, se oculta el mensaje y se procede con el envío
+  $('#msgDatosIncorrectos').hide();
+  sendData('');
+}
+
+
+
+

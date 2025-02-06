@@ -331,24 +331,55 @@ $(document).ready(function() {
 	}
 
 	function validateQ3_2() {
+		console.log("validateQ3_2 ejecutado. Valor de bandContinuar:", bandContinuar);
+	 
+		// Verifica si bandContinuar es false
 		if (bandContinuar == false) {
+		    // Comprueba y asigna ssSource por defecto si no está definido
+		    if (typeof ssSource === "undefined" || !ssSource) {
+			   console.warn("ssSource no está definido. Asignando 'default_tracking_source'");
+			   ssSource = 'default_tracking_source';
+		    }
+		    console.log("Se va a disparar dataLayer.push() con ssSource:", ssSource);
+	 
+		    dataLayer.push({
+			   'event': 'generate_lead',
+			   'CDCategory': 'NA',   
+			   'CDFunnel': 'no_cliente',
+			   'CDSource': ssSource,
+			   'CDAction': 'nombre test', 
+			   'pantalla': 'pantalla_2',
+			   'CDValue': '',
+			   'negocio': 'si',
+			   'duracion_negocio': '6 meses',
+			   'tipo_telefono': 'fijo',
+			   'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
+			   'lead_id': '',
+			   'submit_result': 'Error',
+			   'detail': 'No se pudo mandar la información. Inténtelo más tarde'
+		    });
+		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayer[dataLayer.length-1]);
+	 
+		    // Muestra el mensaje de error en la UI
 		    $('#msgDatosIncorrectos')
 			   .html('Verifica que todos los datos sean correctos.')
 			   .show();
 	 
-		    // Oculta el mensaje después de 7 segundos (7000 ms)
+		    // Oculta el mensaje después de 7 segundos
 		    setTimeout(function() {
 			   $('#msgDatosIncorrectos').fadeOut();
 		    }, 7000);
 	 
 		    return false;
 		}
-	 
-		// Oculta el mensaje si los datos son correctos
+		
+		// Si bandContinuar es true, continúa el flujo normal
 		$('#msgDatosIncorrectos').hide();
-	 
 		sendData('');
 	 }
+	 
+	 
+	 
 	 
 	 
 	 
