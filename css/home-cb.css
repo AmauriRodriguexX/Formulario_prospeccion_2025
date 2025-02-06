@@ -257,7 +257,7 @@
     margin-bottom:0
 }
 .benefits__img,.home__title,.home__title__content {
-    text-align:justify;
+    text-align:start
 }
 .benefits__row {
     display:flex;

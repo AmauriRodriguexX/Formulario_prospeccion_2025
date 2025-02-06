@@ -1,53 +1,79 @@
-let ssSource = '';
-window.addEventListener('DOMContentLoaded',function () {
-    const gtmSource = sessionStorage.getItem('gtm_source');
-    ssSource = (gtmSource != null && gtmSource != '') ? gtmSource : '';
+if (!sessionStorage.getItem('gtm_source')) {
+    sessionStorage.setItem('gtm_source', 'default_tracking_source'); 
+}
+
+// 🔹 Define `ssSource` a nivel global
+window.ssSource = sessionStorage.getItem('gtm_source') || 'default_source';
+console.log("✅ ssSource definido en analytics.js:", window.ssSource);
+
+
+// Verificamos si ya existe un valor en sessionStorage para gtm_source
+if (!sessionStorage.getItem('gtm_source')) {
+    sessionStorage.setItem('gtm_source', 'default_tracking_source'); 
+}
+
+// Definimos ssSource de manera global
+window.ssSource = sessionStorage.getItem('gtm_source') || 'default_tracking_source';
+
+// Agregamos un log para verificar su valor
+console.log("✅ ssSource definido en analytics.js:", window.ssSource);
+
+window.addEventListener('DOMContentLoaded', function () {
+    // Se usa la variable global window.ssSource
+    let ssSource = window.ssSource;
 
     /* Landing page - Si se arma */ 
     const stringSiSeArma = sessionStorage.getItem('step-1');
-    if(stringSiSeArma != null && stringSiSeArma != ''){
+    if (stringSiSeArma != null && stringSiSeArma != '') {
         const objectSiSeArma = JSON.parse(stringSiSeArma);
         const SSArmaCredito = objectSiSeArma['question-1'];
         const SSArmaMonto = objectSiSeArma['question-2'];
-        if(ssSource == '')
-            ssSource = 'LPInst:'+SSArmaCredito+'-Monto:'+SSArmaMonto;
-        else
-            ssSource = ssSource+'|LPInst:'+SSArmaCredito+'-Monto:'+SSArmaMonto; 
+        if (ssSource === 'default_tracking_source') {
+            ssSource = `LPInst:${SSArmaCredito}-Monto:${SSArmaMonto}`;
+        } else {
+            ssSource = `${ssSource}|LPInst:${SSArmaCredito}-Monto:${SSArmaMonto}`;
+        }
     }
-    /* End Landing page - Si se arma */ 
+    /* End Landing page - Si se arma */
+
+    // Guardamos ssSource actualizado en window.ssSource para que otros scripts lo usen
+    window.ssSource = ssSource;
+
+    console.log("📢 ssSource después de Landing Page:", window.ssSource);
 
     /*  formSolicitaCredito(posición,nombre del campo, query js, obligatorio o opcional, ¿Es radio?)  */
-    formSolicitaCredito(1,'¿Tienes un crédito activo con Compartamos Banco?',"#DrbCSi, #DrbCNo",'obligatorio',true)
-    formSolicitaCredito(2,'¿Tienes un negocio?',"#DrbSi, #DrbNo",'obligatorio',true)
-    formSolicitaCredito(3,'¿Tu negocio tiene más de 6 meses?',"#DrtimeSi, #DrtimeNo",'obligatorio',true);
-    formSolicitaCredito(4,'Teléfono: Tipo',"#telefonoSelect",'obligatorio');
-    formSolicitaCredito(5,'Teléfono: Número',"#txbNumeroTel",'obligatorio')
-    formSolicitaCredito(6,'¿A qué hora deseas recibir nuestra llamada?',"#horaSelect",'obligatorio')
-    formSolicitaCredito(7,'Correo electrónico',"#txbCorreoElectronico",'opcional')
-    formSolicitaCredito(8,'Leí y acepto el Aviso de Privacidad',"#avisoPri",'obligatorio');
+    formSolicitaCredito(1, '¿Tienes un crédito activo con Compartamos Banco?', "#DrbCSi, #DrbCNo", 'obligatorio', true);
+    formSolicitaCredito(2, '¿Tienes un negocio?', "#DrbSi, #DrbNo", 'obligatorio', true);
+    formSolicitaCredito(3, '¿Tu negocio tiene más de 6 meses?', "#DrtimeSi, #DrtimeNo", 'obligatorio', true);
+    formSolicitaCredito(4, 'Teléfono: Tipo', "#telefonoSelect", 'obligatorio');
+    formSolicitaCredito(5, 'Teléfono: Número', "#txbNumeroTel", 'obligatorio');
+    formSolicitaCredito(6, '¿A qué hora deseas recibir nuestra llamada?', "#horaSelect", 'obligatorio');
+    formSolicitaCredito(7, 'Correo electrónico', "#txbCorreoElectronico", 'opcional');
+    formSolicitaCredito(8, 'Leí y acepto el Aviso de Privacidad', "#avisoPri", 'obligatorio');
 
-    formDatosPersonales(1,'Nombre(s)',"#txbNombre",'obligatorio');
-    formDatosPersonales(2,'Primer apellido','#txbApPaterno','obligatorio');
-    formDatosPersonales(3,'Segundo apellido',"#txbApMaterno",'opcional');
-    formDatosPersonales(4,'Fecha de nacimiento: Dia',"#diaSelect",'obligatorio');
-    formDatosPersonales(5,'Fecha de nacimiento: Mes',"#mesSelect",'obligatorio');
-    formDatosPersonales(6,'Fecha de nacimiento: Año',"#añoSelect",'obligatorio');
-    formDatosPersonales(7,'Género',"#rdbF, #rdbM",'obligatorio',true);
-    formDatosPersonales(8,'Código postal',"#txbCP",'obligatorio');
+    formDatosPersonales(1, 'Nombre(s)', "#txbNombre", 'obligatorio');
+    formDatosPersonales(2, 'Primer apellido', '#txbApPaterno', 'obligatorio');
+    formDatosPersonales(3, 'Segundo apellido', "#txbApMaterno", 'opcional');
+    formDatosPersonales(4, 'Fecha de nacimiento: Día', "#diaSelect", 'obligatorio');
+    formDatosPersonales(5, 'Fecha de nacimiento: Mes', "#mesSelect", 'obligatorio');
+    formDatosPersonales(6, 'Fecha de nacimiento: Año', "#añoSelect", 'obligatorio');
+    formDatosPersonales(7, 'Género', "#rdbF, #rdbM", 'obligatorio', true);
+    formDatosPersonales(8, 'Código postal', "#txbCP", 'obligatorio');
 
     var btnRegresar = document.querySelector(".btnRegreso");
-    if(btnRegresar != null){
-        btnRegresar.addEventListener('click',function(){
-            window.dataLayer = window.dataLayer || []; 
-            window.dataLayer.push({ 
+    if (btnRegresar != null) {
+        btnRegresar.addEventListener('click', function () {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
                 event: 'click',
                 event_category: 'forms',
                 method: 'clic btnRegreso',
                 detail: 'Regreso Pantalla 1',
-            }); 
-        })
+            });
+        });
     }
 });
+
 
 var clickAll = 0;
 var formStart1 = false;
@@ -485,4 +511,8 @@ function generateLead(dlFolioId){
 
     sessionStorage.removeItem('step-1');
     sessionStorage.removeItem('gtm_source');
+}
+
+if (ssSource === '') {
+    ssSource = 'default_source';
 }

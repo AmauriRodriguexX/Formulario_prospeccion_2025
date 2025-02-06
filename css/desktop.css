@@ -426,7 +426,6 @@
 
     .container {
         max-width: 600px;
-        margin: 20px auto;
         padding: 20px;
         background-color: #ffffff;
         border-radius: 8px;
@@ -661,6 +660,10 @@
     .display-flex-justify-center {
         display: flex;
         justify-self: center;
+    }
+
+    .hide-desk-01 {
+        display: none;
     }
 
    
