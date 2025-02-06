@@ -331,58 +331,55 @@ $(document).ready(function() {
 	}
 
 	function validateQ3_2() {
-		console.log("validateQ3_2 ejecutado. Valor de bandContinuar:", bandContinuar);
-	 
-		// Verifica si bandContinuar es false
 		if (bandContinuar == false) {
-		    // Comprueba y asigna ssSource por defecto si no está definido
+		    // Capturar datos dinámicos del formulario
+		    // Ejemplo: número de teléfono, horario, etc.
+		    var tipoTelefono = $('#telefonoSelect').val(); 
+		    var horarioLlamada = $('#horaSelect').val();
+		    var nombre = $('#txbNombre').val();
+		    // Puedes capturar más campos según necesites
+		    
+		    // Asegúrate de que ssSource esté definido, o asigna un valor por defecto
 		    if (typeof ssSource === "undefined" || !ssSource) {
-			   console.warn("ssSource no está definido. Asignando 'default_tracking_source'");
 			   ssSource = 'default_tracking_source';
 		    }
-		    console.log("Se va a disparar dataLayer.push() con ssSource:", ssSource);
 	 
+		    // Construir el objeto del dataLayer con datos dinámicos
 		    dataLayer.push({
 			   'event': 'generate_lead',
-			   'CDCategory': 'NA',   
+			   'CDCategory': 'NA',
 			   'CDFunnel': 'no_cliente',
 			   'CDSource': ssSource,
-			   'CDAction': 'nombre test', 
+			   'CDAction': nombre, // Ejemplo: usa el nombre del cliente
 			   'pantalla': 'pantalla_2',
 			   'CDValue': '',
-			   'negocio': 'si',
-			   'duracion_negocio': '6 meses',
-			   'tipo_telefono': 'fijo',
-			   'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-			   'lead_id': '',
+			   'negocio': 'si', // O capturado dinámicamente
+			   'duracion_negocio': '6 meses', // O capturado dinámicamente
+			   'tipo_telefono': tipoTelefono, // Valor capturado
+			   'horario_llamada': horarioLlamada, // Valor capturado
+			   'lead_id': '', // Puedes asignar o capturar según corresponda
 			   'submit_result': 'Error',
 			   'detail': 'No se pudo mandar la información. Inténtelo más tarde'
 		    });
-		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayer[dataLayer.length-1]);
+		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayer[dataLayer.length - 1]);
 	 
-		    // Muestra el mensaje de error en la UI
+		    // Muestra el mensaje de error
 		    $('#msgDatosIncorrectos')
 			   .html('Verifica que todos los datos sean correctos.')
 			   .show();
 	 
-		    // Oculta el mensaje después de 7 segundos
 		    setTimeout(function() {
 			   $('#msgDatosIncorrectos').fadeOut();
 		    }, 7000);
 	 
 		    return false;
 		}
-		
-		// Si bandContinuar es true, continúa el flujo normal
+	 
 		$('#msgDatosIncorrectos').hide();
 		sendData('');
 	 }
 	 
-	 
-	 
-	 
-	 
-	 
+
 
 	//Credito Grupal
 	function validateQ4_1(){

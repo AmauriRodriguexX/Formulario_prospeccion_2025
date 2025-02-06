@@ -1,3 +1,6 @@
+// ====================================================
+// Código de GTM
+// ====================================================
 (function(w, d, s, l, i) {
   w[l] = w[l] || [];
   w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
@@ -9,11 +12,12 @@
   f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
 
+// ====================================================
+// Código para esperar elementos y manejo de form_start
+// ====================================================
 document.addEventListener("DOMContentLoaded", function() {
-  // Usamos ssSource o un valor por defecto
   let ssSource = window.ssSource || 'default_tracking_source';
   console.log("📢 Valor de ssSource:", ssSource);
-
   window.dataLayer = window.dataLayer || [];
 
   // Función para esperar a que un elemento esté en el DOM
@@ -35,8 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
   // Sección 1: Pregunta inicial y selección de crédito/negocio
   // ====================================================
 
-  // a) Cuando aparece la pregunta inicial (#q1)
-  waitForElement("#q1", function(questionContainer) {
+  // Bandera para saber si ya se disparó el evento form_start
+  let formStartTriggered = false;
+  // Función que dispara el evento form_start (únicamente una vez)
+  function handleFirstInteraction() {
+    if (formStartTriggered) return;
     let CDFunnel = 'no_cliente';
     const radioSi = document.querySelector("input[name='rbCliente']:checked");
     if (radioSi && radioSi.value === "Si") {
@@ -49,75 +56,108 @@ document.addEventListener("DOMContentLoaded", function() {
       'CDSource': ssSource,
       'pantalla': 'pantalla_1-0%'
     });
-    console.log("✅ DataLayer Push: form_start (pregunta inicial)");
+    console.log("✅ DataLayer Push: form_start (primer interacción)");
+    formStartTriggered = true;
+  }
+
+  // a) Esperamos que aparezca la pregunta inicial (#q1) para disparar form_start en el primer tap
+  waitForElement("#q1", function(questionContainer) {
+    const options = questionContainer.querySelectorAll(".radioButonsForm");
+    options.forEach(option => {
+      option.addEventListener("click", function firstClickListener() {
+        handleFirstInteraction();
+        options.forEach(opt => {
+          opt.removeEventListener("click", firstClickListener);
+        });
+      });
+    });
   });
 
-  // b) Al hacer clic en "Sí, ya tengo uno" o "No, pero quiero uno" (input[name='rbCliente'])
-  // Escuchamos clics en todo el documento
-document.addEventListener("click", function(event) {
-  // Buscamos el elemento contenedor con la clase completa
-  const container = event.target.closest(".radioButonsForm.answer");
-  if (container) {
-    // Obtenemos el radio interno dentro del contenedor
-    const radioButton = container.querySelector("input[name='rbCliente']");
-    if (radioButton) {
-      // Si no está seleccionado, lo marcamos
-      if (!radioButton.checked) {
-        radioButton.checked = true;
+  // **IMPORTANTE:**  
+  // Se han comentado (o eliminado) los listeners que enviaban de inmediato los eventos 
+  // form_field_steps al hacer clic sobre cada opción.  
+  // Ahora, estos eventos se enviarán junto con los demás al hacer clic en el botón "Continuar".
+
+  // ====================================================
+  // Sección 2: Registro y envío de eventos al hacer clic en "Continuar"
+  // ====================================================
+  
+  // Variables para determinar qué opción eligió el usuario en la pregunta 1 (rbCliente)
+  let clientSelected = false;
+  let noClientSelected = false;
+  
+  // Listener para los radio buttons de la pregunta 1
+  document.querySelectorAll("input[name='rbCliente']").forEach(function(radio) {
+    radio.addEventListener("click", function() {
+      if (radio.value === "Si") {
+        clientSelected = true;
+        noClientSelected = false;
+        console.log("✅ Opción 'Sí, ya tengo uno' seleccionada.");
+      } else {
+        clientSelected = false;
+        noClientSelected = true;
+        console.log("✅ Opción 'No, pero quiero uno' seleccionada.");
+      }
+    });
+  });
+  
+  // Listener del botón "Continuar" para enviar todos los eventos form_field_steps de una sola vez
+  let btnContinue = document.getElementById("btnContinue");
+  if (btnContinue) {
+    btnContinue.addEventListener("click", function() {
+      console.log("Se hizo clic en Continuar.");
+      
+      // Para el flujo cliente, nos aseguramos de disparar form_start si no se disparó ya
+      if (clientSelected && !formStartTriggered) {
+        handleFirstInteraction();
       }
       
-      // Configuramos los parámetros según el valor del radio
-      const CDFunnel = radioButton.value === "Si" ? "cliente" : "no_cliente";
-      const CDCategory = radioButton.value === "Si" ? "credito_individual" : "NA";
-      const fieldValue = radioButton.value;
+      // --- Form Field Steps ---
+      // 1. Pregunta 1: ¿Tienes un crédito activo con Compartamos Banco?
+      const radioCliente = document.querySelector("input[name='rbCliente']:checked");
+      if (radioCliente) {
+        let fieldValue1 = radioCliente.value;
+        let CDFunnel1 = (fieldValue1 === "Si") ? "cliente" : "no_cliente";
+        let CDCategory1 = (fieldValue1 === "Si") ? "credito_individual" : "NA";
+        dataLayer.push({
+          'event': 'form_field_steps',
+          'CDCategory': CDCategory1,
+          'CDFunnel': CDFunnel1,
+          'CDSource': ssSource,
+          'pantalla': 'pantalla_1-0%',
+          'field_name': '01. ¿Tienes un crédito activo con Compartamos Banco?',
+          'field_value': fieldValue1
+        });
+        console.log("✅ DataLayer Push: form_field_steps (crédito activo)", dataLayer);
+      }
       
-      // Enviamos la información al dataLayer
-      dataLayer.push({
-        'event': 'form_field_steps',
-        'CDCategory': CDCategory,
-        'CDFunnel': CDFunnel,
-        'CDSource': ssSource,
-        'pantalla': 'pantalla_1-0%',
-        'field_name': '01. ¿Tienes un crédito activo con Compartamos Banco?',
-        'field_value': fieldValue
+      // 2. Pregunta 2: ¿Tienes un negocio?  
+      // (Consideramos solo el radio fuera de #q3_1)
+      let radioNegocio = null;
+      document.querySelectorAll("input[name='rbNegocio']").forEach(function(radio) {
+        // Si el radio no está dentro de #q3_1, lo tomamos para la pregunta 2.
+        if (!radio.closest("#q3_1") && radio.checked) {
+          radioNegocio = radio;
+        }
       });
-      console.log("✅ DataLayer Push: form_field_steps (crédito activo)", dataLayer);
-    }
-  }
-});
-
-
-  // c) Evento para la pregunta "¿Tienes un negocio?" (excluyendo la sección #q3_1)
-  document.addEventListener("click", function(event) {
-    const container = event.target.closest(".radioButonsForm");
-    // Si el clic es dentro de #q3_1, se ignora aquí
-    if (container && container.closest("#q3_1")) {
-      return;
-    }
-    if (container && container.querySelector("input[name='rbNegocio']")) {
-      const radioButton = container.querySelector("input[name='rbNegocio']");
-      let fieldValue = radioButton.value;
-      dataLayer.push({
-        'event': 'form_field_steps',
-        'CDCategory': 'NA',
-        'CDFunnel': 'no_cliente',
-        'CDSource': ssSource,
-        'pantalla': 'pantalla_1-30%',
-        'field_name': '02. ¿Tienes un negocio?',
-        'field_value': fieldValue
-      });
-      console.log("✅ DataLayer Push: form_field_steps (¿Tienes un negocio?)", dataLayer);
-    }
-  });
-
-  // d) Evento para la pregunta "¿Tu negocio tiene más de 6 meses?" en la sección #q3_1
-  document.addEventListener("click", function(event) {
-    const questionSection = event.target.closest("#q3_1");
-    if (questionSection) {
-      const radioContainer = event.target.closest(".radioButonsForm");
-      if (radioContainer && radioContainer.querySelector("input[name='rbNegocio']")) {
-        const radioButton = radioContainer.querySelector("input[name='rbNegocio']");
-        let valueLower = radioButton.value.toLowerCase();
+      if (radioNegocio) {
+        let fieldValue2 = radioNegocio.value;
+        dataLayer.push({
+          'event': 'form_field_steps',
+          'CDCategory': 'NA',
+          'CDFunnel': 'no_cliente',
+          'CDSource': ssSource,
+          'pantalla': 'pantalla_1-30%',
+          'field_name': '02. ¿Tienes un negocio?',
+          'field_value': fieldValue2
+        });
+        console.log("✅ DataLayer Push: form_field_steps (¿Tienes un negocio?)", dataLayer);
+      }
+      
+      // 3. Pregunta 3: ¿Tu negocio tiene más de 6 meses? (dentro de #q3_1)
+      let radioNegocio6meses = document.querySelector("#q3_1 input[name='rbNegocio']:checked");
+      if (radioNegocio6meses) {
+        let fieldValue3 = radioNegocio6meses.value.toLowerCase();
         dataLayer.push({
           'event': 'form_field_steps',
           'CDCategory': 'NA',
@@ -125,106 +165,64 @@ document.addEventListener("click", function(event) {
           'CDSource': ssSource,
           'pantalla': 'pantalla_1-60%',
           'field_name': '03. ¿Tu negocio tiene más de 6 meses?',
-          'field_value': valueLower === "si" ? "si" : "no"
+          'field_value': (fieldValue3 === "si" ? "si" : "no")
         });
         console.log("✅ DataLayer Push: form_field_steps (¿Tu negocio tiene más de 6 meses?)", dataLayer);
       }
-    }
-  });
-
-  // e) Evento para selección de tipo de crédito (input[name='rbCredito'])
-  document.addEventListener("change", function(event) {
-    if (event.target.matches("input[name='rbCredito']")) {
-      let CDCategory = event.target.value === "Individual" ? "credito_individual" : "credito_grupal";
-      let formattedFieldValue = event.target.value === "Individual" ? "Crédito Individual" : "Crédito Grupal";
-      dataLayer.push({
-        'event': 'form_field_steps',
-        'CDCategory': CDCategory,
-        'CDFunnel': 'cliente',
-        'CDSource': ssSource,
-        'pantalla': 'pantalla_1-30%',
-        'field_name': '02. ¿Qué tipo de crédito tienes?',
-        'field_value': formattedFieldValue
-      });
-      console.log("✅ DataLayer Push: form_field_steps (tipo de crédito)");
-    }
-  });
-
-  // f) Evento para selección de producto en el carrusel
-  document.addEventListener("click", function(event) {
-    if (event.target.closest(".card")) {
-      let fieldValue = event.target.closest(".card").querySelector(".card_footer-name").innerText;
-      dataLayer.push({
-        'event': 'form_field_steps',
-        'CDCategory': 'credito_grupal',
-        'CDFunnel': 'cliente',
-        'CDSource': ssSource,
-        'pantalla': 'pantalla_1-60%',
-        'field_name': '03. Producto seleccionado',
-        'field_value': fieldValue
-      });
-      console.log("✅ DataLayer Push: form_field_steps (producto seleccionado)");
-    }
-  });
-
-  // g) Evento para clics en botones "Ir a blog" y "Sitio oficial"
-  document.addEventListener("click", function(event) {
-    if (event.target.matches(".finance-btn")) {
-      let linkText = event.target.innerText.trim();
-      dataLayer.push({
-        'event': 'click_element',
-        'CDAction': 'Clic ' + linkText,
-        'CDCategory': 'credito_individual',
-        'CDFunnel': 'cliente',
-        'CDLabel': 'Crédito crece y mejora',
-        'link_text': linkText
-      });
-      console.log("✅ DataLayer Push: click_element (" + linkText + ")");
-    }
-  });
-
-  // h) Evento para descargas de la app (botones de .store-buttons a)
-  document.addEventListener("click", function(event) {
-    if (event.target.closest(".store-buttons a")) {
-      const img = event.target.closest("a").querySelector("img");
-      let linkText = img ? img.getAttribute("alt") : 'Sin texto';
-      linkText = linkText.replace('Disponible en ', '')
-                           .replace('Consíguelo en el ', '')
-                           .replace('Explóralo en ', '');
-      dataLayer.push({
-        'event': 'click_element',
-        'CDAction': 'Clic ' + linkText,
-        'CDCategory': 'credito_individual',
-        'CDFunnel': 'cliente',
-        'CDLabel': 'Crédito crece y mejora',
-        'link_text': linkText
-      });
-      console.log("✅ DataLayer Push: click_element (" + linkText + ")");
-    }
-  });
-
-  // i) Evento para cuando el usuario inicia el registro en el formulario (sección #q3_2)
-  waitForElement("#q3_2", function(registrationForm) {
-    registrationForm.addEventListener("focusin", function() {
-      dataLayer.push({
-        'event': 'form_start',
-        'CDCategory': 'credito_individual',
-        'CDFunnel': 'cliente',
-        'CDSource': ssSource,
-        'pantalla': 'pantalla_4-90%',
-        'CDLabel': 'Crédito crece y mejora'
-      });
-      console.log("✅ DataLayer Push: form_start (registro pantalla_4-90%)");
+      
+      // 4. Pregunta 4: Selección de tipo de crédito (input[name='rbCredito'])
+      const radioCredito = document.querySelector("input[name='rbCredito']:checked");
+      if (radioCredito) {
+        let fieldValue4 = (radioCredito.value === "Individual") ? "Crédito Individual" : "Crédito Grupal";
+        let CDCategory4 = (radioCredito.value === "Individual") ? "credito_individual" : "credito_grupal";
+        dataLayer.push({
+          'event': 'form_field_steps',
+          'CDCategory': CDCategory4,
+          'CDFunnel': 'cliente',
+          'CDSource': ssSource,
+          'pantalla': 'pantalla_1-30%',
+          'field_name': '02. ¿Qué tipo de crédito tienes?',
+          'field_value': fieldValue4
+        });
+        console.log("✅ DataLayer Push: form_field_steps (tipo de crédito)", dataLayer);
+      }
+      
+      // 5. Pregunta 5: Selección de producto en el carrusel  
+      // Para este caso, asumiendo que se almacena la opción seleccionada en un elemento oculto o variable global.
+      // Por ejemplo, si al hacer clic en el carrusel se guarda en un input hidden con id "productoSeleccionado"
+      let productoSeleccionadoElem = document.getElementById("productoSeleccionado");
+      if (productoSeleccionadoElem && productoSeleccionadoElem.value) {
+        dataLayer.push({
+          'event': 'form_field_steps',
+          'CDCategory': 'credito_grupal',
+          'CDFunnel': 'cliente',
+          'CDSource': ssSource,
+          'pantalla': 'pantalla_1-60%',
+          'field_name': '03. Producto seleccionado',
+          'field_value': productoSeleccionadoElem.value
+        });
+        console.log("✅ DataLayer Push: form_field_steps (producto seleccionado)", dataLayer);
+      }
+      
+      // ====================================================
+      // Sección 2: Información del formulario del cliente
+      // ====================================================
+      // Aquí podrías hacer lo mismo: leer los valores actuales de los inputs y, si es necesario, 
+      // enviar eventos form_field (por ejemplo, si deseas enviar todos los datos de registro).
+      // En este ejemplo dejamos los eventos form_field que se disparan al focusin (ya configurados)
+      // y asumimos que estos se dispararon a medida que el usuario completaba el formulario.
+      
+      // Finalmente, continuar con el envío o navegación del formulario...
+      console.log("Todos los eventos form_field_steps han sido enviados al hacer clic en Continuar.");
     });
-  });
-
-
-
+  }
+  
   // ====================================================
-  // Sección 2: Formulario "Información cliente" (sección #q3_2)
+  // (Resto del código: eventos form_field para cada input en el formulario "Información cliente")
   // ====================================================
-
-  // 1. Evento para el campo "Nombre" (input con id "txbNombre")
+  // Se mantienen los listeners de focusin para los campos de la sección 2.
+  
+  // 1. Evento para el campo "Nombre"
   waitForElement("#txbNombre", function(nombreField) {
     nombreField.addEventListener("focusin", function() {
       dataLayer.push({
@@ -238,14 +236,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (01. Nombre)");
     });
   });
-
-
-  // ====================================================
-  // Sección 2.1: DataLayer para cada campo del formulario "Información cliente"
-  // ====================================================
-
-  // 01. Nombre (ya definido arriba)
-  // 02. Primer apellido
+  
+  // 2. Primer apellido
   waitForElement("#txbApPaterno", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -259,8 +251,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (02. Primer apellido)");
     });
   });
-
-  // 03. Segundo apellido
+  
+  // 3. Segundo apellido
   waitForElement("#txbApMaterno", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -274,8 +266,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (03. Segundo apellido)");
     });
   });
-
-  // 04. Fecha nacimiento - Día
+  
+  // 4. Fecha nacimiento - Día
   waitForElement("#diaSelect", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -289,8 +281,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (04. Fecha nacimiento - Día)");
     });
   });
-
-  // 05. Fecha nacimiento - Mes
+  
+  // 5. Fecha nacimiento - Mes
   waitForElement("#mesSelect", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -304,8 +296,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (05. Fecha nacimiento - Mes)");
     });
   });
-
-  // 06. Fecha nacimiento - Año
+  
+  // 6. Fecha nacimiento - Año
   waitForElement("#anioSelect", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -319,8 +311,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (06. Fecha nacimiento - Año)");
     });
   });
-
-  // 07. Género (radio buttons)
+  
+  // 7. Género
   document.querySelectorAll("input[name='rbSexo']").forEach(function(radio) {
     radio.addEventListener("click", function() {
       dataLayer.push({
@@ -334,8 +326,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (07. Género)");
     });
   });
-
-  // 08. Tipo Teléfono
+  
+  // 8. Tipo Teléfono
   waitForElement("#telefonoSelect", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -349,8 +341,8 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (08. Tipo Teléfono)");
     });
   });
-
-  // 09. Teléfono
+  
+  // 9. Teléfono
   waitForElement("#txbNumeroTel", function(field) {
     field.addEventListener("focusin", function() {
       dataLayer.push({
@@ -364,7 +356,7 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (09. Teléfono)");
     });
   });
-
+  
   // 10. Horario
   waitForElement("#horaSelect", function(field) {
     field.addEventListener("focusin", function() {
@@ -379,7 +371,7 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (10. Horario)");
     });
   });
-
+  
   // 11. Código Postal
   waitForElement("#txbCP", function(field) {
     field.addEventListener("focusin", function() {
@@ -394,7 +386,7 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (11. Código Postal)");
     });
   });
-
+  
   // 12. Correo electrónico
   waitForElement("#txbCorreoElectronico", function(field) {
     field.addEventListener("focusin", function() {
@@ -409,7 +401,7 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (12. Correo electrónico)");
     });
   });
-
+  
   // 13. Aviso privacidad (checkbox)
   waitForElement("#avisoPrivacidad", function(field) {
     field.addEventListener("click", function() {
@@ -424,17 +416,16 @@ document.addEventListener("click", function(event) {
       console.log("✅ DataLayer Push: form_field (13. Aviso privacidad)");
     });
   });
-
-  // Función simulada de envío AJAX (adapta esta función a tu implementación real)
+  
+  // (Opcional) Función simulada de envío AJAX
   function enviarFormularioAJAX(callback) {
     console.log("Simulando envío AJAX...");
-    // Se simula una respuesta exitosa después de 1 segundo.
     setTimeout(function() {
       callback({ status: 200 });
     }, 1000);
   }
-
 });
+
 
 
 
@@ -472,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function() {
         'CDCategory': 'credito_individual',  
         'CDFunnel': 'cliente',
         'CDSource': ssSource,
-        'CDValue': 'OK',
+        'CDValue': 'registro_completado',
         'CDLabel': 'Crédito crece y mejora',
         'submit_result': 'OK'
       });
@@ -562,7 +553,7 @@ document.addEventListener("DOMContentLoaded", function() {
         'CDSource': ssSource,
         'CDAction': 'Registro exitoso - OK',
         'pantalla': 'pantalla_2',
-        'CDValue': 'nombre_test',
+        'CDValue': 'registro_completado',
         'negocio': 'si',
         'duracion_negocio': '6 meses',
         'tipo_telefono': 'fijo',
@@ -609,50 +600,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-
-
-
-
-//error event cuando presionamos Sí, ya tengo uno
-function validateQ3_2() {
-  if (bandContinuar == false) {
-      // Muestra el mensaje de error
-      $('#msgDatosIncorrectos')
-          .html('Verifica que todos los datos sean correctos.')
-          .show();
-      
-      // Dispara el dataLayer con el objeto de error
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-          'event': 'generate_lead',
-          'CDCategory': 'NA',   
-          'CDFunnel': 'no_cliente',
-          'CDSource': ssSource,         // Asegúrate de que ssSource esté definido (global o en el scope adecuado)
-          'CDAction': 'nombre test', 
-          'pantalla': 'pantalla_2',
-          'CDValue': '',
-          'negocio': 'si',
-          'duracion_negocio': '6 meses',
-          'tipo_telefono': 'fijo',
-          'horario_llamada': 'Vespertino (3:00 pm a 8:00 pm)',
-          'lead_id': '',
-          'submit_result': 'Error',
-          'detail': 'No se pudo mandar la información. Inténtelo más tarde'
-      });
-      console.log("✅ DataLayer error event pushed");
-
-      // Oculta el mensaje después de 7 segundos
-      setTimeout(function() {
-          $('#msgDatosIncorrectos').fadeOut();
-      }, 7000);
-
-      return false;
-  }
-  
-  // Si no hay error, se oculta el mensaje y se procede con el envío
-  $('#msgDatosIncorrectos').hide();
-  sendData('');
-}
 
 
 
