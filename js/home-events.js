@@ -392,14 +392,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 4. Función unificada que decide qué Data Layer disparar según la selección
   function pushUnifiedDataLayer() {
-    console.log("En pushUnifiedDataLayer, clientSelected =", clientSelected);
-    if (clientSelected === "Si") {
-      pushGenerateLeadCliente();
-    } else if (clientSelected === "No") {
+    const select = document.getElementById("horaSelect");
+    if (select.value  != "0") {
       pushGenerateLead();
     } else {
-      console.warn("No se ha seleccionado ninguna opción en rbCliente.");
-    }
+      pushGenerateLeadCliente(); 
+    }  
   }
 
 
@@ -413,10 +411,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     console.log("Botón 'Continuar' detectado. Añadiendo evento.");
 
+   
 
     btnContinue.addEventListener("click", function () {
-      console.log("Clic en 'Continuar'. Valor de clientSelected en el momento:", clientSelected);
-      pushUnifiedDataLayer();
+      const select = document.getElementById("txbNombre");
+      if (select.value  != ""){
+        console.log("Clic en 'Continuar'. Valor de clientSelected en el momento:", clientSelected);
+        pushUnifiedDataLayer();
+      } 
+      
     });
   }
 
