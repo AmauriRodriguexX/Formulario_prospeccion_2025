@@ -11,9 +11,15 @@
 
     <!-- SEO -->
     <title>Formulario de Prospección | Compartamos Banco</title>
+    <meta name="title" content="Solicita un crédito Compartamos Banco">
     <meta name="description"
-        content="Completa nuestro formulario de prospección y encuentra el crédito ideal para ti. Te ayudamos a conocer las opciones de financiamiento que mejor se adaptan en tu negocio y necesidades.">
-    <link rel="icon" href="https://www.compartamos.com.mx/contenthandler/!ut/p/digest!JnecS20XWpI9OaaqZPK8bQ/dav/fs-type1/themes/CompartamosBanco/img/site/favicon.ico" type="image/x-icon">
+        content="¿Necesitas dinero extra? Solicita un crédito grupal o individual de manera fácil. Completa el formulario digital y un asesor te contactará a la brevedad.">
+    <meta name="og:title"
+        content="Solicita tu crédito adicional o empieza con Compartamos. Nuestro proceso es fácil y rápido, diseñado para ayudarte a alcanzar tus sueños. Mejora tu salud financiera con nosotros.">
+
+    <link rel="icon"
+        href="https://www.compartamos.com.mx/contenthandler/!ut/p/digest!JnecS20XWpI9OaaqZPK8bQ/dav/fs-type1/themes/CompartamosBanco/img/site/favicon.ico"
+        type="image/x-icon">
 
 
     <!-- Estilos externos y fuentes -->
@@ -89,8 +95,8 @@
                             <div class="radioButonsForm answer" data-id="No" id="DrbCNo" name="DrbCNo">
                                 <input type="radio" id="rbCNo" value="No" name="rbCliente">
                                 <label style="color: grey;" for="rbCNo">No, pero quiero uno</label>
-                              </div>
-                              
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -415,24 +421,24 @@
 
                         <div class="carousel">
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito crece y mejora')">
-                              <div class="thumbnail"></div>
-                              <div class="card_footer">
-                                <span class="card_footer-name">Crédito crece y mejora</span>
-                                <span class="card_footer-description">
-                                  Préstamo personal preautorizado para clientes. Desde $5,000 hasta $8,000.
-                                </span>
-                              </div>
+                                <div class="thumbnail"></div>
+                                <div class="card_footer">
+                                    <span class="card_footer-name">Crédito crece y mejora</span>
+                                    <span class="card_footer-description">
+                                        Préstamo personal preautorizado para clientes. Desde $5,000 hasta $8,000.
+                                    </span>
+                                </div>
                             </div>
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito individual')">
-                              <div class="thumbnail"></div>
-                              <div class="card_footer">
-                                <span class="card_footer-name h2-creditos">Crédito individual</span>
-                                <span class="card_footer-description">
-                                  ¡Dile que sí a tu negocio! Ahora puedes solicitar un monto de hasta $500,000.
-                                </span>
-                              </div>
+                                <div class="thumbnail"></div>
+                                <div class="card_footer">
+                                    <span class="card_footer-name h2-creditos">Crédito individual</span>
+                                    <span class="card_footer-description">
+                                        ¡Dile que sí a tu negocio! Ahora puedes solicitar un monto de hasta $500,000.
+                                    </span>
+                                </div>
                             </div>
-                          </div>
+                        </div>
 
                         <div class="carousel-controls">
                             <div class="carousel-dots">
@@ -1668,10 +1674,13 @@
         });
 
     </script>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/home.js"></script>
-    <script src="js/jquery.blockUI.min.js"></script>
-    <script src="js/home-events.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script> <!-- 📌 jQuery debe ir primero -->
+    <script src="js/jquery.blockUI.min.js"></script> <!-- 📌 Bloqueo de UI antes de home.js -->
+    <script src="js/analytics.js"></script> <!-- 📌 Analytics antes si se usa en home.js -->
+    <script src="js/home.js"></script> <!-- 📌 Código principal -->
+    <script src="js/home-events.js"></script> <!-- 📌 Eventos que dependen de home.js -->
+
 </body>
 
 </html>
