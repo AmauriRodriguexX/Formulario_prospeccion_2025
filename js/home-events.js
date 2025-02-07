@@ -1,5 +1,5 @@
 /**
- * 📌 form_start - Primer data layer
+ * 📌 form_start - Primer data layers
  *
  * 🔹 Descripción:  
  * Se activa cuando el usuario llega al formulario de registro y comienza a interactuar.
