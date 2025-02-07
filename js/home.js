@@ -331,21 +331,17 @@ $(document).ready(function() {
 	}
 
 	function validateQ3_2() {
-		if (bandContinuar == false) {
+		var ssSource = window.ssSource || 'default_tracking_source'; // Asegurar que ssSource siempre esté definido
+	 
+		if (bandContinuar === false) { // Usar === para comparación estricta
+	 
 		    // Capturar datos dinámicos del formulario
-		    // Ejemplo: número de teléfono, horario, etc.
-		    var tipoTelefono = $('#telefonoSelect').val(); 
+		    var tipoTelefono = $('#telefonoSelect').val();
 		    var horarioLlamada = $('#horaSelect').val();
 		    var nombre = $('#txbNombre').val();
-		    // Puedes capturar más campos según necesites
-		    
-		    // Asegúrate de que ssSource esté definido, o asigna un valor por defecto
-		    if (typeof ssSource === "undefined" || !ssSource) {
-			   ssSource = 'default_tracking_source';
-		    }
 	 
 		    // Construir el objeto del dataLayer con datos dinámicos
-		    dataLayer.push({
+		    var dataLayerObject = { // Crear un objeto para mayor claridad
 			   'event': 'generate_lead',
 			   'CDCategory': 'NA',
 			   'CDFunnel': 'no_cliente',
@@ -360,8 +356,10 @@ $(document).ready(function() {
 			   'lead_id': '', // Puedes asignar o capturar según corresponda
 			   'submit_result': 'Error',
 			   'detail': 'No se pudo mandar la información. Inténtelo más tarde'
-		    });
-		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayer[dataLayer.length - 1]);
+		    };
+	 
+		    dataLayer.push(dataLayerObject);
+		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayerObject);
 	 
 		    // Muestra el mensaje de error
 		    $('#msgDatosIncorrectos')
@@ -372,11 +370,13 @@ $(document).ready(function() {
 			   $('#msgDatosIncorrectos').fadeOut();
 		    }, 7000);
 	 
-		    return false;
+		    return false; // Indica que la validación falló
 		}
 	 
+		// Si la validación es exitosa:
 		$('#msgDatosIncorrectos').hide();
 		sendData('');
+		return true; // Indica que la validación fue exitosa
 	 }
 	 
 
