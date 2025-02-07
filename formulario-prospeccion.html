@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- SEO -->
-    <title>Formulario de Prospección | Compartamos Banco</title>
+    <title>Solicita un crédito Compartamos Banco</title>
     <meta name="title" content="Solicita un crédito Compartamos Banco">
     <meta name="description"
         content="¿Necesitas dinero extra? Solicita un crédito grupal o individual de manera fácil. Completa el formulario digital y un asesor te contactará a la brevedad.">
@@ -1674,12 +1674,15 @@
         });
 
     </script>
-
-    <script src="js/jquery-3.6.0.min.js"></script> <!-- 📌 jQuery debe ir primero -->
-    <script src="js/jquery.blockUI.min.js"></script> <!-- 📌 Bloqueo de UI antes de home.js -->
-    <script src="js/analytics.js"></script> <!-- 📌 Analytics antes si se usa en home.js -->
-    <script src="js/home.js"></script> <!-- 📌 Código principal -->
-    <script src="js/home-events.js"></script> <!-- 📌 Eventos que dependen de home.js -->
+    <script>
+        // Si no existe, la creamos vacía
+        window.adobeDataLayer = window.adobeDataLayer || [];
+    </script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.blockUI.min.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/home-events.js"></script>
 
 </body>
 
