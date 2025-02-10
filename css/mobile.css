@@ -5,8 +5,8 @@
           margin: auto;
           height: 2px;
           background-color: #CEC9C6;
-          margin-top: 24px;
-          margin-bottom: 24px;
+          margin-top: 8px;
+          margin-bottom: 8px;
      }
 
      .btnContinuarInicio {
@@ -371,14 +371,20 @@
 
 
      .tituloGracias {
-          display: flex;
-          justify-content: left;
-          padding-top: 20px;
+          padding-top: 0px;
           margin-left: 19px;
           color: #ce0058;
           font-weight: bold;
           font-size: 28px;
-     }
+          text-align: left;
+      }
+      
+      
+
+     .progress__label {
+          margin-top: 8px;
+          margin-bottom: 8px;
+      }
 
      .title-credito-grupales {
           color: #252A2D;
@@ -459,7 +465,15 @@
      .h1-custom-title {
           font-size: 24px;
           font-weight: 400;
-     }
+          color: #CE0058;
+          text-align: center;
+          font-family: Bree;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 34px;
+          margin-bottom: 24px;
+      }
 
      .store-buttons {
           display: block;
@@ -527,6 +541,21 @@
           padding-left: 20px;
           list-style-type: disc !important;
           margin-bottom: 32px;
+      }
+
+      .text-left-center {
+          text-align: left;
+          margin-bottom: 24px;
+      }
+
+      .gracias {
+          color: #252A2D;
+          text-align: left;
+          font-family: Inter;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 30px;
       }
  
 

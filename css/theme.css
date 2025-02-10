@@ -316,7 +316,11 @@ h3 {
 
 
 section p {
-    margin-bottom: 8px;
-    line-height: 1.5
+  color: #252A2D;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
 }
 
