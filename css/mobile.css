@@ -1,5 +1,13 @@
 @media screen and (max-width: 768px) {
 
+     body {
+          background: url(../assets/images/bg-amarillo-mobile.png) no-repeat center center fixed;
+          background-size: cover;
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+      }
+
      .home__line {
           width: 100%;
           margin: auto;
