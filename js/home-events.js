@@ -1,3 +1,45 @@
+if (!sessionStorage.getItem('gtm_source')) {
+  sessionStorage.setItem('gtm_source', 'default_tracking_source'); 
+}
+
+// 🔹 Define `ssSource` a nivel global
+window.ssSource = sessionStorage.getItem('gtm_source') || 'default_source';
+console.log("✅ ssSource definido en analytics.js:", window.ssSource);
+
+
+// Verificamos si ya existe un valor en sessionStorage para gtm_source
+if (!sessionStorage.getItem('gtm_source')) {
+  sessionStorage.setItem('gtm_source', 'default_tracking_source'); 
+}
+
+// Definimos ssSource de manera global
+window.ssSource = sessionStorage.getItem('gtm_source') || 'default_tracking_source';
+
+// Agregamos un log para verificar su valor
+console.log("✅ ssSource definido en analytics.js:", window.ssSource);
+
+window.addEventListener('DOMContentLoaded', function () {
+  // Se usa la variable global window.ssSource
+  let ssSource = window.ssSource;
+
+  /* Landing page - Si se arma */ 
+  const stringSiSeArma = sessionStorage.getItem('step-1');
+  if (stringSiSeArma != null && stringSiSeArma != '') {
+      const objectSiSeArma = JSON.parse(stringSiSeArma);
+      const SSArmaCredito = objectSiSeArma['question-1'];
+      const SSArmaMonto = objectSiSeArma['question-2'];
+      if (ssSource === 'default_tracking_source') {
+          ssSource = `LPInst:${SSArmaCredito}-Monto:${SSArmaMonto}`;
+      } else {
+          ssSource = `${ssSource}|LPInst:${SSArmaCredito}-Monto:${SSArmaMonto}`;
+      }
+  }
+  /* End Landing page - Si se arma */
+
+  // Guardamos ssSource actualizado en window.ssSource para que otros scripts lo usen
+  window.ssSource = ssSource;
+  
+ });
 /**
  * 📌 form_start - Primer data layers
  *
@@ -15,11 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let clientFormStartTriggered = false; // ✅ Ahora está correctamente definido una sola vez
 
 
-  function pushDataLayer(eventName, additionalData = {}) {
+  function pushDataLayer(eventName, additionalData = {}, category = 'NA') {
       window.dataLayer = window.dataLayer || [];
       let data = {
           'event': eventName,
-          'CDCategory': 'NA',
+          'CDCategory': category,
           'CDFunnel': document.querySelector("input[name='rbCliente']:checked")?.value === "Si" ? 'cliente' : 'no_cliente',
           'CDSource': ssSource,
           ...additionalData
@@ -73,71 +115,67 @@ function handleFormFieldSteps() {
 
   btnContinue.addEventListener("click", function () {
       console.log("🎯 Botón 'Continuar' presionado.");
+      var question1 = document.getElementById("q1");
+      var question2_1 = document.getElementById("q2_1");
+      var question2_2 = document.getElementById("q2_2");
 
+      let question = '';
 
-      // 📌 **1️⃣ ¿Tienes un crédito activo con Compartamos Banco?** (Data Layer 9)
-      let selectedCliente = document.querySelector("input[name='rbCliente']:checked");
-      if (selectedCliente) {
-          pushDataLayer("form_field_steps", {
-              'pantalla': 'pantalla_1-0%',
-              'field_name': '01. ¿Tienes un crédito activo con Compartamos Banco?',
-              'field_value': selectedCliente.value
-          });
-      } else {
-          console.warn("⚠️ No se seleccionó '¿Tienes un crédito activo con Compartamos Banco?'.");
+      // Check if the element is visible
+      if (question1 && window.getComputedStyle(question1).display !== "none") {
+        question = 1;
       }
-
-
-      // 📌 **2️⃣ ¿Tienes un negocio?** (Data Layer 2)
-      let selectedNegocio = document.querySelector("input[name='rbNegocio']:checked");
-      if (selectedNegocio) {
-          pushDataLayer("form_field_steps", {
-              'pantalla': 'pantalla_1-30%',
-              'field_name': '02. ¿Tienes un negocio?',
-              'field_value': selectedNegocio.value
-          });
-      } else {
-          console.warn("⚠️ No se seleccionó '¿Tienes un negocio?'.");
+      else if (question2_1 && window.getComputedStyle(question2_1).display !== "none") {
+        question = 2;
       }
-
-
-      // 📌 **3️⃣ ¿Tu negocio tiene más de 6 meses?** (Data Layer 3)
-      let selectedTiempoNegocio = document.querySelector("#q3_1 input[name='rbNegocio']:checked");
-      if (selectedTiempoNegocio) {
-          pushDataLayer("form_field_steps", {
-              'pantalla': 'pantalla_1-60%',
-              'field_name': '03. ¿Tu negocio tiene más de 6 meses?',
-              'field_value': selectedTiempoNegocio.value
-          });
-      } else {
-          console.warn("⚠️ No se seleccionó '¿Tu negocio tiene más de 6 meses?'.");
+      else if (question2_2 && window.getComputedStyle(question2_2).display !== "none") {
+        question = 2;
       }
-
-
-      // 📌 **4️⃣ Tipo de crédito** (Data Layer 4)
-      let selectedCredito = document.querySelector("input[name='rbCredito']:checked");
-      if (selectedCredito) {
-          pushDataLayer("form_field_steps", {
-              'field_name': '04. Tipo de crédito',
-              'field_value': selectedCredito.value
-          });
-      } else {
-          console.warn("⚠️ No se seleccionó 'Tipo de crédito'.");
+      switch (question) {
+        case 1:
+          // 📌 **1️⃣ ¿Tienes un crédito activo con Compartamos Banco?** (Data Layer 9)
+          let selectedCliente = document.querySelector("input[name='rbCliente']:checked");
+          if (selectedCliente) {
+              pushDataLayer(
+                  "form_field_steps", 
+                  {
+                    'pantalla': 'pantalla_1-0%',
+                    'field_name': '01. ¿Tienes un crédito activo con Compartamos Banco?',              
+                    'field_value': selectedCliente.value
+                  },
+                  selectedCliente.value.toLowerCase() === 'si' ? 'credito_individual':'NA'
+              );
+          } else {
+              console.warn("⚠️ No se seleccionó '¿Tienes un crédito activo con Compartamos Banco?'.");
+          }
+          break;
+        case 2:
+          // 📌 **2️⃣ ¿Tienes un negocio?** (Data Layer 2)
+          let selectedNegocio = document.querySelector("input[name='rbNegocio']:checked");
+          if (selectedNegocio) {
+              pushDataLayer("form_field_steps", {
+                  'pantalla': 'pantalla_1-30%',
+                  'field_name': '02. ¿Tienes un negocio?',
+                  'field_value': selectedNegocio.value
+              });
+          } else {
+              console.warn("⚠️ No se seleccionó '¿Tienes un negocio?'.");
+          }
+          // 📌 **5️⃣ Nuevo: ¿Qué tipo de crédito tienes?** (Data Layer 10)
+          let selectedTipoCredito = document.querySelector("input[name='rbCredito']:checked");
+          if (selectedTipoCredito) {
+              pushDataLayer("form_field_steps", {
+                  'pantalla': 'pantalla_1-30%',
+                  'field_name': '02. ¿Qué tipo de crédito tienes?',
+                  'field_value': selectedTipoCredito.value
+              }, selectedTipoCredito.value.toLowerCase() === 'Crédito Grupal' ? 'credito_grupal':'credito_individual');
+          } else {
+              console.warn("⚠️ No se seleccionó '¿Qué tipo de crédito tienes?'.");
+          }
+        break;
+        default:
+          console.log(`Sorry, we are out of ${expr}.`);
       }
-
-
-      // 📌 **5️⃣ Nuevo: ¿Qué tipo de crédito tienes?** (Data Layer 10)
-      let selectedTipoCredito = document.querySelector("input[name='rbCredito']:checked");
-      if (selectedTipoCredito) {
-          pushDataLayer("form_field_steps", {
-              'pantalla': 'pantalla_1-30%',
-              'field_name': '02. ¿Qué tipo de crédito tienes?',
-              'field_value': selectedTipoCredito.value
-          });
-      } else {
-          console.warn("⚠️ No se seleccionó '¿Qué tipo de crédito tienes?'.");
-      }
-
 
       // 📌 **Validaciones de Depuración en Consola**
       console.log("📢 Validaciones finalizadas. Si hay mensajes de advertencia (⚠️), revisa los campos faltantes.");
@@ -181,11 +219,26 @@ document.addEventListener("DOMContentLoaded", function () {
       function triggerClientFormStart() {
           if (!clientFormStartTriggered && typeof pushDataLayer === "function") { // ✅ Validamos que la función existe
               setTimeout(() => {
-                  pushDataLayer("form_start", {
-                      'pantalla': 'pantalla_2-90%'
-                  });
+                  if(document.getElementsByName("answer_question_2_1")[0].value == '')
+                  {
+                    pushDataLayer("form_start", {
+                        'pantalla': 'pantalla_2-90%'
+                    });
+                    console.log("✅ DataLayer Push: form_start (pantalla_2-90%)");
+                  }
+                  else
+                  {
+                    window.dataLayer.push({
+                        'event': 'form_start',
+                        'CDCategory': document.getElementsByName("answer_question_2_1")[0].value === "Grupal" ? 'credito_grupal' : 'credito_individual',
+                        'CDFunnel': 'cliente',
+                        'CDSource': ssSource,
+                        'pantalla': 'pantalla_4-90%',
+                        'CDLabel': selectedCredito
+                    });
+                    console.log(`✅ DataLayer Push: form_start (${selectedCredito})`);
+                  }
                   clientFormStartTriggered = true;
-                  console.log("✅ DataLayer Push: form_start (pantalla_2-90%)");
               }, 50); // ✅ Pequeño retraso para evitar lag
           }
       }
@@ -244,18 +297,17 @@ document.addEventListener("DOMContentLoaded", function () {
   function pushDataLayerField(event) {
       let field = event.target;
       let fieldName = fieldMapping[field.id];
-
+      let category = document.getElementsByName("answer_question_2_1")[0].value;
 
       if (fieldName && !field.dataset.tracked) { // Evita duplicados
           window.dataLayer.push({
               'event': 'form_field',
-              'CDCategory': 'NA',
+              'CDCategory': category == '' ? 'NA' : (category == "Crédito crece y mejora" ? 'credito_grupal' : 'credito_individual' ),
               'CDFunnel': 'no_cliente',
               'CDSource': window.ssSource || 'default_tracking_source',
               'pantalla': 'pantalla_2-80%',
               'field_name': fieldName
           });
-
 
           console.log(`✅ DataLayer Push: form_field -> ${fieldName}`);
           field.dataset.tracked = "true"; // Marca el campo como rastreado
@@ -355,7 +407,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (!fechaValida || !horarioValido || !aviso) {
+        const validations = [
+          { value: fechaValida, message: "Fecha invalida." },
+          { value: horarioValido, message: "Horario invalido." },
+          { value: aviso, message: "Aviso no seleccionado." }
+      ];
       console.warn("Validación fallida para generate_lead.");
+      dataLayer.push({
+        'event': 'error_lead',
+        'CDCategory': 'NA',  
+        'CDFunnel': 'no_cliente',
+        'CDAction': 'Intento de registro',
+        'pantalla': 'pantalla_2',
+        'submit_result': 'Error',
+        'detail': validations.find(v => !v.value)
+      });
       return;
     }
 
@@ -454,19 +520,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function agregarTipoCreditoGrupal(productoSeleccionado) {
       console.log(`🎯 Producto seleccionado: ${productoSeleccionado}`);
-
+      let selectedTipoCredito = document.querySelector("input[name='rbCredito']:checked");
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
           'event': 'form_field_steps',
-          'CDCategory': 'credito_grupal', // Se puede cambiar dinámicamente si aplica
+          'CDCategory': selectedTipoCredito.value.toLowerCase() === 'Crédito Grupal' ? 'credito_grupal':'credito_individual', // Se puede cambiar dinámicamente si aplica
           'CDFunnel': 'cliente',
           'CDSource': ssSource,
           'pantalla': 'pantalla_1-60%',
           'field_name': '03. Producto seleccionado',
           'field_value': productoSeleccionado
       });
-
 
       console.log(`✅ DataLayer Push: form_field_steps (Producto: ${productoSeleccionado})`);
   }
@@ -589,12 +654,22 @@ document.addEventListener("DOMContentLoaded", function () {
   function pushClickDataLayer(action, linkText) {
     var tipoCredito = document.querySelector("input[name='rbCredito']:checked")?.value || "credito_individual";
     var isCliente = document.querySelector("input[name='rbCliente']:checked")?.value === "Si" ? "cliente" : "no_cliente";
-
+    let leadType = 'Registro exitoso - OK', leadName = '';
+    if(document.getElementById('txtNombre') != null)
+    {
+      let tmNameVal = document.getElementById('txtNombre').value;
+      if(tmNameVal.toLowerCase().includes('prueba') || tmNameVal.toLowerCase().includes('test'))
+      {
+        leadType = 'Registro exitoso -TEST';
+        leadName = tmNameVal;
+      }
+    }
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       'event': 'click_element',
-      'CDAction': action,
+      'CDAction': leadType,
+      'CDValue': leadName,
       'CDCategory': tipoCredito,
       'CDFunnel': isCliente,
       'CDLabel': tipoCredito === "credito_individual" ? "Crédito crece y mejora" : "NA",

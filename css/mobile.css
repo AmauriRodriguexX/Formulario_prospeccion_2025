@@ -8,6 +8,14 @@
           padding: 0;
       }
 
+      .body-sin-imagen {
+          background: none; /* Elimina la imagen de fondo */
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+      }
+      
+
      .home__line {
           width: 100%;
           margin: auto;
