@@ -201,6 +201,7 @@
 .header-back-icons a:last-child {
     position: absolute;
     right: 0; /* Siempre pegado a la derecha */
+    margin-bottom: 15px;
 }
 
 
