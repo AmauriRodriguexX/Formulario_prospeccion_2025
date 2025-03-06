@@ -41,17 +41,8 @@
     <link rel="stylesheet" href="css/mobile.css">
 
     <!-- GData Layer -->
-
     <script>
-        // var breadCrumbs = localStorage.getItem("CompartamosBreadCrumbs");
         var urlAhora = window.location.href;
-        // if(breadCrumbs === null)
-        //     breadCrumbs = [];
-        // else
-        //     breadCrumbs = JSON.parse(localStorage.getItem("CompartamosBreadCrumbs"));
-        // breadCrumbs.push(urlAhora);        
-        // localStorage.setItem("CompartamosBreadCrumbs", JSON.stringify(breadCrumbs));
-
         var re = /^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|\d{3}))?((?:-(?:[\da-z]{5,8}|\d[\da-z]{3}))*)?((?:-[\da-wy-z](?:-[\da-z]{2,8})+)*)?(-x(?:-[\da-z]{1,8})+)?$|^(x(?:-[\da-z]{1,8})+)$/i;
         var lenguaje = navigator.language;
         let foo = re.exec(lenguaje);
@@ -61,7 +52,7 @@
             pageInstanceID: "Prospeccion de clientes - production",
             page: {
                 pageInfo: {
-                    pageName: "TYPage",
+                    pageName: "TYPage Clientes",
                     URL: urlAhora,
                     referringURL: "",
                     deviceCategory: localStorage.getItem("CompartamosDispositivoUsuario"),
@@ -262,7 +253,7 @@
             <a href="https://www.compartamos.com.mx/compartamos"><img g src="img/compartamos_banco_logo.svg"
                     alt="Compartamos Banco" class="footer-logo"></a>
             <p>Una empresa de <img src="img/gentera_logo.svg" alt="Gentera"></p>
-            <p>© 2024 Gentera S.A.B.</p>
+            <p>© 2025 Gentera S.A.B.</p>
             <div class="footer-links">
                 <a href="https://www.compartamos.com.mx/compartamos/regulacion/privacidad" class="footer-link">Aviso de
                     Privacidad</a> |
@@ -272,6 +263,7 @@
         </div>
     </footer>
     <script src="js/home-events.js"></script>
+    <script src="js/gracias.js"></script>
 </body>
 
 </html>

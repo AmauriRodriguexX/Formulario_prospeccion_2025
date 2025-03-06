@@ -47,17 +47,8 @@
     <link rel="stylesheet" href="css/mobile.css">
 
     <!-- GData Layer -->
-
     <script>
-        // var breadCrumbs = localStorage.getItem("CompartamosBreadCrumbs");
         var urlAhora = window.location.href;
-        // if(breadCrumbs === null)
-        //     breadCrumbs = [];
-        // else
-        //     breadCrumbs = JSON.parse(localStorage.getItem("CompartamosBreadCrumbs"));
-        // breadCrumbs.push(urlAhora);        
-        // localStorage.setItem("CompartamosBreadCrumbs", JSON.stringify(breadCrumbs));
-
         var re = /^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|\d{3}))?((?:-(?:[\da-z]{5,8}|\d[\da-z]{3}))*)?((?:-[\da-wy-z](?:-[\da-z]{2,8})+)*)?(-x(?:-[\da-z]{1,8})+)?$|^(x(?:-[\da-z]{1,8})+)$/i;
         var lenguaje = navigator.language;
         let foo = re.exec(lenguaje);
@@ -67,7 +58,7 @@
             pageInstanceID: "Prospeccion de clientes - production",
             page: {
                 pageInfo: {
-                    pageName: "TYPage",
+                    pageName: "TYPage No clientes",
                     URL: urlAhora,
                     referringURL: "",
                     deviceCategory: localStorage.getItem("CompartamosDispositivoUsuario"),
@@ -100,18 +91,10 @@
             }
         }
 
-        function triggerView() {
-            var viewName = digitalData.page.pageInfo.pageName;
-
-            if (typeof adobe != 'undefined' && adobe.target && typeof adobe.target.triggerView === 'function') {
-                adobe.target.triggerView(viewName);
-            }
-        }
-
         /* DataLayer t2ó */
         window.adobeDataLayer = window.adobeDataLayer || [];
         window.adobeDataLayer.push({
-            pageName: "TYPage Cliente - Prospección",
+            pageName: "TYPage No Cliente - Prospección",
             pageUrl: window.location.href,
             referringUrl: document.referrer,
             primaryCategory: "Landing page - Prospecccion de clientes",
@@ -187,7 +170,7 @@
     </header>
     <section>
         <div class="d-flex flex-column">
-            <h1 class="tituloGracias">Solicitud crédito adicional</h1>
+            <h1 class="tituloGracias">Solicitud crédito Compartamos</h1>
             <p class="gracias header-center no-padding">¡Gracias!</p>
 
             <div class="progress ty no-padding-top">
@@ -206,14 +189,14 @@
                     <img class="imgTY-cte" src="assets/images/check-img.png"
                         alt="Gracias por solicitar crédito en Compartamos Banco">
                     <div class="contenidoCentralTY">
-                        <p class="h-text-typo h1-custom-title">¡Gracias, Antonio!</p>
+                        <p class="h-text-typo h1-custom-title" id="gracias_cliente"></p>
                         <p class="text-align-center text-center">Apreciamos tu confianza en Compartamos. Tu número de folio es: </b>
                         </p>
                         <br>
                         <div class="container">
                             <div class="header-center header-center-mobile ">
                                 <div class="code-box">
-                                    <span class="code">00000276870</span>
+                                    <span id="spanFolioN" name="spanFolioN" class="code">00000276870</span>
                                 </div>
                             </div>
 
@@ -223,7 +206,7 @@
 
                             <h3 class="inter-font tiitlte-ul-ty">Horario:</h3>
                             <ul>
-                                <li>Matutino de 8:00 am a 3:00 pm.</li>
+                                <li id="spanhorarioN" name="spanhorarioN" >Matutino de 8:00 am a 3:00 pm.</li>
                             </ul>
 
                             <h3 class="inter-font tiitlte-ul-ty">Asegúrate de tener a la mano:</h3>
@@ -296,7 +279,7 @@
             <a href="https://www.compartamos.com.mx/compartamos"><img g src="img/compartamos_banco_logo.svg"
                     alt="Compartamos Banco" class="footer-logo"></a>
             <p>Una empresa de <img src="img/gentera_logo.svg" alt="Gentera"></p>
-            <p>© 2024 Gentera S.A.B.</p>
+            <p>© 2025 Gentera S.A.B.</p>
             <div class="footer-links">
                 <a href="https://www.compartamos.com.mx/compartamos/regulacion/privacidad" class="footer-link">Aviso de
                     Privacidad</a> |
@@ -305,7 +288,10 @@
             </div>
         </div>
     </footer>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.blockUI.min.js"></script>
     <script src="js/home-events.js"></script>
+    <script src="js/gracias.js"></script>
 </body>
 
 </html>

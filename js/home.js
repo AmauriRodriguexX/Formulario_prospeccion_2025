@@ -1,15 +1,14 @@
-var endPointSendData = "https://www.prospeccion.compartamos.com.mx:8583/prospeccion-web/web/v1/solicitud/submit";
+//var endPointSendData = "https://www.prospeccion.compartamos.com.mx:8583/prospeccion-web/web/v1/solicitud/submit";
 //var endPointSendData = "https://sl-gbeta052.compartamos.mx:8602/prospeccion-web/web/v1/solicitud/submit";
+var endPointSendData = "https://MQLDVVAS4552.compartamos.mx:8600/prospeccion-web/web/v1/solicitud/submit";
 const MSG_ERROR_GRAL = "No se pudo mandar la información. Inténtelo más tarde";
 
-window.onload = function() {    
 
-   
-}
 $(document).ready(function() {
 	$('input[type="radio"]').prop('checked', false);
 	$('input[name=id_question]').val('1');
 	$('#msError').hide();	
+	$('.desktop-footer').hide();
 
 	// Cambiar color del checkbox cuando esté marcado
 	$('#avisoPrivacidad').on('change', function() {
@@ -229,6 +228,14 @@ $(document).ready(function() {
 
 		localStorage.setItem('cliente', answer);
 	
+		pushDataLayer(
+			"form_field_steps", 
+			{
+			  'pantalla': 'pantalla_1-0%',
+			  'field_name': '01. ¿Tienes un crédito Compartamos?',              
+			  'field_value': answer
+			},
+		);
 	}
 
 	function validateQ2_1(){
@@ -248,11 +255,13 @@ $(document).ready(function() {
 			$('input[name=id_question]').val('4_1');
 			$('#q4_1 .progress__label span').html('60%');
 			$('#q4_1 .progress__line').addClass('p60');
+			$('.desktop-footer').show();
 		} else {
 			$('#q4_2').show();
 			$('input[name=id_question]').val('4_2');
 			$('#q4_2 .progress__label span').html('60%');
 			$('#q4_2 .progress__line').addClass('p60');
+			$('.desktop-footer').show();
 		}
 		
 		$('#btnContinue').removeClass('active');
@@ -261,7 +270,11 @@ $(document).ready(function() {
 		$('input[name=answer_question_2_1]').val(answer);
 		localStorage.setItem('tipoCredito', answer);
 
-
+		pushDataLayer("form_field_steps", {
+			'pantalla': 'pantalla_1-30%',
+			'field_name': '02. ¿Qué tipo de crédito tienes?',
+			'field_value': answer
+		}, answer);
 	}
 
 	//Pregunta: tienes negocio?
@@ -294,7 +307,11 @@ $(document).ready(function() {
 		$('input[name=answer_question_1]').val(answer);
 		localStorage.setItem('negocio', tienesNegocio);
 
-	
+		pushDataLayer("form_field_steps", {
+			'pantalla': 'pantalla_1-30%',
+			'field_name': '02. ¿Tienes un negocio?',
+			'field_value': tienesNegocio
+		});
 	}
 
 	//Pregunta: tiene mas de 6 meses?
@@ -328,38 +345,23 @@ $(document).ready(function() {
 	
 		$('input[name=answer_question_1]').val(answer);
 		localStorage.setItem('antiguedad', antiguedadSeisMeses);
+
+		pushDataLayer("form_field_steps", {
+			'pantalla': 'pantalla_1-60%',
+			'field_name': '03. ¿Tu negocio tiene más de 6 meses?',
+			'field_value': antiguedadSeisMeses
+		});
 	}
 
 	function validateQ3_2() {
 		var ssSource = window.ssSource || 'default_tracking_source'; // Asegurar que ssSource siempre esté definido
 	 
-		if (bandContinuar === false) { // Usar === para comparación estricta
+		if (bandContinuar === false) {
 	 
 		    // Capturar datos dinámicos del formulario
 		    var tipoTelefono = $('#telefonoSelect').val();
 		    var horarioLlamada = $('#horaSelect').val();
 		    var nombre = $('#txbNombre').val();
-	 
-		    // Construir el objeto del dataLayer con datos dinámicos
-		    var dataLayerObject = { // Crear un objeto para mayor claridad
-			   'event': 'generate_lead',
-			   'CDCategory': 'NA',
-			   'CDFunnel': 'no_cliente',
-			   'CDSource': ssSource,
-			   'CDAction': nombre, // Ejemplo: usa el nombre del cliente
-			   'pantalla': 'pantalla_2',
-			   'CDValue': '',
-			   'negocio': 'si', // O capturado dinámicamente
-			   'duracion_negocio': '6 meses', // O capturado dinámicamente
-			   'tipo_telefono': tipoTelefono, // Valor capturado
-			   'horario_llamada': horarioLlamada, // Valor capturado
-			   'lead_id': '', // Puedes asignar o capturar según corresponda
-			   'submit_result': 'Error',
-			   'detail': 'No se pudo mandar la información. Inténtelo más tarde'
-		    };
-	 
-		    dataLayer.push(dataLayerObject);
-		    console.log("Evento 'generate_lead' empujado al dataLayer:", dataLayerObject);
 	 
 		    // Muestra el mensaje de error
 		    $('#msgDatosIncorrectos')
@@ -384,6 +386,7 @@ $(document).ready(function() {
 	//Credito Grupal
 	function validateQ4_1(){
 		let answer = $('input[name=answer_question_4_1]').val();
+		$('.desktop-footer').hide();
 	
 		if (answer == '') {
 			$('#msgError')
@@ -395,6 +398,17 @@ $(document).ready(function() {
 		$('.question__content').hide();
 		productoAdicional = answer;
 		localStorage.setItem ("productoAdicional", productoAdicional);
+
+		window.dataLayer = window.dataLayer || [];
+		window.dataLayer.push({
+			'event': 'form_field_steps',
+			'CDCategory': $('input[name=answer_question_2_1]').val(),
+			'CDFunnel': 'cliente',
+			'CDSource': ssSource,
+			'pantalla': 'pantalla_1-60%',
+			'field_name': '03. Producto seleccionado',
+			'field_value': productoAdicional
+		});
 
 		//Cambia a Datos Personales
 		$('#q3_2').show();
@@ -410,11 +424,13 @@ $(document).ready(function() {
 		$('#btnContinue').removeClass('active');
 		$('#btnContinue').show();
 	}
+  
 
 	//Crédito Individual
 
 	function validateQ4_2(){
 		let answer = $('input[name=answer_question_4_2]').val();
+		$('.desktop-footer').hide();
 	
 		if (answer == '') {
 			$('#msgError')
@@ -614,7 +630,7 @@ $(document).ready(function() {
 			default:
 				break;
 		}
-
+		errorTelefono = false;
 		var validaBolque1= errorNombre || errorApP || errorApM || errorTelefono || errorCP;
 		var validaBloque2= errorFecha || errorValidaGenero || errorHorario  || errorEmail;
 
@@ -721,6 +737,8 @@ $(document).ready(function() {
 	function sendData(token) {
 		console.log("Iniciando envío de datos...");
 		spinnerOn('Registrando información...');
+
+		let category = document.getElementsByName("answer_question_2_1")[0].value;
 		
 		$.ajax({
 		    method: 'POST', // ✅ Añadir método HTTP
@@ -734,14 +752,29 @@ $(document).ready(function() {
 			   spinnerOff();
 			   
 			   if (data.codigo == 0) {
+					localStorage.setItem('lead_id',data.solicitud.id)
+					//inicio de código para traer el folio//
+					sessionStorage.setItem('Folio', data.solicitud.id);
+					sessionStorage.setItem('Horario', data.solicitud.horario);
+
+					//fin de códig//
+					clickSenderDatakayer();
 				  console.log("Redireccionando...");
 				  determinarRedireccion();
 			   } else {
-				  console.error("Error en respuesta:", data.mensaje);
 				  gestionaError(data);
 			   }
 		    },
-		    error: function(xhr, status, error) {
+		    error: function(xhr, status, error) {				
+				dataLayer.push({
+				'event': 'error_lead',
+				'CDFunnel': (localStorage.getItem('cliente') == 'Si') ? 'Cliente' : 'No cliente',
+				'CDCategory': localStorage.getItem('tipoCredito'),
+      			'CDLabel': localStorage.getItem('productoAdicional'),
+				'CDAction': 'Intento de registro',
+				'submit_result': 'Error',
+				'detail': "Error de conexión:"+ error
+				});
 			   console.error("Error de conexión:", error);
 			   spinnerOff();
 			   alert("Error al conectar con el servidor. Intente nuevamente.");
@@ -751,7 +784,7 @@ $(document).ready(function() {
 		    }
 		});
 	 }
-	 
+	 /*
 	 function determinarRedireccion() {
 		// Verificar visibilidad con estilo CSS
 		const isDateVisible = () => {
@@ -779,6 +812,8 @@ $(document).ready(function() {
 		    window.location.href = 'ty-cliente.html';
 		}
 	 }
+	*/
+
 	 function determinarRedireccion() {
 		// Verificar si los campos de fecha están visibles
 		const isDateVisible = () => {
@@ -793,11 +828,11 @@ $(document).ready(function() {
 		    const fechaCompleta = diaVal !== "0" && mesVal !== "0" && anioVal !== "0";
 		    
 		    fechaCompleta 
-			   ? window.location.href = 'ty-no-cliente.html' 
-			   : window.location.href = 'ty-cliente.html';
+			   ? setTimeout(()=> window.location.href = 'ty-no-cliente.html',600)
+			   : setTimeout(()=> window.location.href = 'ty-cliente.html',600);
 		    
 		} else { // Campos de fecha OCULTOS
-		    window.location.href = 'ty-cliente.html';
+			setTimeout(()=> window.location.href = 'ty-cliente.html',600)
 		}
 	 }
 
@@ -831,7 +866,7 @@ $(document).ready(function() {
 		if (correo.length < 3) {
 			correo = "N/A";
 		}
-	
+		
 		formData.append('nombre',document.getElementById('txbNombre').value);
 		formData.append('aPaterno', document.getElementById('txbApPaterno').value);
 		formData.append('aMaterno', materno);
@@ -847,7 +882,7 @@ $(document).ready(function() {
 		formData.append('antiguedad', antiguedadSeisMeses);	
 		formData.append('tipoCredito', tipoCredito); 
 		formData.append('productoAdicional', productoAdicional);
-
+		localStorage.setItem ("nombreProspecto", document.getElementById('txbNombre').value);
 		localStorage.setItem ("negocio", tienesNegocio);
 		localStorage.setItem ("antiguedad", antiguedadSeisMeses );
 		localStorage.setItem ("tipoCredito", tipoCredito);
@@ -900,7 +935,6 @@ $(document).ready(function() {
 		var valor = $(this).val(); 
 		validateQ4_1();
 	});
-
 
 
 });
@@ -992,10 +1026,19 @@ function gestionaError(data){
     	msjError = MSG_ERROR_GRAL;
     }    
 	msErrorsend(msjError);
+	dataLayer.push({
+		'event': 'error_lead',
+		'CDFunnel': (localStorage.getItem('cliente') == 'Si') ? 'Cliente' : 'No cliente',
+		'CDCategory': localStorage.getItem('tipoCredito'),
+		'CDLabel': localStorage.getItem('productoAdicional'),
+		'CDAction': 'Intento de registro',
+		'submit_result': 'Error',
+		'detail': msjError
+	});
 }
 
 function msErrorsend(msg){
-	formSubmitDatosPersonales("error",msg);
+	//formSubmitDatosPersonales("error",msg);
 	$('#msError').text(msg);
 	$('#msError').show();	
 	var etop = $('#msError').offset().top;

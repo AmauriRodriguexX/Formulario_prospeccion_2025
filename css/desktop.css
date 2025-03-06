@@ -1,12 +1,10 @@
-@media screen and (min-width: 1024px) {
-    body {
-        background: url('../assets/images/BG-amarillo.png') no-repeat center center fixed;
-        background-size: cover;
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
+@media screen and (min-width: 770px) {
+    .carousel-controls {
+        display: none;
     }
-
+}
+@media screen and (min-width: 1024px) {
+  
     .no-image {
         background: none;
     }

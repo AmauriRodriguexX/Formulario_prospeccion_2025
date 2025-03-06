@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
              // Modificar estilos para .main__content
              if (mainContent) {
-                 mainContent.style.width = "50%";
+                // mainContent.style.width = "50%";  Se removio por que en movil queda a la mitad
              }
 
              // Modificar estilos para las cards del carrusel
@@ -243,359 +243,34 @@ document.addEventListener("DOMContentLoaded", function () {
      // Observar cambios en el DOM (por si algo se inyecta dinámicamente)
      observer.observe(document.body, { childList: true, subtree: true });
  });
-  // desktop
+
+ 
+  //MARK:  BG color en desktop y mobile 
   document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
-
-    // --- Radio Buttons "Sí/No" (anteriores) ---
+  
+    // --- Elementos de los radio buttons ---
     const rbSiContainer = document.getElementById('DrbCSi');
     const rbNoContainer = document.getElementById('DrbCNo');
-
-    // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
+  
     const rbGrupalContainer = document.getElementById('DrbCGrupal');
     const rbIndividualContainer = document.getElementById('DrbIndividual');
-
-    // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
+  
     const rbSiNegocioContainer = document.getElementById('DrbSi');
     const rbNoNegocioContainer = document.getElementById('DrbNo');
-
-    // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
+  
     const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
     const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
-
-    // Secciones
+  
+    // --- Secciones del formulario ---
     const q2_1 = document.getElementById('q2_1');
     const q2_2 = document.getElementById('q2_2');
     const q3_1 = document.getElementById('q3_1');
     const q3_2 = document.getElementById('q3_2');
     const q4_1 = document.getElementById('q4_1');
-    // Sección que se desea que no muestre fondo
-    const q4_2 = document.getElementById('q4_2');
-
-    // Elementos para modificar clases (usados en q3_2)
-    const mainElement = document.querySelector('.main');
-    const mainContent = document.querySelector('.main__content');
-    const wrapper = document.querySelector('.wrapper');
-    const homeTitle = document.querySelector('.home__title');
-
-    // Estilos base para el <body>
-    Object.assign(body.style, {
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        transition: 'background-image 0.5s ease-in-out'
-    });
-
-    /**
-     * Retorna el nombre de la imagen de fondo correspondiente
-     * según la sección visible y los radios seleccionados.
-     * Se ha agregado la condición para q4_2 como prioridad.
-     */
-    function getCurrentBackground() {
-       // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
-       if (q4_2 && q4_2.offsetParent !== null) {
-           return 'none';
-       }
-   
-       // 1) Si q4_1 está visible => fondo 'none' (blanco)
-       if (q4_1 && q4_1.offsetParent !== null) {
-           return 'none';
-       }
-   
-       // 2) Si q3_1 está visible => gris si "Sí, más de 6 meses", morado si "No, menos de 6 meses"
-       if (q3_1 && q3_1.offsetParent !== null) {
-           const rbSiMeses = document.getElementById('rbSiNegocio'); // "Sí, tiene más de 6 meses"
-           const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses"
-   
-           if (rbNoMeses?.checked) {
-               return 'BG-morado.png'; // Si elige "No, tiene menos de 6 meses"
-           } else if (rbSiMeses?.checked) {
-               return 'BG-gris.png'; // Si elige "Sí, tiene más de 6 meses"
-           }
-       }
-   
-       // 3) Si q3_2 está visible, verificamos el origen (q2_2 o q3_1)
-       if (q3_2 && q3_2.offsetParent !== null) {
-           const rbNo2_2 = document.getElementById('rbNo'); // "No, tengo" de q2_2
-           const rbSiMeses = document.getElementById('rbSiNegocio'); // "Sí, tiene más de 6 meses" de q3_1
-           const rbNoMeses = document.getElementById('rbNoNegocio'); // "No, tiene menos de 6 meses" de q3_1
-   
-           if (rbNo2_2?.checked || rbNoMeses?.checked) {
-               return 'BG-morado.png'; // Si viene de "No, tengo" o "No, tiene menos de 6 meses"
-           }
-           if (rbSiMeses?.checked) {
-               return 'BG-gris.png'; // Si viene de "Sí, más de 6 meses"
-           }
-   
-           return 'BG-amarillo.png'; // Si no, fondo amarillo por defecto
-       }
-   
-       // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
-       if (q2_2 && q2_2.offsetParent !== null) {
-           const rbSi2_2 = document.getElementById('rbSi');
-           const rbNo2_2 = document.getElementById('rbNo');
-   
-           if (rbSi2_2?.checked) {
-               return 'BG-gris.png';
-           } else if (rbNo2_2?.checked) {
-               return 'BG-morado.png';
-           } else {
-               return 'BG-amarillo.png';
-           }
-       }
-   
-       // 5) Si q2_1 está visible => "Crédito grupal/individual"
-       if (q2_1 && q2_1.offsetParent !== null) {
-           const rbGrupal = document.getElementById('rbGrupalSi');
-           const rbIndividual = document.getElementById('rbIndividualNo');
-   
-           if (rbGrupal?.checked) {
-               return 'BG-morado.png';
-           } else if (rbIndividual?.checked) {
-               return 'BG-gris.png';
-           } else {
-               return 'BG-amarillo.png';
-           }
-       }
-   
-       // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
-       const rbSi = document.getElementById('rbCSi');
-       const rbNo = document.getElementById('rbCNo');
-   
-       if (rbSi?.checked) {
-           return 'BG-morado.png';
-       } else if (rbNo?.checked) {
-           return 'BG-blue.png';
-       }
-   
-       // 7) Por defecto
-       return 'BG-amarillo.png';
-   }
-   
-
-    /**
-     * Aplica el fondo al <body> según la imagen (o 'none').
-     * En pantallas >=1024 se aplica la imagen, en menores se omite.
-     */
-    function changeBackground(image) {
-        if (image === 'none') {
-            body.style.backgroundImage = 'none';
-            body.style.backgroundColor = '#fff';
-            return;
-        }
-        if (window.innerWidth >= 1024) {
-            body.style.backgroundImage = `url('assets/images/${image}')`;
-            body.style.backgroundColor = '';
-            document.documentElement.style.height = '100%';
-            body.style.minHeight = '100vh';
-        } else {
-            body.style.backgroundImage = '';
-            body.style.backgroundColor = '';
-            document.documentElement.style.height = '';
-            body.style.minHeight = '';
-        }
-    }
-
-    // Al cargar la página, se aplica el fondo inicial
-    changeBackground(getCurrentBackground());
-
-    // ---------------------------------------------------
-    // 1. Eventos de clic para "Sí/No" (anteriores)
-    // ---------------------------------------------------
-    if (rbSiContainer && rbNoContainer) {
-        rbSiContainer.addEventListener('click', () => {
-            document.getElementById('rbCSi').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-
-        rbNoContainer.addEventListener('click', () => {
-            document.getElementById('rbCNo').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-
-    // ---------------------------------------------------
-    // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
-    // ---------------------------------------------------
-    if (rbGrupalContainer && rbIndividualContainer) {
-        rbGrupalContainer.addEventListener('click', () => {
-            document.getElementById('rbGrupalSi').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-
-        rbIndividualContainer.addEventListener('click', () => {
-            document.getElementById('rbIndividualNo').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-
-    // ---------------------------------------------------
-    // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
-    // ---------------------------------------------------
-    if (rbSiNegocioContainer) {
-        rbSiNegocioContainer.addEventListener('click', () => {
-            document.getElementById('rbSi').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-    if (rbNoNegocioContainer) {
-        rbNoNegocioContainer.addEventListener('click', () => {
-            document.getElementById('rbNo').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-
-    // ---------------------------------------------------
-    // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
-    // ---------------------------------------------------
-    if (rbSiMesesContainer) {
-        rbSiMesesContainer.addEventListener('click', () => {
-            document.getElementById('rbSiNegocio').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-    if (rbNoMesesContainer) {
-        rbNoMesesContainer.addEventListener('click', () => {
-            document.getElementById('rbNoNegocio').checked = true;
-            changeBackground(getCurrentBackground());
-        });
-    }
-
-    // ---------------------------------------------------
-    // 5. Al cambiar tamaño de ventana u orientación
-    // ---------------------------------------------------
-    window.addEventListener('resize', () => {
-        changeBackground(getCurrentBackground());
-    });
-    window.addEventListener('orientationchange', () => {
-        setTimeout(() => {
-            changeBackground(getCurrentBackground());
-        }, 100);
-    });
-
-    // ---------------------------------------------------
-    // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
-    // ---------------------------------------------------
-    if (q4_1) {
-        const observerQ4_1 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    changeBackground('none');
-                } else {
-                    changeBackground(getCurrentBackground());
-                }
-            });
-        });
-        observerQ4_1.observe(q4_1);
-    }
-
-    // ---------------------------------------------------
-    // 7. IntersectionObserver para q4_2 => cuando esta sección esté visible, se oculta el fondo
-    // ---------------------------------------------------
-    if (q4_2) {
-        const observerQ4_2 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    changeBackground('none');
-                } else {
-                    changeBackground(getCurrentBackground());
-                }
-            });
-        });
-        observerQ4_2.observe(q4_2);
-    }
-
-    // ---------------------------------------------------
-    // 8. IntersectionObserver para q3_2 => modifica clases en elementos
-    // ---------------------------------------------------
-    if (q3_2) {
-        const observerQ3_2 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    mainElement?.classList.add('main-visible-q3_2');
-                    mainContent?.classList.add('main-content-visible-q3_2');
-                    wrapper?.classList.add('wrapper-visible-q3_2');
-                    homeTitle?.classList.add('home-title-visible-q3_2');
-                } else {
-                    mainElement?.classList.remove('main-visible-q3_2');
-                    mainContent?.classList.remove('main-content-visible-q3_2');
-                    wrapper?.classList.remove('wrapper-visible-q3_2');
-                    homeTitle?.classList.remove('home-title-visible-q3_2');
-                }
-            });
-        });
-        observerQ3_2.observe(q3_2);
-    }
-
-    // ---------------------------------------------------
-    // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
-    // ---------------------------------------------------
-    if (q3_1) {
-        const observerQ3_1 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-            });
-        });
-        observerQ3_1.observe(q3_1);
-    }
-
-    // ---------------------------------------------------
-    // 10. IntersectionObservers opcionales para q2_2 y q2_1
-    // ---------------------------------------------------
-    if (q2_2) {
-        const observerQ2_2 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-            });
-        });
-        observerQ2_2.observe(q2_2);
-    }
-    if (q2_1) {
-        const observerQ2_1 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                changeBackground(getCurrentBackground());
-            });
-        });
-        observerQ2_1.observe(q2_1);
-    }
-});
-
-
-  // Mobile
-  document.addEventListener('DOMContentLoaded', () => {
-    // Verificamos si la resolución es < 1024 (mobile). Si no lo es, salimos.
-    if (window.innerWidth >= 1024) {
-      return; // No hace nada en desktop
-    }
+    const q4_2 = document.getElementById('q4_2'); // Sección para ocultar fondo
   
-    const body = document.body;
-  
-    // --- Radio Buttons "Sí/No" (anteriores) ---
-    const rbSiContainer = document.getElementById('DrbCSi');
-    const rbNoContainer = document.getElementById('DrbCNo');
-  
-    // --- Radio Buttons "Crédito grupal" / "Crédito individual" (#q2_1) ---
-    const rbGrupalContainer = document.getElementById('DrbCGrupal');
-    const rbIndividualContainer = document.getElementById('DrbIndividual');
-  
-    // --- Radio Buttons para "¿Tienes un negocio?" (#q2_2) ---
-    const rbSiNegocioContainer = document.getElementById('DrbSi');
-    const rbNoNegocioContainer = document.getElementById('DrbNo');
-  
-    // --- Radio Buttons para "¿Tu negocio tiene más de 6 meses?" (#q3_1) ---
-    const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
-    const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
-  
-    // Secciones
-    const q2_1 = document.getElementById('q2_1');
-    const q2_2 = document.getElementById('q2_2');
-    const q3_1 = document.getElementById('q3_1');
-    const q3_2 = document.getElementById('q3_2');
-    const q4_1 = document.getElementById('q4_1');
-    const q4_2 = document.getElementById('q4_2'); // Sección que se desea que no muestre fondo
-  
-    // Elementos para modificar clases (usados en q3_2)
+    // --- Elementos para modificar clases (usados en q3_2) ---
     const mainElement = document.querySelector('.main');
     const mainContent = document.querySelector('.main__content');
     const wrapper = document.querySelector('.wrapper');
@@ -611,57 +286,73 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   
     /**
-     * Retorna el nombre de la imagen de fondo correspondiente
-     * según la sección visible y los radios seleccionados (versión mobile).
-     * Todas las imágenes son .png y cada una tiene su versión "-mobile".
+     * Retorna el nombre de la imagen de fondo según la sección visible
+     * y las opciones seleccionadas, adaptando los nombres para desktop o mobile.
      */
     function getCurrentBackground() {
-      // PRIORIDAD: Si q4_2 (Crédito Individual) está visible, no se muestra ningún fondo.
+      const isDesktop = window.innerWidth >= 1024;
+  
+      // PRIORIDAD: Si q4_2 está visible => sin fondo
       if (q4_2 && q4_2.offsetParent !== null) {
         return 'none';
       }
   
-      // 1) Si q4_1 está visible => fondo 'none' (blanco)
+      // 1) Si q4_1 está visible => sin fondo (blanco)
       if (q4_1 && q4_1.offsetParent !== null) {
         return 'none';
       }
   
-      // 2) Si q3_1 está visible => gris si "Sí, más de 6 meses", morado si "No, menos de 6 meses"
+      // 2) Si q3_1 está visible => según "más de 6 meses" o no
       if (q3_1 && q3_1.offsetParent !== null) {
         const rbSiMeses = document.getElementById('rbSiNegocio');
         const rbNoMeses = document.getElementById('rbNoNegocio');
+  
         if (rbNoMeses?.checked) {
-          return 'BG-morado-mobile.png';
+          return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
         } else if (rbSiMeses?.checked) {
-          return 'BG-gris-mobile.png';
+          return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
         }
       }
   
-      // 3) Si q3_2 está visible, verificamos el origen (q2_2 o q3_1)
+      // 3) Si q3_2 está visible => revisa origen (q2_2 o q3_1) esta parte solo altera a los formularios
       if (q3_2 && q3_2.offsetParent !== null) {
-        const rbNo2_2 = document.getElementById('rbNo');
+        const rbNo2_2 = document.getElementById('rbNo'); // opción de q2_2
         const rbSiMeses = document.getElementById('rbSiNegocio');
         const rbNoMeses = document.getElementById('rbNoNegocio');
   
         if (rbNo2_2?.checked || rbNoMeses?.checked) {
-          return 'BG-morado-mobile.png';
+          if (!isDesktop) {
+            // En mobile se asigna fondo con propiedades especiales
+            body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+            body.style.backgroundSize = "cover";
+            return 'BG-rosa-mobile.png';
+          } else {
+            return 'bg-gris-mangenta.png';
+          }
         }
         if (rbSiMeses?.checked) {
-          return 'BG-gris-mobile.png';
+          if (!isDesktop) {
+            body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+            body.style.backgroundSize = "cover";
+            return 'BG-rosa-mobile.png';
+          } else {
+            return 'bg-gris-mangenta.png';
+          }
         }
-        return 'BG-amarillo-mobile.png';
+        return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
       }
   
-      // 4) Si q2_2 está visible => checamos radio "Sí, tengo" / "No, tengo"
+      // 4) Si q2_2 está visible => "¿Tienes un negocio?"
       if (q2_2 && q2_2.offsetParent !== null) {
         const rbSi2_2 = document.getElementById('rbSi');
         const rbNo2_2 = document.getElementById('rbNo');
+  
         if (rbSi2_2?.checked) {
-          return 'BG-gris-mobile.png';
+          return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
         } else if (rbNo2_2?.checked) {
-          return 'BG-morado-mobile.png';
+          return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
         } else {
-          return 'BG-amarillo-mobile.png';
+          return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
         }
       }
   
@@ -669,31 +360,33 @@ document.addEventListener("DOMContentLoaded", function () {
       if (q2_1 && q2_1.offsetParent !== null) {
         const rbGrupal = document.getElementById('rbGrupalSi');
         const rbIndividual = document.getElementById('rbIndividualNo');
+  
         if (rbGrupal?.checked) {
-          return 'BG-morado-mobile.png';
+          return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
         } else if (rbIndividual?.checked) {
-          return 'BG-gris-mobile.png';
+          return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
         } else {
-          return 'BG-amarillo-mobile.png';
+          return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
         }
       }
   
-      // 6) Fuera de las secciones anteriores, se revisan los radios "Sí/No"
+      // 6) Fuera de las secciones anteriores: se revisan los radios "Sí/No"
       const rbSi = document.getElementById('rbCSi');
       const rbNo = document.getElementById('rbCNo');
+  
       if (rbSi?.checked) {
-        return 'BG-morado-mobile.png';
+        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
       } else if (rbNo?.checked) {
-        // BG-blue también tiene versión mobile
-        return 'BG-blue-mobile.png';
+        return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
       }
   
       // 7) Por defecto
-      return 'BG-amarillo-mobile.png';
+      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
     }
   
     /**
-     * Aplica el fondo al <body> según la imagen (o 'none').
+     * Aplica el fondo al <body> según la imagen recibida.
+     * Si es 'none', se quita el fondo.
      */
     function changeBackground(image) {
       if (image === 'none') {
@@ -701,19 +394,31 @@ document.addEventListener("DOMContentLoaded", function () {
         body.style.backgroundColor = '#fff';
         return;
       }
-      // Asignamos la imagen (para mobile)
-      body.style.backgroundImage = `url('assets/images/${image}')`;
-      body.style.backgroundColor = '';
-      document.documentElement.style.height = '';
-      body.style.minHeight = '';
+      const isDesktop = window.innerWidth >= 1024;
+      if (isDesktop) {
+        body.style.backgroundImage = `url('assets/images/${image}')`;
+        body.style.backgroundColor = '';
+        document.documentElement.style.height = '100%';
+        body.style.minHeight = '100vh';
+      } else {
+        if (image === 'BG-rosa-mobile.png') {
+          body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+          body.style.backgroundSize = "cover";
+        } else {
+          body.style.backgroundImage = `url('assets/images/${image}')`;
+        }
+        body.style.backgroundColor = '';
+        document.documentElement.style.height = '';
+        body.style.minHeight = '';
+      }
     }
   
-    // Al cargar la página, se aplica el fondo inicial
+    // Al cargar la página se aplica el fondo inicial
     changeBackground(getCurrentBackground());
   
-    // ---------------------------------------------------
-    // 1. Eventos de clic para "Sí/No" (anteriores)
-    // ---------------------------------------------------
+    // ----------------------------
+    // Eventos para los radio buttons
+    // ----------------------------
     if (rbSiContainer && rbNoContainer) {
       rbSiContainer.addEventListener('click', () => {
         document.getElementById('rbCSi').checked = true;
@@ -726,9 +431,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ---------------------------------------------------
-    // 2. Eventos de clic para "Crédito grupal/individual" (#q2_1)
-    // ---------------------------------------------------
     if (rbGrupalContainer && rbIndividualContainer) {
       rbGrupalContainer.addEventListener('click', () => {
         document.getElementById('rbGrupalSi').checked = true;
@@ -741,9 +443,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ---------------------------------------------------
-    // 3. Eventos de clic para #q2_2 => "Sí, tengo" / "No, tengo"
-    // ---------------------------------------------------
     if (rbSiNegocioContainer) {
       rbSiNegocioContainer.addEventListener('click', () => {
         document.getElementById('rbSi').checked = true;
@@ -757,9 +456,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ---------------------------------------------------
-    // 4. Eventos de clic para #q3_1 => "Sí, más de 6 meses" / "No, menos de 6 meses"
-    // ---------------------------------------------------
     if (rbSiMesesContainer) {
       rbSiMesesContainer.addEventListener('click', () => {
         document.getElementById('rbSiNegocio').checked = true;
@@ -773,25 +469,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ---------------------------------------------------
-    // 5. Al cambiar tamaño de ventana u orientación
-    // ---------------------------------------------------
+    // ----------------------------
+    // Eventos de cambio de tamaño y orientación
+    // ----------------------------
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 1024) {
-        changeBackground(getCurrentBackground());
-      }
+      changeBackground(getCurrentBackground());
     });
     window.addEventListener('orientationchange', () => {
       setTimeout(() => {
-        if (window.innerWidth < 1024) {
-          changeBackground(getCurrentBackground());
-        }
+        changeBackground(getCurrentBackground());
       }, 100);
     });
   
-    // ---------------------------------------------------
-    // 6. IntersectionObserver para q4_1 => fondo 'none' si está visible
-    // ---------------------------------------------------
+    // ----------------------------
+    // IntersectionObservers para cambiar el fondo según la visibilidad de secciones
+    // ----------------------------
     if (q4_1) {
       const observerQ4_1 = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -805,9 +497,6 @@ document.addEventListener("DOMContentLoaded", function () {
       observerQ4_1.observe(q4_1);
     }
   
-    // ---------------------------------------------------
-    // 7. IntersectionObserver para q4_2 => cuando esta sección esté visible, se oculta el fondo
-    // ---------------------------------------------------
     if (q4_2) {
       const observerQ4_2 = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -821,9 +510,6 @@ document.addEventListener("DOMContentLoaded", function () {
       observerQ4_2.observe(q4_2);
     }
   
-    // ---------------------------------------------------
-    // 8. IntersectionObserver para q3_2 => modifica clases en elementos
-    // ---------------------------------------------------
     if (q3_2) {
       const observerQ3_2 = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -843,9 +529,6 @@ document.addEventListener("DOMContentLoaded", function () {
       observerQ3_2.observe(q3_2);
     }
   
-    // ---------------------------------------------------
-    // 9. IntersectionObserver para q3_1 => recalcula fondo al cambiar de visibilidad
-    // ---------------------------------------------------
     if (q3_1) {
       const observerQ3_1 = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -855,9 +538,6 @@ document.addEventListener("DOMContentLoaded", function () {
       observerQ3_1.observe(q3_1);
     }
   
-    // ---------------------------------------------------
-    // 10. IntersectionObservers opcionales para q2_2 y q2_1
-    // ---------------------------------------------------
     if (q2_2) {
       const observerQ2_2 = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -875,6 +555,8 @@ document.addEventListener("DOMContentLoaded", function () {
       observerQ2_1.observe(q2_1);
     }
   });
+  
+  
   
 
  document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1035,7 +717,168 @@ document.addEventListener("DOMContentLoaded", function () {
      observer.observe(targetSection);
  });
 
+
+
+//MARK: ROMULARIOS - DESHABILITAR Y HABILITAR CAMPOS
+document.addEventListener("DOMContentLoaded", function() {
+    // Inyecta estilos para que los campos deshabilitados muestren el texto y placeholder en #5E6A71,
+    // y para que las etiquetas de los radios de género deshabilitados tengan el estilo deseado.
+    var customStyle = document.createElement("style");
+    customStyle.innerHTML = `
+      /* Estilos generales para inputs, selects y elementos con .disableForm deshabilitados */
+      .campoFormulario input:disabled,
+      .select-container select:disabled,
+      .disableForm:disabled {
+        color: #5E6A71 !important;
+        background-color: #D8DADA !important;
+      }
+      .campoFormulario input:disabled::placeholder,
+      .campoFormulario input:disabled::-webkit-input-placeholder,
+      .campoFormulario input:disabled:-ms-input-placeholder,
+      .select-container select:disabled::placeholder,
+      .select-container select:disabled::-webkit-input-placeholder,
+      .select-container select:disabled:-ms-input-placeholder,
+      .disableForm:disabled::placeholder,
+      .disableForm:disabled::-webkit-input-placeholder,
+      .disableForm:disabled:-ms-input-placeholder {
+        color: #5E6A71 !important;
+      }
+      /* Estilos específicos para las etiquetas de radios de género cuando el input está deshabilitado */
+      .radio-button input.genero:disabled + label.genero {
+        background-color: #F3F3F2 !important;
+        border: 1px solid #D8DADA !important;
+        color: #949C9F !important;
+      }
+    `;
+    document.head.appendChild(customStyle);
+  
+    // Función de ayuda para habilitar un campo por su ID
+    function enableField(id) {
+      var field = document.getElementById(id);
+      if (field && field.disabled) {
+        field.disabled = false;
+        field.style.color = "";
+      }
+    }
+  
+    // Lista de campos a deshabilitar inicialmente (todos excepto "txbNombre")
+    // Incluye los radios de género: rbFemenino y rbMasculino.
+    var fields = [
+      "txbApPaterno",
+      "txbApMaterno",
+      "rbFemenino",
+      "rbMasculino",
+      "diaSelect",
+      "mesSelect",
+      "anioSelect",
+      "telefonoSelect",
+      "txbNumeroTel",
+      "horaSelect",
+      "txbCP",
+      "txbCorreoElectronico"
+    ];
+    
+    fields.forEach(function(id) {
+      var elem = document.getElementById(id);
+      if (elem) {
+        elem.disabled = true;
+        // Para los radios, si deseas asignarles también estilos inline (además de la regla inyectada)
+        if (elem.type === "radio") {
+          elem.style.backgroundColor = "#F3F3F2";
+          elem.style.color = "#949C9F";
+          elem.style.border = "1px solid #D8DADA";
+        } else {
+          elem.style.color = "#5E6A71";
+        }
+      }
+    });
+  
+    // --- Cadena de habilitación ---
+  
+    // Paso 1: "txbNombre" (Nombre(s)) ya está habilitado por defecto.
+  
+    // Paso 2: Cuando se llena "txbNombre", se habilitan "txbApPaterno" y "txbApMaterno"
+    var nombreField = document.getElementById("txbNombre");
+    if (nombreField) {
+      nombreField.addEventListener("input", function() {
+        if (nombreField.value.trim() !== "") {
+          enableField("txbApPaterno");
+          enableField("txbApMaterno");
+        }
+      });
+    }
+  
+    // Paso 3: Cuando se llena "txbApPaterno", se habilitan:
+    // - Fecha de nacimiento: "diaSelect", "mesSelect" y "anioSelect"
+    // - Teléfono: "telefonoSelect" y "txbNumeroTel"
+    // - Grupo de radios (Género): "rbFemenino" y "rbMasculino"
+    var apPaternoField = document.getElementById("txbApPaterno");
+    if (apPaternoField) {
+      apPaternoField.addEventListener("input", function() {
+        if (apPaternoField.value.trim() !== "") {
+          enableField("diaSelect");
+          enableField("mesSelect");
+          enableField("anioSelect");
+          enableField("telefonoSelect");
+          enableField("txbNumeroTel");
+          enableField("rbFemenino");
+          enableField("rbMasculino");
+        }
+      });
+    }
+  
+    // Paso 4: Cuando se llena el campo Teléfono ("txbNumeroTel"),
+    // se habilitan "horaSelect" (¿A qué hora te hablamos?) y "txbCP" (Código postal)
+    var telField = document.getElementById("txbNumeroTel");
+    if (telField) {
+      telField.addEventListener("input", function() {
+        if (telField.value.trim() !== "") {
+          enableField("horaSelect");
+          enableField("txbCP");
+        }
+      });
+    }
+  
+    // Paso 5: Cuando se llena el campo Código postal ("txbCP"),
+    // se habilita "txbCorreoElectronico" (Correo electrónico, opcional)
+    var cpField = document.getElementById("txbCP");
+    if (cpField) {
+      cpField.addEventListener("input", function() {
+        if (cpField.value.trim() !== "") {
+          enableField("txbCorreoElectronico");
+        }
+      });
+    }
+  });
  
+
+//MARK: funcion para boton de regresar
+
+document.addEventListener("DOMContentLoaded", function(){
+    // Selecciona el botón "arrow_back" (se asume que es el segundo <a> dentro de .header-back-icons)
+    var backButton = document.querySelector('.header-back-icons a:nth-child(2)');
+    
+    function updateBackButton() {
+        // Recorre todas las secciones para encontrar la visible
+        var sections = document.querySelectorAll('.question__content');
+        var visibleSection = null;
+        sections.forEach(function(section) {
+            var style = window.getComputedStyle(section);
+            if (style.display !== "none") {
+                visibleSection = section;
+            }
+        });
+        // Si la sección visible es la de id "q1", oculta el botón; de lo contrario, lo muestra.
+        if (visibleSection && visibleSection.id === "q1") {
+            backButton.style.display = "none";
+        } else {
+            backButton.style.display = "block";
+        }
+    }
+    
+    updateBackButton();
+    setInterval(updateBackButton, 300);
+});
         
 
         

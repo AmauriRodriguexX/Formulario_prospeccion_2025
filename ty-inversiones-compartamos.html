@@ -68,7 +68,7 @@
             pageInstanceID: "Prospeccion de clientes - production",
             page: {
                 pageInfo: {
-                    pageName: "TYPage",
+                    pageName: "TYPage Clientes Inversiones",
                     URL: urlAhora,
                     referringURL: "",
                     deviceCategory: localStorage.getItem("CompartamosDispositivoUsuario"),
@@ -101,18 +101,10 @@
             }
         }
 
-        function triggerView() {
-            var viewName = digitalData.page.pageInfo.pageName;
-
-            if (typeof adobe != 'undefined' && adobe.target && typeof adobe.target.triggerView === 'function') {
-                adobe.target.triggerView(viewName);
-            }
-        }
-
         /* DataLayer t2ó */
         window.adobeDataLayer = window.adobeDataLayer || [];
         window.adobeDataLayer.push({
-            pageName: "TYPage Cliente - Prospección",
+            pageName: "TYPage Cliente Inversiones - Prospección",
             pageUrl: window.location.href,
             referringUrl: document.referrer,
             primaryCategory: "Landing page - Prospecccion de clientes",
@@ -267,7 +259,7 @@
             <a href="https://www.compartamos.com.mx/compartamos"><img g src="img/compartamos_banco_logo.svg"
                     alt="Compartamos Banco" class="footer-logo"></a>
             <p>Una empresa de <img src="img/gentera_logo.svg" alt="Gentera"></p>
-            <p>© 2024 Gentera S.A.B.</p>
+            <p>© 2025 Gentera S.A.B.</p>
             <div class="footer-links">
                 <a href="https://www.compartamos.com.mx/compartamos/regulacion/privacidad" class="footer-link">Aviso de
                     Privacidad</a> |

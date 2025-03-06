@@ -1,29 +1,32 @@
-
 .home__title {
-    font-family:bree;
-    font-size:28px;
-    line-height:36px;
-    margin:0;
+    font-family: bree;
+    font-size: 28px;
+    line-height: 36px;
+    margin: 0;
 }
+
 .home__txt {
-    font-size:16px;
-    margin-bottom:20px
+    font-size: 16px;
+    margin-bottom: 20px
 }
+
 .home__line {
-    width:100%;
-    margin:auto;
-    height:2px;
-    background-color:#CEC9C6
+    width: 100%;
+    margin: auto;
+    height: 2px;
+    background-color: #CEC9C6
 }
+
 .home__msg {
-    display:none;
-    color:#fff;
-    background-color:#C91A0F;
-    border-radius:6px;
-    padding:6px;
-    text-align:center;
+    display: none;
+    color: #fff;
+    background-color: #C91A0F;
+    border-radius: 6px;
+    padding: 6px;
+    text-align: center;
     margin-bottom: 42px;
 }
+
 .question {
     color: #252A2D;
     font-family: Inter;
@@ -33,59 +36,70 @@
     line-height: 30px;
     margin-bottom: 24px;
 }
+
 .progress__label {
     margin-top: 8px;
     margin-bottom: 24px;
 }
+
 .progress__bar {
-    width:100%;
-    margin:auto;
-    height:5px;
+    width: 100%;
+    margin: auto;
+    height: 5px;
     border-radius: 92px;
-    background-color:#CEC9C6
+    background-color: #CEC9C6
 }
+
 .progress__line {
-    background-color:#CE0058;
-    width:0;
-    height:100%;
+    background-color: #CE0058;
+    width: 0;
+    height: 100%;
     border-radius: 92px;
     border-radius: 20px;
 }
+
 .progress__line.p30 {
-    width:30%
+    width: 30%
 }
+
 .progress__line.p60 {
-    width:60%
+    width: 60%
 }
+
 .progress__line.p50 {
-    width:50%
+    width: 50%
 }
+
 .progress__line.p80 {
-    width:90%
+    width: 90%
 }
+
 .progress__line.p100 {
-    width:100%
+    width: 100%
 }
+
 .question__content {
-    display:none
+    display: none
 }
+
 #q1 {
-    display:block
+    display: block
 }
+
 .answer {
     /* font-size:14px; */
-    border-radius:6px;
-    padding:15px;
-    background-color:#fff;
-    box-shadow:0 3px 6px #00000021;
-    margin-bottom:20px;
-    cursor:pointer
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 3px 6px #00000021;
+    margin-bottom: 20px;
+    cursor: pointer
 }
 
 
 .material-symbols-outlined {
-    font-size: 24px; 
-    margin-right: 2px; 
+    font-size: 24px;
+    margin-right: 2px;
 }
 
 
@@ -141,7 +155,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     appearance: none;
-    /* Ocultar la flecha nativa */
+    opacity: 1 !important;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-color: white;
@@ -162,7 +176,7 @@
 
 .inter-font {
     font-family: 'Inter', sans-serif;
- 
+
 }
 
 .text-left {
@@ -172,4 +186,24 @@
 
 .text-center {
     text-align: center;
+}
+
+.rosa-bg {
+    background-position: center 244px !important;
+}
+
+.header-back-icons {
+    display: flex !important;
+    align-items: center !important;
+    position: relative; /* Necesario para que el icono se posicione dentro de este contenedor */
+}
+
+.header-back-icons a:last-child {
+    position: absolute;
+    right: 0; /* Siempre pegado a la derecha */
+}
+
+
+.header-back-icons a span {
+    color: #141414;
 }
