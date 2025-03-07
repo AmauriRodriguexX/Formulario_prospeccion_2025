@@ -5,6 +5,8 @@ const MSG_ERROR_GRAL = "No se pudo mandar la información. Inténtelo más tarde
 
 
 $(document).ready(function() {
+	$('#btnBack').hide(); // Ocultar inicialmente
+
 	$('input[type="radio"]').prop('checked', false);
 	$('input[name=id_question]').val('1');
 	$('#msError').hide();	
@@ -18,6 +20,98 @@ $(document).ready(function() {
 			$(this).css('accent-color', 'initial');
 		}
 	});
+
+	// Variable para controlar visibilidad
+	let showBackButton = false;
+
+	// Manejador del botón "Anterior"
+	$('#btnBack').on('click', function() {
+		const currentQuestion = $('input[name=id_question]').val();
+		navigateBack(currentQuestion);
+	});
+	function navigateBack(currentId) {
+		const previousMap = {
+			'1': null,
+			'2_1': '1',
+			'2_2': '1',
+			'3_1': '2_2',
+			'3_2': $('#id_question_prev').val(),
+			'4_1': '2_1',
+			'4_2': '2_1',
+			'4_3': '4_2'
+		};
+	
+		const previousQuestion = previousMap[currentId];
+		if (!previousQuestion) return;
+	
+		// Ocultar todas las preguntas y mostrar la anterior
+		$('.question__content').hide();
+		$(`#q${previousQuestion}`).show();
+		$('input[name=id_question]').val(previousQuestion);
+	
+		// Validación directa sin usar funciones existentes
+		const isValid = checkQuestionValidity(previousQuestion);
+		
+		// Actualizar estado del botón Continuar
+		$('#btnContinue')
+			.toggleClass('active', isValid)
+			.show();
+	
+		updateProgress(previousQuestion);
+		toggleBackButton(previousQuestion);
+	}
+	function checkQuestionValidity(questionId) {
+		switch(questionId) {
+			case '1':
+				return $('input[name=answer_question_1]').val() != '';
+	
+			case '2_1':
+				return $('input[name=answer_question_2_1]').val() != '';
+	
+			case '2_2':
+				return $('input[name=answer_question_2_2]').val() != '';
+	
+			case '3_1':
+				return $('input[name=answer_question_3_1]').val() != '';
+	
+			case '3_2':
+				// Usa la misma lógica de validación del formulario
+				return !(errorNombre || errorApP || errorFecha || errorTelefono || errorCP);
+	
+			case '4_1':
+				return $('#tipoCreditoGrupal').val() !== '0';
+	
+			case '4_2':
+				return $('#tipoCreditoIndividual').val() !== '0';
+	
+			default:
+				return false;
+		}
+	}
+	// Función para actualizar barra de progreso
+	function updateProgress(questionId) {
+		const progressMap = {
+			'1': { percent: '0%', class: 'p0' },
+			'2_1': { percent: '30%', class: 'p30' },
+			'2_2': { percent: '30%', class: 'p30' },
+			'3_1': { percent: '60%', class: 'p60' },
+			'3_2': { percent: '90%', class: 'p90' },
+			'4_1': { percent: '60%', class: 'p60' },
+			'4_2': { percent: '60%', class: 'p60' }
+		};
+
+		const progress = progressMap[questionId] || { percent: '0%', class: 'p0' };
+		$(`.progress__label span`).html(progress.percent);
+		$(`.progress__line`).removeClass().addClass(`progress__line ${progress.class}`);
+	}
+
+	// Función para mostrar/ocultar botón
+	function toggleBackButton(questionId) {
+		showBackButton = questionId !== '1';
+		$('#btnBack').toggle(showBackButton);
+		$('#id_question_prev').val(questionId);
+	}
+
 
 	//Inicializar localStorage
 	localStorage.setItem("CompartamosGenero","");
@@ -199,6 +293,7 @@ $(document).ready(function() {
 	//Pregunta: Tienes un credito?
 	function validateQ1() {
 
+		let idQuestion = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_1]').val();
 	
 		if (answer == '') {
@@ -236,9 +331,12 @@ $(document).ready(function() {
 			  'field_value': answer
 			},
 		);
+		
+		toggleBackButton(idQuestion);
 	}
 
 	function validateQ2_1(){
+		let newQuestionId = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_2_1]').val();
 
 		if (answer == '') {
@@ -275,10 +373,12 @@ $(document).ready(function() {
 			'field_name': '02. ¿Qué tipo de crédito tienes?',
 			'field_value': answer
 		}, answer);
+		toggleBackButton(newQuestionId);
 	}
 
 	//Pregunta: tienes negocio?
 	function validateQ2_2() {
+		let newQuestionId = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_2_2]').val();
 	
 		if (answer == '') {
@@ -312,10 +412,12 @@ $(document).ready(function() {
 			'field_name': '02. ¿Tienes un negocio?',
 			'field_value': tienesNegocio
 		});
+		toggleBackButton(newQuestionId);
 	}
 
 	//Pregunta: tiene mas de 6 meses?
 	function validateQ3_1(){
+		let newQuestionId = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_3_1]').val();
 	
 		if (answer == '') {
@@ -351,9 +453,11 @@ $(document).ready(function() {
 			'field_name': '03. ¿Tu negocio tiene más de 6 meses?',
 			'field_value': antiguedadSeisMeses
 		});
+		toggleBackButton(newQuestionId);
 	}
 
 	function validateQ3_2() {
+		let newQuestionId = $('input[name=id_question]').val();
 		var ssSource = window.ssSource || 'default_tracking_source'; // Asegurar que ssSource siempre esté definido
 	 
 		if (bandContinuar === false) {
@@ -378,6 +482,7 @@ $(document).ready(function() {
 		// Si la validación es exitosa:
 		$('#msgDatosIncorrectos').hide();
 		sendData('');
+		toggleBackButton(newQuestionId);
 		return true; // Indica que la validación fue exitosa
 	 }
 	 
@@ -385,6 +490,7 @@ $(document).ready(function() {
 
 	//Credito Grupal
 	function validateQ4_1(){
+		let newQuestionId = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_4_1]').val();
 		$('.desktop-footer').hide();
 	
@@ -423,12 +529,14 @@ $(document).ready(function() {
 
 		$('#btnContinue').removeClass('active');
 		$('#btnContinue').show();
+		toggleBackButton(newQuestionId);
 	}
   
 
 	//Crédito Individual
 
 	function validateQ4_2(){
+		let newQuestionId = $('input[name=id_question]').val();
 		let answer = $('input[name=answer_question_4_2]').val();
 		$('.desktop-footer').hide();
 	
@@ -455,6 +563,7 @@ $(document).ready(function() {
 
 		$('#btnContinue').removeClass('active');
 		$('#btnContinue').show();
+		toggleBackButton(newQuestionId);
 	}
 
 

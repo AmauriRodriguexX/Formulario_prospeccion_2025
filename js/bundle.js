@@ -856,7 +856,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function(){
     // Selecciona el botón "arrow_back" (se asume que es el segundo <a> dentro de .header-back-icons)
-    var backButton = document.querySelector('.header-back-icons a:nth-child(2)');
+    var backButton = document.querySelector('.header-back-icons div#btnBack');
     
     function updateBackButton() {
         // Recorre todas las secciones para encontrar la visible

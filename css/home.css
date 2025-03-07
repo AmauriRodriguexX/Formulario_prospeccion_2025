@@ -198,13 +198,14 @@
     position: relative; /* Necesario para que el icono se posicione dentro de este contenedor */
 }
 
-.header-back-icons a:last-child {
+.header-back-icons div#btnBack:last-child {
     position: absolute;
     right: 0; /* Siempre pegado a la derecha */
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 
-.header-back-icons a span {
+.header-back-icons div#btnBack span {
     color: #141414;
 }

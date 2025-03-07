@@ -47,7 +47,7 @@
      .wrapper {
           margin: auto;
           max-width: 1240px;
-          padding: 0 0px 0 16px !important;
+          padding: 0px !important;
      }
 
      .answer {

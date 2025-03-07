@@ -174,13 +174,14 @@
                         <img class="header__logo" src="img/compartamos_banco_logo.svg" alt="Logo Compartamos Banco">
                         <!--eliminacion de estilos style="margin: 15% 32%;"-->
                     </a>
-                    <a href="">
+                    <div id="btnBack">
                         <span class="material-symbols-outlined">
                             arrow_back
                         </span>
-                    </a>
+                    </div>
                 </div>
                 <input type="hidden" name="id_question" value="1">
+                <input type="hidden" id="id_question_prev" name="id_question_prev" value="1">
                 <input type="hidden" name="answer_question_1" value=""> <!--Tienes un credito-->
                 <input type="hidden" name="answer_question_2_1" value=""> <!--tipoCredito-->
                 <input type="hidden" name="answer_question_2_2" value=""> <!--negocio-->
@@ -283,11 +284,11 @@
                     <p class="question pt-3">¿Tu negocio tiene más de 6 meses?</p>
                     <div class="d-flex flex-column pt-3">
                         <div class="radioButonsForm answer" data-id="Si" id="DrbSi" name="DrbSi">
-                            <input type="radio" id="rbSiNegocio" value="Si" name="rbNegocio">
+                            <input type="radio" id="rbSiNegocio" value="Si" name="rbNegocioM">
                             <label style="color: grey;" for="Si">Sí, tiene más de 6 meses</label>
                         </div>
                         <div class="radioButonsForm answer" data-id="No" id="DrbNo" name="DrbCNo">
-                            <input type="radio" id="rbNoNegocio" value="No" name="rbNegocio">
+                            <input type="radio" id="rbNoNegocio" value="No" name="rbNegocioM">
                             <label style="color: grey;" for="No">No, tiene menos de 6 meses</label>
                         </div>
                     </div>
@@ -684,6 +685,7 @@
                 </div>
 
 
+              
                 <!--Crédito Individual-->
                 <div class="question__content" id="q4_2">
                     <div class="d-flex flex-column">
@@ -706,12 +708,11 @@
                         <div class="carousel">
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito extra')">
                                 <div class="thumbnail crece-mejora-individual"></div>
-                                <span class="card_footer-description">Para lo que quieras y cuando quieras. Montos desde
-                                    $5,000 hasta $100,000 pesos.</span>
-                            </div>
-                            <div class="card_footer">
-                                <span class="card_footer-name">Dile sí a un crédito extra</span>
-
+                                <div class="card_footer">
+                                    <span class="card_footer-name">Crédito extra</span>
+                                    <span class="card_footer-description">Para lo que quieras y cuando quieras. Montos
+                                        desde $5,000 hasta $100,000 pesos.</span>
+                                </div>
                             </div>
                             <div class="card" onclick="agregarTipoCreditoGrupal('Crédito de emergencia')">
                                 <div class="thumbnail credito-emergencia-individual"></div>
@@ -787,7 +788,6 @@
                 <button type="button" class="frm__btn btnContinuarInicio" id="btnContinue">
                     Continuar <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
-
             </form>
             <footer class="desktop-footer">
                 <div class="footer-content">
