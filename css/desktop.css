@@ -68,6 +68,7 @@
     .question {
         font-weight: 600;
         font-size: 18px;
+        text-align: left;
         font-family: Inter;
         font-style: normal;
         line-height: 30px;
@@ -673,4 +674,10 @@
    
 
 
+}
+
+@media screen and (min-width: 1024px) {
+    .main.main-visible-q3_2 {
+        max-width: 50% !important;
+    }
 }

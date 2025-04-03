@@ -1,3 +1,70 @@
+/* MARK: Fondos dinámicos */
+.bg-none {
+    background-image: none !important;
+    background-color: #fff !important;
+}
+
+.bg-morado {
+    background-image: url('/assets/images/BG-morado.png');
+}
+
+.bg-morado-mobile {
+    background-image: url('/assets/images/BG-morado-mobile.png');
+}
+
+.bg-gris {
+    background-image: url('/assets/images/BG-gris.png');
+}
+
+.bg-gris-mobile {
+    background-image: url('/assets/images/BG-gris-mobile.png');
+}
+
+.bg-rosa-mobile {
+    background-image: url('/assets/images/BG-rosa-mobile.png');
+    background-position: center 244px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-gris-mangenta {
+    background-image: url('/assets/images/bg-gris-mangenta.png');
+}
+
+.bg-amarillo {
+    background-image: url('/assets/images/BG-amarillo.png');
+}
+
+.bg-amarillo-mobile {
+    background-image: url('/assets/images/BG-amarillo-mobile.png');
+}
+
+.bg-amarillo-opacy {
+    background-image: url('/assets/images/BG-amarillo-opacy.png');
+}
+
+.bg-amarillo-mobile-opacy {
+    background-image: url('/assets/images/BG-amarillo-mobile-opacy.png');
+}
+
+.bg-azul {
+    background-image: url('/assets/images/BG-blue.png');
+}
+
+.bg-azul-mobile {
+    background-image: url('/assets/images/BG-blue-mobile.png');
+}
+
+/* MARK: Estilos base del body (todos los fondos lo usan) */
+body {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: scroll;
+    transition: background-image 0.5s ease-in-out;
+    min-height: 100vh;
+}
+
 .home__title {
     font-family: bree;
     font-size: 28px;
@@ -195,12 +262,14 @@
 .header-back-icons {
     display: flex !important;
     align-items: center !important;
-    position: relative; /* Necesario para que el icono se posicione dentro de este contenedor */
+    position: relative;
+    /* Necesario para que el icono se posicione dentro de este contenedor */
 }
 
 .header-back-icons div#btnBack:last-child {
     position: absolute;
-    right: 0; /* Siempre pegado a la derecha */
+    right: 0;
+    /* Siempre pegado a la derecha */
     margin-bottom: 15px;
     cursor: pointer;
 }
@@ -208,4 +277,185 @@
 
 .header-back-icons div#btnBack span {
     color: #141414;
+}
+
+/* Mark: forms habilitar y deshabilitar*/
+
+
+.campoFormulario input:disabled,
+.select-container select:disabled,
+.disableForm:disabled {
+    color: #5E6A71 !important;
+    background-color: #D8DADA !important;
+}
+
+.campoFormulario input:disabled::placeholder,
+.campoFormulario input:disabled::-webkit-input-placeholder,
+.campoFormulario input:disabled:-ms-input-placeholder,
+.select-container select:disabled::placeholder,
+.select-container select:disabled::-webkit-input-placeholder,
+.select-container select:disabled:-ms-input-placeholder,
+.disableForm:disabled::placeholder,
+.disableForm:disabled::-webkit-input-placeholder,
+.disableForm:disabled:-ms-input-placeholder {
+    color: #5E6A71 !important;
+}
+
+.radio-button input.genero:disabled+label.genero {
+    background-color: #F3F3F2 !important;
+    border: 1px solid #D8DADA !important;
+    color: #949C9F !important;
+}
+
+.carousel-prev.inactive {
+    background-color: #D8D8D8;
+    color: #333;
+}
+
+.carousel-next.inactive {
+    background-color: #D8D8D8;
+    color: #333;
+}
+
+.carousel-prev:not(.inactive),
+.carousel-next:not(.inactive) {
+    background-color: #CE0058;
+    color: white;
+}
+
+/* MARK: Posición del botón según visibilidad */
+.btn-fixed {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 999;
+}
+
+.btn-relative {
+    position: relative;
+}
+
+
+
+/* MARK: Estilos adaptados para secciones específicas */
+/* Estilos generales del título */
+.home__title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+
+    .home__title,
+    .question {
+        text-align: center;
+    }
+}
+
+/* Estilos por defecto para .main */
+.main {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* En mobile (menos de 768px), quitar fondo y sombra */
+@media screen and (max-width: 767px) {
+    .main {
+        background: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* MARK: Estilos aplicados cuando q4_1 o q4_2 están visibles */
+.main-no-style {
+    background: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+}
+
+.main-default-style {
+    background: #fff !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.wrapper-custom {
+    max-width: 1240px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-flex-auto {
+    flex: auto !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.flex-column-center {
+    flex-direction: column !important;
+    text-align: center !important;
+}
+
+/* MAIN default (se restaura si no hay q4_1 o q4_2 visibles) */
+.main-default-style {
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* MAIN sin estilo cuando q4_1 o q4_2 están visibles */
+.main-no-style {
+    background: none;
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
+}
+
+/* WRAPPER personalizado */
+.wrapper-custom {
+    max-width: 1240px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Centrado de texto */
+.text-center {
+    text-align: center;
+}
+
+/* Cards del carrusel con flex automático */
+.card-flex-auto {
+    flex: auto;
+}
+
+/* Flex column centrado */
+.flex-column-center {
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Q3_2 grid para escritorio */
+.grid-form {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px;
+}
+
+/* Q3_2 estilo para mobile (fallback si no hay grid) */
+.flex-column-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Elementos que ocupan las dos columnas en escritorio */
+.span-2-columns {
+    grid-column: span 2 !important;
+}
+
+/* Ancho de .main dentro de q3_2 para escritorio */
+.main-40-width {
+    max-width: 40% !important;
 }
