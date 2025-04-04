@@ -287,8 +287,9 @@ body {
     color: #141414;
 }
 
-/* Mark: forms habilitar y deshabilitar*/
 
+
+/* Mark: forms habilitar y deshabilitar*/
 /* Ocultar los íconos nativos en Safari para inputs tipo "tel" */
 input[type="tel"]::-webkit-contacts-auto-fill-button,
 input[type="tel"]::-webkit-credentials-auto-fill-button {
@@ -297,8 +298,13 @@ input[type="tel"]::-webkit-credentials-auto-fill-button {
   pointer-events: none;
 }
 
-
-
+input[type="checkbox"] {
+    -webkit-appearance: checkbox; /* Fuerza estilo nativo pero consistente */
+    appearance: checkbox;
+    height: 16px;
+    width: 16px;
+  }
+  
 
 .campoFormulario input:disabled,
 .select-container select:disabled,
@@ -414,9 +420,11 @@ input[type="tel"]::-webkit-credentials-auto-fill-button {
 }
 
 .flex-column-center {
+    display: flex !important;
     flex-direction: column !important;
     text-align: center !important;
 }
+
 
 /* MAIN default (se restaura si no hay q4_1 o q4_2 visibles) */
 .main-default-style {
@@ -513,8 +521,3 @@ input[type="tel"]::-webkit-credentials-auto-fill-button {
       max-width: 500px;
     }
   }
-  
-
-
-
-  

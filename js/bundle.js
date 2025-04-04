@@ -369,25 +369,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
 // MARK: Alterna posición del botón según visibilidad de la sección 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth > 768) return; // Solo ejecuta en móvil
-  const btn = document.querySelector(".btnContinuarInicio");
-  const targetSection = document.getElementById("q3_2");
-  if (!btn || !targetSection) return;
-  function updateButtonPosition() {
-    const rect = targetSection.getBoundingClientRect();
-    const visible = rect.top < window.innerHeight && rect.bottom > 0;
-    btn.classList.toggle("btn-fixed", !visible);
-    btn.classList.toggle("btn-relative", visible);
-  }
+  if (window.innerWidth > 768) return; // Solo ejecuta el script en dispositivos móviles
 
-  window.addEventListener("scroll", updateButtonPosition);
-  window.addEventListener("resize", updateButtonPosition);
+  let btn = document.querySelector(".btnContinuarInicio");
+  let targetSection = document.getElementById("q3_2");
 
-  updateButtonPosition(); 
+  if (!btn || !targetSection) return; // Evita errores si los elementos no existen
+
+  let observer = new IntersectionObserver(
+      (entries) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  if (btn.style.position !== "relative") {
+                      btn.style.position = "relative";
+                  }
+              } else {
+                  if (btn.style.position !== "fixed") {
+                      btn.style.position = "fixed";
+                  }
+              }
+          });
+      },
+      { threshold: 0.2 } // Detectar cuando al menos el 20% de la sección es visible
+  );
+
+  observer.observe(targetSection);
 });
 
 //MARK: ROMULARIOS - DESHABILITAR Y HABILITAR CAMPOS
@@ -482,11 +490,17 @@ document.addEventListener("DOMContentLoaded", function(){
     updateBackButton();
     setInterval(updateBackButton, 300);
 });
-        
 
-        
 
-        
+
+
+
+
+
+
+
+
+
 
         
 
