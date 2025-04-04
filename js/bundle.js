@@ -4,16 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const sectionQ3_2 = document.getElementById("q3_2");
   const paragraphQ3_2 = sectionQ3_2?.querySelector("p.question.c-center");
   const spanQ3_2 = sectionQ3_2?.querySelector("span.p-title.text-mobiel-form");
-
   const radioNo = document.getElementById("rbCNo");
   const radioSi = document.getElementById("rbCSi");
 
   const sectionTitles = {
-    q2_1: "Ofertas para clientes",
-    q3_2: "Solicitud crédito adicional",
-    q4_1: "Crédito grupal",
-    q4_2: "Crédito individual"
+    "q2_1": "Ofertas para clientes",
+    "q3_2": "Solicitud crédito adicional",
+    "q4_1": "Crédito grupal",
+    "q4_2": "Crédito individual"
   };
+
+  function isVisible(el) {
+    return el && el.offsetParent !== null;
+  }
 
   function updateTitle() {
     let newTitle = "Tramita tu crédito";
@@ -21,18 +24,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let sectionId in sectionTitles) {
       const section = document.getElementById(sectionId);
-      if (section && section.offsetParent !== null) {
+      if (isVisible(section)) {
         newTitle = sectionTitles[sectionId];
         break;
       }
     }
 
-    if (sectionQ3_2 && sectionQ3_2.offsetParent !== null) {
-      if (radioNo?.checked) {
-        newTitle = "Tramita tu crédito";
-        if (paragraphQ3_2) paragraphQ3_2.textContent = "Información personal";
-      } else if (radioSi?.checked) {
-        if (paragraphQ3_2) paragraphQ3_2.textContent = "Información cliente";
+    if (isVisible(sectionQ3_2) && radioNo?.checked) {
+      newTitle = "Tramita tu crédito";
+      if (paragraphQ3_2) {
+        paragraphQ3_2.textContent = "Información personal";
+      }
+    } else if (isVisible(sectionQ3_2) && radioSi?.checked) {
+      if (paragraphQ3_2) {
+        paragraphQ3_2.textContent = "Información cliente";
       }
     }
 
@@ -40,24 +45,21 @@ document.addEventListener("DOMContentLoaded", function () {
       newSpanText = "Déjanos tus datos. Le haremos saber a tu Promotor que estás interesado en este crédito para iniciar el trámite.";
     }
 
-    if (titleElement) titleElement.textContent = newTitle;
-    if (spanQ3_2) spanQ3_2.textContent = newSpanText;
+    titleElement.textContent = newTitle;
+    if (spanQ3_2) {
+      spanQ3_2.textContent = newSpanText;
+    }
   }
 
-  // Escuchar cambios en radio buttons
-  [radioNo, radioSi].forEach((radio) => {
-    if (radio) {
-      radio.addEventListener("change", updateTitle);
-    }
-  });
+  if (radioNo) radioNo.addEventListener("change", updateTitle);
+  if (radioSi) radioSi.addEventListener("change", updateTitle);
+  window.addEventListener("scroll", () => setTimeout(updateTitle, 100));
+  window.addEventListener("resize", () => setTimeout(updateTitle, 100));
+  document.addEventListener("click", () => setTimeout(updateTitle, 100));
 
-  // Verificar visibilidad de secciones cuando se hace scroll o cambia viewport
-  window.addEventListener("scroll", updateTitle);
-  window.addEventListener("resize", updateTitle);
-  window.addEventListener("orientationchange", updateTitle);
-
-  updateTitle(); // Estado inicial
+  updateTitle();
 });
+
 // MARK: Estilos dinámicos para secciones q4_1 y q4_2 en escritorio (CSS separado, sin observer)
 document.addEventListener("DOMContentLoaded", function () {
   if (window.innerWidth < 768) return;
