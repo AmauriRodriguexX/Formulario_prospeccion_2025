@@ -1,59 +1,69 @@
 /* MARK: Fondos dinámicos */
 .bg-none {
-    background-image: none !important;
-    background-color: #fff !important;
+  background: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
 }
 
+
 .bg-morado {
-    background-image: url('/assets/images/BG-morado.png');
+    background-image: url('../assets/images/BG-morado.png');
 }
 
 .bg-morado-mobile {
-    background-image: url('/assets/images/BG-morado-mobile.png');
+    background-image: url('../assets/images/BG-morado-mobile.png');
 }
 
 .bg-gris {
-    background-image: url('/assets/images/BG-gris.png');
+    background-image: url('../assets/images/BG-gris.png');
 }
 
 .bg-gris-mobile {
-    background-image: url('/assets/images/BG-gris-mobile.png');
+    background-image: url('../assets/images/BG-gris-mobile.png');
 }
 
 .bg-rosa-mobile {
-    background-image: url('/assets/images/BG-rosa-mobile.png');
+    background-image: url('../assets/images/BG-rosa-mobile.png');
     background-position: center 244px;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .bg-gris-mangenta {
-    background-image: url('/assets/images/bg-gris-mangenta.png');
+    background-image: url('../assets/images/bg-gris-mangenta.png');
 }
 
 .bg-amarillo {
-    background-image: url('/assets/images/BG-amarillo.png');
+    background-image: url('../assets/images/BG-amarillo.png');
 }
 
 .bg-amarillo-mobile {
-    background-image: url('/assets/images/BG-amarillo-mobile.png');
+    background-image: url('../assets/images/BG-amarillo-mobile.png');
 }
 
 .bg-amarillo-opacy {
-    background-image: url('/assets/images/BG-amarillo-opacy.png');
+    background-image: url('../assets/images/BG-amarillo-opacy.png');
 }
 
 .bg-amarillo-mobile-opacy {
-    background-image: url('/assets/images/BG-amarillo-mobile-opacy.png');
+    background-image: url('../assets/images/BG-amarillo-mobile-opacy.png');
 }
 
 .bg-azul {
-    background-image: url('/assets/images/BG-blue.png');
+    background-image: url('../assets/images/BG-blue.png');
 }
 
 .bg-azul-mobile {
-    background-image: url('/assets/images/BG-blue-mobile.png');
+    background-image: url('../assets/images/BG-blue-mobile.png');
 }
+
+.no-bg {
+    background: none !important;
+    background-image: none !important;
+    background-color: #fff !important; /* O el color que prefieras */
+  }
+  
+  
 
 /* MARK: Estilos base del body (todos los fondos lo usan) */
 body {
@@ -459,3 +469,40 @@ body {
 .main-40-width {
     max-width: 40% !important;
 }
+
+
+
+/* MARK: Estilos grid forms */
+
+@media (min-width: 1024px) {
+    #q3_2 .d-flex.flex-column.pt-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0px;
+    }
+  
+    #q3_2 .progress,
+    #q3_2 .progress__label,
+    #q3_2 .home__line,
+    #q3_2 .question,
+    #q3_2 .contenidoGeneralForm {
+      grid-column: span 2;
+    }
+  
+    #q3_2 .main {
+      max-width: 40%;
+    }
+  }
+  
+  /* En pantallas menores a 1024px, solo si quieres asegurarte del fallback */
+  @media (max-width: 1023px) {
+    #q3_2 .d-flex.flex-column.pt-3 {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    #q3_2 .main {
+      max-width: 500px;
+    }
+  }
+  

@@ -98,9 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", updateStyles);
   document.addEventListener("click", () => setTimeout(updateStyles, 100));
 });
+
 //MARK:  BG color en desktop y mobile 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
+
+  // --- Elementos de los radio buttons ---
   const rbSiContainer = document.getElementById('DrbCSi');
   const rbNoContainer = document.getElementById('DrbCNo');
   const rbGrupalContainer = document.getElementById('DrbCGrupal');
@@ -110,138 +113,126 @@ document.addEventListener('DOMContentLoaded', () => {
   const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
   const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
 
+  // --- Secciones del formulario ---
   const q2_1 = document.getElementById('q2_1');
   const q2_2 = document.getElementById('q2_2');
   const q3_1 = document.getElementById('q3_1');
   const q3_2 = document.getElementById('q3_2');
   const q4_1 = document.getElementById('q4_1');
   const q4_2 = document.getElementById('q4_2');
+
+  // --- Elementos visuales ---
   const mainElement = document.querySelector('.main');
   const mainContent = document.querySelector('.main__content');
   const wrapper = document.querySelector('.wrapper');
   const homeTitle = document.querySelector('.home__title');
+
+  function isVisible(el) {
+    return el && el.offsetParent !== null;
+  }
+
   function getCurrentBackground() {
     const isDesktop = window.innerWidth >= 1024;
+    if (isVisible(q4_2) || isVisible(q4_1)) return 'none';
 
-    if (q4_2 && q4_2.offsetParent !== null) {
-      return 'none';
-    }
-
-    if (q4_1 && q4_1.offsetParent !== null) {
-      return 'none';
-    }
-
-    if (q3_1 && q3_1.offsetParent !== null) {
+    if (isVisible(q3_1)) {
       const rbSiMeses = document.getElementById('rbSiNegocio');
       const rbNoMeses = document.getElementById('rbNoNegocio');
-
-      if (rbNoMeses?.checked) {
-        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      } else if (rbSiMeses?.checked) {
-        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      }
+      if (rbNoMeses?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      if (rbSiMeses?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
     }
 
-    if (q3_2 && q3_2.offsetParent !== null) {
+    if (isVisible(q3_2)) {
       const rbNo2_2 = document.getElementById('rbNo');
       const rbSiMeses = document.getElementById('rbSiNegocio');
       const rbNoMeses = document.getElementById('rbNoNegocio');
-
       if (rbNo2_2?.checked || rbNoMeses?.checked || rbSiMeses?.checked) {
         return isDesktop ? 'bg-gris-mangenta.png' : 'BG-rosa-mobile.png';
       }
-
       return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
     }
 
-    if (q2_2 && q2_2.offsetParent !== null) {
+    if (isVisible(q2_2)) {
       const rbSi2_2 = document.getElementById('rbSi');
       const rbNo2_2 = document.getElementById('rbNo');
-
-      if (rbSi2_2?.checked) {
-        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      } else if (rbNo2_2?.checked) {
-        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      } else {
-        return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-      }
+      if (rbSi2_2?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      if (rbNo2_2?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
     }
 
-    if (q2_1 && q2_1.offsetParent !== null) {
+    if (isVisible(q2_1)) {
       const rbGrupal = document.getElementById('rbGrupalSi');
       const rbIndividual = document.getElementById('rbIndividualNo');
-
-      if (rbGrupal?.checked) {
-        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      } else if (rbIndividual?.checked) {
-        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      } else {
-        return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-      }
+      if (rbGrupal?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      if (rbIndividual?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
     }
 
     const rbSi = document.getElementById('rbCSi');
     const rbNo = document.getElementById('rbCNo');
-
-    if (rbSi?.checked) {
-      return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-    } else if (rbNo?.checked) {
-      return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
-    }
+    if (rbSi?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+    if (rbNo?.checked) return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
 
     return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
   }
 
   function changeBackground(image) {
-    body.className = ''; // Remueve todas las clases para pruebas limpias
-    const imageClass = imageToClass(image);
-    if (imageClass) body.classList.add(imageClass);
-  }
+    body.className = body.className
+      .split(' ')
+      .filter(c => !c.startsWith('bg-') && c !== 'no-bg')
+      .join(' ');
 
-  function imageToClass(imageName) {
-    switch (imageName) {
-      case 'none': return 'bg-none';
-      case 'BG-morado.png': return 'bg-morado';
-      case 'BG-morado-mobile.png': return 'bg-morado-mobile';
-      case 'BG-gris.png': return 'bg-gris';
-      case 'BG-gris-mobile.png': return 'bg-gris-mobile';
-      case 'BG-rosa-mobile.png': return 'bg-rosa-mobile';
-      case 'bg-gris-mangenta.png': return 'bg-gris-mangenta';
-      case 'BG-amarillo.png': return 'bg-amarillo';
-      case 'BG-amarillo-mobile.png': return 'bg-amarillo-mobile';
-      case 'BG-amarillo-opacy.png': return 'bg-amarillo-opacy';
-      case 'BG-amarillo-mobile-opacy.png': return 'bg-amarillo-mobile-opacy';
-      case 'BG-blue.png': return 'bg-azul';
-      case 'BG-blue-mobile.png': return 'bg-azul-mobile';
-      default: return '';
+    if (image === 'none') {
+      body.classList.add('no-bg');
+      return;
+    }
+
+    const isDesktop = window.innerWidth >= 1024;
+    if (!isDesktop && image === 'BG-rosa-mobile.png') {
+      body.classList.add('bg-rosa-mobile');
+    } else {
+      const className = 'bg-' + image.replace('.png', '').toLowerCase();
+      body.classList.add(className);
     }
   }
 
-  [rbSiContainer, rbNoContainer, rbGrupalContainer, rbIndividualContainer, rbSiNegocioContainer, rbNoNegocioContainer, rbSiMesesContainer, rbNoMesesContainer].forEach(container => {
+  function updateClasses() {
+    const visible = isVisible(q3_2);
+    mainElement?.classList.toggle('main-visible-q3_2', visible);
+    mainContent?.classList.toggle('main-content-visible-q3_2', visible);
+    wrapper?.classList.toggle('wrapper-visible-q3_2', visible);
+    homeTitle?.classList.toggle('home-title-visible-q3_2', visible);
+  }
+
+  function updateView() {
+    updateClasses();
+    changeBackground(getCurrentBackground());
+  }
+
+  updateView();
+
+  const actions = [
+    [rbSiContainer, 'rbCSi'],
+    [rbNoContainer, 'rbCNo'],
+    [rbGrupalContainer, 'rbGrupalSi'],
+    [rbIndividualContainer, 'rbIndividualNo'],
+    [rbSiNegocioContainer, 'rbSi'],
+    [rbNoNegocioContainer, 'rbNo'],
+    [rbSiMesesContainer, 'rbSiNegocio'],
+    [rbNoMesesContainer, 'rbNoNegocio']
+  ];
+
+  actions.forEach(([container, inputId]) => {
     container?.addEventListener('click', () => {
-      setTimeout(() => {
-        changeBackground(getCurrentBackground());
-      }, 50);
+      const input = document.getElementById(inputId);
+      if (input) input.checked = true;
+      updateView();
     });
   });
 
-  window.addEventListener('resize', () => {
-    changeBackground(getCurrentBackground());
-  });
-
-  window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-      changeBackground(getCurrentBackground());
-    }, 100);
-  });
-
-  window.addEventListener('scroll', () => {
-    changeBackground(getCurrentBackground());
-  });
-
-  changeBackground(getCurrentBackground());
+  window.addEventListener('resize', updateView);
+  window.addEventListener('orientationchange', () => setTimeout(updateView, 100));
 });
-
 
 //MARK:  scroll suave
  document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -259,97 +250,314 @@ document.addEventListener('DOMContentLoaded', () => {
  });
 
 // MARK: Carrusel interactivo con botones, dots y swipe
-document.addEventListener("DOMContentLoaded", function () {
-  const carousels = document.querySelectorAll("[data-carousel]");
-  carousels.forEach((carouselSection) => {
-    const carousel = carouselSection.querySelector(".carousel");
-    const cards = carousel.querySelectorAll(".card");
-    const dots = carouselSection.querySelectorAll(".dot");
-    const prevButton = carouselSection.querySelector(".carousel-prev");
-    const nextButton = carouselSection.querySelector(".carousel-next");
-    if (cards.length === 0) return;
-    let currentIndex = 0;
-    const threshold = 50;
-    let startX = 0;
-    let isDragging = false;
-    function getCardWidth() {
-      return carousel.scrollWidth / cards.length;
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
 
-    function updateButtons() {
-      prevButton.classList.toggle("inactive", currentIndex === 0);
-      nextButton.classList.toggle("inactive", currentIndex === cards.length - 1);
-    }
+  // --- Elementos de los radio buttons ---
+  const rbSiContainer = document.getElementById('DrbCSi');
+  const rbNoContainer = document.getElementById('DrbCNo');
 
-    function moveSlide(event, direction) {
-      event.preventDefault();
-      const cardWidth = getCardWidth();
-      currentIndex += direction;
+  const rbGrupalContainer = document.getElementById('DrbCGrupal');
+  const rbIndividualContainer = document.getElementById('DrbIndividual');
 
-      if (currentIndex < 0) currentIndex = 0;
-      else if (currentIndex >= cards.length) currentIndex = cards.length - 1;
+  const rbSiNegocioContainer = document.getElementById('DrbSi');
+  const rbNoNegocioContainer = document.getElementById('DrbNo');
 
-      carousel.scrollTo({
-        left: currentIndex * cardWidth,
-        behavior: "smooth",
-      });
+  const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+  const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
 
-      updateButtons();
-      updateDots();
-    }
+  // --- Secciones del formulario ---
+  const q2_1 = document.getElementById('q2_1');
+  const q2_2 = document.getElementById('q2_2');
+  const q3_1 = document.getElementById('q3_1');
+  const q3_2 = document.getElementById('q3_2');
+  const q4_1 = document.getElementById('q4_1');
+  const q4_2 = document.getElementById('q4_2'); // Sección para ocultar fondo
 
-    function goToSlide(event, index) {
-      event.preventDefault();
-      currentIndex = index;
+  // --- Elementos para modificar clases (usados en q3_2) ---
+  const mainElement = document.querySelector('.main');
+  const mainContent = document.querySelector('.main__content');
+  const wrapper = document.querySelector('.wrapper');
+  const homeTitle = document.querySelector('.home__title');
 
-      carousel.scrollTo({
-        left: currentIndex * getCardWidth(),
-        behavior: "smooth",
-      });
-
-      updateButtons();
-      updateDots();
-    }
-
-    function updateDots() {
-      dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentIndex);
-      });
-    }
-
-    prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-    nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", (event) => goToSlide(event, index));
-    });
-    // --- SWIPE SUAVE Y PRECISO ---
-    carousel.addEventListener("touchstart", (event) => {
-      isDragging = true;
-      startX = event.touches[0].clientX;
-    });
-
-    carousel.addEventListener("touchmove", (event) => {
-      if (!isDragging) return;
-      event.preventDefault();
-    });
-
-    carousel.addEventListener("touchend", (event) => {
-      if (!isDragging) return;
-      isDragging = false;
-
-      const endX = event.changedTouches[0].clientX;
-      const diffX = startX - endX;
-
-      if (diffX > threshold) {
-        moveSlide(event, 1);
-      } else if (diffX < -threshold) {
-        moveSlide(event, -1);
-      }
-    });
-
-    updateButtons();
+  // Estilos base para el <body>
+  Object.assign(body.style, {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'scroll',
+    transition: 'background-image 0.5s ease-in-out'
   });
+
+  /**
+   * Retorna el nombre de la imagen de fondo según la sección visible
+   * y las opciones seleccionadas, adaptando los nombres para desktop o mobile.
+   */
+  function getCurrentBackground() {
+    const isDesktop = window.innerWidth >= 1024;
+
+    // PRIORIDAD: Si q4_2 está visible => sin fondo
+    if (q4_2 && q4_2.offsetParent !== null) {
+      return 'none';
+    }
+
+    // 1) Si q4_1 está visible => sin fondo (blanco)
+    if (q4_1 && q4_1.offsetParent !== null) {
+      return 'none';
+    }
+
+    // 2) Si q3_1 está visible => según "más de 6 meses" o no
+    if (q3_1 && q3_1.offsetParent !== null) {
+      const rbSiMeses = document.getElementById('rbSiNegocio');
+      const rbNoMeses = document.getElementById('rbNoNegocio');
+
+      if (rbNoMeses?.checked) {
+        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      } else if (rbSiMeses?.checked) {
+        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      }
+    }
+
+    // 3) Si q3_2 está visible => revisa origen (q2_2 o q3_1) esta parte solo altera a los formularios
+    if (q3_2 && q3_2.offsetParent !== null) {
+      const rbNo2_2 = document.getElementById('rbNo'); // opción de q2_2
+      const rbSiMeses = document.getElementById('rbSiNegocio');
+      const rbNoMeses = document.getElementById('rbNoNegocio');
+
+      if (rbNo2_2?.checked || rbNoMeses?.checked) {
+        if (!isDesktop) {
+          // En mobile se asigna fondo con propiedades especiales
+          body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+          body.style.backgroundSize = "cover";
+          return 'BG-rosa-mobile.png';
+        } else {
+          return 'bg-gris-mangenta.png';
+        }
+      }
+      if (rbSiMeses?.checked) {
+        if (!isDesktop) {
+          body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+          body.style.backgroundSize = "cover";
+          return 'BG-rosa-mobile.png';
+        } else {
+          return 'bg-gris-mangenta.png';
+        }
+      }
+      return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
+    }
+
+    // 4) Si q2_2 está visible => "¿Tienes un negocio?"
+    if (q2_2 && q2_2.offsetParent !== null) {
+      const rbSi2_2 = document.getElementById('rbSi');
+      const rbNo2_2 = document.getElementById('rbNo');
+
+      if (rbSi2_2?.checked) {
+        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      } else if (rbNo2_2?.checked) {
+        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      } else {
+        return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+      }
+    }
+
+    // 5) Si q2_1 está visible => "Crédito grupal/individual"
+    if (q2_1 && q2_1.offsetParent !== null) {
+      const rbGrupal = document.getElementById('rbGrupalSi');
+      const rbIndividual = document.getElementById('rbIndividualNo');
+
+      if (rbGrupal?.checked) {
+        return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      } else if (rbIndividual?.checked) {
+        return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      } else {
+        return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+      }
+    }
+
+    // 6) Fuera de las secciones anteriores: se revisan los radios "Sí/No"
+    const rbSi = document.getElementById('rbCSi');
+    const rbNo = document.getElementById('rbCNo');
+
+    if (rbSi?.checked) {
+      return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+    } else if (rbNo?.checked) {
+      return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
+    }
+
+    // 7) Por defecto
+    return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+  }
+
+  /**
+   * Aplica el fondo al <body> según la imagen recibida.
+   * Si es 'none', se quita el fondo.
+   */
+  function changeBackground(image) {
+    if (image === 'none') {
+      body.style.backgroundImage = 'none';
+      body.style.backgroundColor = '#fff';
+      return;
+    }
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop) {
+      body.style.backgroundImage = `url('assets/images/${image}')`;
+      body.style.backgroundColor = '';
+      document.documentElement.style.height = '100%';
+      body.style.minHeight = '100vh';
+    } else {
+      if (image === 'BG-rosa-mobile.png') {
+        body.style.background = "url(assets/images/BG-rosa-mobile.png) no-repeat center 244px scroll";
+        body.style.backgroundSize = "cover";
+      } else {
+        body.style.backgroundImage = `url('assets/images/${image}')`;
+      }
+      body.style.backgroundColor = '';
+      document.documentElement.style.height = '';
+      body.style.minHeight = '';
+    }
+  }
+
+  // Al cargar la página se aplica el fondo inicial
+  changeBackground(getCurrentBackground());
+
+  // ----------------------------
+  // Eventos para los radio buttons
+  // ----------------------------
+  if (rbSiContainer && rbNoContainer) {
+    rbSiContainer.addEventListener('click', () => {
+      document.getElementById('rbCSi').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+
+    rbNoContainer.addEventListener('click', () => {
+      document.getElementById('rbCNo').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+
+  if (rbGrupalContainer && rbIndividualContainer) {
+    rbGrupalContainer.addEventListener('click', () => {
+      document.getElementById('rbGrupalSi').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+
+    rbIndividualContainer.addEventListener('click', () => {
+      document.getElementById('rbIndividualNo').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+
+  if (rbSiNegocioContainer) {
+    rbSiNegocioContainer.addEventListener('click', () => {
+      document.getElementById('rbSi').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+  if (rbNoNegocioContainer) {
+    rbNoNegocioContainer.addEventListener('click', () => {
+      document.getElementById('rbNo').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+
+  if (rbSiMesesContainer) {
+    rbSiMesesContainer.addEventListener('click', () => {
+      document.getElementById('rbSiNegocio').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+  if (rbNoMesesContainer) {
+    rbNoMesesContainer.addEventListener('click', () => {
+      document.getElementById('rbNoNegocio').checked = true;
+      changeBackground(getCurrentBackground());
+    });
+  }
+
+  // ----------------------------
+  // Eventos de cambio de tamaño y orientación
+  // ----------------------------
+  window.addEventListener('resize', () => {
+    changeBackground(getCurrentBackground());
+  });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      changeBackground(getCurrentBackground());
+    }, 100);
+  });
+
+  // ----------------------------
+  // IntersectionObservers para cambiar el fondo según la visibilidad de secciones
+  // ----------------------------
+  if (q4_1) {
+    const observerQ4_1 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          changeBackground('none');
+        } else {
+          changeBackground(getCurrentBackground());
+        }
+      });
+    });
+    observerQ4_1.observe(q4_1);
+  }
+
+  if (q4_2) {
+    const observerQ4_2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          changeBackground('none');
+        } else {
+          changeBackground(getCurrentBackground());
+        }
+      });
+    });
+    observerQ4_2.observe(q4_2);
+  }
+
+  if (q3_2) {
+    const observerQ3_2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          mainElement?.classList.add('main-visible-q3_2');
+          mainContent?.classList.add('main-content-visible-q3_2');
+          wrapper?.classList.add('wrapper-visible-q3_2');
+          homeTitle?.classList.add('home-title-visible-q3_2');
+        } else {
+          mainElement?.classList.remove('main-visible-q3_2');
+          mainContent?.classList.remove('main-content-visible-q3_2');
+          wrapper?.classList.remove('wrapper-visible-q3_2');
+          homeTitle?.classList.remove('home-title-visible-q3_2');
+        }
+      });
+    });
+    observerQ3_2.observe(q3_2);
+  }
+
+  if (q3_1) {
+    const observerQ3_1 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        changeBackground(getCurrentBackground());
+      });
+    });
+    observerQ3_1.observe(q3_1);
+  }
+
+  if (q2_2) {
+    const observerQ2_2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        changeBackground(getCurrentBackground());
+      });
+    });
+    observerQ2_2.observe(q2_2);
+  }
+  if (q2_1) {
+    const observerQ2_1 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        changeBackground(getCurrentBackground());
+      });
+    });
+    observerQ2_1.observe(q2_1);
+  }
 });
 
 
