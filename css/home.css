@@ -64,8 +64,6 @@
   }
   
   
-
-/* MARK: Estilos base del body (todos los fondos lo usan) */
 body {
     background-repeat: no-repeat;
     background-position: center;
@@ -74,7 +72,7 @@ body {
     transition: background-image 0.5s ease-in-out;
     min-height: 100vh;
 }
-
+/* MARK: demas estilos */
 .home__title {
     font-family: bree;
     font-size: 28px;
