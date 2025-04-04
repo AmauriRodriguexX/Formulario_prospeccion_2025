@@ -364,7 +364,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 // MARK: Alterna posición del botón según visibilidad de la sección 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.innerWidth > 768) return; // Solo ejecuta en móvil

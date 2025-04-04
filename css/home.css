@@ -289,6 +289,16 @@ body {
 
 /* Mark: forms habilitar y deshabilitar*/
 
+/* Ocultar los íconos nativos en Safari para inputs tipo "tel" */
+input[type="tel"]::-webkit-contacts-auto-fill-button,
+input[type="tel"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+
 
 .campoFormulario input:disabled,
 .select-container select:disabled,
@@ -503,4 +513,8 @@ body {
       max-width: 500px;
     }
   }
+  
+
+
+
   
