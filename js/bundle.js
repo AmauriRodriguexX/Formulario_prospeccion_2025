@@ -252,116 +252,123 @@ document.addEventListener("DOMContentLoaded", function () {
   const carousels = document.querySelectorAll("[data-carousel]");
 
   carousels.forEach((carouselSection) => {
-      const carousel = carouselSection.querySelector(".carousel");
-      const cards = carousel.querySelectorAll(".card");
-      const dots = carouselSection.querySelectorAll(".dot");
-      const prevButton = carouselSection.querySelector(".carousel-prev");
-      const nextButton = carouselSection.querySelector(".carousel-next");
+    const carousel = carouselSection.querySelector(".carousel");
+    const cards = carousel.querySelectorAll(".card");
+    const dots = carouselSection.querySelectorAll(".dot");
+    const prevButton = carouselSection.querySelector(".carousel-prev");
+    const nextButton = carouselSection.querySelector(".carousel-next");
 
-      if (cards.length === 0) return; // Evita errores si no hay cards
+    if (cards.length === 0) return;
 
-      let currentIndex = 0;
-      const threshold = 50; // Distancia mínima de swipe para cambiar de slide
-      let startX = 0;
-      let isDragging = false;
+    let currentIndex = 0;
+    const threshold = 50;
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
 
-      function getCardWidth() {
-          return carousel.scrollWidth / cards.length;
+    function getCardWidth() {
+      return carousel.scrollWidth / cards.length;
+    }
+
+    function updateButtons() {
+      if (currentIndex === 0) {
+        prevButton.style.backgroundColor = "#D8D8D8";
+        prevButton.style.color = "#333";
+        nextButton.style.backgroundColor = "#CE0058";
+        nextButton.style.color = "white";
+      } else if (currentIndex === 1) {
+        prevButton.style.backgroundColor = "#CE0058";
+        prevButton.style.color = "white";
+        nextButton.style.backgroundColor = "#D8D8D8";
+        nextButton.style.color = "#333";
+      }
+    }
+
+    function moveSlide(event, direction) {
+      event.preventDefault();
+      const cardWidth = getCardWidth();
+      currentIndex += direction;
+
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      } else if (currentIndex >= cards.length) {
+        currentIndex = cards.length - 1;
       }
 
-      function updateButtons() {
-          if (currentIndex === 0) {
-              prevButton.style.backgroundColor = "#D8D8D8"; // Gris
-              prevButton.style.color = "#333";
-
-              nextButton.style.backgroundColor = "#CE0058"; // Magenta
-              nextButton.style.color = "white";
-          } else if (currentIndex === 1) {
-              prevButton.style.backgroundColor = "#CE0058"; // Magenta
-              prevButton.style.color = "white";
-
-              nextButton.style.backgroundColor = "#D8D8D8"; // Gris
-              nextButton.style.color = "#333";
-          }
-      }
-
-      function moveSlide(event, direction) {
-          event.preventDefault();
-          const cardWidth = getCardWidth();
-          currentIndex += direction;
-
-          if (currentIndex < 0) {
-              currentIndex = 0;
-          } else if (currentIndex >= cards.length) {
-              currentIndex = cards.length - 1;
-          }
-
-          carousel.scrollTo({
-              left: currentIndex * cardWidth,
-              behavior: "smooth"
-          });
-
-          updateButtons();
-          updateDots();
-      }
-
-      function goToSlide(event, index) {
-          event.preventDefault();
-          currentIndex = index;
-
-          carousel.scrollTo({
-              left: currentIndex * getCardWidth(),
-              behavior: "smooth"
-          });
-
-          updateButtons();
-          updateDots();
-      }
-
-      function updateDots() {
-          dots.forEach((dot, index) => {
-              dot.classList.toggle("active", index === currentIndex);
-          });
-      }
-
-      prevButton.addEventListener("click", (event) => moveSlide(event, -1));
-      nextButton.addEventListener("click", (event) => moveSlide(event, 1));
-
-      dots.forEach((dot, index) => {
-          dot.addEventListener("click", (event) => goToSlide(event, index));
+      carousel.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: "smooth"
       });
 
-      // --- SWIPE SUAVE Y PRECISO ---
-      carousel.addEventListener("touchstart", (event) => {
-          isDragging = true;
-          startX = event.touches[0].clientX;
-      });
-
-      carousel.addEventListener("touchmove", (event) => {
-          if (!isDragging) return;
-          event.preventDefault(); // Evita interferencias con el scroll de la página
-      });
-
-      carousel.addEventListener("touchend", (event) => {
-          if (!isDragging) return;
-          isDragging = false;
-
-          const endX = event.changedTouches[0].clientX;
-          const diffX = startX - endX;
-
-          if (diffX > threshold) {
-              // Swipe a la izquierda (siguiente slide)
-              moveSlide(event, 1);
-          } else if (diffX < -threshold) {
-              // Swipe a la derecha (slide anterior)
-              moveSlide(event, -1);
-          }
-      });
-
-      // Asegurar que los botones tengan el color correcto al inicio
       updateButtons();
+      updateDots();
+    }
+
+    function goToSlide(event, index) {
+      event.preventDefault();
+      currentIndex = index;
+
+      carousel.scrollTo({
+        left: currentIndex * getCardWidth(),
+        behavior: "smooth"
+      });
+
+      updateButtons();
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentIndex);
+      });
+    }
+
+    prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+    nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", (event) => goToSlide(event, index));
+    });
+
+    // --- SWIPE SUAVE Y FUNCIONAL ---
+    carousel.addEventListener("touchstart", (event) => {
+      isDragging = true;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+    });
+
+    carousel.addEventListener("touchmove", (event) => {
+      if (!isDragging) return;
+
+      const currentX = event.touches[0].clientX;
+      const currentY = event.touches[0].clientY;
+      const diffX = Math.abs(currentX - startX);
+      const diffY = Math.abs(currentY - startY);
+
+      // Solo previene scroll si el gesto es más horizontal que vertical
+      if (diffX > diffY) {
+        event.preventDefault();
+      }
+    });
+
+    carousel.addEventListener("touchend", (event) => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      const endX = event.changedTouches[0].clientX;
+      const diffX = startX - endX;
+
+      if (diffX > threshold) {
+        moveSlide(event, 1);
+      } else if (diffX < -threshold) {
+        moveSlide(event, -1);
+      }
+    });
+
+    updateButtons();
   });
 });
+
 
 
 // MARK: Alterna posición del botón según visibilidad de la sección 
