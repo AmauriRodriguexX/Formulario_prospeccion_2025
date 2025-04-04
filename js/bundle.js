@@ -106,156 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Elementos de los radio buttons ---
   const rbSiContainer = document.getElementById('DrbCSi');
   const rbNoContainer = document.getElementById('DrbCNo');
-  const rbGrupalContainer = document.getElementById('DrbCGrupal');
-  const rbIndividualContainer = document.getElementById('DrbIndividual');
-  const rbSiNegocioContainer = document.getElementById('DrbSi');
-  const rbNoNegocioContainer = document.getElementById('DrbNo');
-  const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
-  const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
-
-  // --- Secciones del formulario ---
-  const q2_1 = document.getElementById('q2_1');
-  const q2_2 = document.getElementById('q2_2');
-  const q3_1 = document.getElementById('q3_1');
-  const q3_2 = document.getElementById('q3_2');
-  const q4_1 = document.getElementById('q4_1');
-  const q4_2 = document.getElementById('q4_2');
-
-  // --- Elementos visuales ---
-  const mainElement = document.querySelector('.main');
-  const mainContent = document.querySelector('.main__content');
-  const wrapper = document.querySelector('.wrapper');
-  const homeTitle = document.querySelector('.home__title');
-
-  function isVisible(el) {
-    return el && el.offsetParent !== null;
-  }
-
-  function getCurrentBackground() {
-    const isDesktop = window.innerWidth >= 1024;
-    if (isVisible(q4_2) || isVisible(q4_1)) return 'none';
-
-    if (isVisible(q3_1)) {
-      const rbSiMeses = document.getElementById('rbSiNegocio');
-      const rbNoMeses = document.getElementById('rbNoNegocio');
-      if (rbNoMeses?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      if (rbSiMeses?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-    }
-
-    if (isVisible(q3_2)) {
-      const rbNo2_2 = document.getElementById('rbNo');
-      const rbSiMeses = document.getElementById('rbSiNegocio');
-      const rbNoMeses = document.getElementById('rbNoNegocio');
-      if (rbNo2_2?.checked || rbNoMeses?.checked || rbSiMeses?.checked) {
-        return isDesktop ? 'bg-gris-mangenta.png' : 'BG-rosa-mobile.png';
-      }
-      return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
-    }
-
-    if (isVisible(q2_2)) {
-      const rbSi2_2 = document.getElementById('rbSi');
-      const rbNo2_2 = document.getElementById('rbNo');
-      if (rbSi2_2?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      if (rbNo2_2?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-    }
-
-    if (isVisible(q2_1)) {
-      const rbGrupal = document.getElementById('rbGrupalSi');
-      const rbIndividual = document.getElementById('rbIndividualNo');
-      if (rbGrupal?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      if (rbIndividual?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-    }
-
-    const rbSi = document.getElementById('rbCSi');
-    const rbNo = document.getElementById('rbCNo');
-    if (rbSi?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-    if (rbNo?.checked) return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
-
-    return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-  }
-
-  function changeBackground(image) {
-    body.className = body.className
-      .split(' ')
-      .filter(c => !c.startsWith('bg-') && c !== 'no-bg')
-      .join(' ');
-
-    if (image === 'none') {
-      body.classList.add('no-bg');
-      return;
-    }
-
-    const isDesktop = window.innerWidth >= 1024;
-    if (!isDesktop && image === 'BG-rosa-mobile.png') {
-      body.classList.add('bg-rosa-mobile');
-    } else {
-      const className = 'bg-' + image.replace('.png', '').toLowerCase();
-      body.classList.add(className);
-    }
-  }
-
-  function updateClasses() {
-    const visible = isVisible(q3_2);
-    mainElement?.classList.toggle('main-visible-q3_2', visible);
-    mainContent?.classList.toggle('main-content-visible-q3_2', visible);
-    wrapper?.classList.toggle('wrapper-visible-q3_2', visible);
-    homeTitle?.classList.toggle('home-title-visible-q3_2', visible);
-  }
-
-  function updateView() {
-    updateClasses();
-    changeBackground(getCurrentBackground());
-  }
-
-  updateView();
-
-  const actions = [
-    [rbSiContainer, 'rbCSi'],
-    [rbNoContainer, 'rbCNo'],
-    [rbGrupalContainer, 'rbGrupalSi'],
-    [rbIndividualContainer, 'rbIndividualNo'],
-    [rbSiNegocioContainer, 'rbSi'],
-    [rbNoNegocioContainer, 'rbNo'],
-    [rbSiMesesContainer, 'rbSiNegocio'],
-    [rbNoMesesContainer, 'rbNoNegocio']
-  ];
-
-  actions.forEach(([container, inputId]) => {
-    container?.addEventListener('click', () => {
-      const input = document.getElementById(inputId);
-      if (input) input.checked = true;
-      updateView();
-    });
-  });
-
-  window.addEventListener('resize', updateView);
-  window.addEventListener('orientationchange', () => setTimeout(updateView, 100));
-});
-
-//MARK:  scroll suave
- document.querySelectorAll('a[href^="#"]').forEach(a => {
-     a.addEventListener('click', function (e) {
-         e.preventDefault();
-         const id = this.getAttribute('href');
-         const target = document.getElementById(id);
-         if (target) {
-             window.scrollTo({
-                 top: target.offsetTop,
-                 behavior: 'smooth'
-             });
-         }
-     });
- });
-
-// MARK: Carrusel interactivo con botones, dots y swipe
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-
-  // --- Elementos de los radio buttons ---
-  const rbSiContainer = document.getElementById('DrbCSi');
-  const rbNoContainer = document.getElementById('DrbCNo');
 
   const rbGrupalContainer = document.getElementById('DrbCGrupal');
   const rbIndividualContainer = document.getElementById('DrbIndividual');
@@ -558,6 +408,159 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     observerQ2_1.observe(q2_1);
   }
+});
+
+//MARK:  scroll suave
+ document.querySelectorAll('a[href^="#"]').forEach(a => {
+     a.addEventListener('click', function (e) {
+         e.preventDefault();
+         const id = this.getAttribute('href');
+         const target = document.getElementById(id);
+         if (target) {
+             window.scrollTo({
+                 top: target.offsetTop,
+                 behavior: 'smooth'
+             });
+         }
+     });
+ });
+
+// MARK: Carrusel interactivo con botones, dots y swipe
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+
+  // --- Elementos de los radio buttons ---
+  const rbSiContainer = document.getElementById('DrbCSi');
+  const rbNoContainer = document.getElementById('DrbCNo');
+  const rbGrupalContainer = document.getElementById('DrbCGrupal');
+  const rbIndividualContainer = document.getElementById('DrbIndividual');
+  const rbSiNegocioContainer = document.getElementById('DrbSi');
+  const rbNoNegocioContainer = document.getElementById('DrbNo');
+  const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
+  const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
+
+  // --- Secciones del formulario ---
+  const q2_1 = document.getElementById('q2_1');
+  const q2_2 = document.getElementById('q2_2');
+  const q3_1 = document.getElementById('q3_1');
+  const q3_2 = document.getElementById('q3_2');
+  const q4_1 = document.getElementById('q4_1');
+  const q4_2 = document.getElementById('q4_2');
+
+  // --- Elementos visuales ---
+  const mainElement = document.querySelector('.main');
+  const mainContent = document.querySelector('.main__content');
+  const wrapper = document.querySelector('.wrapper');
+  const homeTitle = document.querySelector('.home__title');
+
+  function isVisible(el) {
+    return el && el.offsetParent !== null;
+  }
+
+  function getCurrentBackground() {
+    const isDesktop = window.innerWidth >= 1024;
+    if (isVisible(q4_2) || isVisible(q4_1)) return 'none';
+
+    if (isVisible(q3_1)) {
+      const rbSiMeses = document.getElementById('rbSiNegocio');
+      const rbNoMeses = document.getElementById('rbNoNegocio');
+      if (rbNoMeses?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      if (rbSiMeses?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+    }
+
+    if (isVisible(q3_2)) {
+      const rbNo2_2 = document.getElementById('rbNo');
+      const rbSiMeses = document.getElementById('rbSiNegocio');
+      const rbNoMeses = document.getElementById('rbNoNegocio');
+      if (rbNo2_2?.checked || rbNoMeses?.checked || rbSiMeses?.checked) {
+        return isDesktop ? 'bg-gris-mangenta.png' : 'BG-rosa-mobile.png';
+      }
+      return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
+    }
+
+    if (isVisible(q2_2)) {
+      const rbSi2_2 = document.getElementById('rbSi');
+      const rbNo2_2 = document.getElementById('rbNo');
+      if (rbSi2_2?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      if (rbNo2_2?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+    }
+
+    if (isVisible(q2_1)) {
+      const rbGrupal = document.getElementById('rbGrupalSi');
+      const rbIndividual = document.getElementById('rbIndividualNo');
+      if (rbGrupal?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+      if (rbIndividual?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
+      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+    }
+
+    const rbSi = document.getElementById('rbCSi');
+    const rbNo = document.getElementById('rbCNo');
+    if (rbSi?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
+    if (rbNo?.checked) return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
+
+    return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
+  }
+
+  function changeBackground(image) {
+    body.className = body.className
+      .split(' ')
+      .filter(c => !c.startsWith('bg-') && c !== 'no-bg')
+      .join(' ');
+
+    if (image === 'none') {
+      body.classList.add('no-bg');
+      return;
+    }
+
+    const isDesktop = window.innerWidth >= 1024;
+    if (!isDesktop && image === 'BG-rosa-mobile.png') {
+      body.classList.add('bg-rosa-mobile');
+    } else {
+      const className = 'bg-' + image.replace('.png', '').toLowerCase();
+      body.classList.add(className);
+    }
+  }
+
+  function updateClasses() {
+    const visible = isVisible(q3_2);
+    mainElement?.classList.toggle('main-visible-q3_2', visible);
+    mainContent?.classList.toggle('main-content-visible-q3_2', visible);
+    wrapper?.classList.toggle('wrapper-visible-q3_2', visible);
+    homeTitle?.classList.toggle('home-title-visible-q3_2', visible);
+  }
+
+  function updateView() {
+    updateClasses();
+    changeBackground(getCurrentBackground());
+  }
+
+  updateView();
+
+  const actions = [
+    [rbSiContainer, 'rbCSi'],
+    [rbNoContainer, 'rbCNo'],
+    [rbGrupalContainer, 'rbGrupalSi'],
+    [rbIndividualContainer, 'rbIndividualNo'],
+    [rbSiNegocioContainer, 'rbSi'],
+    [rbNoNegocioContainer, 'rbNo'],
+    [rbSiMesesContainer, 'rbSiNegocio'],
+    [rbNoMesesContainer, 'rbNoNegocio']
+  ];
+
+  actions.forEach(([container, inputId]) => {
+    container?.addEventListener('click', () => {
+      const input = document.getElementById(inputId);
+      if (input) input.checked = true;
+      updateView();
+    });
+  });
+
+  // Eventos de cambio de tamaño, scroll o interacción
+  window.addEventListener('resize', updateView);
+  window.addEventListener('orientationchange', () => setTimeout(updateView, 100));
+  window.addEventListener('scroll', updateView);
+  document.addEventListener('click', () => setTimeout(updateView, 100));
 });
 
 
