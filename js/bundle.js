@@ -426,141 +426,119 @@ document.addEventListener('DOMContentLoaded', () => {
  });
 
 // MARK: Carrusel interactivo con botones, dots y swipe
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
+document.addEventListener("DOMContentLoaded", function () {
+  const carousels = document.querySelectorAll("[data-carousel]");
 
-  // --- Elementos de los radio buttons ---
-  const rbSiContainer = document.getElementById('DrbCSi');
-  const rbNoContainer = document.getElementById('DrbCNo');
-  const rbGrupalContainer = document.getElementById('DrbCGrupal');
-  const rbIndividualContainer = document.getElementById('DrbIndividual');
-  const rbSiNegocioContainer = document.getElementById('DrbSi');
-  const rbNoNegocioContainer = document.getElementById('DrbNo');
-  const rbSiMesesContainer = document.querySelector('#q3_1 #DrbSi');
-  const rbNoMesesContainer = document.querySelector('#q3_1 #DrbNo');
+  carousels.forEach((carouselSection) => {
+      const carousel = carouselSection.querySelector(".carousel");
+      const cards = carousel.querySelectorAll(".card");
+      const dots = carouselSection.querySelectorAll(".dot");
+      const prevButton = carouselSection.querySelector(".carousel-prev");
+      const nextButton = carouselSection.querySelector(".carousel-next");
 
-  // --- Secciones del formulario ---
-  const q2_1 = document.getElementById('q2_1');
-  const q2_2 = document.getElementById('q2_2');
-  const q3_1 = document.getElementById('q3_1');
-  const q3_2 = document.getElementById('q3_2');
-  const q4_1 = document.getElementById('q4_1');
-  const q4_2 = document.getElementById('q4_2');
+      if (cards.length === 0) return; // Evita errores si no hay cards
 
-  // --- Elementos visuales ---
-  const mainElement = document.querySelector('.main');
-  const mainContent = document.querySelector('.main__content');
-  const wrapper = document.querySelector('.wrapper');
-  const homeTitle = document.querySelector('.home__title');
+      let currentIndex = 0;
+      const threshold = 50; // Distancia mínima de swipe para cambiar de slide
+      let startX = 0;
+      let isDragging = false;
 
-  function isVisible(el) {
-    return el && el.offsetParent !== null;
-  }
-
-  function getCurrentBackground() {
-    const isDesktop = window.innerWidth >= 1024;
-    if (isVisible(q4_2) || isVisible(q4_1)) return 'none';
-
-    if (isVisible(q3_1)) {
-      const rbSiMeses = document.getElementById('rbSiNegocio');
-      const rbNoMeses = document.getElementById('rbNoNegocio');
-      if (rbNoMeses?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      if (rbSiMeses?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-    }
-
-    if (isVisible(q3_2)) {
-      const rbNo2_2 = document.getElementById('rbNo');
-      const rbSiMeses = document.getElementById('rbSiNegocio');
-      const rbNoMeses = document.getElementById('rbNoNegocio');
-      if (rbNo2_2?.checked || rbNoMeses?.checked || rbSiMeses?.checked) {
-        return isDesktop ? 'bg-gris-mangenta.png' : 'BG-rosa-mobile.png';
+      function getCardWidth() {
+          return carousel.scrollWidth / cards.length;
       }
-      return isDesktop ? 'BG-amarillo-opacy.png' : 'BG-amarillo-mobile-opacy.png';
-    }
 
-    if (isVisible(q2_2)) {
-      const rbSi2_2 = document.getElementById('rbSi');
-      const rbNo2_2 = document.getElementById('rbNo');
-      if (rbSi2_2?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      if (rbNo2_2?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-    }
+      function updateButtons() {
+          if (currentIndex === 0) {
+              prevButton.style.backgroundColor = "#D8D8D8"; // Gris
+              prevButton.style.color = "#333";
 
-    if (isVisible(q2_1)) {
-      const rbGrupal = document.getElementById('rbGrupalSi');
-      const rbIndividual = document.getElementById('rbIndividualNo');
-      if (rbGrupal?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-      if (rbIndividual?.checked) return isDesktop ? 'BG-gris.png' : 'BG-gris-mobile.png';
-      return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-    }
+              nextButton.style.backgroundColor = "#CE0058"; // Magenta
+              nextButton.style.color = "white";
+          } else if (currentIndex === 1) {
+              prevButton.style.backgroundColor = "#CE0058"; // Magenta
+              prevButton.style.color = "white";
 
-    const rbSi = document.getElementById('rbCSi');
-    const rbNo = document.getElementById('rbCNo');
-    if (rbSi?.checked) return isDesktop ? 'BG-morado.png' : 'BG-morado-mobile.png';
-    if (rbNo?.checked) return isDesktop ? 'BG-blue.png' : 'BG-blue-mobile.png';
+              nextButton.style.backgroundColor = "#D8D8D8"; // Gris
+              nextButton.style.color = "#333";
+          }
+      }
 
-    return isDesktop ? 'BG-amarillo.png' : 'BG-amarillo-mobile.png';
-  }
+      function moveSlide(event, direction) {
+          event.preventDefault();
+          const cardWidth = getCardWidth();
+          currentIndex += direction;
 
-  function changeBackground(image) {
-    body.className = body.className
-      .split(' ')
-      .filter(c => !c.startsWith('bg-') && c !== 'no-bg')
-      .join(' ');
+          if (currentIndex < 0) {
+              currentIndex = 0;
+          } else if (currentIndex >= cards.length) {
+              currentIndex = cards.length - 1;
+          }
 
-    if (image === 'none') {
-      body.classList.add('no-bg');
-      return;
-    }
+          carousel.scrollTo({
+              left: currentIndex * cardWidth,
+              behavior: "smooth"
+          });
 
-    const isDesktop = window.innerWidth >= 1024;
-    if (!isDesktop && image === 'BG-rosa-mobile.png') {
-      body.classList.add('bg-rosa-mobile');
-    } else {
-      const className = 'bg-' + image.replace('.png', '').toLowerCase();
-      body.classList.add(className);
-    }
-  }
+          updateButtons();
+          updateDots();
+      }
 
-  function updateClasses() {
-    const visible = isVisible(q3_2);
-    mainElement?.classList.toggle('main-visible-q3_2', visible);
-    mainContent?.classList.toggle('main-content-visible-q3_2', visible);
-    wrapper?.classList.toggle('wrapper-visible-q3_2', visible);
-    homeTitle?.classList.toggle('home-title-visible-q3_2', visible);
-  }
+      function goToSlide(event, index) {
+          event.preventDefault();
+          currentIndex = index;
 
-  function updateView() {
-    updateClasses();
-    changeBackground(getCurrentBackground());
-  }
+          carousel.scrollTo({
+              left: currentIndex * getCardWidth(),
+              behavior: "smooth"
+          });
 
-  updateView();
+          updateButtons();
+          updateDots();
+      }
 
-  const actions = [
-    [rbSiContainer, 'rbCSi'],
-    [rbNoContainer, 'rbCNo'],
-    [rbGrupalContainer, 'rbGrupalSi'],
-    [rbIndividualContainer, 'rbIndividualNo'],
-    [rbSiNegocioContainer, 'rbSi'],
-    [rbNoNegocioContainer, 'rbNo'],
-    [rbSiMesesContainer, 'rbSiNegocio'],
-    [rbNoMesesContainer, 'rbNoNegocio']
-  ];
+      function updateDots() {
+          dots.forEach((dot, index) => {
+              dot.classList.toggle("active", index === currentIndex);
+          });
+      }
 
-  actions.forEach(([container, inputId]) => {
-    container?.addEventListener('click', () => {
-      const input = document.getElementById(inputId);
-      if (input) input.checked = true;
-      updateView();
-    });
+      prevButton.addEventListener("click", (event) => moveSlide(event, -1));
+      nextButton.addEventListener("click", (event) => moveSlide(event, 1));
+
+      dots.forEach((dot, index) => {
+          dot.addEventListener("click", (event) => goToSlide(event, index));
+      });
+
+      // --- SWIPE SUAVE Y PRECISO ---
+      carousel.addEventListener("touchstart", (event) => {
+          isDragging = true;
+          startX = event.touches[0].clientX;
+      });
+
+      carousel.addEventListener("touchmove", (event) => {
+          if (!isDragging) return;
+          event.preventDefault(); // Evita interferencias con el scroll de la página
+      });
+
+      carousel.addEventListener("touchend", (event) => {
+          if (!isDragging) return;
+          isDragging = false;
+
+          const endX = event.changedTouches[0].clientX;
+          const diffX = startX - endX;
+
+          if (diffX > threshold) {
+              // Swipe a la izquierda (siguiente slide)
+              moveSlide(event, 1);
+          } else if (diffX < -threshold) {
+              // Swipe a la derecha (slide anterior)
+              moveSlide(event, -1);
+          }
+      });
+
+      // Asegurar que los botones tengan el color correcto al inicio
+      updateButtons();
   });
-
-  // Eventos de cambio de tamaño, scroll o interacción
-  window.addEventListener('resize', updateView);
-  window.addEventListener('orientationchange', () => setTimeout(updateView, 100));
-  window.addEventListener('scroll', updateView);
-  document.addEventListener('click', () => setTimeout(updateView, 100));
 });
 
 
