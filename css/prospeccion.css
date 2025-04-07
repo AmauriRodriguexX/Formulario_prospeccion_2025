@@ -173,20 +173,7 @@ textarea {
   color: #910048;
 }
 
-/*MARK: Modal Aviso*/
-.imgAvisoUp {
-  content: url(../img/arrow_aviso_up.png);
-  width: 12px !important;
-  height: 20px !important;
-  padding: 4px 0px 0px;
-}
 
-.imgAvisoDown {
-  content: url(../img/arrow_aviso_down.png);
-  width: 12px !important;
-  height: 20px !important;
-  padding: 4px 0px 0px;
-}
 
 /* fondo oscuro detrás del modal */
 .modal {
