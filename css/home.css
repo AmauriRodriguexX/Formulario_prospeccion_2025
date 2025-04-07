@@ -521,3 +521,10 @@ input[type="checkbox"] {
       max-width: 500px;
     }
   }
+
+div.imgAvisoUp {
+    content: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+}
